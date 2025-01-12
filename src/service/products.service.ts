@@ -1,30 +1,22 @@
-import { Injectable } from '@nestjs/common';
-import { Product } from '../model/product';
+import { Injectable, Logger } from "@nestjs/common";
+import { Product } from "../model/product";
+import { SquareMapper } from "./mappers/square.mapper";
+import { SquareService } from "./square.service";
 
 @Injectable()
 export class ProductsService {
-    private readonly products: Product[] = [
-        {
-            name: 'Bacon Cheeseburger',
-            sku: 'P-BC-001',
-            price: 1295,
-            image: 'https://example.com/images/bacon_cheeseburger.jpg',
-            category: 'Burgers',
-            variations: [
-                {
-                    name: 'Sauce',
-                    max_selection: 2,
-                    mandatory: true,
-                    items: [
-                        { name: 'Ketchup', sku: 'V-K-001', price: 50 },
-                        { name: 'Mustard', sku: 'V-M-001', price: 50 },
-                    ],
-                },
-            ],
-        },
-    ];
+  private readonly logger = new Logger(ProductsService.name);
+  private readonly products: Product[] = [];
 
-    findAll(): Product[] {
-        return this.products;
-    }
+  constructor(private readonly squareService: SquareService, private readonly squareMapper: SquareMapper) {
+    
+  }
+
+  async findAll(): Promise<Product[]> {
+    this.logger.log("Retrieving all products");
+    const catalog = await this.squareService.getProducts();
+    this.logger.log("Mapping products");
+    const products = this.squareMapper.productsFromCatalogObject(catalog);
+    return products;
+  }
 }

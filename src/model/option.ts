@@ -11,27 +11,23 @@
  */
 
 /**
- * Subitem information
+ * Option information
  */
-export interface SubItem { 
+export interface Option { 
     /**
-     * Subitem id
+     * Option id
      */
     id?: string;
     /**
-     * Subitem name
+     * Default option
+     */
+    defaultOption?: boolean;
+    /**
+     * Option name
      */
     name?: string;
     /**
-     * Subitem plu
-     */
-    plu?: string;
-    /**
-     * Subitem price in cents without decimals
+     * Option price in cents without decimals
      */
     price?: number;
-    /**
-     * Subitem quantity
-     */
-    quantity?: number;
 }

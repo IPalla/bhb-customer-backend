@@ -84,6 +84,13 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: Order created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
     get:
       summary: Get orders
       description: Retrieve customer orders using different filters
@@ -159,18 +166,6 @@ paths:
       
 components:
   requestBodies:
-    StatusUpdateBody:
-      description: Request body to update an order
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StatusUpdate'
-    IncidentBody:
-      description: Request body to create an incident
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IncidentCreateBody'
     OtpBody:
       description: Request Body to generate OTP Code
       content:
@@ -243,6 +238,13 @@ components:
           maxItems: 1000
           items:
             $ref: '#/components/schemas/Status'
+    OrderResponse: 
+      type: object
+      description: Order response
+      additionalProperties: false
+      properties:
+        order:
+          $ref: '#/components/schemas/Order'
     Rider:
       type: object
       description: Rider information
@@ -293,21 +295,6 @@ components:
           type: string
           description: Customer address longitude
           example: -3.7001011
-    IncidentCreateBody:
-      type: object
-      description: New incident information
-      properties:
-        comments:
-          type: string
-          description: Incident comments
-        incidentType:
-          type: string
-          description: Incident fault
-          example: Web
-          enum:
-            - Kitchen
-            - Delivery
-            - Client
       
     Item:
       type: object
@@ -448,10 +435,22 @@ components:
           type: string
           description: Product id
           example: UQ3MUDZ3XIUJPS5Y5KDDKPW2
+        catalogId:
+          type: string
+          description: Catalog Id (From Variation). Used to create the order
+          example: UQ3MUDZ3XIUJPS5Y5KDDKPW2
         name:
           type: string
           description: Product name
           example: Bacon Cheese Burger
+        description:
+          type: string
+          description: Product description
+          example: Amazing burger with bacon and cheese
+        price:
+          type: number
+          description: Product base price
+          example: 0
         category:
           $ref: '#/components/schemas/Category'
         images:
@@ -460,11 +459,6 @@ components:
           description: Product image
           items:
             $ref: '#/components/schemas/Image'
-        variations:
-          type: array
-          maxItems: 1000
-          items: 
-            $ref: '#/components/schemas/Variation'
         modifiers:
           type: array
           maxItems: 1000
@@ -507,7 +501,7 @@ components:
         selection:
           type: string
           description: Modifier selection
-          example: Single
+          example: SINGLE
           enum:
             - SINGLE
             - MULTIPLE
@@ -550,23 +544,6 @@ components:
           type: string
           description: Image name
           example: Bite House Burger
-    Variation:
-      type: object
-      description: Variation information
-      additionalProperties: false
-      properties:
-        id:
-          type: string
-          description: Variation id
-          example: UQ3MUDZ3XIUJPS5Y5KDDKPW2
-        name:
-          type: string
-          description: Variation name
-          example: Bacon Cheese Burger
-        price:
-          type: number
-          description: Variation price in cents without decimals
-          example: 1295
     Otp:
       type: object
       description: Otp information
@@ -585,91 +562,6 @@ components:
           type: string
           description: Auth token
           example: eyJhbGci...
-    Kpis:
-      type: object
-      description: Jwt Token
-      additionalProperties: false
-      properties:
-        totalOrders:
-          type: number
-          description: Total orders kpi
-          example: 20
-        finishedOrders:
-          type: number
-          description: Finished orders kpi
-          example: 20
-        inPreparationOrders:
-          type: number
-          description: In preparation orders kpi
-          example: 20
-        averagePreparationTime:
-          type: number
-          description: Average preparation time kpi
-          example: 20
-        minPreparationTime:
-          type: number
-          description: Min preparation time kpi
-          example: 20
-        maxPreparationTime:
-          type: number
-          description: Max preparation time kpi
-          example: 20
-        awaitingOrders:
-          type: number
-          description: Awaiting orders kpi
-          example: 20
-        inDeliveryOrders:
-          type: number
-          description: Orders in delivery
-          example: 20
-        averageDeliveryTime:
-          type: number
-          description: Average delivery time
-          example: 20
-        minDeliveryTime:
-          type: number
-          description: Minimum delivery time
-          example: 20
-        maxDeliveryTime:
-          type: number
-          description: Max delivery time
-          example: 20
-        averageEndToEndTime:
-          type: number
-          description: Average total time
-          example: 20
-        minEndToEndTime:
-          type: number
-          description: Minimum total time
-          example: 20
-        maxEndToEndTime:
-          type: number
-          description: Max total time
-          example: 20
-        pickupOrders:
-          type: number
-          description: Total pickup orders
-          example: 20
-        deliveredOrders:
-          type: number
-          description: Total delivered orders
-          example: 20
-    StatusUpdate:
-      type: object
-      description: Status update
-      additionalProperties: false
-      properties:
-        status:
-          type: string
-          description: Status enum
-          example: PENDING
-          enum:
-            - PENDING
-            - IN_PROGRESS
-            - PREPARED
-            - READY
-            - IN_DELIVERY
-            - DELIVERED
   responses:
     AuthResponse:
       description: JWT of the authenticated rider
@@ -683,12 +575,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Order'
-    KpisResponse:
-      description: Kpis response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Kpis'
     OrdersListResponse:
       description: List of retrieved orders
       content:

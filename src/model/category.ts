@@ -9,11 +9,19 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Order } from './order';
+import { Image } from './image';
 
 /**
- * Orders list response
+ * Category information
  */
-export interface OrdersListResponse { 
-    orders?: Array<Order>;
+export interface Category { 
+    /**
+     * Category id
+     */
+    id?: string;
+    /**
+     * Category name
+     */
+    name?: string;
+    image?: Image;
 }
