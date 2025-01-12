@@ -1,1 +1,0 @@
-{"version":3,"file":"incidentCreateBody.js","sourceRoot":"","sources":["../../src/model/incidentCreateBody.ts"],"names":[],"mappings":";;;AAyBA,IAAiB,kBAAkB,CAOlC;AAPD,WAAiB,kBAAkB;IAElB,mCAAgB,GAAG;QAC5B,OAAO,EAAE,SAA6B;QACtC,QAAQ,EAAE,UAA8B;QACxC,MAAM,EAAE,QAA4B;KACvC,CAAC;AACN,CAAC,EAPgB,kBAAkB,kCAAlB,kBAAkB,QAOlC"}
