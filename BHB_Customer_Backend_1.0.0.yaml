@@ -1,0 +1,697 @@
+openapi: 3.0.0
+info:
+  title: API BHB Customer Backend
+  description: API BHB Customer Backend
+  version: 1.0.0
+servers:
+  - url: bhb-cusomter-backend.bitehouseburger.es/bhb-cusomter-backend
+paths:
+  /categories:
+    get:
+      summary: Get categories
+      description: Retrieve all categories
+      tags:
+        - Categories API
+      responses:
+        '200':
+          description: List of categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+  /categories/{category}/products:
+    get:
+      summary: Get products by category
+      description: Retrieve all products by category
+      tags:
+        - Products API
+      parameters:
+        - name: category
+          in: path
+          required: true
+          description: Category id
+          schema:
+            type: string
+            example: UQ3MUDZ3XIUJPS5Y5KDDKPW2
+      responses:
+        '200':
+          description: List of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+  /categories/{category}/products/{productId}:
+    get:
+      summary: Get product by id
+      description: Retrieve product by id
+      tags:
+        - Products API
+      parameters:
+        - name: category
+          in: path
+          required: true
+          description: Category id
+          schema:
+            type: string
+            example: UQ3MUDZ3XIUJPS5Y5KDDKPW2
+        - name: productId
+          in: path
+          required: true
+          description: Product id
+          schema:
+            type: string
+            example: UQ3MUDZ3XIUJPS5Y5KDDKPW2
+      responses:
+        '200':
+          description: Retrieved product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+  
+  /orders:
+    post:
+      summary: Create orders
+      description: Create order
+      tags:
+        - Orders API
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+    get:
+      summary: Get orders
+      description: Retrieve customer orders using different filters
+      tags:
+        - Orders API
+      parameters:
+        - name: order_type
+          in: query
+          required: false
+          description: Order type filter
+          schema:
+            type: string
+            example: Delivery
+            enum:
+              - Delivery
+              - Pickup
+              - Dinein
+        - name: start_date
+          in: query
+          required: false
+          description: Start date filter
+          schema:
+            type: string
+            example: 2024-04-21
+        - name: end_date
+          in: query
+          required: false
+          description: Start date filter
+          schema:
+            type: string
+            example: 2024-04-21
+      responses:
+        '200':
+          $ref: '#/components/responses/OrdersListResponse'
+  /otp:
+    post:
+      tags:
+        - OTP API
+      summary: Authenticates user using OTP code
+      requestBody:
+        $ref: '#/components/requestBodies/OtpBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/AuthResponse'
+        '401':
+          description: 'Unauthorized'
+  
+  /otp/{phone_number}/validate:
+    post:
+      tags:
+        - OTP API
+      parameters:
+        - name: otp_code
+          in: query
+          required: true
+          description: OTP Code to be validated
+          schema:
+            type: string
+            example: 123456
+        - name: phone_number
+          in: path
+          required: true
+          description: Number associated to OTP code
+          schema:
+            type: string
+            example: 123456
+      summary: Authenticates user using OTP code
+      responses:
+        '200':
+          $ref: '#/components/responses/AuthResponse'
+        '401':
+          description: 'Unauthorized'
+      
+components:
+  requestBodies:
+    StatusUpdateBody:
+      description: Request body to update an order
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StatusUpdate'
+    IncidentBody:
+      description: Request body to create an incident
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IncidentCreateBody'
+    OtpBody:
+      description: Request Body to generate OTP Code
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Otp'
+  schemas:
+    Order:
+      type: object
+      description: Order information
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Order id
+          example: W-20027C
+        externalId:
+          type: string
+          description: External Order Id
+          example: 6387ba12b94315cad7d87581
+        date:
+          type: string
+          description: Order creation date
+          example: 2024-04-24 22:20:41
+        scheduled:
+          type: boolean
+          example: false
+          description: Indicates if it is an scheduled order
+        type:
+          type: string
+          description: Order type
+          example: Delivery
+          enum:
+            - Delivery
+            - Pickup
+            - Dinein
+        channel:
+          type: string
+          description: Order channel
+          example: Web
+          enum:
+            - Web
+            - Glovo
+            - JustEat
+            - Uber
+            - Waitry
+        amount:
+          type: number
+          description: Order amount in cents without decimals
+          example: 3562.0
+        notes:
+          type: string
+          description: Order notes
+          example: Notes of the order!!
+        rider:
+            $ref: '#/components/schemas/Rider'
+        customer:
+            $ref: '#/components/schemas/Customer'
+        operation:
+            $ref: '#/components/schemas/Operation'
+        items:
+          type: array
+          maxItems: 1000
+          items:
+            $ref: '#/components/schemas/Item'
+        status:
+          $ref: '#/components/schemas/Status'
+        statuses:
+          type: array
+          maxItems: 1000
+          items:
+            $ref: '#/components/schemas/Status'
+    Rider:
+      type: object
+      description: Rider information
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Rider id
+          example: cf02b7ac-57f2-463f-8fe0-b51ade1696c8
+        name:
+          type: string
+          description: Rider name
+          example: 'Julio'
+        phone:
+          type: string
+          description: Rider phone
+          example: +34666666666
+    Customer:
+      type: object
+      description: Customer information
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Customer id
+          example: cf02b7ac-57f2-463f-8fe0-b51ade1696c8
+        name:
+          type: string
+          description: Customer name
+          example: 'Julio'
+        email:
+          type: string
+          description: Customer email
+          example: 'julio@example.com'
+        phone_number:
+          type: string
+          description: Customer phone
+          example: +34666666666
+        address:
+          type: string
+          description: Customer address
+          example: Avenida de Ejemplo, 7, Portal 2 Bajo E, 28760, Tres Cantos
+        addressLatitude:
+          type: string
+          description: Customer address latitude
+          example: 40.5933474
+        addressLongitude:
+          type: string
+          description: Customer address longitude
+          example: -3.7001011
+    IncidentCreateBody:
+      type: object
+      description: New incident information
+      properties:
+        comments:
+          type: string
+          description: Incident comments
+        incidentType:
+          type: string
+          description: Incident fault
+          example: Web
+          enum:
+            - Kitchen
+            - Delivery
+            - Client
+      
+    Item:
+      type: object
+      description: Item information
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Item id
+          example: cf02b7ac-57f2-463f-8fe0-b51ade1696c8
+        name:
+          type: string
+          description: Item name
+          example: 'BACON CHEESEBURGER'
+        plu:
+          type: string
+          description: Item plu
+          example: 'P-DO-wNqB-2'
+        price:
+          type: number
+          description: Item price in cents without decimals
+          example: 1295.0
+        quantity:
+          type: number
+          description: Item quantity
+          example: 2
+        subItems:
+          type: array
+          maxItems: 1000
+          items:
+            $ref: '#/components/schemas/SubItem'
+    SubItem:
+      type: object
+      description: Subitem information
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Subitem id
+          example: cf02b7ac-57f2-463f-8fe0-b51ade1696c8
+        name:
+          type: string
+          description: Subitem name
+          example: 'BITE FRIES'
+        plu:
+          type: string
+          description: Subitem plu
+          example: 'P-DO-wNqB-2'
+        price:
+          type: number
+          description: Subitem price in cents without decimals
+          example: 249.0
+        quantity:
+          type: number
+          description: Subitem quantity
+          example: 1
+    Status:
+      type: object
+      description: Order status information
+      additionalProperties: false
+      properties:
+        createdAt:
+          type: string
+          description: Status creation date
+          example: '2024-03-23 10:05:25'
+        createdAtTs:
+          type: number
+          description: Status creation date timestamp in epoch
+          example: 1716544468
+        createdBy:
+          type: string
+          description: Status created by
+          example: 'admin'
+        latitude:
+          type: string
+          description: Status update latitude
+          example: '43.1234567'
+        longitude:
+          type: string
+          description: Status update longitude
+          example: '43.1234567'
+        status:
+          type: string
+          description: Status enum
+          example: PENDING
+          enum:
+            - PENDING
+            - IN_PROGRESS
+            - PREPARED
+            - READY
+            - IN_DELIVERY
+            - DELIVERED
+    Operation:
+      type: object
+      description: Information about order operational 
+      additionalProperties: false
+      properties:
+        createdTs:
+          type: string
+          description: Expected ready timestamp. Usually 15 mins after order is created.
+          example: 1570432
+        expectedDeliveredTs:
+          type: string
+          description: Expected delivery timestamp. Usually 30 mins after order is created.
+          example: 1570432
+        expectedTotalOrderTs:
+          type: string
+          description: Expected total order timestamp. Usually 15 mins after order is created, 30 mins for delivery orders.
+          example: 1570432
+        kitchenTime:
+          type: number
+          description: Total time of the order in the kitchen in miliseconds
+          example: 40200
+        inDeliveryTime:
+          type: number
+          description: Total time of the order during delivery in miliseconds
+          example: 40200
+        totalOrderTime:
+          type: number
+          description: Total time of the order (kitchen + delivery) in miliseconds
+          example: 40200
+    OrdersListResponse:
+      type: object
+      description: Orders list response
+      additionalProperties: false
+      properties:
+        orders:
+          type: array
+          maxItems: 1000
+          items:
+            $ref: '#/components/schemas/Order'
+    Product:
+      type: object
+      description: Product information
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Product id
+          example: UQ3MUDZ3XIUJPS5Y5KDDKPW2
+        name:
+          type: string
+          description: Product name
+          example: Bacon Cheese Burger
+        category:
+          $ref: '#/components/schemas/Category'
+        images:
+          type: array
+          maxItems: 1000
+          description: Product image
+          items:
+            $ref: '#/components/schemas/Image'
+        variations:
+          type: array
+          maxItems: 1000
+          items: 
+            $ref: '#/components/schemas/Variation'
+        modifiers:
+          type: array
+          maxItems: 1000
+          items: 
+            $ref: '#/components/schemas/Modifier'
+    Category:
+      type: object
+      description: Category information
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Category id
+          example: UQ3MUDZ3XIUJPS5Y5KDDKPW2
+        name:
+          type: string
+          description: Category name
+          example: Burgers
+        image:
+          $ref: '#/components/schemas/Image'
+    Modifier:
+      type: object
+      description: Modifier information
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Modifier id
+          example: UQ3MUDZ3XIUJPS5Y5KDDKPW2
+        name:
+          type: string
+          description: Modifier name
+          example: Tipo de pan
+        type: 
+          type: string
+          description: Modifier type
+          example: Single
+          enum:
+            - LIST
+        selection:
+          type: string
+          description: Modifier selection
+          example: Single
+          enum:
+            - SINGLE
+            - MULTIPLE
+        options:
+          type: array
+          maxItems: 1000
+          items: 
+            $ref: '#/components/schemas/Option'
+    Option:
+      type: object
+      description: Option information
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Option id
+          example: UQ3MUDZ3XIUJPS5Y5KDDKPW2
+        default_option:
+          type: boolean
+          description: Default option
+          example: false
+        name:
+          type: string
+          description: Option name
+          example: Integral
+        price:
+          type: number
+          description: Option price in cents without decimals
+          example: 0
+    Image:
+      type: object
+      description: Image information
+      additionalProperties: false
+      properties:
+        url:
+          type: string
+          description: Image url
+          example: https://www.bitehouseburger.es/images/bitehouseburger.png
+        name:
+          type: string
+          description: Image name
+          example: Bite House Burger
+    Variation:
+      type: object
+      description: Variation information
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Variation id
+          example: UQ3MUDZ3XIUJPS5Y5KDDKPW2
+        name:
+          type: string
+          description: Variation name
+          example: Bacon Cheese Burger
+        price:
+          type: number
+          description: Variation price in cents without decimals
+          example: 1295
+    Otp:
+      type: object
+      description: Otp information
+      additionalProperties: false
+      properties:
+        phoneNumber:
+          type: string
+          description: Phone number
+          example: +34611222333
+    JwtToken:
+      type: object
+      description: Jwt Token
+      additionalProperties: false
+      properties:
+        token:
+          type: string
+          description: Auth token
+          example: eyJhbGci...
+    Kpis:
+      type: object
+      description: Jwt Token
+      additionalProperties: false
+      properties:
+        totalOrders:
+          type: number
+          description: Total orders kpi
+          example: 20
+        finishedOrders:
+          type: number
+          description: Finished orders kpi
+          example: 20
+        inPreparationOrders:
+          type: number
+          description: In preparation orders kpi
+          example: 20
+        averagePreparationTime:
+          type: number
+          description: Average preparation time kpi
+          example: 20
+        minPreparationTime:
+          type: number
+          description: Min preparation time kpi
+          example: 20
+        maxPreparationTime:
+          type: number
+          description: Max preparation time kpi
+          example: 20
+        awaitingOrders:
+          type: number
+          description: Awaiting orders kpi
+          example: 20
+        inDeliveryOrders:
+          type: number
+          description: Orders in delivery
+          example: 20
+        averageDeliveryTime:
+          type: number
+          description: Average delivery time
+          example: 20
+        minDeliveryTime:
+          type: number
+          description: Minimum delivery time
+          example: 20
+        maxDeliveryTime:
+          type: number
+          description: Max delivery time
+          example: 20
+        averageEndToEndTime:
+          type: number
+          description: Average total time
+          example: 20
+        minEndToEndTime:
+          type: number
+          description: Minimum total time
+          example: 20
+        maxEndToEndTime:
+          type: number
+          description: Max total time
+          example: 20
+        pickupOrders:
+          type: number
+          description: Total pickup orders
+          example: 20
+        deliveredOrders:
+          type: number
+          description: Total delivered orders
+          example: 20
+    StatusUpdate:
+      type: object
+      description: Status update
+      additionalProperties: false
+      properties:
+        status:
+          type: string
+          description: Status enum
+          example: PENDING
+          enum:
+            - PENDING
+            - IN_PROGRESS
+            - PREPARED
+            - READY
+            - IN_DELIVERY
+            - DELIVERED
+  responses:
+    AuthResponse:
+      description: JWT of the authenticated rider
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JwtToken'
+    OrderResponse:
+      description: Retrieved order
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Order'
+    KpisResponse:
+      description: Kpis response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Kpis'
+    OrdersListResponse:
+      description: List of retrieved orders
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrdersListResponse'

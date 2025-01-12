@@ -1,0 +1,37 @@
+PGPASSWORD=xu.r=;J4pR<an.}] pg_dump "postgresql://bite-admin@34.116.213.106:5432/bhb-operations-postgresql" -F c -b -v -f db_backup.dump
+
+
+
+gcloud auth login --no-launch-browser
+gcloud auth configure-docker europe-north1-docker.pkg.dev
+
+
+docker build . --no-cache --tag europe-north1-docker.pkg.dev/bite-house-burger/bhb-repository/delivery-manager:latest
+docker push europe-north1-docker.pkg.dev/bite-house-burger/bhb-repository/delivery-manager:latest
+
+//
+docker image rm bitehouse-frontend --force
+ng build --configuration=development
+rm -r nginx-hosting/dist
+mv dist nginx-hosting
+cd nginx-hosting
+docker build -t bitehouse-frontend .
+docker run -dp 8080:8080 bitehouse-frontend
+//gcloud builds submit
+//gcloud run deploy --image us.gcr.io/bite-house-burger/angular-nginx-container:latest --port 8080
+
+//ng build --output-path docs --base-href /repository-name/
+//ng build --configuration=development --output-path docs --base-href /bitehouse-frontend/
+// europe-central2
+
+
+
+//docker image rm bitehouse-frontend --force
+
+
+
+gcloud auth login --no-launch-browser
+gcloud auth configure-docker europe-north1-docker.pkg.dev
+
+docker build . --no-cache --tag europe-north1-docker.pkg.dev/bite-house-burger/bhb-repository/bitehouse-frontend:latest
+docker push europe-north1-docker.pkg.dev/bite-house-burger/bhb-repository/bitehouse-frontend:latest

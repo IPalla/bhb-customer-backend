@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  postgres:
+    ports:
+      - "5455:5432"
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: myUser
+      POSTGRES_PASSWORD: myPassword
+      POSTGRES_DB: postgres  # Adjust this to your database name
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    build: .
+    ports:
+      - "3000:3000"  # Adjust this to your NestJS app port
+    environment:
+      DB_USER: 'myUser'
+      DB_HOST: 'postgres'
+      DB_NAME: 'postgres'
+      DB_PASS: 'myPassword'
+      DB_PORT: 5432
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata: {}

@@ -1,0 +1,3498 @@
+[
+    {
+        "id": 24680,
+        "name": "BITE FRIES &amp; DIP",
+        "slug": "bite-fries-dip",
+        "permalink": "https://test.bitehouseburger.es/producto/bite-fries-dip/",
+        "date_created": "2024-07-16T08:41:58",
+        "date_created_gmt": "2024-07-16T06:41:58",
+        "date_modified": "2024-08-10T15:35:02",
+        "date_modified_gmt": "2024-08-10T13:35:02",
+        "type": "variable",
+        "status": "publish",
+        "featured": false,
+        "catalog_visibility": "visible",
+        "description": "<p>Nuestras deliciosas y crujientes patatas teja con piel acompañadas de una de nuestras salsas a elegir. Rebozado especial para mantener el calor y el crujiente a domicilio.</p>\n",
+        "short_description": "",
+        "sku": "P-BI-tm1g-2",
+        "price": "3.95",
+        "regular_price": "",
+        "sale_price": "",
+        "date_on_sale_from": null,
+        "date_on_sale_from_gmt": null,
+        "date_on_sale_to": null,
+        "date_on_sale_to_gmt": null,
+        "on_sale": false,
+        "purchasable": true,
+        "total_sales": 31,
+        "virtual": false,
+        "downloadable": false,
+        "downloads": [],
+        "download_limit": -1,
+        "download_expiry": -1,
+        "external_url": "",
+        "button_text": "",
+        "tax_status": "taxable",
+        "tax_class": "",
+        "manage_stock": false,
+        "stock_quantity": null,
+        "backorders": "no",
+        "backorders_allowed": false,
+        "backordered": false,
+        "low_stock_amount": null,
+        "sold_individually": false,
+        "weight": "",
+        "dimensions": {
+            "length": "",
+            "width": "",
+            "height": ""
+        },
+        "shipping_required": true,
+        "shipping_taxable": true,
+        "shipping_class": "",
+        "shipping_class_id": 0,
+        "reviews_allowed": true,
+        "average_rating": "0.00",
+        "rating_count": 0,
+        "upsell_ids": [],
+        "cross_sell_ids": [],
+        "parent_id": 0,
+        "purchase_note": "",
+        "categories": [
+            {
+                "id": 69,
+                "name": "Sides",
+                "slug": "sides"
+            }
+        ],
+        "tags": [],
+        "images": [
+            {
+                "id": 24679,
+                "date_created": "2024-07-16T10:41:58",
+                "date_created_gmt": "2024-07-16T06:41:58",
+                "date_modified": "2024-08-10T17:35:02",
+                "date_modified_gmt": "2024-08-10T13:35:02",
+                "src": "https://test.bitehouseburger.es/wp-content/uploads/2024/07/PATATAS20SIN-SALSA-636d57a4ca667f00203379ef.jpg",
+                "name": "BITE FRIES &#038; DIP",
+                "alt": "BITE FRIES & DIP"
+            }
+        ],
+        "attributes": [
+            {
+                "id": 0,
+                "name": "SALSA A ELEGIR",
+                "slug": "SALSA A ELEGIR",
+                "position": 0,
+                "visible": true,
+                "variation": true,
+                "options": [
+                    "MAYO TRUFA AHUMADA",
+                    "MOJO ROJO 96",
+                    "MOSTAZA MIEL",
+                    "BBQ JACK DANIELS",
+                    "HOLANDESA CHIPOTLE",
+                    "KETCHUP 96",
+                    "MAYO AHUMADA",
+                    "CHUTNEY DE MANGO Y LIMA"
+                ]
+            }
+        ],
+        "default_attributes": [],
+        "variations": [
+            24681,
+            24682,
+            24683,
+            24684,
+            24685,
+            24686,
+            24687,
+            24688
+        ],
+        "grouped_products": [],
+        "menu_order": 0,
+        "price_html": "Desde <span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&euro;</span>3.95</bdi></span>",
+        "related_ids": [
+            7451,
+            9276
+        ],
+        "meta_data": [
+            {
+                "id": 726821,
+                "key": "_wc_gla_visibility",
+                "value": "sync-and-show"
+            },
+            {
+                "id": 726835,
+                "key": "tp_widgets",
+                "value": {
+                    "widgets": [],
+                    "update_at": "1730193972"
+                }
+            },
+            {
+                "id": 743356,
+                "key": "_wc_gla_sync_status",
+                "value": "synced"
+            },
+            {
+                "id": 743368,
+                "key": "_wc_gla_synced_at",
+                "value": "1727751606"
+            },
+            {
+                "id": 743369,
+                "key": "_wc_gla_google_ids",
+                "value": {
+                    "ES": "online:es:ES:gla_24688"
+                }
+            },
+            {
+                "id": 762492,
+                "key": "_elementor_css",
+                "value": {
+                    "time": 1733192669
+                }
+            },
+            {
+                "id": 795963,
+                "key": "_wc_gla_mc_status",
+                "value": "disapproved"
+            }
+        ],
+        "stock_status": "instock",
+        "has_options": true,
+        "post_password": "",
+        "global_unique_id": "",
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.7 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>BITE FRIES &amp; DIP - Bite House Burger</title>\n<!-- Aviso solo para el Administrador: esta página no muestra una meta description porque no la tiene. Haz una de estas dos cosas: escribe una específicamente para esta página o ve al menú [Yoast SEO - Ajustes] y configura una plantilla. -->\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"https://test.bitehouseburger.es/producto/bite-fries-dip/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:locale\" content=\"es_ES\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:type\" content=\"article\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:title\" content=\"BITE FRIES &amp; DIP - Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:description\" content=\"Nuestras deliciosas y crujientes patatas teja con piel acompañadas de una de nuestras salsas a elegir. Rebozado especial para mantener el calor y el crujiente a domicilio.\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:url\" content=\"https://test.bitehouseburger.es/producto/bite-fries-dip/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:site_name\" content=\"Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"article:modified_time\" content=\"2024-08-10T13:35:02+00:00\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:image\" content=\"https://test.bitehouseburger.es/wp-content/uploads/2024/07/PATATAS20SIN-SALSA-636d57a4ca667f00203379ef.jpg\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:width\" content=\"1400\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:height\" content=\"1400\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:type\" content=\"image/jpeg\" class=\"yoast-seo-meta-tag\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"https://test.bitehouseburger.es/producto/bite-fries-dip/\",\"url\":\"https://test.bitehouseburger.es/producto/bite-fries-dip/\",\"name\":\"BITE FRIES &amp; DIP - Bite House Burger\",\"isPartOf\":{\"@id\":\"https://test.bitehouseburger.es/#website\"},\"primaryImageOfPage\":{\"@id\":\"https://test.bitehouseburger.es/producto/bite-fries-dip/#primaryimage\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/producto/bite-fries-dip/#primaryimage\"},\"thumbnailUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/07/PATATAS20SIN-SALSA-636d57a4ca667f00203379ef.jpg\",\"datePublished\":\"2024-07-16T06:41:58+00:00\",\"dateModified\":\"2024-08-10T13:35:02+00:00\",\"breadcrumb\":{\"@id\":\"https://test.bitehouseburger.es/producto/bite-fries-dip/#breadcrumb\"},\"inLanguage\":\"es\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"https://test.bitehouseburger.es/producto/bite-fries-dip/\"]}]},{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/producto/bite-fries-dip/#primaryimage\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/07/PATATAS20SIN-SALSA-636d57a4ca667f00203379ef.jpg\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/07/PATATAS20SIN-SALSA-636d57a4ca667f00203379ef.jpg\",\"width\":1400,\"height\":1400,\"caption\":\"BITE FRIES & DIP\"},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://test.bitehouseburger.es/producto/bite-fries-dip/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Portada\",\"item\":\"https://test.bitehouseburger.es/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Productos\",\"item\":\"https://test.bitehouseburger.es/tienda__trashed/\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"BITE FRIES &amp; DIP\"}]},{\"@type\":\"WebSite\",\"@id\":\"https://test.bitehouseburger.es/#website\",\"url\":\"https://test.bitehouseburger.es/\",\"name\":\"Bite House Burger\",\"description\":\"Bite House Burger\",\"publisher\":{\"@id\":\"https://test.bitehouseburger.es/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"https://test.bitehouseburger.es/?s={search_term_string}\"},\"query-input\":{\"@type\":\"PropertyValueSpecification\",\"valueRequired\":true,\"valueName\":\"search_term_string\"}}],\"inLanguage\":\"es\"},{\"@type\":\"Organization\",\"@id\":\"https://test.bitehouseburger.es/#organization\",\"name\":\"Bite House Burger\",\"url\":\"https://test.bitehouseburger.es/\",\"logo\":{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"width\":512,\"height\":512,\"caption\":\"Bite House Burger\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\"},\"sameAs\":[\"https://www.instagram.com/bitehouseburger\"]}]}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "BITE FRIES &amp; DIP - Bite House Burger",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "https://test.bitehouseburger.es/producto/bite-fries-dip/",
+            "og_locale": "es_ES",
+            "og_type": "article",
+            "og_title": "BITE FRIES &amp; DIP - Bite House Burger",
+            "og_description": "Nuestras deliciosas y crujientes patatas teja con piel acompañadas de una de nuestras salsas a elegir. Rebozado especial para mantener el calor y el crujiente a domicilio.",
+            "og_url": "https://test.bitehouseburger.es/producto/bite-fries-dip/",
+            "og_site_name": "Bite House Burger",
+            "article_modified_time": "2024-08-10T13:35:02+00:00",
+            "og_image": [
+                {
+                    "width": 1400,
+                    "height": 1400,
+                    "url": "https://test.bitehouseburger.es/wp-content/uploads/2024/07/PATATAS20SIN-SALSA-636d57a4ca667f00203379ef.jpg",
+                    "type": "image/jpeg"
+                }
+            ],
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://test.bitehouseburger.es/producto/bite-fries-dip/",
+                        "url": "https://test.bitehouseburger.es/producto/bite-fries-dip/",
+                        "name": "BITE FRIES &amp; DIP - Bite House Burger",
+                        "isPartOf": {
+                            "@id": "https://test.bitehouseburger.es/#website"
+                        },
+                        "primaryImageOfPage": {
+                            "@id": "https://test.bitehouseburger.es/producto/bite-fries-dip/#primaryimage"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/producto/bite-fries-dip/#primaryimage"
+                        },
+                        "thumbnailUrl": "https://test.bitehouseburger.es/wp-content/uploads/2024/07/PATATAS20SIN-SALSA-636d57a4ca667f00203379ef.jpg",
+                        "datePublished": "2024-07-16T06:41:58+00:00",
+                        "dateModified": "2024-08-10T13:35:02+00:00",
+                        "breadcrumb": {
+                            "@id": "https://test.bitehouseburger.es/producto/bite-fries-dip/#breadcrumb"
+                        },
+                        "inLanguage": "es",
+                        "potentialAction": [
+                            {
+                                "@type": "ReadAction",
+                                "target": [
+                                    "https://test.bitehouseburger.es/producto/bite-fries-dip/"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "ImageObject",
+                        "inLanguage": "es",
+                        "@id": "https://test.bitehouseburger.es/producto/bite-fries-dip/#primaryimage",
+                        "url": "https://test.bitehouseburger.es/wp-content/uploads/2024/07/PATATAS20SIN-SALSA-636d57a4ca667f00203379ef.jpg",
+                        "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2024/07/PATATAS20SIN-SALSA-636d57a4ca667f00203379ef.jpg",
+                        "width": 1400,
+                        "height": 1400,
+                        "caption": "BITE FRIES & DIP"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://test.bitehouseburger.es/producto/bite-fries-dip/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Portada",
+                                "item": "https://test.bitehouseburger.es/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Productos",
+                                "item": "https://test.bitehouseburger.es/tienda__trashed/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "BITE FRIES &amp; DIP"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://test.bitehouseburger.es/#website",
+                        "url": "https://test.bitehouseburger.es/",
+                        "name": "Bite House Burger",
+                        "description": "Bite House Burger",
+                        "publisher": {
+                            "@id": "https://test.bitehouseburger.es/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "https://test.bitehouseburger.es/?s={search_term_string}"
+                                },
+                                "query-input": {
+                                    "@type": "PropertyValueSpecification",
+                                    "valueRequired": true,
+                                    "valueName": "search_term_string"
+                                }
+                            }
+                        ],
+                        "inLanguage": "es"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "https://test.bitehouseburger.es/#organization",
+                        "name": "Bite House Burger",
+                        "url": "https://test.bitehouseburger.es/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "es",
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/",
+                            "url": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "width": 512,
+                            "height": 512,
+                            "caption": "Bite House Burger"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://www.instagram.com/bitehouseburger"
+                        ]
+                    }
+                ]
+            }
+        },
+        "google_listings_and_ads__channel_visibility": {
+            "is_visible": true,
+            "channel_visibility": "sync-and-show",
+            "sync_status": "synced",
+            "issues": []
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products/24680"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products"
+                }
+            ]
+        }
+    },
+    {
+        "id": 23593,
+        "name": "Agua 50cl",
+        "slug": "agua-50cl",
+        "permalink": "https://test.bitehouseburger.es/producto/agua-50cl/",
+        "date_created": "2024-05-25T10:36:40",
+        "date_created_gmt": "2024-05-25T08:36:40",
+        "date_modified": "2024-05-25T10:36:40",
+        "date_modified_gmt": "2024-05-25T08:36:40",
+        "type": "simple",
+        "status": "publish",
+        "featured": false,
+        "catalog_visibility": "visible",
+        "description": "<p>Agua mineral natural de débil mineralización Nestlé Aquarel 50cl.</p>\n",
+        "short_description": "",
+        "sku": "P-AG-E0Q5-2",
+        "price": "1.5",
+        "regular_price": "1.5",
+        "sale_price": "",
+        "date_on_sale_from": null,
+        "date_on_sale_from_gmt": null,
+        "date_on_sale_to": null,
+        "date_on_sale_to_gmt": null,
+        "on_sale": false,
+        "purchasable": true,
+        "total_sales": 10,
+        "virtual": false,
+        "downloadable": false,
+        "downloads": [],
+        "download_limit": -1,
+        "download_expiry": -1,
+        "external_url": "",
+        "button_text": "",
+        "tax_status": "taxable",
+        "tax_class": "",
+        "manage_stock": false,
+        "stock_quantity": null,
+        "backorders": "no",
+        "backorders_allowed": false,
+        "backordered": false,
+        "low_stock_amount": null,
+        "sold_individually": false,
+        "weight": "",
+        "dimensions": {
+            "length": "",
+            "width": "",
+            "height": ""
+        },
+        "shipping_required": true,
+        "shipping_taxable": true,
+        "shipping_class": "",
+        "shipping_class_id": 0,
+        "reviews_allowed": true,
+        "average_rating": "0.00",
+        "rating_count": 0,
+        "upsell_ids": [],
+        "cross_sell_ids": [],
+        "parent_id": 0,
+        "purchase_note": "",
+        "categories": [
+            {
+                "id": 76,
+                "name": "Drinks",
+                "slug": "drinks"
+            }
+        ],
+        "tags": [],
+        "images": [
+            {
+                "id": 23592,
+                "date_created": "2024-05-25T12:36:39",
+                "date_created_gmt": "2024-05-25T08:36:39",
+                "date_modified": "2024-05-25T12:36:40",
+                "date_modified_gmt": "2024-05-25T08:36:40",
+                "src": "https://test.bitehouseburger.es/wp-content/uploads/2024/05/agua_nestle_50cl-663a06db3cbf7a367fb44d3d.png",
+                "name": "Agua 50cl",
+                "alt": "Agua 50cl"
+            }
+        ],
+        "attributes": [],
+        "default_attributes": [],
+        "variations": [],
+        "grouped_products": [],
+        "menu_order": 0,
+        "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&euro;</span>1.50</bdi></span>",
+        "related_ids": [
+            7475,
+            7461,
+            9767,
+            7467,
+            7471
+        ],
+        "meta_data": [
+            {
+                "id": 674120,
+                "key": "_wc_gla_sync_status",
+                "value": "synced"
+            },
+            {
+                "id": 674121,
+                "key": "_wc_gla_synced_at",
+                "value": "1727751606"
+            },
+            {
+                "id": 674122,
+                "key": "_wc_gla_visibility",
+                "value": "sync-and-show"
+            },
+            {
+                "id": 674123,
+                "key": "_wc_gla_google_ids",
+                "value": {
+                    "ES": "online:es:ES:gla_23593"
+                }
+            },
+            {
+                "id": 675758,
+                "key": "tp_widgets",
+                "value": {
+                    "widgets": [],
+                    "update_at": "1730193972"
+                }
+            },
+            {
+                "id": 763605,
+                "key": "_elementor_css",
+                "value": {
+                    "time": 1733192650
+                }
+            },
+            {
+                "id": 795928,
+                "key": "_wc_gla_mc_status",
+                "value": "disapproved"
+            }
+        ],
+        "stock_status": "instock",
+        "has_options": false,
+        "post_password": "",
+        "global_unique_id": "",
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.7 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>Agua 50cl - Bite House Burger</title>\n<!-- Aviso solo para el Administrador: esta página no muestra una meta description porque no la tiene. Haz una de estas dos cosas: escribe una específicamente para esta página o ve al menú [Yoast SEO - Ajustes] y configura una plantilla. -->\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"https://test.bitehouseburger.es/producto/agua-50cl/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:locale\" content=\"es_ES\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:type\" content=\"article\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:title\" content=\"Agua 50cl - Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:description\" content=\"Agua mineral natural de débil mineralización Nestlé Aquarel 50cl.\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:url\" content=\"https://test.bitehouseburger.es/producto/agua-50cl/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:site_name\" content=\"Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"https://test.bitehouseburger.es/producto/agua-50cl/\",\"url\":\"https://test.bitehouseburger.es/producto/agua-50cl/\",\"name\":\"Agua 50cl - Bite House Burger\",\"isPartOf\":{\"@id\":\"https://test.bitehouseburger.es/#website\"},\"primaryImageOfPage\":{\"@id\":\"https://test.bitehouseburger.es/producto/agua-50cl/#primaryimage\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/producto/agua-50cl/#primaryimage\"},\"thumbnailUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/05/agua_nestle_50cl-663a06db3cbf7a367fb44d3d.png\",\"datePublished\":\"2024-05-25T08:36:40+00:00\",\"dateModified\":\"2024-05-25T08:36:40+00:00\",\"breadcrumb\":{\"@id\":\"https://test.bitehouseburger.es/producto/agua-50cl/#breadcrumb\"},\"inLanguage\":\"es\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"https://test.bitehouseburger.es/producto/agua-50cl/\"]}]},{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/producto/agua-50cl/#primaryimage\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/05/agua_nestle_50cl-663a06db3cbf7a367fb44d3d.png\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/05/agua_nestle_50cl-663a06db3cbf7a367fb44d3d.png\",\"width\":1500,\"height\":1500,\"caption\":\"Agua 50cl\"},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://test.bitehouseburger.es/producto/agua-50cl/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Portada\",\"item\":\"https://test.bitehouseburger.es/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Productos\",\"item\":\"https://test.bitehouseburger.es/tienda__trashed/\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"Agua 50cl\"}]},{\"@type\":\"WebSite\",\"@id\":\"https://test.bitehouseburger.es/#website\",\"url\":\"https://test.bitehouseburger.es/\",\"name\":\"Bite House Burger\",\"description\":\"Bite House Burger\",\"publisher\":{\"@id\":\"https://test.bitehouseburger.es/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"https://test.bitehouseburger.es/?s={search_term_string}\"},\"query-input\":{\"@type\":\"PropertyValueSpecification\",\"valueRequired\":true,\"valueName\":\"search_term_string\"}}],\"inLanguage\":\"es\"},{\"@type\":\"Organization\",\"@id\":\"https://test.bitehouseburger.es/#organization\",\"name\":\"Bite House Burger\",\"url\":\"https://test.bitehouseburger.es/\",\"logo\":{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"width\":512,\"height\":512,\"caption\":\"Bite House Burger\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\"},\"sameAs\":[\"https://www.instagram.com/bitehouseburger\"]}]}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Agua 50cl - Bite House Burger",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "https://test.bitehouseburger.es/producto/agua-50cl/",
+            "og_locale": "es_ES",
+            "og_type": "article",
+            "og_title": "Agua 50cl - Bite House Burger",
+            "og_description": "Agua mineral natural de débil mineralización Nestlé Aquarel 50cl.",
+            "og_url": "https://test.bitehouseburger.es/producto/agua-50cl/",
+            "og_site_name": "Bite House Burger",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://test.bitehouseburger.es/producto/agua-50cl/",
+                        "url": "https://test.bitehouseburger.es/producto/agua-50cl/",
+                        "name": "Agua 50cl - Bite House Burger",
+                        "isPartOf": {
+                            "@id": "https://test.bitehouseburger.es/#website"
+                        },
+                        "primaryImageOfPage": {
+                            "@id": "https://test.bitehouseburger.es/producto/agua-50cl/#primaryimage"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/producto/agua-50cl/#primaryimage"
+                        },
+                        "thumbnailUrl": "https://test.bitehouseburger.es/wp-content/uploads/2024/05/agua_nestle_50cl-663a06db3cbf7a367fb44d3d.png",
+                        "datePublished": "2024-05-25T08:36:40+00:00",
+                        "dateModified": "2024-05-25T08:36:40+00:00",
+                        "breadcrumb": {
+                            "@id": "https://test.bitehouseburger.es/producto/agua-50cl/#breadcrumb"
+                        },
+                        "inLanguage": "es",
+                        "potentialAction": [
+                            {
+                                "@type": "ReadAction",
+                                "target": [
+                                    "https://test.bitehouseburger.es/producto/agua-50cl/"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "ImageObject",
+                        "inLanguage": "es",
+                        "@id": "https://test.bitehouseburger.es/producto/agua-50cl/#primaryimage",
+                        "url": "https://test.bitehouseburger.es/wp-content/uploads/2024/05/agua_nestle_50cl-663a06db3cbf7a367fb44d3d.png",
+                        "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2024/05/agua_nestle_50cl-663a06db3cbf7a367fb44d3d.png",
+                        "width": 1500,
+                        "height": 1500,
+                        "caption": "Agua 50cl"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://test.bitehouseburger.es/producto/agua-50cl/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Portada",
+                                "item": "https://test.bitehouseburger.es/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Productos",
+                                "item": "https://test.bitehouseburger.es/tienda__trashed/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "Agua 50cl"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://test.bitehouseburger.es/#website",
+                        "url": "https://test.bitehouseburger.es/",
+                        "name": "Bite House Burger",
+                        "description": "Bite House Burger",
+                        "publisher": {
+                            "@id": "https://test.bitehouseburger.es/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "https://test.bitehouseburger.es/?s={search_term_string}"
+                                },
+                                "query-input": {
+                                    "@type": "PropertyValueSpecification",
+                                    "valueRequired": true,
+                                    "valueName": "search_term_string"
+                                }
+                            }
+                        ],
+                        "inLanguage": "es"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "https://test.bitehouseburger.es/#organization",
+                        "name": "Bite House Burger",
+                        "url": "https://test.bitehouseburger.es/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "es",
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/",
+                            "url": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "width": 512,
+                            "height": 512,
+                            "caption": "Bite House Burger"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://www.instagram.com/bitehouseburger"
+                        ]
+                    }
+                ]
+            }
+        },
+        "google_listings_and_ads__channel_visibility": {
+            "is_visible": true,
+            "channel_visibility": "sync-and-show",
+            "sync_status": "synced",
+            "issues": []
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products/23593"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products"
+                }
+            ]
+        }
+    },
+    {
+        "id": 22655,
+        "name": "PASTRAMI BURGER",
+        "slug": "pastrami-burger",
+        "permalink": "https://test.bitehouseburger.es/producto/pastrami-burger/",
+        "date_created": "2024-04-12T12:02:58",
+        "date_created_gmt": "2024-04-12T10:02:58",
+        "date_modified": "2024-07-12T19:42:55",
+        "date_modified_gmt": "2024-07-12T17:42:55",
+        "type": "variable",
+        "status": "publish",
+        "featured": false,
+        "catalog_visibility": "visible",
+        "description": "<p>Doble smash burger (180 gr.) de vacuno selecto, pastrami ahumado Black Angus, pepinillos y queso cheddar. Acompañada de nuestra russian secret sauce y envuelta en nuestro pan brioche.</p>\n",
+        "short_description": "",
+        "sku": "P-PA-7qfc-2",
+        "price": "13.95",
+        "regular_price": "",
+        "sale_price": "",
+        "date_on_sale_from": null,
+        "date_on_sale_from_gmt": null,
+        "date_on_sale_to": null,
+        "date_on_sale_to_gmt": null,
+        "on_sale": false,
+        "purchasable": true,
+        "total_sales": 656,
+        "virtual": false,
+        "downloadable": false,
+        "downloads": [],
+        "download_limit": -1,
+        "download_expiry": -1,
+        "external_url": "",
+        "button_text": "",
+        "tax_status": "taxable",
+        "tax_class": "",
+        "manage_stock": false,
+        "stock_quantity": null,
+        "backorders": "no",
+        "backorders_allowed": false,
+        "backordered": false,
+        "low_stock_amount": null,
+        "sold_individually": false,
+        "weight": "",
+        "dimensions": {
+            "length": "",
+            "width": "",
+            "height": ""
+        },
+        "shipping_required": true,
+        "shipping_taxable": true,
+        "shipping_class": "",
+        "shipping_class_id": 0,
+        "reviews_allowed": true,
+        "average_rating": "0.00",
+        "rating_count": 0,
+        "upsell_ids": [],
+        "cross_sell_ids": [],
+        "parent_id": 0,
+        "purchase_note": "",
+        "categories": [
+            {
+                "id": 64,
+                "name": "Burgers",
+                "slug": "burgers"
+            }
+        ],
+        "tags": [],
+        "images": [
+            {
+                "id": 22654,
+                "date_created": "2024-04-12T14:02:58",
+                "date_created_gmt": "2024-04-12T10:02:58",
+                "date_modified": "2024-07-12T21:42:55",
+                "date_modified_gmt": "2024-07-12T17:42:55",
+                "src": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/pastrami-burger-660e86482e6d524c34d008fd-2.jpg",
+                "name": "PASTRAMI BURGER",
+                "alt": "PASTRAMI BURGER"
+            }
+        ],
+        "attributes": [
+            {
+                "id": 0,
+                "name": "ACOMPAÑANTE",
+                "slug": "ACOMPAÑANTE",
+                "position": 0,
+                "visible": true,
+                "variation": true,
+                "options": [
+                    "SIN ACOMPAÑANTE",
+                    "BITE FRIES",
+                    "BITE POPS"
+                ]
+            },
+            {
+                "id": 0,
+                "name": "TIPO DE PAN",
+                "slug": "TIPO DE PAN",
+                "position": 0,
+                "visible": true,
+                "variation": true,
+                "options": [
+                    "PAN BRIOCHE",
+                    "PAN SIN GLUTEN"
+                ]
+            }
+        ],
+        "default_attributes": [
+            {
+                "id": 0,
+                "name": "ACOMPAÑANTE",
+                "option": "SIN ACOMPAÑANTE"
+            },
+            {
+                "id": 0,
+                "name": "TIPO DE PAN",
+                "option": "PAN BRIOCHE"
+            }
+        ],
+        "variations": [
+            22686,
+            22687,
+            22688,
+            22689,
+            22690,
+            22691
+        ],
+        "grouped_products": [],
+        "menu_order": 0,
+        "price_html": "Desde <span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&euro;</span>13.95</bdi></span>",
+        "related_ids": [
+            22653,
+            22651,
+            22649,
+            22643,
+            22645
+        ],
+        "meta_data": [
+            {
+                "id": 630123,
+                "key": "_wc_gla_visibility",
+                "value": "sync-and-show"
+            },
+            {
+                "id": 630266,
+                "key": "tp_widgets",
+                "value": {
+                    "widgets": [],
+                    "update_at": "1730193972"
+                }
+            },
+            {
+                "id": 721516,
+                "key": "_wc_gla_sync_status",
+                "value": "synced"
+            },
+            {
+                "id": 721524,
+                "key": "_wc_gla_synced_at",
+                "value": "1727492406"
+            },
+            {
+                "id": 721525,
+                "key": "_wc_gla_google_ids",
+                "value": {
+                    "ES": "online:es:ES:gla_22691"
+                }
+            },
+            {
+                "id": 762297,
+                "key": "_elementor_css",
+                "value": {
+                    "time": 1733192612
+                }
+            },
+            {
+                "id": 795962,
+                "key": "_wc_gla_mc_status",
+                "value": "disapproved"
+            }
+        ],
+        "stock_status": "outofstock",
+        "has_options": true,
+        "post_password": "",
+        "global_unique_id": "",
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.7 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>PASTRAMI BURGER - Bite House Burger</title>\n<!-- Aviso solo para el Administrador: esta página no muestra una meta description porque no la tiene. Haz una de estas dos cosas: escribe una específicamente para esta página o ve al menú [Yoast SEO - Ajustes] y configura una plantilla. -->\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"https://test.bitehouseburger.es/producto/pastrami-burger/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:locale\" content=\"es_ES\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:type\" content=\"article\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:title\" content=\"PASTRAMI BURGER - Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:description\" content=\"Doble smash burger (180 gr.) de vacuno selecto, pastrami ahumado Black Angus, pepinillos y queso cheddar. Acompañada de nuestra russian secret sauce y envuelta en nuestro pan brioche.\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:url\" content=\"https://test.bitehouseburger.es/producto/pastrami-burger/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:site_name\" content=\"Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"article:modified_time\" content=\"2024-07-12T17:42:55+00:00\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:image\" content=\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/pastrami-burger-660e86482e6d524c34d008fd-2.jpg\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:width\" content=\"1400\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:height\" content=\"1400\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:type\" content=\"image/jpeg\" class=\"yoast-seo-meta-tag\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"https://test.bitehouseburger.es/producto/pastrami-burger/\",\"url\":\"https://test.bitehouseburger.es/producto/pastrami-burger/\",\"name\":\"PASTRAMI BURGER - Bite House Burger\",\"isPartOf\":{\"@id\":\"https://test.bitehouseburger.es/#website\"},\"primaryImageOfPage\":{\"@id\":\"https://test.bitehouseburger.es/producto/pastrami-burger/#primaryimage\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/producto/pastrami-burger/#primaryimage\"},\"thumbnailUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/pastrami-burger-660e86482e6d524c34d008fd-2.jpg\",\"datePublished\":\"2024-04-12T10:02:58+00:00\",\"dateModified\":\"2024-07-12T17:42:55+00:00\",\"breadcrumb\":{\"@id\":\"https://test.bitehouseburger.es/producto/pastrami-burger/#breadcrumb\"},\"inLanguage\":\"es\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"https://test.bitehouseburger.es/producto/pastrami-burger/\"]}]},{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/producto/pastrami-burger/#primaryimage\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/pastrami-burger-660e86482e6d524c34d008fd-2.jpg\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/pastrami-burger-660e86482e6d524c34d008fd-2.jpg\",\"width\":1400,\"height\":1400,\"caption\":\"PASTRAMI BURGER\"},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://test.bitehouseburger.es/producto/pastrami-burger/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Portada\",\"item\":\"https://test.bitehouseburger.es/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Productos\",\"item\":\"https://test.bitehouseburger.es/tienda__trashed/\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"PASTRAMI BURGER\"}]},{\"@type\":\"WebSite\",\"@id\":\"https://test.bitehouseburger.es/#website\",\"url\":\"https://test.bitehouseburger.es/\",\"name\":\"Bite House Burger\",\"description\":\"Bite House Burger\",\"publisher\":{\"@id\":\"https://test.bitehouseburger.es/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"https://test.bitehouseburger.es/?s={search_term_string}\"},\"query-input\":{\"@type\":\"PropertyValueSpecification\",\"valueRequired\":true,\"valueName\":\"search_term_string\"}}],\"inLanguage\":\"es\"},{\"@type\":\"Organization\",\"@id\":\"https://test.bitehouseburger.es/#organization\",\"name\":\"Bite House Burger\",\"url\":\"https://test.bitehouseburger.es/\",\"logo\":{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"width\":512,\"height\":512,\"caption\":\"Bite House Burger\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\"},\"sameAs\":[\"https://www.instagram.com/bitehouseburger\"]}]}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "PASTRAMI BURGER - Bite House Burger",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "https://test.bitehouseburger.es/producto/pastrami-burger/",
+            "og_locale": "es_ES",
+            "og_type": "article",
+            "og_title": "PASTRAMI BURGER - Bite House Burger",
+            "og_description": "Doble smash burger (180 gr.) de vacuno selecto, pastrami ahumado Black Angus, pepinillos y queso cheddar. Acompañada de nuestra russian secret sauce y envuelta en nuestro pan brioche.",
+            "og_url": "https://test.bitehouseburger.es/producto/pastrami-burger/",
+            "og_site_name": "Bite House Burger",
+            "article_modified_time": "2024-07-12T17:42:55+00:00",
+            "og_image": [
+                {
+                    "width": 1400,
+                    "height": 1400,
+                    "url": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/pastrami-burger-660e86482e6d524c34d008fd-2.jpg",
+                    "type": "image/jpeg"
+                }
+            ],
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://test.bitehouseburger.es/producto/pastrami-burger/",
+                        "url": "https://test.bitehouseburger.es/producto/pastrami-burger/",
+                        "name": "PASTRAMI BURGER - Bite House Burger",
+                        "isPartOf": {
+                            "@id": "https://test.bitehouseburger.es/#website"
+                        },
+                        "primaryImageOfPage": {
+                            "@id": "https://test.bitehouseburger.es/producto/pastrami-burger/#primaryimage"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/producto/pastrami-burger/#primaryimage"
+                        },
+                        "thumbnailUrl": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/pastrami-burger-660e86482e6d524c34d008fd-2.jpg",
+                        "datePublished": "2024-04-12T10:02:58+00:00",
+                        "dateModified": "2024-07-12T17:42:55+00:00",
+                        "breadcrumb": {
+                            "@id": "https://test.bitehouseburger.es/producto/pastrami-burger/#breadcrumb"
+                        },
+                        "inLanguage": "es",
+                        "potentialAction": [
+                            {
+                                "@type": "ReadAction",
+                                "target": [
+                                    "https://test.bitehouseburger.es/producto/pastrami-burger/"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "ImageObject",
+                        "inLanguage": "es",
+                        "@id": "https://test.bitehouseburger.es/producto/pastrami-burger/#primaryimage",
+                        "url": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/pastrami-burger-660e86482e6d524c34d008fd-2.jpg",
+                        "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/pastrami-burger-660e86482e6d524c34d008fd-2.jpg",
+                        "width": 1400,
+                        "height": 1400,
+                        "caption": "PASTRAMI BURGER"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://test.bitehouseburger.es/producto/pastrami-burger/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Portada",
+                                "item": "https://test.bitehouseburger.es/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Productos",
+                                "item": "https://test.bitehouseburger.es/tienda__trashed/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "PASTRAMI BURGER"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://test.bitehouseburger.es/#website",
+                        "url": "https://test.bitehouseburger.es/",
+                        "name": "Bite House Burger",
+                        "description": "Bite House Burger",
+                        "publisher": {
+                            "@id": "https://test.bitehouseburger.es/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "https://test.bitehouseburger.es/?s={search_term_string}"
+                                },
+                                "query-input": {
+                                    "@type": "PropertyValueSpecification",
+                                    "valueRequired": true,
+                                    "valueName": "search_term_string"
+                                }
+                            }
+                        ],
+                        "inLanguage": "es"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "https://test.bitehouseburger.es/#organization",
+                        "name": "Bite House Burger",
+                        "url": "https://test.bitehouseburger.es/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "es",
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/",
+                            "url": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "width": 512,
+                            "height": 512,
+                            "caption": "Bite House Burger"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://www.instagram.com/bitehouseburger"
+                        ]
+                    }
+                ]
+            }
+        },
+        "google_listings_and_ads__channel_visibility": {
+            "is_visible": true,
+            "channel_visibility": "sync-and-show",
+            "sync_status": "synced",
+            "issues": []
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products/22655"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products"
+                }
+            ]
+        }
+    },
+    {
+        "id": 22653,
+        "name": "PULLED PORK BURGER.",
+        "slug": "pulled-pork-burger",
+        "permalink": "https://test.bitehouseburger.es/producto/pulled-pork-burger/",
+        "date_created": "2024-04-12T12:02:57",
+        "date_created_gmt": "2024-04-12T10:02:57",
+        "date_modified": "2024-09-30T12:31:28",
+        "date_modified_gmt": "2024-09-30T10:31:28",
+        "type": "variable",
+        "status": "publish",
+        "featured": false,
+        "catalog_visibility": "visible",
+        "description": "<p>Smash burger (90 gr.) de vacuno selecto, pulled pork, queso cheddar, bacon ahumado laminado y cebolla crunchy. Acompañada de salsa barbacoa BITE y envuelta en nuestro pan brioche.</p>\n",
+        "short_description": "",
+        "sku": "P-PU-PUff-4",
+        "price": "12.95",
+        "regular_price": "",
+        "sale_price": "",
+        "date_on_sale_from": null,
+        "date_on_sale_from_gmt": null,
+        "date_on_sale_to": null,
+        "date_on_sale_to_gmt": null,
+        "on_sale": false,
+        "purchasable": true,
+        "total_sales": 624,
+        "virtual": false,
+        "downloadable": false,
+        "downloads": [],
+        "download_limit": -1,
+        "download_expiry": -1,
+        "external_url": "",
+        "button_text": "",
+        "tax_status": "taxable",
+        "tax_class": "",
+        "manage_stock": false,
+        "stock_quantity": null,
+        "backorders": "no",
+        "backorders_allowed": false,
+        "backordered": false,
+        "low_stock_amount": null,
+        "sold_individually": false,
+        "weight": "",
+        "dimensions": {
+            "length": "",
+            "width": "",
+            "height": ""
+        },
+        "shipping_required": true,
+        "shipping_taxable": true,
+        "shipping_class": "",
+        "shipping_class_id": 0,
+        "reviews_allowed": true,
+        "average_rating": "0.00",
+        "rating_count": 0,
+        "upsell_ids": [],
+        "cross_sell_ids": [],
+        "parent_id": 0,
+        "purchase_note": "",
+        "categories": [
+            {
+                "id": 64,
+                "name": "Burgers",
+                "slug": "burgers"
+            }
+        ],
+        "tags": [
+            {
+                "id": 85,
+                "name": "GLUTEN",
+                "slug": "gluten"
+            },
+            {
+                "id": 79,
+                "name": "MILK",
+                "slug": "milk"
+            }
+        ],
+        "images": [
+            {
+                "id": 22652,
+                "date_created": "2024-04-12T14:02:57",
+                "date_created_gmt": "2024-04-12T10:02:57",
+                "date_modified": "2024-09-30T14:31:28",
+                "date_modified_gmt": "2024-09-30T10:31:28",
+                "src": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/PULLPORK20EDITADA20OK-645e6eaa4125ef027e8ce3ca.jpg",
+                "name": "PULLED PORK BURGER.",
+                "alt": "PULLED PORK BURGER."
+            }
+        ],
+        "attributes": [
+            {
+                "id": 0,
+                "name": "ACOMPAÑANTE",
+                "slug": "ACOMPAÑANTE",
+                "position": 0,
+                "visible": true,
+                "variation": true,
+                "options": [
+                    "SIN ACOMPAÑANTE",
+                    "BITE FRIES",
+                    "BITE POPS"
+                ]
+            },
+            {
+                "id": 0,
+                "name": "TIPO DE PAN",
+                "slug": "TIPO DE PAN",
+                "position": 0,
+                "visible": true,
+                "variation": true,
+                "options": [
+                    "PAN BRIOCHE",
+                    "PAN SIN GLUTEN"
+                ]
+            }
+        ],
+        "default_attributes": [
+            {
+                "id": 0,
+                "name": "ACOMPAÑANTE",
+                "option": "SIN ACOMPAÑANTE"
+            },
+            {
+                "id": 0,
+                "name": "TIPO DE PAN",
+                "option": "PAN BRIOCHE"
+            }
+        ],
+        "variations": [
+            22680,
+            22681,
+            22682,
+            22683,
+            22684,
+            22685
+        ],
+        "grouped_products": [],
+        "menu_order": 0,
+        "price_html": "Desde <span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&euro;</span>12.95</bdi></span>",
+        "related_ids": [
+            22647,
+            7483,
+            22655,
+            22651,
+            7469
+        ],
+        "meta_data": [
+            {
+                "id": 630019,
+                "key": "tp_widgets",
+                "value": {
+                    "widgets": [],
+                    "update_at": "1730193972"
+                }
+            },
+            {
+                "id": 630108,
+                "key": "_wc_gla_visibility",
+                "value": "sync-and-show"
+            },
+            {
+                "id": 762308,
+                "key": "_elementor_css",
+                "value": {
+                    "time": 1730199545
+                }
+            },
+            {
+                "id": 774922,
+                "key": "_wc_gla_sync_status",
+                "value": "synced"
+            },
+            {
+                "id": 774930,
+                "key": "_wc_gla_synced_at",
+                "value": "1727692296"
+            },
+            {
+                "id": 774931,
+                "key": "_wc_gla_google_ids",
+                "value": {
+                    "ES": "online:es:ES:gla_22685"
+                }
+            },
+            {
+                "id": 795961,
+                "key": "_wc_gla_mc_status",
+                "value": "disapproved"
+            }
+        ],
+        "stock_status": "outofstock",
+        "has_options": true,
+        "post_password": "",
+        "global_unique_id": "",
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.7 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>PULLED PORK BURGER. - Bite House Burger</title>\n<!-- Aviso solo para el Administrador: esta página no muestra una meta description porque no la tiene. Haz una de estas dos cosas: escribe una específicamente para esta página o ve al menú [Yoast SEO - Ajustes] y configura una plantilla. -->\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"https://test.bitehouseburger.es/producto/pulled-pork-burger/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:locale\" content=\"es_ES\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:type\" content=\"article\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:title\" content=\"PULLED PORK BURGER. - Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:description\" content=\"Smash burger (90 gr.) de vacuno selecto, pulled pork, queso cheddar, bacon ahumado laminado y cebolla crunchy. Acompañada de salsa barbacoa BITE y envuelta en nuestro pan brioche.\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:url\" content=\"https://test.bitehouseburger.es/producto/pulled-pork-burger/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:site_name\" content=\"Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"article:modified_time\" content=\"2024-09-30T10:31:28+00:00\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:image\" content=\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/PULLPORK20EDITADA20OK-645e6eaa4125ef027e8ce3ca.jpg\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:width\" content=\"1080\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:height\" content=\"1080\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:type\" content=\"image/jpeg\" class=\"yoast-seo-meta-tag\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"https://test.bitehouseburger.es/producto/pulled-pork-burger/\",\"url\":\"https://test.bitehouseburger.es/producto/pulled-pork-burger/\",\"name\":\"PULLED PORK BURGER. - Bite House Burger\",\"isPartOf\":{\"@id\":\"https://test.bitehouseburger.es/#website\"},\"primaryImageOfPage\":{\"@id\":\"https://test.bitehouseburger.es/producto/pulled-pork-burger/#primaryimage\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/producto/pulled-pork-burger/#primaryimage\"},\"thumbnailUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/PULLPORK20EDITADA20OK-645e6eaa4125ef027e8ce3ca.jpg\",\"datePublished\":\"2024-04-12T10:02:57+00:00\",\"dateModified\":\"2024-09-30T10:31:28+00:00\",\"breadcrumb\":{\"@id\":\"https://test.bitehouseburger.es/producto/pulled-pork-burger/#breadcrumb\"},\"inLanguage\":\"es\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"https://test.bitehouseburger.es/producto/pulled-pork-burger/\"]}]},{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/producto/pulled-pork-burger/#primaryimage\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/PULLPORK20EDITADA20OK-645e6eaa4125ef027e8ce3ca.jpg\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/PULLPORK20EDITADA20OK-645e6eaa4125ef027e8ce3ca.jpg\",\"width\":1080,\"height\":1080,\"caption\":\"PULLED PORK BURGER.\"},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://test.bitehouseburger.es/producto/pulled-pork-burger/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Portada\",\"item\":\"https://test.bitehouseburger.es/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Productos\",\"item\":\"https://test.bitehouseburger.es/tienda__trashed/\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"PULLED PORK BURGER.\"}]},{\"@type\":\"WebSite\",\"@id\":\"https://test.bitehouseburger.es/#website\",\"url\":\"https://test.bitehouseburger.es/\",\"name\":\"Bite House Burger\",\"description\":\"Bite House Burger\",\"publisher\":{\"@id\":\"https://test.bitehouseburger.es/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"https://test.bitehouseburger.es/?s={search_term_string}\"},\"query-input\":{\"@type\":\"PropertyValueSpecification\",\"valueRequired\":true,\"valueName\":\"search_term_string\"}}],\"inLanguage\":\"es\"},{\"@type\":\"Organization\",\"@id\":\"https://test.bitehouseburger.es/#organization\",\"name\":\"Bite House Burger\",\"url\":\"https://test.bitehouseburger.es/\",\"logo\":{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"width\":512,\"height\":512,\"caption\":\"Bite House Burger\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\"},\"sameAs\":[\"https://www.instagram.com/bitehouseburger\"]}]}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "PULLED PORK BURGER. - Bite House Burger",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "https://test.bitehouseburger.es/producto/pulled-pork-burger/",
+            "og_locale": "es_ES",
+            "og_type": "article",
+            "og_title": "PULLED PORK BURGER. - Bite House Burger",
+            "og_description": "Smash burger (90 gr.) de vacuno selecto, pulled pork, queso cheddar, bacon ahumado laminado y cebolla crunchy. Acompañada de salsa barbacoa BITE y envuelta en nuestro pan brioche.",
+            "og_url": "https://test.bitehouseburger.es/producto/pulled-pork-burger/",
+            "og_site_name": "Bite House Burger",
+            "article_modified_time": "2024-09-30T10:31:28+00:00",
+            "og_image": [
+                {
+                    "width": 1080,
+                    "height": 1080,
+                    "url": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/PULLPORK20EDITADA20OK-645e6eaa4125ef027e8ce3ca.jpg",
+                    "type": "image/jpeg"
+                }
+            ],
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://test.bitehouseburger.es/producto/pulled-pork-burger/",
+                        "url": "https://test.bitehouseburger.es/producto/pulled-pork-burger/",
+                        "name": "PULLED PORK BURGER. - Bite House Burger",
+                        "isPartOf": {
+                            "@id": "https://test.bitehouseburger.es/#website"
+                        },
+                        "primaryImageOfPage": {
+                            "@id": "https://test.bitehouseburger.es/producto/pulled-pork-burger/#primaryimage"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/producto/pulled-pork-burger/#primaryimage"
+                        },
+                        "thumbnailUrl": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/PULLPORK20EDITADA20OK-645e6eaa4125ef027e8ce3ca.jpg",
+                        "datePublished": "2024-04-12T10:02:57+00:00",
+                        "dateModified": "2024-09-30T10:31:28+00:00",
+                        "breadcrumb": {
+                            "@id": "https://test.bitehouseburger.es/producto/pulled-pork-burger/#breadcrumb"
+                        },
+                        "inLanguage": "es",
+                        "potentialAction": [
+                            {
+                                "@type": "ReadAction",
+                                "target": [
+                                    "https://test.bitehouseburger.es/producto/pulled-pork-burger/"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "ImageObject",
+                        "inLanguage": "es",
+                        "@id": "https://test.bitehouseburger.es/producto/pulled-pork-burger/#primaryimage",
+                        "url": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/PULLPORK20EDITADA20OK-645e6eaa4125ef027e8ce3ca.jpg",
+                        "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/PULLPORK20EDITADA20OK-645e6eaa4125ef027e8ce3ca.jpg",
+                        "width": 1080,
+                        "height": 1080,
+                        "caption": "PULLED PORK BURGER."
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://test.bitehouseburger.es/producto/pulled-pork-burger/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Portada",
+                                "item": "https://test.bitehouseburger.es/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Productos",
+                                "item": "https://test.bitehouseburger.es/tienda__trashed/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "PULLED PORK BURGER."
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://test.bitehouseburger.es/#website",
+                        "url": "https://test.bitehouseburger.es/",
+                        "name": "Bite House Burger",
+                        "description": "Bite House Burger",
+                        "publisher": {
+                            "@id": "https://test.bitehouseburger.es/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "https://test.bitehouseburger.es/?s={search_term_string}"
+                                },
+                                "query-input": {
+                                    "@type": "PropertyValueSpecification",
+                                    "valueRequired": true,
+                                    "valueName": "search_term_string"
+                                }
+                            }
+                        ],
+                        "inLanguage": "es"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "https://test.bitehouseburger.es/#organization",
+                        "name": "Bite House Burger",
+                        "url": "https://test.bitehouseburger.es/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "es",
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/",
+                            "url": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "width": 512,
+                            "height": 512,
+                            "caption": "Bite House Burger"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://www.instagram.com/bitehouseburger"
+                        ]
+                    }
+                ]
+            }
+        },
+        "google_listings_and_ads__channel_visibility": {
+            "is_visible": true,
+            "channel_visibility": "sync-and-show",
+            "sync_status": "synced",
+            "issues": []
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products/22653"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products"
+                }
+            ]
+        }
+    },
+    {
+        "id": 22651,
+        "name": "TRUFFLE BURGER",
+        "slug": "truffle-burger",
+        "permalink": "https://test.bitehouseburger.es/producto/truffle-burger/",
+        "date_created": "2024-04-12T12:02:56",
+        "date_created_gmt": "2024-04-12T10:02:56",
+        "date_modified": "2024-04-12T12:05:05",
+        "date_modified_gmt": "2024-04-12T10:05:05",
+        "type": "variable",
+        "status": "publish",
+        "featured": false,
+        "catalog_visibility": "visible",
+        "description": "<p>Doble smash burger (180 gr.) de vacuno selecto, huevo frito campero con puntilla y queso cheddar. Acompañada de salsa ahumada de trufa negra BITE y envuelta en nuestro pan brioche.</p>\n",
+        "short_description": "",
+        "sku": "P-TR-jfvf-3",
+        "price": "12.95",
+        "regular_price": "",
+        "sale_price": "",
+        "date_on_sale_from": null,
+        "date_on_sale_from_gmt": null,
+        "date_on_sale_to": null,
+        "date_on_sale_to_gmt": null,
+        "on_sale": false,
+        "purchasable": true,
+        "total_sales": 852,
+        "virtual": false,
+        "downloadable": false,
+        "downloads": [],
+        "download_limit": -1,
+        "download_expiry": -1,
+        "external_url": "",
+        "button_text": "",
+        "tax_status": "taxable",
+        "tax_class": "",
+        "manage_stock": false,
+        "stock_quantity": null,
+        "backorders": "no",
+        "backorders_allowed": false,
+        "backordered": false,
+        "low_stock_amount": null,
+        "sold_individually": false,
+        "weight": "",
+        "dimensions": {
+            "length": "",
+            "width": "",
+            "height": ""
+        },
+        "shipping_required": true,
+        "shipping_taxable": true,
+        "shipping_class": "",
+        "shipping_class_id": 0,
+        "reviews_allowed": true,
+        "average_rating": "0.00",
+        "rating_count": 0,
+        "upsell_ids": [],
+        "cross_sell_ids": [],
+        "parent_id": 0,
+        "purchase_note": "",
+        "categories": [
+            {
+                "id": 64,
+                "name": "Burgers",
+                "slug": "burgers"
+            }
+        ],
+        "tags": [
+            {
+                "id": 83,
+                "name": "CRUSTACEANS",
+                "slug": "crustaceans"
+            },
+            {
+                "id": 82,
+                "name": "EGGS",
+                "slug": "eggs"
+            },
+            {
+                "id": 87,
+                "name": "FISH",
+                "slug": "fish"
+            },
+            {
+                "id": 85,
+                "name": "GLUTEN",
+                "slug": "gluten"
+            },
+            {
+                "id": 79,
+                "name": "MILK",
+                "slug": "milk"
+            },
+            {
+                "id": 78,
+                "name": "MOLLUSCS",
+                "slug": "molluscs"
+            },
+            {
+                "id": 80,
+                "name": "NUTS",
+                "slug": "nuts"
+            },
+            {
+                "id": 88,
+                "name": "SULPHITES",
+                "slug": "sulphites"
+            }
+        ],
+        "images": [
+            {
+                "id": 22650,
+                "date_created": "2024-04-12T14:02:55",
+                "date_created_gmt": "2024-04-12T10:02:55",
+                "date_modified": "2024-04-12T14:02:56",
+                "date_modified_gmt": "2024-04-12T10:02:56",
+                "src": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/TRUFFLE20BURGER-637d1e513d74010e0237f1be.jpg",
+                "name": "TRUFFLE BURGER",
+                "alt": "TRUFFLE BURGER"
+            }
+        ],
+        "attributes": [
+            {
+                "id": 0,
+                "name": "ACOMPAÑANTE",
+                "slug": "ACOMPAÑANTE",
+                "position": 0,
+                "visible": true,
+                "variation": true,
+                "options": [
+                    "SIN ACOMPAÑANTE",
+                    "BITE FRIES",
+                    "BITE POPS"
+                ]
+            },
+            {
+                "id": 0,
+                "name": "TIPO DE PAN",
+                "slug": "TIPO DE PAN",
+                "position": 0,
+                "visible": true,
+                "variation": true,
+                "options": [
+                    "PAN BRIOCHE",
+                    "PAN SIN GLUTEN"
+                ]
+            }
+        ],
+        "default_attributes": [
+            {
+                "id": 0,
+                "name": "ACOMPAÑANTE",
+                "option": "SIN ACOMPAÑANTE"
+            },
+            {
+                "id": 0,
+                "name": "TIPO DE PAN",
+                "option": "PAN BRIOCHE"
+            }
+        ],
+        "variations": [
+            22674,
+            22675,
+            22676,
+            22677,
+            22678,
+            22679
+        ],
+        "grouped_products": [],
+        "menu_order": 0,
+        "price_html": "Desde <span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&euro;</span>12.95</bdi></span>",
+        "related_ids": [
+            7459,
+            7461,
+            22653,
+            7485,
+            7451
+        ],
+        "meta_data": [
+            {
+                "id": 629614,
+                "key": "_wc_gla_sync_status",
+                "value": "synced"
+            },
+            {
+                "id": 630079,
+                "key": "_wc_gla_visibility",
+                "value": "sync-and-show"
+            },
+            {
+                "id": 630081,
+                "key": "_wc_gla_synced_at",
+                "value": "1728529206"
+            },
+            {
+                "id": 630082,
+                "key": "_wc_gla_google_ids",
+                "value": {
+                    "ES": "online:es:ES:gla_22679"
+                }
+            },
+            {
+                "id": 630270,
+                "key": "tp_widgets",
+                "value": {
+                    "widgets": [],
+                    "update_at": "1730193972"
+                }
+            },
+            {
+                "id": 762032,
+                "key": "_elementor_css",
+                "value": {
+                    "time": 1730198326
+                }
+            },
+            {
+                "id": 795960,
+                "key": "_wc_gla_mc_status",
+                "value": "disapproved"
+            }
+        ],
+        "stock_status": "outofstock",
+        "has_options": true,
+        "post_password": "",
+        "global_unique_id": "",
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.7 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>TRUFFLE BURGER - Bite House Burger</title>\n<!-- Aviso solo para el Administrador: esta página no muestra una meta description porque no la tiene. Haz una de estas dos cosas: escribe una específicamente para esta página o ve al menú [Yoast SEO - Ajustes] y configura una plantilla. -->\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"https://test.bitehouseburger.es/producto/truffle-burger/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:locale\" content=\"es_ES\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:type\" content=\"article\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:title\" content=\"TRUFFLE BURGER - Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:description\" content=\"Doble smash burger (180 gr.) de vacuno selecto, huevo frito campero con puntilla y queso cheddar. Acompañada de salsa ahumada de trufa negra BITE y envuelta en nuestro pan brioche.\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:url\" content=\"https://test.bitehouseburger.es/producto/truffle-burger/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:site_name\" content=\"Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"article:modified_time\" content=\"2024-04-12T10:05:05+00:00\" class=\"yoast-seo-meta-tag\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"https://test.bitehouseburger.es/producto/truffle-burger/\",\"url\":\"https://test.bitehouseburger.es/producto/truffle-burger/\",\"name\":\"TRUFFLE BURGER - Bite House Burger\",\"isPartOf\":{\"@id\":\"https://test.bitehouseburger.es/#website\"},\"primaryImageOfPage\":{\"@id\":\"https://test.bitehouseburger.es/producto/truffle-burger/#primaryimage\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/producto/truffle-burger/#primaryimage\"},\"thumbnailUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/TRUFFLE20BURGER-637d1e513d74010e0237f1be.jpg\",\"datePublished\":\"2024-04-12T10:02:56+00:00\",\"dateModified\":\"2024-04-12T10:05:05+00:00\",\"breadcrumb\":{\"@id\":\"https://test.bitehouseburger.es/producto/truffle-burger/#breadcrumb\"},\"inLanguage\":\"es\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"https://test.bitehouseburger.es/producto/truffle-burger/\"]}]},{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/producto/truffle-burger/#primaryimage\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/TRUFFLE20BURGER-637d1e513d74010e0237f1be.jpg\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/TRUFFLE20BURGER-637d1e513d74010e0237f1be.jpg\",\"width\":1920,\"height\":1920,\"caption\":\"TRUFFLE BURGER\"},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://test.bitehouseburger.es/producto/truffle-burger/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Portada\",\"item\":\"https://test.bitehouseburger.es/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Productos\",\"item\":\"https://test.bitehouseburger.es/tienda__trashed/\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"TRUFFLE BURGER\"}]},{\"@type\":\"WebSite\",\"@id\":\"https://test.bitehouseburger.es/#website\",\"url\":\"https://test.bitehouseburger.es/\",\"name\":\"Bite House Burger\",\"description\":\"Bite House Burger\",\"publisher\":{\"@id\":\"https://test.bitehouseburger.es/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"https://test.bitehouseburger.es/?s={search_term_string}\"},\"query-input\":{\"@type\":\"PropertyValueSpecification\",\"valueRequired\":true,\"valueName\":\"search_term_string\"}}],\"inLanguage\":\"es\"},{\"@type\":\"Organization\",\"@id\":\"https://test.bitehouseburger.es/#organization\",\"name\":\"Bite House Burger\",\"url\":\"https://test.bitehouseburger.es/\",\"logo\":{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"width\":512,\"height\":512,\"caption\":\"Bite House Burger\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\"},\"sameAs\":[\"https://www.instagram.com/bitehouseburger\"]}]}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "TRUFFLE BURGER - Bite House Burger",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "https://test.bitehouseburger.es/producto/truffle-burger/",
+            "og_locale": "es_ES",
+            "og_type": "article",
+            "og_title": "TRUFFLE BURGER - Bite House Burger",
+            "og_description": "Doble smash burger (180 gr.) de vacuno selecto, huevo frito campero con puntilla y queso cheddar. Acompañada de salsa ahumada de trufa negra BITE y envuelta en nuestro pan brioche.",
+            "og_url": "https://test.bitehouseburger.es/producto/truffle-burger/",
+            "og_site_name": "Bite House Burger",
+            "article_modified_time": "2024-04-12T10:05:05+00:00",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://test.bitehouseburger.es/producto/truffle-burger/",
+                        "url": "https://test.bitehouseburger.es/producto/truffle-burger/",
+                        "name": "TRUFFLE BURGER - Bite House Burger",
+                        "isPartOf": {
+                            "@id": "https://test.bitehouseburger.es/#website"
+                        },
+                        "primaryImageOfPage": {
+                            "@id": "https://test.bitehouseburger.es/producto/truffle-burger/#primaryimage"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/producto/truffle-burger/#primaryimage"
+                        },
+                        "thumbnailUrl": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/TRUFFLE20BURGER-637d1e513d74010e0237f1be.jpg",
+                        "datePublished": "2024-04-12T10:02:56+00:00",
+                        "dateModified": "2024-04-12T10:05:05+00:00",
+                        "breadcrumb": {
+                            "@id": "https://test.bitehouseburger.es/producto/truffle-burger/#breadcrumb"
+                        },
+                        "inLanguage": "es",
+                        "potentialAction": [
+                            {
+                                "@type": "ReadAction",
+                                "target": [
+                                    "https://test.bitehouseburger.es/producto/truffle-burger/"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "ImageObject",
+                        "inLanguage": "es",
+                        "@id": "https://test.bitehouseburger.es/producto/truffle-burger/#primaryimage",
+                        "url": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/TRUFFLE20BURGER-637d1e513d74010e0237f1be.jpg",
+                        "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/TRUFFLE20BURGER-637d1e513d74010e0237f1be.jpg",
+                        "width": 1920,
+                        "height": 1920,
+                        "caption": "TRUFFLE BURGER"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://test.bitehouseburger.es/producto/truffle-burger/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Portada",
+                                "item": "https://test.bitehouseburger.es/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Productos",
+                                "item": "https://test.bitehouseburger.es/tienda__trashed/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "TRUFFLE BURGER"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://test.bitehouseburger.es/#website",
+                        "url": "https://test.bitehouseburger.es/",
+                        "name": "Bite House Burger",
+                        "description": "Bite House Burger",
+                        "publisher": {
+                            "@id": "https://test.bitehouseburger.es/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "https://test.bitehouseburger.es/?s={search_term_string}"
+                                },
+                                "query-input": {
+                                    "@type": "PropertyValueSpecification",
+                                    "valueRequired": true,
+                                    "valueName": "search_term_string"
+                                }
+                            }
+                        ],
+                        "inLanguage": "es"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "https://test.bitehouseburger.es/#organization",
+                        "name": "Bite House Burger",
+                        "url": "https://test.bitehouseburger.es/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "es",
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/",
+                            "url": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "width": 512,
+                            "height": 512,
+                            "caption": "Bite House Burger"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://www.instagram.com/bitehouseburger"
+                        ]
+                    }
+                ]
+            }
+        },
+        "google_listings_and_ads__channel_visibility": {
+            "is_visible": true,
+            "channel_visibility": "sync-and-show",
+            "sync_status": "synced",
+            "issues": []
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products/22651"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products"
+                }
+            ]
+        }
+    },
+    {
+        "id": 22649,
+        "name": "SWEET SPICY BURGER",
+        "slug": "sweet-spicy-burger",
+        "permalink": "https://test.bitehouseburger.es/producto/sweet-spicy-burger/",
+        "date_created": "2024-04-12T12:02:55",
+        "date_created_gmt": "2024-04-12T10:02:55",
+        "date_modified": "2024-09-28T02:40:49",
+        "date_modified_gmt": "2024-09-28T00:40:49",
+        "type": "variable",
+        "status": "publish",
+        "featured": false,
+        "catalog_visibility": "visible",
+        "description": "<p>Doble smash burger (180 gr.) de vacuno selecto, bacon ahumado crujiente, queso cheddar y cebolla caramelizada. Acompañada de salsa holandesa chipotle BITE y envuelta en nuestro pan brioche.</p>\n",
+        "short_description": "",
+        "sku": "P-SW-PhnA-2",
+        "price": "12.95",
+        "regular_price": "",
+        "sale_price": "",
+        "date_on_sale_from": null,
+        "date_on_sale_from_gmt": null,
+        "date_on_sale_to": null,
+        "date_on_sale_to_gmt": null,
+        "on_sale": false,
+        "purchasable": true,
+        "total_sales": 984,
+        "virtual": false,
+        "downloadable": false,
+        "downloads": [],
+        "download_limit": -1,
+        "download_expiry": -1,
+        "external_url": "",
+        "button_text": "",
+        "tax_status": "taxable",
+        "tax_class": "",
+        "manage_stock": false,
+        "stock_quantity": null,
+        "backorders": "no",
+        "backorders_allowed": false,
+        "backordered": false,
+        "low_stock_amount": null,
+        "sold_individually": false,
+        "weight": "",
+        "dimensions": {
+            "length": "",
+            "width": "",
+            "height": ""
+        },
+        "shipping_required": true,
+        "shipping_taxable": true,
+        "shipping_class": "",
+        "shipping_class_id": 0,
+        "reviews_allowed": true,
+        "average_rating": "0.00",
+        "rating_count": 0,
+        "upsell_ids": [],
+        "cross_sell_ids": [],
+        "parent_id": 0,
+        "purchase_note": "",
+        "categories": [
+            {
+                "id": 64,
+                "name": "Burgers",
+                "slug": "burgers"
+            }
+        ],
+        "tags": [
+            {
+                "id": 83,
+                "name": "CRUSTACEANS",
+                "slug": "crustaceans"
+            },
+            {
+                "id": 82,
+                "name": "EGGS",
+                "slug": "eggs"
+            },
+            {
+                "id": 87,
+                "name": "FISH",
+                "slug": "fish"
+            },
+            {
+                "id": 85,
+                "name": "GLUTEN",
+                "slug": "gluten"
+            },
+            {
+                "id": 79,
+                "name": "MILK",
+                "slug": "milk"
+            },
+            {
+                "id": 84,
+                "name": "SOYA",
+                "slug": "soya"
+            },
+            {
+                "id": 88,
+                "name": "SULPHITES",
+                "slug": "sulphites"
+            }
+        ],
+        "images": [
+            {
+                "id": 22648,
+                "date_created": "2024-04-12T14:02:54",
+                "date_created_gmt": "2024-04-12T10:02:54",
+                "date_modified": "2024-09-28T04:40:49",
+                "date_modified_gmt": "2024-09-28T00:40:49",
+                "src": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/SWEET20SPICY20BURGER-637d1f04ecc22606455c7d27.jpg",
+                "name": "SWEET SPICY BURGER",
+                "alt": "SWEET SPICY BURGER"
+            }
+        ],
+        "attributes": [
+            {
+                "id": 0,
+                "name": "ACOMPAÑANTE",
+                "slug": "ACOMPAÑANTE",
+                "position": 0,
+                "visible": true,
+                "variation": true,
+                "options": [
+                    "SIN ACOMPAÑANTE",
+                    "BITE FRIES",
+                    "BITE POPS"
+                ]
+            },
+            {
+                "id": 0,
+                "name": "TIPO DE PAN",
+                "slug": "TIPO DE PAN",
+                "position": 0,
+                "visible": true,
+                "variation": true,
+                "options": [
+                    "PAN BRIOCHE",
+                    "PAN SIN GLUTEN"
+                ]
+            }
+        ],
+        "default_attributes": [
+            {
+                "id": 0,
+                "name": "ACOMPAÑANTE",
+                "option": "SIN ACOMPAÑANTE"
+            },
+            {
+                "id": 0,
+                "name": "TIPO DE PAN",
+                "option": "PAN BRIOCHE"
+            }
+        ],
+        "variations": [
+            22668,
+            22669,
+            22670,
+            22671,
+            22672,
+            22673
+        ],
+        "grouped_products": [],
+        "menu_order": 0,
+        "price_html": "Desde <span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&euro;</span>12.95</bdi></span>",
+        "related_ids": [
+            22651,
+            22643,
+            7481,
+            7457,
+            7461
+        ],
+        "meta_data": [
+            {
+                "id": 630064,
+                "key": "_wc_gla_visibility",
+                "value": "sync-and-show"
+            },
+            {
+                "id": 630272,
+                "key": "tp_widgets",
+                "value": {
+                    "widgets": [],
+                    "update_at": "1730193972"
+                }
+            },
+            {
+                "id": 762462,
+                "key": "_elementor_css",
+                "value": {
+                    "time": 1733192616
+                }
+            },
+            {
+                "id": 772023,
+                "key": "_wc_gla_sync_status",
+                "value": "synced"
+            },
+            {
+                "id": 772032,
+                "key": "_wc_gla_synced_at",
+                "value": "1727484060"
+            },
+            {
+                "id": 772033,
+                "key": "_wc_gla_google_ids",
+                "value": {
+                    "ES": "online:es:ES:gla_22673"
+                }
+            },
+            {
+                "id": 795959,
+                "key": "_wc_gla_mc_status",
+                "value": "disapproved"
+            }
+        ],
+        "stock_status": "outofstock",
+        "has_options": true,
+        "post_password": "",
+        "global_unique_id": "",
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.7 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>SWEET SPICY BURGER - Bite House Burger</title>\n<!-- Aviso solo para el Administrador: esta página no muestra una meta description porque no la tiene. Haz una de estas dos cosas: escribe una específicamente para esta página o ve al menú [Yoast SEO - Ajustes] y configura una plantilla. -->\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"https://test.bitehouseburger.es/producto/sweet-spicy-burger/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:locale\" content=\"es_ES\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:type\" content=\"article\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:title\" content=\"SWEET SPICY BURGER - Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:description\" content=\"Doble smash burger (180 gr.) de vacuno selecto, bacon ahumado crujiente, queso cheddar y cebolla caramelizada. Acompañada de salsa holandesa chipotle BITE y envuelta en nuestro pan brioche.\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:url\" content=\"https://test.bitehouseburger.es/producto/sweet-spicy-burger/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:site_name\" content=\"Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"article:modified_time\" content=\"2024-09-28T00:40:49+00:00\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:image\" content=\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/SWEET20SPICY20BURGER-637d1f04ecc22606455c7d27.jpg\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:width\" content=\"1920\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:height\" content=\"1920\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:type\" content=\"image/jpeg\" class=\"yoast-seo-meta-tag\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"https://test.bitehouseburger.es/producto/sweet-spicy-burger/\",\"url\":\"https://test.bitehouseburger.es/producto/sweet-spicy-burger/\",\"name\":\"SWEET SPICY BURGER - Bite House Burger\",\"isPartOf\":{\"@id\":\"https://test.bitehouseburger.es/#website\"},\"primaryImageOfPage\":{\"@id\":\"https://test.bitehouseburger.es/producto/sweet-spicy-burger/#primaryimage\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/producto/sweet-spicy-burger/#primaryimage\"},\"thumbnailUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/SWEET20SPICY20BURGER-637d1f04ecc22606455c7d27.jpg\",\"datePublished\":\"2024-04-12T10:02:55+00:00\",\"dateModified\":\"2024-09-28T00:40:49+00:00\",\"breadcrumb\":{\"@id\":\"https://test.bitehouseburger.es/producto/sweet-spicy-burger/#breadcrumb\"},\"inLanguage\":\"es\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"https://test.bitehouseburger.es/producto/sweet-spicy-burger/\"]}]},{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/producto/sweet-spicy-burger/#primaryimage\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/SWEET20SPICY20BURGER-637d1f04ecc22606455c7d27.jpg\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/SWEET20SPICY20BURGER-637d1f04ecc22606455c7d27.jpg\",\"width\":1920,\"height\":1920,\"caption\":\"SWEET SPICY BURGER\"},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://test.bitehouseburger.es/producto/sweet-spicy-burger/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Portada\",\"item\":\"https://test.bitehouseburger.es/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Productos\",\"item\":\"https://test.bitehouseburger.es/tienda__trashed/\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"SWEET SPICY BURGER\"}]},{\"@type\":\"WebSite\",\"@id\":\"https://test.bitehouseburger.es/#website\",\"url\":\"https://test.bitehouseburger.es/\",\"name\":\"Bite House Burger\",\"description\":\"Bite House Burger\",\"publisher\":{\"@id\":\"https://test.bitehouseburger.es/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"https://test.bitehouseburger.es/?s={search_term_string}\"},\"query-input\":{\"@type\":\"PropertyValueSpecification\",\"valueRequired\":true,\"valueName\":\"search_term_string\"}}],\"inLanguage\":\"es\"},{\"@type\":\"Organization\",\"@id\":\"https://test.bitehouseburger.es/#organization\",\"name\":\"Bite House Burger\",\"url\":\"https://test.bitehouseburger.es/\",\"logo\":{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"width\":512,\"height\":512,\"caption\":\"Bite House Burger\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\"},\"sameAs\":[\"https://www.instagram.com/bitehouseburger\"]}]}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "SWEET SPICY BURGER - Bite House Burger",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "https://test.bitehouseburger.es/producto/sweet-spicy-burger/",
+            "og_locale": "es_ES",
+            "og_type": "article",
+            "og_title": "SWEET SPICY BURGER - Bite House Burger",
+            "og_description": "Doble smash burger (180 gr.) de vacuno selecto, bacon ahumado crujiente, queso cheddar y cebolla caramelizada. Acompañada de salsa holandesa chipotle BITE y envuelta en nuestro pan brioche.",
+            "og_url": "https://test.bitehouseburger.es/producto/sweet-spicy-burger/",
+            "og_site_name": "Bite House Burger",
+            "article_modified_time": "2024-09-28T00:40:49+00:00",
+            "og_image": [
+                {
+                    "width": 1920,
+                    "height": 1920,
+                    "url": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/SWEET20SPICY20BURGER-637d1f04ecc22606455c7d27.jpg",
+                    "type": "image/jpeg"
+                }
+            ],
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://test.bitehouseburger.es/producto/sweet-spicy-burger/",
+                        "url": "https://test.bitehouseburger.es/producto/sweet-spicy-burger/",
+                        "name": "SWEET SPICY BURGER - Bite House Burger",
+                        "isPartOf": {
+                            "@id": "https://test.bitehouseburger.es/#website"
+                        },
+                        "primaryImageOfPage": {
+                            "@id": "https://test.bitehouseburger.es/producto/sweet-spicy-burger/#primaryimage"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/producto/sweet-spicy-burger/#primaryimage"
+                        },
+                        "thumbnailUrl": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/SWEET20SPICY20BURGER-637d1f04ecc22606455c7d27.jpg",
+                        "datePublished": "2024-04-12T10:02:55+00:00",
+                        "dateModified": "2024-09-28T00:40:49+00:00",
+                        "breadcrumb": {
+                            "@id": "https://test.bitehouseburger.es/producto/sweet-spicy-burger/#breadcrumb"
+                        },
+                        "inLanguage": "es",
+                        "potentialAction": [
+                            {
+                                "@type": "ReadAction",
+                                "target": [
+                                    "https://test.bitehouseburger.es/producto/sweet-spicy-burger/"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "ImageObject",
+                        "inLanguage": "es",
+                        "@id": "https://test.bitehouseburger.es/producto/sweet-spicy-burger/#primaryimage",
+                        "url": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/SWEET20SPICY20BURGER-637d1f04ecc22606455c7d27.jpg",
+                        "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/SWEET20SPICY20BURGER-637d1f04ecc22606455c7d27.jpg",
+                        "width": 1920,
+                        "height": 1920,
+                        "caption": "SWEET SPICY BURGER"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://test.bitehouseburger.es/producto/sweet-spicy-burger/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Portada",
+                                "item": "https://test.bitehouseburger.es/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Productos",
+                                "item": "https://test.bitehouseburger.es/tienda__trashed/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "SWEET SPICY BURGER"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://test.bitehouseburger.es/#website",
+                        "url": "https://test.bitehouseburger.es/",
+                        "name": "Bite House Burger",
+                        "description": "Bite House Burger",
+                        "publisher": {
+                            "@id": "https://test.bitehouseburger.es/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "https://test.bitehouseburger.es/?s={search_term_string}"
+                                },
+                                "query-input": {
+                                    "@type": "PropertyValueSpecification",
+                                    "valueRequired": true,
+                                    "valueName": "search_term_string"
+                                }
+                            }
+                        ],
+                        "inLanguage": "es"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "https://test.bitehouseburger.es/#organization",
+                        "name": "Bite House Burger",
+                        "url": "https://test.bitehouseburger.es/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "es",
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/",
+                            "url": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "width": 512,
+                            "height": 512,
+                            "caption": "Bite House Burger"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://www.instagram.com/bitehouseburger"
+                        ]
+                    }
+                ]
+            }
+        },
+        "google_listings_and_ads__channel_visibility": {
+            "is_visible": true,
+            "channel_visibility": "sync-and-show",
+            "sync_status": "synced",
+            "issues": []
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products/22649"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products"
+                }
+            ]
+        }
+    },
+    {
+        "id": 22647,
+        "name": "MOJO ROJO CRUNCHY CHICKEN",
+        "slug": "mojo-rojo-crunchy-chicken",
+        "permalink": "https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/",
+        "date_created": "2024-04-12T12:02:54",
+        "date_created_gmt": "2024-04-12T10:02:54",
+        "date_modified": "2024-09-07T21:23:32",
+        "date_modified_gmt": "2024-09-07T19:23:32",
+        "type": "variable",
+        "status": "publish",
+        "featured": false,
+        "catalog_visibility": "visible",
+        "description": "<p>Jugoso contramuslo de corral extra crunchy macerado en salsa mojo rojo BITE, queso havarti y cebolla caramelizada. Todo envuelto en nuestro pan brioche.</p>\n",
+        "short_description": "",
+        "sku": "P-MO-xVfa-4",
+        "price": "11.45",
+        "regular_price": "",
+        "sale_price": "",
+        "date_on_sale_from": null,
+        "date_on_sale_from_gmt": null,
+        "date_on_sale_to": null,
+        "date_on_sale_to_gmt": null,
+        "on_sale": false,
+        "purchasable": true,
+        "total_sales": 287,
+        "virtual": false,
+        "downloadable": false,
+        "downloads": [],
+        "download_limit": -1,
+        "download_expiry": -1,
+        "external_url": "",
+        "button_text": "",
+        "tax_status": "taxable",
+        "tax_class": "",
+        "manage_stock": false,
+        "stock_quantity": null,
+        "backorders": "no",
+        "backorders_allowed": false,
+        "backordered": false,
+        "low_stock_amount": null,
+        "sold_individually": false,
+        "weight": "",
+        "dimensions": {
+            "length": "",
+            "width": "",
+            "height": ""
+        },
+        "shipping_required": true,
+        "shipping_taxable": true,
+        "shipping_class": "",
+        "shipping_class_id": 0,
+        "reviews_allowed": true,
+        "average_rating": "0.00",
+        "rating_count": 0,
+        "upsell_ids": [],
+        "cross_sell_ids": [],
+        "parent_id": 0,
+        "purchase_note": "",
+        "categories": [
+            {
+                "id": 64,
+                "name": "Burgers",
+                "slug": "burgers"
+            }
+        ],
+        "tags": [
+            {
+                "id": 85,
+                "name": "GLUTEN",
+                "slug": "gluten"
+            },
+            {
+                "id": 79,
+                "name": "MILK",
+                "slug": "milk"
+            },
+            {
+                "id": 88,
+                "name": "SULPHITES",
+                "slug": "sulphites"
+            }
+        ],
+        "images": [
+            {
+                "id": 22646,
+                "date_created": "2024-04-12T14:02:53",
+                "date_created_gmt": "2024-04-12T10:02:53",
+                "date_modified": "2024-09-07T23:23:32",
+                "date_modified_gmt": "2024-09-07T19:23:32",
+                "src": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/BURGER20420ENTERA-636d569fecc22606455c72c8.jpg",
+                "name": "MOJO ROJO CRUNCHY CHICKEN",
+                "alt": "MOJO ROJO CRUNCHY CHICKEN"
+            }
+        ],
+        "attributes": [
+            {
+                "id": 0,
+                "name": "ACOMPAÑANTE",
+                "slug": "ACOMPAÑANTE",
+                "position": 0,
+                "visible": true,
+                "variation": true,
+                "options": [
+                    "SIN ACOMPAÑANTE",
+                    "BITE FRIES",
+                    "BITE POPS"
+                ]
+            }
+        ],
+        "default_attributes": [
+            {
+                "id": 0,
+                "name": "ACOMPAÑANTE",
+                "option": "SIN ACOMPAÑANTE"
+            }
+        ],
+        "variations": [
+            22665,
+            22666,
+            22667
+        ],
+        "grouped_products": [],
+        "menu_order": 0,
+        "price_html": "Desde <span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&euro;</span>11.45</bdi></span>",
+        "related_ids": [
+            22653,
+            7459,
+            7461,
+            7489,
+            20659
+        ],
+        "meta_data": [
+            {
+                "id": 630054,
+                "key": "_wc_gla_visibility",
+                "value": "sync-and-show"
+            },
+            {
+                "id": 630274,
+                "key": "tp_widgets",
+                "value": {
+                    "widgets": [],
+                    "update_at": "1730193972"
+                }
+            },
+            {
+                "id": 752239,
+                "key": "_wc_gla_sync_status",
+                "value": "synced"
+            },
+            {
+                "id": 752304,
+                "key": "_wc_gla_synced_at",
+                "value": "1727924405"
+            },
+            {
+                "id": 752305,
+                "key": "_wc_gla_google_ids",
+                "value": {
+                    "ES": "online:es:ES:gla_22667"
+                }
+            },
+            {
+                "id": 762404,
+                "key": "_elementor_css",
+                "value": {
+                    "time": 1733192621
+                }
+            },
+            {
+                "id": 795958,
+                "key": "_wc_gla_mc_status",
+                "value": "disapproved"
+            }
+        ],
+        "stock_status": "instock",
+        "has_options": true,
+        "post_password": "",
+        "global_unique_id": "",
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.7 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>MOJO ROJO CRUNCHY CHICKEN - Bite House Burger</title>\n<!-- Aviso solo para el Administrador: esta página no muestra una meta description porque no la tiene. Haz una de estas dos cosas: escribe una específicamente para esta página o ve al menú [Yoast SEO - Ajustes] y configura una plantilla. -->\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:locale\" content=\"es_ES\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:type\" content=\"article\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:title\" content=\"MOJO ROJO CRUNCHY CHICKEN - Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:description\" content=\"Jugoso contramuslo de corral extra crunchy macerado en salsa mojo rojo BITE, queso havarti y cebolla caramelizada. Todo envuelto en nuestro pan brioche.\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:url\" content=\"https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:site_name\" content=\"Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"article:modified_time\" content=\"2024-09-07T19:23:32+00:00\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:image\" content=\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/BURGER20420ENTERA-636d569fecc22606455c72c8.jpg\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:width\" content=\"1400\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:height\" content=\"1400\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:type\" content=\"image/jpeg\" class=\"yoast-seo-meta-tag\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/\",\"url\":\"https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/\",\"name\":\"MOJO ROJO CRUNCHY CHICKEN - Bite House Burger\",\"isPartOf\":{\"@id\":\"https://test.bitehouseburger.es/#website\"},\"primaryImageOfPage\":{\"@id\":\"https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/#primaryimage\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/#primaryimage\"},\"thumbnailUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/BURGER20420ENTERA-636d569fecc22606455c72c8.jpg\",\"datePublished\":\"2024-04-12T10:02:54+00:00\",\"dateModified\":\"2024-09-07T19:23:32+00:00\",\"breadcrumb\":{\"@id\":\"https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/#breadcrumb\"},\"inLanguage\":\"es\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/\"]}]},{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/#primaryimage\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/BURGER20420ENTERA-636d569fecc22606455c72c8.jpg\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/BURGER20420ENTERA-636d569fecc22606455c72c8.jpg\",\"width\":1400,\"height\":1400,\"caption\":\"MOJO ROJO CRUNCHY CHICKEN\"},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Portada\",\"item\":\"https://test.bitehouseburger.es/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Productos\",\"item\":\"https://test.bitehouseburger.es/tienda__trashed/\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"MOJO ROJO CRUNCHY CHICKEN\"}]},{\"@type\":\"WebSite\",\"@id\":\"https://test.bitehouseburger.es/#website\",\"url\":\"https://test.bitehouseburger.es/\",\"name\":\"Bite House Burger\",\"description\":\"Bite House Burger\",\"publisher\":{\"@id\":\"https://test.bitehouseburger.es/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"https://test.bitehouseburger.es/?s={search_term_string}\"},\"query-input\":{\"@type\":\"PropertyValueSpecification\",\"valueRequired\":true,\"valueName\":\"search_term_string\"}}],\"inLanguage\":\"es\"},{\"@type\":\"Organization\",\"@id\":\"https://test.bitehouseburger.es/#organization\",\"name\":\"Bite House Burger\",\"url\":\"https://test.bitehouseburger.es/\",\"logo\":{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"width\":512,\"height\":512,\"caption\":\"Bite House Burger\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\"},\"sameAs\":[\"https://www.instagram.com/bitehouseburger\"]}]}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "MOJO ROJO CRUNCHY CHICKEN - Bite House Burger",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/",
+            "og_locale": "es_ES",
+            "og_type": "article",
+            "og_title": "MOJO ROJO CRUNCHY CHICKEN - Bite House Burger",
+            "og_description": "Jugoso contramuslo de corral extra crunchy macerado en salsa mojo rojo BITE, queso havarti y cebolla caramelizada. Todo envuelto en nuestro pan brioche.",
+            "og_url": "https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/",
+            "og_site_name": "Bite House Burger",
+            "article_modified_time": "2024-09-07T19:23:32+00:00",
+            "og_image": [
+                {
+                    "width": 1400,
+                    "height": 1400,
+                    "url": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/BURGER20420ENTERA-636d569fecc22606455c72c8.jpg",
+                    "type": "image/jpeg"
+                }
+            ],
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/",
+                        "url": "https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/",
+                        "name": "MOJO ROJO CRUNCHY CHICKEN - Bite House Burger",
+                        "isPartOf": {
+                            "@id": "https://test.bitehouseburger.es/#website"
+                        },
+                        "primaryImageOfPage": {
+                            "@id": "https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/#primaryimage"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/#primaryimage"
+                        },
+                        "thumbnailUrl": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/BURGER20420ENTERA-636d569fecc22606455c72c8.jpg",
+                        "datePublished": "2024-04-12T10:02:54+00:00",
+                        "dateModified": "2024-09-07T19:23:32+00:00",
+                        "breadcrumb": {
+                            "@id": "https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/#breadcrumb"
+                        },
+                        "inLanguage": "es",
+                        "potentialAction": [
+                            {
+                                "@type": "ReadAction",
+                                "target": [
+                                    "https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "ImageObject",
+                        "inLanguage": "es",
+                        "@id": "https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/#primaryimage",
+                        "url": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/BURGER20420ENTERA-636d569fecc22606455c72c8.jpg",
+                        "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/BURGER20420ENTERA-636d569fecc22606455c72c8.jpg",
+                        "width": 1400,
+                        "height": 1400,
+                        "caption": "MOJO ROJO CRUNCHY CHICKEN"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://test.bitehouseburger.es/producto/mojo-rojo-crunchy-chicken/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Portada",
+                                "item": "https://test.bitehouseburger.es/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Productos",
+                                "item": "https://test.bitehouseburger.es/tienda__trashed/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "MOJO ROJO CRUNCHY CHICKEN"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://test.bitehouseburger.es/#website",
+                        "url": "https://test.bitehouseburger.es/",
+                        "name": "Bite House Burger",
+                        "description": "Bite House Burger",
+                        "publisher": {
+                            "@id": "https://test.bitehouseburger.es/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "https://test.bitehouseburger.es/?s={search_term_string}"
+                                },
+                                "query-input": {
+                                    "@type": "PropertyValueSpecification",
+                                    "valueRequired": true,
+                                    "valueName": "search_term_string"
+                                }
+                            }
+                        ],
+                        "inLanguage": "es"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "https://test.bitehouseburger.es/#organization",
+                        "name": "Bite House Burger",
+                        "url": "https://test.bitehouseburger.es/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "es",
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/",
+                            "url": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "width": 512,
+                            "height": 512,
+                            "caption": "Bite House Burger"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://www.instagram.com/bitehouseburger"
+                        ]
+                    }
+                ]
+            }
+        },
+        "google_listings_and_ads__channel_visibility": {
+            "is_visible": true,
+            "channel_visibility": "sync-and-show",
+            "sync_status": "synced",
+            "issues": []
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products/22647"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products"
+                }
+            ]
+        }
+    },
+    {
+        "id": 22645,
+        "name": "BACON CHEESEBURGER",
+        "slug": "bacon-cheeseburger",
+        "permalink": "https://test.bitehouseburger.es/producto/bacon-cheeseburger/",
+        "date_created": "2024-04-12T12:02:53",
+        "date_created_gmt": "2024-04-12T10:02:53",
+        "date_modified": "2024-04-12T12:06:33",
+        "date_modified_gmt": "2024-04-12T10:06:33",
+        "type": "variable",
+        "status": "publish",
+        "featured": false,
+        "catalog_visibility": "visible",
+        "description": "<p>Doble smash burger (180 gr.) de vacuno selecto, bacon ahumado crujiente, queso cheddar, acompañada de salsa mayonesa ahumada BITE envuelta en nuestro pan brioche</p>\n",
+        "short_description": "",
+        "sku": "P-DO-wNqB-2",
+        "price": "12.95",
+        "regular_price": "",
+        "sale_price": "",
+        "date_on_sale_from": null,
+        "date_on_sale_from_gmt": null,
+        "date_on_sale_to": null,
+        "date_on_sale_to_gmt": null,
+        "on_sale": false,
+        "purchasable": true,
+        "total_sales": 1772,
+        "virtual": false,
+        "downloadable": false,
+        "downloads": [],
+        "download_limit": -1,
+        "download_expiry": -1,
+        "external_url": "",
+        "button_text": "",
+        "tax_status": "taxable",
+        "tax_class": "",
+        "manage_stock": false,
+        "stock_quantity": null,
+        "backorders": "no",
+        "backorders_allowed": false,
+        "backordered": false,
+        "low_stock_amount": null,
+        "sold_individually": false,
+        "weight": "",
+        "dimensions": {
+            "length": "",
+            "width": "",
+            "height": ""
+        },
+        "shipping_required": true,
+        "shipping_taxable": true,
+        "shipping_class": "",
+        "shipping_class_id": 0,
+        "reviews_allowed": false,
+        "average_rating": "0.00",
+        "rating_count": 0,
+        "upsell_ids": [],
+        "cross_sell_ids": [],
+        "parent_id": 0,
+        "purchase_note": "",
+        "categories": [
+            {
+                "id": 64,
+                "name": "Burgers",
+                "slug": "burgers"
+            }
+        ],
+        "tags": [
+            {
+                "id": 82,
+                "name": "EGGS",
+                "slug": "eggs"
+            },
+            {
+                "id": 85,
+                "name": "GLUTEN",
+                "slug": "gluten"
+            },
+            {
+                "id": 79,
+                "name": "MILK",
+                "slug": "milk"
+            },
+            {
+                "id": 77,
+                "name": "MUSTARD",
+                "slug": "mustard"
+            },
+            {
+                "id": 88,
+                "name": "SULPHITES",
+                "slug": "sulphites"
+            }
+        ],
+        "images": [
+            {
+                "id": 22644,
+                "date_created": "2024-04-12T14:02:52",
+                "date_created_gmt": "2024-04-12T10:02:52",
+                "date_modified": "2024-04-12T14:02:53",
+                "date_modified_gmt": "2024-04-12T10:02:53",
+                "src": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/BACON20CHEESEBURGER-637d1ecadf14012dd9b8341c.jpg",
+                "name": "BACON CHEESEBURGER",
+                "alt": "BACON CHEESEBURGER"
+            }
+        ],
+        "attributes": [
+            {
+                "id": 0,
+                "name": "ACOMPAÑANTE",
+                "slug": "ACOMPAÑANTE",
+                "position": 0,
+                "visible": true,
+                "variation": true,
+                "options": [
+                    "SIN ACOMPAÑANTE",
+                    "BITE FRIES",
+                    "BITE POPS"
+                ]
+            },
+            {
+                "id": 0,
+                "name": "TIPO DE PAN",
+                "slug": "TIPO DE PAN",
+                "position": 0,
+                "visible": true,
+                "variation": true,
+                "options": [
+                    "PAN BRIOCHE",
+                    "PAN SIN GLUTEN"
+                ]
+            }
+        ],
+        "default_attributes": [
+            {
+                "id": 0,
+                "name": "ACOMPAÑANTE",
+                "option": "SIN ACOMPAÑANTE"
+            },
+            {
+                "id": 0,
+                "name": "TIPO DE PAN",
+                "option": "PAN BRIOCHE"
+            }
+        ],
+        "variations": [
+            22659,
+            22660,
+            22661,
+            22662,
+            22663,
+            22664
+        ],
+        "grouped_products": [],
+        "menu_order": 0,
+        "price_html": "Desde <span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&euro;</span>12.95</bdi></span>",
+        "related_ids": [
+            22643,
+            22655,
+            22647,
+            7469,
+            7491
+        ],
+        "meta_data": [
+            {
+                "id": 629278,
+                "key": "_wc_gla_sync_status",
+                "value": "synced"
+            },
+            {
+                "id": 630007,
+                "key": "_wc_gla_visibility",
+                "value": "sync-and-show"
+            },
+            {
+                "id": 630009,
+                "key": "_wc_gla_synced_at",
+                "value": "1728529206"
+            },
+            {
+                "id": 630010,
+                "key": "_wc_gla_google_ids",
+                "value": {
+                    "ES": "online:es:ES:gla_22664"
+                }
+            },
+            {
+                "id": 630183,
+                "key": "_wp_page_template",
+                "value": "default"
+            },
+            {
+                "id": 630184,
+                "key": "_coupon_title",
+                "value": []
+            },
+            {
+                "id": 630185,
+                "key": "send_coupons_on_renewals",
+                "value": "no"
+            },
+            {
+                "id": 630186,
+                "key": "inline_featured_image",
+                "value": "0"
+            },
+            {
+                "id": 630187,
+                "key": "_yoast_wpseo_estimated-reading-time-minutes",
+                "value": ""
+            },
+            {
+                "id": 630188,
+                "key": "_yoast_wpseo_wordproof_timestamp",
+                "value": ""
+            },
+            {
+                "id": 630204,
+                "key": "tp_widgets",
+                "value": {
+                    "widgets": [],
+                    "update_at": "1730193972"
+                }
+            },
+            {
+                "id": 762489,
+                "key": "_elementor_css",
+                "value": {
+                    "time": 1733192630
+                }
+            },
+            {
+                "id": 795957,
+                "key": "_wc_gla_mc_status",
+                "value": "disapproved"
+            }
+        ],
+        "stock_status": "outofstock",
+        "has_options": true,
+        "post_password": "",
+        "global_unique_id": "",
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.7 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>BACON CHEESEBURGER - Bite House Burger</title>\n<!-- Aviso solo para el Administrador: esta página no muestra una meta description porque no la tiene. Haz una de estas dos cosas: escribe una específicamente para esta página o ve al menú [Yoast SEO - Ajustes] y configura una plantilla. -->\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"https://test.bitehouseburger.es/producto/bacon-cheeseburger/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:locale\" content=\"es_ES\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:type\" content=\"article\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:title\" content=\"BACON CHEESEBURGER - Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:description\" content=\"Doble smash burger (180 gr.) de vacuno selecto, bacon ahumado crujiente, queso cheddar, acompañada de salsa mayonesa ahumada BITE envuelta en nuestro pan brioche\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:url\" content=\"https://test.bitehouseburger.es/producto/bacon-cheeseburger/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:site_name\" content=\"Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"article:modified_time\" content=\"2024-04-12T10:06:33+00:00\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:image\" content=\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/BACON20CHEESEBURGER-637d1ecadf14012dd9b8341c.jpg\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:width\" content=\"1920\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:height\" content=\"1920\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:type\" content=\"image/jpeg\" class=\"yoast-seo-meta-tag\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"https://test.bitehouseburger.es/producto/bacon-cheeseburger/\",\"url\":\"https://test.bitehouseburger.es/producto/bacon-cheeseburger/\",\"name\":\"BACON CHEESEBURGER - Bite House Burger\",\"isPartOf\":{\"@id\":\"https://test.bitehouseburger.es/#website\"},\"primaryImageOfPage\":{\"@id\":\"https://test.bitehouseburger.es/producto/bacon-cheeseburger/#primaryimage\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/producto/bacon-cheeseburger/#primaryimage\"},\"thumbnailUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/BACON20CHEESEBURGER-637d1ecadf14012dd9b8341c.jpg\",\"datePublished\":\"2024-04-12T10:02:53+00:00\",\"dateModified\":\"2024-04-12T10:06:33+00:00\",\"breadcrumb\":{\"@id\":\"https://test.bitehouseburger.es/producto/bacon-cheeseburger/#breadcrumb\"},\"inLanguage\":\"es\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"https://test.bitehouseburger.es/producto/bacon-cheeseburger/\"]}]},{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/producto/bacon-cheeseburger/#primaryimage\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/BACON20CHEESEBURGER-637d1ecadf14012dd9b8341c.jpg\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/BACON20CHEESEBURGER-637d1ecadf14012dd9b8341c.jpg\",\"width\":1920,\"height\":1920,\"caption\":\"BACON CHEESEBURGER\"},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://test.bitehouseburger.es/producto/bacon-cheeseburger/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Portada\",\"item\":\"https://test.bitehouseburger.es/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Productos\",\"item\":\"https://test.bitehouseburger.es/tienda__trashed/\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"BACON CHEESEBURGER\"}]},{\"@type\":\"WebSite\",\"@id\":\"https://test.bitehouseburger.es/#website\",\"url\":\"https://test.bitehouseburger.es/\",\"name\":\"Bite House Burger\",\"description\":\"Bite House Burger\",\"publisher\":{\"@id\":\"https://test.bitehouseburger.es/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"https://test.bitehouseburger.es/?s={search_term_string}\"},\"query-input\":{\"@type\":\"PropertyValueSpecification\",\"valueRequired\":true,\"valueName\":\"search_term_string\"}}],\"inLanguage\":\"es\"},{\"@type\":\"Organization\",\"@id\":\"https://test.bitehouseburger.es/#organization\",\"name\":\"Bite House Burger\",\"url\":\"https://test.bitehouseburger.es/\",\"logo\":{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"width\":512,\"height\":512,\"caption\":\"Bite House Burger\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\"},\"sameAs\":[\"https://www.instagram.com/bitehouseburger\"]}]}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "BACON CHEESEBURGER - Bite House Burger",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "https://test.bitehouseburger.es/producto/bacon-cheeseburger/",
+            "og_locale": "es_ES",
+            "og_type": "article",
+            "og_title": "BACON CHEESEBURGER - Bite House Burger",
+            "og_description": "Doble smash burger (180 gr.) de vacuno selecto, bacon ahumado crujiente, queso cheddar, acompañada de salsa mayonesa ahumada BITE envuelta en nuestro pan brioche",
+            "og_url": "https://test.bitehouseburger.es/producto/bacon-cheeseburger/",
+            "og_site_name": "Bite House Burger",
+            "article_modified_time": "2024-04-12T10:06:33+00:00",
+            "og_image": [
+                {
+                    "width": 1920,
+                    "height": 1920,
+                    "url": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/BACON20CHEESEBURGER-637d1ecadf14012dd9b8341c.jpg",
+                    "type": "image/jpeg"
+                }
+            ],
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://test.bitehouseburger.es/producto/bacon-cheeseburger/",
+                        "url": "https://test.bitehouseburger.es/producto/bacon-cheeseburger/",
+                        "name": "BACON CHEESEBURGER - Bite House Burger",
+                        "isPartOf": {
+                            "@id": "https://test.bitehouseburger.es/#website"
+                        },
+                        "primaryImageOfPage": {
+                            "@id": "https://test.bitehouseburger.es/producto/bacon-cheeseburger/#primaryimage"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/producto/bacon-cheeseburger/#primaryimage"
+                        },
+                        "thumbnailUrl": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/BACON20CHEESEBURGER-637d1ecadf14012dd9b8341c.jpg",
+                        "datePublished": "2024-04-12T10:02:53+00:00",
+                        "dateModified": "2024-04-12T10:06:33+00:00",
+                        "breadcrumb": {
+                            "@id": "https://test.bitehouseburger.es/producto/bacon-cheeseburger/#breadcrumb"
+                        },
+                        "inLanguage": "es",
+                        "potentialAction": [
+                            {
+                                "@type": "ReadAction",
+                                "target": [
+                                    "https://test.bitehouseburger.es/producto/bacon-cheeseburger/"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "ImageObject",
+                        "inLanguage": "es",
+                        "@id": "https://test.bitehouseburger.es/producto/bacon-cheeseburger/#primaryimage",
+                        "url": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/BACON20CHEESEBURGER-637d1ecadf14012dd9b8341c.jpg",
+                        "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/BACON20CHEESEBURGER-637d1ecadf14012dd9b8341c.jpg",
+                        "width": 1920,
+                        "height": 1920,
+                        "caption": "BACON CHEESEBURGER"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://test.bitehouseburger.es/producto/bacon-cheeseburger/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Portada",
+                                "item": "https://test.bitehouseburger.es/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Productos",
+                                "item": "https://test.bitehouseburger.es/tienda__trashed/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "BACON CHEESEBURGER"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://test.bitehouseburger.es/#website",
+                        "url": "https://test.bitehouseburger.es/",
+                        "name": "Bite House Burger",
+                        "description": "Bite House Burger",
+                        "publisher": {
+                            "@id": "https://test.bitehouseburger.es/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "https://test.bitehouseburger.es/?s={search_term_string}"
+                                },
+                                "query-input": {
+                                    "@type": "PropertyValueSpecification",
+                                    "valueRequired": true,
+                                    "valueName": "search_term_string"
+                                }
+                            }
+                        ],
+                        "inLanguage": "es"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "https://test.bitehouseburger.es/#organization",
+                        "name": "Bite House Burger",
+                        "url": "https://test.bitehouseburger.es/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "es",
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/",
+                            "url": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "width": 512,
+                            "height": 512,
+                            "caption": "Bite House Burger"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://www.instagram.com/bitehouseburger"
+                        ]
+                    }
+                ]
+            }
+        },
+        "google_listings_and_ads__channel_visibility": {
+            "is_visible": true,
+            "channel_visibility": "sync-and-show",
+            "sync_status": "synced",
+            "issues": []
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products/22645"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products"
+                }
+            ]
+        }
+    },
+    {
+        "id": 22643,
+        "name": "CRUNCHY CHICKEN BUN",
+        "slug": "crunchy-chicken-bun",
+        "permalink": "https://test.bitehouseburger.es/producto/crunchy-chicken-bun/",
+        "date_created": "2024-04-12T12:02:52",
+        "date_created_gmt": "2024-04-12T10:02:52",
+        "date_modified": "2024-04-12T12:08:38",
+        "date_modified_gmt": "2024-04-12T10:08:38",
+        "type": "variable",
+        "status": "publish",
+        "featured": false,
+        "catalog_visibility": "visible",
+        "description": "<p>Jugoso contramuslo de corral extra crunchy, lechuga hoja roble verde, tomate pera, y doble queso cheddar. Acompañado de salsa mayo ahumada BITE y envuelta en nuestro pan brioche.</p>\n",
+        "short_description": "",
+        "sku": "P-CR-7boY-5",
+        "price": "10.95",
+        "regular_price": "",
+        "sale_price": "",
+        "date_on_sale_from": null,
+        "date_on_sale_from_gmt": null,
+        "date_on_sale_to": null,
+        "date_on_sale_to_gmt": null,
+        "on_sale": false,
+        "purchasable": true,
+        "total_sales": 435,
+        "virtual": false,
+        "downloadable": false,
+        "downloads": [],
+        "download_limit": -1,
+        "download_expiry": -1,
+        "external_url": "",
+        "button_text": "",
+        "tax_status": "taxable",
+        "tax_class": "",
+        "manage_stock": false,
+        "stock_quantity": null,
+        "backorders": "no",
+        "backorders_allowed": false,
+        "backordered": false,
+        "low_stock_amount": null,
+        "sold_individually": false,
+        "weight": "",
+        "dimensions": {
+            "length": "",
+            "width": "",
+            "height": ""
+        },
+        "shipping_required": true,
+        "shipping_taxable": true,
+        "shipping_class": "",
+        "shipping_class_id": 0,
+        "reviews_allowed": true,
+        "average_rating": "0.00",
+        "rating_count": 0,
+        "upsell_ids": [],
+        "cross_sell_ids": [],
+        "parent_id": 0,
+        "purchase_note": "",
+        "categories": [
+            {
+                "id": 64,
+                "name": "Burgers",
+                "slug": "burgers"
+            }
+        ],
+        "tags": [
+            {
+                "id": 85,
+                "name": "GLUTEN",
+                "slug": "gluten"
+            },
+            {
+                "id": 79,
+                "name": "MILK",
+                "slug": "milk"
+            },
+            {
+                "id": 88,
+                "name": "SULPHITES",
+                "slug": "sulphites"
+            }
+        ],
+        "images": [
+            {
+                "id": 22642,
+                "date_created": "2024-04-12T14:02:51",
+                "date_created_gmt": "2024-04-12T10:02:51",
+                "date_modified": "2024-04-12T14:02:52",
+                "date_modified_gmt": "2024-04-12T10:02:52",
+                "src": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/BURGER20520ENTERA-636d5702ca667f00203379ed.jpg",
+                "name": "CRUNCHY CHICKEN BUN",
+                "alt": "CRUNCHY CHICKEN BUN"
+            }
+        ],
+        "attributes": [
+            {
+                "id": 0,
+                "name": "ACOMPAÑANTE",
+                "slug": "ACOMPAÑANTE",
+                "position": 0,
+                "visible": true,
+                "variation": true,
+                "options": [
+                    "SIN ACOMPAÑANTE",
+                    "BITE FRIES",
+                    "BITE POPS"
+                ]
+            }
+        ],
+        "default_attributes": [
+            {
+                "id": 0,
+                "name": "ACOMPAÑANTE",
+                "option": "SIN ACOMPAÑANTE"
+            }
+        ],
+        "variations": [
+            22656,
+            22657,
+            22658
+        ],
+        "grouped_products": [],
+        "menu_order": 0,
+        "price_html": "Desde <span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&euro;</span>10.95</bdi></span>",
+        "related_ids": [
+            7481,
+            22647,
+            7491,
+            7479,
+            9276
+        ],
+        "meta_data": [
+            {
+                "id": 629211,
+                "key": "_wc_gla_sync_status",
+                "value": "synced"
+            },
+            {
+                "id": 629998,
+                "key": "_wc_gla_visibility",
+                "value": "sync-and-show"
+            },
+            {
+                "id": 630000,
+                "key": "_wc_gla_synced_at",
+                "value": "1728529206"
+            },
+            {
+                "id": 630001,
+                "key": "_wc_gla_google_ids",
+                "value": {
+                    "ES": "online:es:ES:gla_22658"
+                }
+            },
+            {
+                "id": 630268,
+                "key": "tp_widgets",
+                "value": {
+                    "widgets": [],
+                    "update_at": "1730193972"
+                }
+            },
+            {
+                "id": 762324,
+                "key": "_elementor_css",
+                "value": {
+                    "time": 1733192629
+                }
+            },
+            {
+                "id": 795956,
+                "key": "_wc_gla_mc_status",
+                "value": "disapproved"
+            }
+        ],
+        "stock_status": "instock",
+        "has_options": true,
+        "post_password": "",
+        "global_unique_id": "",
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.7 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>CRUNCHY CHICKEN BUN - Bite House Burger</title>\n<!-- Aviso solo para el Administrador: esta página no muestra una meta description porque no la tiene. Haz una de estas dos cosas: escribe una específicamente para esta página o ve al menú [Yoast SEO - Ajustes] y configura una plantilla. -->\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"https://test.bitehouseburger.es/producto/crunchy-chicken-bun/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:locale\" content=\"es_ES\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:type\" content=\"article\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:title\" content=\"CRUNCHY CHICKEN BUN - Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:description\" content=\"Jugoso contramuslo de corral extra crunchy, lechuga hoja roble verde, tomate pera, y doble queso cheddar. Acompañado de salsa mayo ahumada BITE y envuelta en nuestro pan brioche.\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:url\" content=\"https://test.bitehouseburger.es/producto/crunchy-chicken-bun/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:site_name\" content=\"Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"article:modified_time\" content=\"2024-04-12T10:08:38+00:00\" class=\"yoast-seo-meta-tag\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"https://test.bitehouseburger.es/producto/crunchy-chicken-bun/\",\"url\":\"https://test.bitehouseburger.es/producto/crunchy-chicken-bun/\",\"name\":\"CRUNCHY CHICKEN BUN - Bite House Burger\",\"isPartOf\":{\"@id\":\"https://test.bitehouseburger.es/#website\"},\"primaryImageOfPage\":{\"@id\":\"https://test.bitehouseburger.es/producto/crunchy-chicken-bun/#primaryimage\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/producto/crunchy-chicken-bun/#primaryimage\"},\"thumbnailUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/BURGER20520ENTERA-636d5702ca667f00203379ed.jpg\",\"datePublished\":\"2024-04-12T10:02:52+00:00\",\"dateModified\":\"2024-04-12T10:08:38+00:00\",\"breadcrumb\":{\"@id\":\"https://test.bitehouseburger.es/producto/crunchy-chicken-bun/#breadcrumb\"},\"inLanguage\":\"es\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"https://test.bitehouseburger.es/producto/crunchy-chicken-bun/\"]}]},{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/producto/crunchy-chicken-bun/#primaryimage\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/BURGER20520ENTERA-636d5702ca667f00203379ed.jpg\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2024/04/BURGER20520ENTERA-636d5702ca667f00203379ed.jpg\",\"width\":1400,\"height\":1400,\"caption\":\"CRUNCHY CHICKEN BUN\"},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://test.bitehouseburger.es/producto/crunchy-chicken-bun/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Portada\",\"item\":\"https://test.bitehouseburger.es/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Productos\",\"item\":\"https://test.bitehouseburger.es/tienda__trashed/\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"CRUNCHY CHICKEN BUN\"}]},{\"@type\":\"WebSite\",\"@id\":\"https://test.bitehouseburger.es/#website\",\"url\":\"https://test.bitehouseburger.es/\",\"name\":\"Bite House Burger\",\"description\":\"Bite House Burger\",\"publisher\":{\"@id\":\"https://test.bitehouseburger.es/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"https://test.bitehouseburger.es/?s={search_term_string}\"},\"query-input\":{\"@type\":\"PropertyValueSpecification\",\"valueRequired\":true,\"valueName\":\"search_term_string\"}}],\"inLanguage\":\"es\"},{\"@type\":\"Organization\",\"@id\":\"https://test.bitehouseburger.es/#organization\",\"name\":\"Bite House Burger\",\"url\":\"https://test.bitehouseburger.es/\",\"logo\":{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"width\":512,\"height\":512,\"caption\":\"Bite House Burger\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\"},\"sameAs\":[\"https://www.instagram.com/bitehouseburger\"]}]}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "CRUNCHY CHICKEN BUN - Bite House Burger",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "https://test.bitehouseburger.es/producto/crunchy-chicken-bun/",
+            "og_locale": "es_ES",
+            "og_type": "article",
+            "og_title": "CRUNCHY CHICKEN BUN - Bite House Burger",
+            "og_description": "Jugoso contramuslo de corral extra crunchy, lechuga hoja roble verde, tomate pera, y doble queso cheddar. Acompañado de salsa mayo ahumada BITE y envuelta en nuestro pan brioche.",
+            "og_url": "https://test.bitehouseburger.es/producto/crunchy-chicken-bun/",
+            "og_site_name": "Bite House Burger",
+            "article_modified_time": "2024-04-12T10:08:38+00:00",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://test.bitehouseburger.es/producto/crunchy-chicken-bun/",
+                        "url": "https://test.bitehouseburger.es/producto/crunchy-chicken-bun/",
+                        "name": "CRUNCHY CHICKEN BUN - Bite House Burger",
+                        "isPartOf": {
+                            "@id": "https://test.bitehouseburger.es/#website"
+                        },
+                        "primaryImageOfPage": {
+                            "@id": "https://test.bitehouseburger.es/producto/crunchy-chicken-bun/#primaryimage"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/producto/crunchy-chicken-bun/#primaryimage"
+                        },
+                        "thumbnailUrl": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/BURGER20520ENTERA-636d5702ca667f00203379ed.jpg",
+                        "datePublished": "2024-04-12T10:02:52+00:00",
+                        "dateModified": "2024-04-12T10:08:38+00:00",
+                        "breadcrumb": {
+                            "@id": "https://test.bitehouseburger.es/producto/crunchy-chicken-bun/#breadcrumb"
+                        },
+                        "inLanguage": "es",
+                        "potentialAction": [
+                            {
+                                "@type": "ReadAction",
+                                "target": [
+                                    "https://test.bitehouseburger.es/producto/crunchy-chicken-bun/"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "ImageObject",
+                        "inLanguage": "es",
+                        "@id": "https://test.bitehouseburger.es/producto/crunchy-chicken-bun/#primaryimage",
+                        "url": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/BURGER20520ENTERA-636d5702ca667f00203379ed.jpg",
+                        "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2024/04/BURGER20520ENTERA-636d5702ca667f00203379ed.jpg",
+                        "width": 1400,
+                        "height": 1400,
+                        "caption": "CRUNCHY CHICKEN BUN"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://test.bitehouseburger.es/producto/crunchy-chicken-bun/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Portada",
+                                "item": "https://test.bitehouseburger.es/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Productos",
+                                "item": "https://test.bitehouseburger.es/tienda__trashed/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "CRUNCHY CHICKEN BUN"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://test.bitehouseburger.es/#website",
+                        "url": "https://test.bitehouseburger.es/",
+                        "name": "Bite House Burger",
+                        "description": "Bite House Burger",
+                        "publisher": {
+                            "@id": "https://test.bitehouseburger.es/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "https://test.bitehouseburger.es/?s={search_term_string}"
+                                },
+                                "query-input": {
+                                    "@type": "PropertyValueSpecification",
+                                    "valueRequired": true,
+                                    "valueName": "search_term_string"
+                                }
+                            }
+                        ],
+                        "inLanguage": "es"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "https://test.bitehouseburger.es/#organization",
+                        "name": "Bite House Burger",
+                        "url": "https://test.bitehouseburger.es/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "es",
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/",
+                            "url": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "width": 512,
+                            "height": 512,
+                            "caption": "Bite House Burger"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://www.instagram.com/bitehouseburger"
+                        ]
+                    }
+                ]
+            }
+        },
+        "google_listings_and_ads__channel_visibility": {
+            "is_visible": true,
+            "channel_visibility": "sync-and-show",
+            "sync_status": "synced",
+            "issues": []
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products/22643"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products"
+                }
+            ]
+        }
+    },
+    {
+        "id": 20659,
+        "name": "NUTELLA SHAKE",
+        "slug": "nutella-shake",
+        "permalink": "https://test.bitehouseburger.es/producto/nutella-shake/",
+        "date_created": "2023-12-18T20:49:15",
+        "date_created_gmt": "2023-12-18T19:49:15",
+        "date_modified": "2024-10-17T20:12:22",
+        "date_modified_gmt": "2024-10-17T18:12:22",
+        "type": "variable",
+        "status": "publish",
+        "featured": false,
+        "catalog_visibility": "visible",
+        "description": "<p>Batido elaborado a base de leche y helado de nata con textura espesa y deliciosa crema Nutella.</p>\n",
+        "short_description": "",
+        "sku": "P-NU-Zccz-2",
+        "price": "3.99",
+        "regular_price": "",
+        "sale_price": "",
+        "date_on_sale_from": null,
+        "date_on_sale_from_gmt": null,
+        "date_on_sale_to": null,
+        "date_on_sale_to_gmt": null,
+        "on_sale": false,
+        "purchasable": true,
+        "total_sales": 52,
+        "virtual": false,
+        "downloadable": false,
+        "downloads": [],
+        "download_limit": -1,
+        "download_expiry": -1,
+        "external_url": "",
+        "button_text": "",
+        "tax_status": "taxable",
+        "tax_class": "",
+        "manage_stock": false,
+        "stock_quantity": null,
+        "backorders": "no",
+        "backorders_allowed": false,
+        "backordered": false,
+        "low_stock_amount": null,
+        "sold_individually": false,
+        "weight": "",
+        "dimensions": {
+            "length": "",
+            "width": "",
+            "height": ""
+        },
+        "shipping_required": true,
+        "shipping_taxable": true,
+        "shipping_class": "",
+        "shipping_class_id": 0,
+        "reviews_allowed": true,
+        "average_rating": "0.00",
+        "rating_count": 0,
+        "upsell_ids": [],
+        "cross_sell_ids": [],
+        "parent_id": 0,
+        "purchase_note": "",
+        "categories": [
+            {
+                "id": 68,
+                "name": "Shakes",
+                "slug": "shakes"
+            }
+        ],
+        "tags": [
+            {
+                "id": 93,
+                "name": "HAZELNUTS",
+                "slug": "hazelnuts"
+            },
+            {
+                "id": 79,
+                "name": "MILK",
+                "slug": "milk"
+            },
+            {
+                "id": 80,
+                "name": "NUTS",
+                "slug": "nuts"
+            },
+            {
+                "id": 92,
+                "name": "PEANUTS",
+                "slug": "peanuts"
+            }
+        ],
+        "images": [
+            {
+                "id": 20658,
+                "date_created": "2023-12-18T21:49:15",
+                "date_created_gmt": "2023-12-18T19:49:15",
+                "date_modified": "2024-10-17T22:12:22",
+                "date_modified_gmt": "2024-10-17T18:12:22",
+                "src": "https://test.bitehouseburger.es/wp-content/uploads/2023/12/NUTELLA_SHAKE-651fdce99bceb79df14948bd.jpg",
+                "name": "NUTELLA SHAKE",
+                "alt": "NUTELLA SHAKE"
+            }
+        ],
+        "attributes": [
+            {
+                "id": 0,
+                "name": "Variations",
+                "slug": "Variations",
+                "position": 0,
+                "visible": true,
+                "variation": true,
+                "options": [
+                    "Large (60Cl)",
+                    "Medium (40Cl)"
+                ]
+            }
+        ],
+        "default_attributes": [],
+        "variations": [
+            20660,
+            20661
+        ],
+        "grouped_products": [],
+        "menu_order": 0,
+        "price_html": "Desde <span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&euro;</span>3.99</bdi></span>",
+        "related_ids": [
+            9276,
+            7479,
+            7459,
+            22653,
+            7457
+        ],
+        "meta_data": [
+            {
+                "id": 538577,
+                "key": "_wc_gla_visibility",
+                "value": "sync-and-show"
+            },
+            {
+                "id": 538583,
+                "key": "theplus_transient_widgets",
+                "value": []
+            },
+            {
+                "id": 591170,
+                "key": "tp_widgets",
+                "value": {
+                    "update_at": "1730193972",
+                    "widgets": []
+                }
+            },
+            {
+                "id": 763091,
+                "key": "_elementor_css",
+                "value": {
+                    "time": 1733192646
+                }
+            },
+            {
+                "id": 790250,
+                "key": "_wc_gla_sync_status",
+                "value": "synced"
+            },
+            {
+                "id": 790269,
+                "key": "_wc_gla_synced_at",
+                "value": "1729188750"
+            },
+            {
+                "id": 790270,
+                "key": "_wc_gla_google_ids",
+                "value": {
+                    "ES": "online:es:ES:gla_20661"
+                }
+            },
+            {
+                "id": 795955,
+                "key": "_wc_gla_mc_status",
+                "value": "disapproved"
+            }
+        ],
+        "stock_status": "instock",
+        "has_options": true,
+        "post_password": "",
+        "global_unique_id": "",
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.7 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>NUTELLA SHAKE - Bite House Burger</title>\n<!-- Aviso solo para el Administrador: esta página no muestra una meta description porque no la tiene. Haz una de estas dos cosas: escribe una específicamente para esta página o ve al menú [Yoast SEO - Ajustes] y configura una plantilla. -->\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"https://test.bitehouseburger.es/producto/nutella-shake/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:locale\" content=\"es_ES\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:type\" content=\"article\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:title\" content=\"NUTELLA SHAKE - Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:description\" content=\"Batido elaborado a base de leche y helado de nata con textura espesa y deliciosa crema Nutella.\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:url\" content=\"https://test.bitehouseburger.es/producto/nutella-shake/\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:site_name\" content=\"Bite House Burger\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"article:modified_time\" content=\"2024-10-17T18:12:22+00:00\" class=\"yoast-seo-meta-tag\" />\n<meta property=\"og:image\" content=\"https://test.bitehouseburger.es/wp-content/uploads/2023/12/NUTELLA_SHAKE-651fdce99bceb79df14948bd.jpg\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:width\" content=\"594\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:height\" content=\"594\" class=\"yoast-seo-meta-tag\" />\n\t<meta property=\"og:image:type\" content=\"image/jpeg\" class=\"yoast-seo-meta-tag\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"https://test.bitehouseburger.es/producto/nutella-shake/\",\"url\":\"https://test.bitehouseburger.es/producto/nutella-shake/\",\"name\":\"NUTELLA SHAKE - Bite House Burger\",\"isPartOf\":{\"@id\":\"https://test.bitehouseburger.es/#website\"},\"primaryImageOfPage\":{\"@id\":\"https://test.bitehouseburger.es/producto/nutella-shake/#primaryimage\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/producto/nutella-shake/#primaryimage\"},\"thumbnailUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2023/12/NUTELLA_SHAKE-651fdce99bceb79df14948bd.jpg\",\"datePublished\":\"2023-12-18T19:49:15+00:00\",\"dateModified\":\"2024-10-17T18:12:22+00:00\",\"breadcrumb\":{\"@id\":\"https://test.bitehouseburger.es/producto/nutella-shake/#breadcrumb\"},\"inLanguage\":\"es\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"https://test.bitehouseburger.es/producto/nutella-shake/\"]}]},{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/producto/nutella-shake/#primaryimage\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2023/12/NUTELLA_SHAKE-651fdce99bceb79df14948bd.jpg\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2023/12/NUTELLA_SHAKE-651fdce99bceb79df14948bd.jpg\",\"width\":594,\"height\":594,\"caption\":\"NUTELLA SHAKE\"},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://test.bitehouseburger.es/producto/nutella-shake/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Portada\",\"item\":\"https://test.bitehouseburger.es/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Productos\",\"item\":\"https://test.bitehouseburger.es/tienda__trashed/\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"NUTELLA SHAKE\"}]},{\"@type\":\"WebSite\",\"@id\":\"https://test.bitehouseburger.es/#website\",\"url\":\"https://test.bitehouseburger.es/\",\"name\":\"Bite House Burger\",\"description\":\"Bite House Burger\",\"publisher\":{\"@id\":\"https://test.bitehouseburger.es/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"https://test.bitehouseburger.es/?s={search_term_string}\"},\"query-input\":{\"@type\":\"PropertyValueSpecification\",\"valueRequired\":true,\"valueName\":\"search_term_string\"}}],\"inLanguage\":\"es\"},{\"@type\":\"Organization\",\"@id\":\"https://test.bitehouseburger.es/#organization\",\"name\":\"Bite House Burger\",\"url\":\"https://test.bitehouseburger.es/\",\"logo\":{\"@type\":\"ImageObject\",\"inLanguage\":\"es\",\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\",\"url\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"contentUrl\":\"https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png\",\"width\":512,\"height\":512,\"caption\":\"Bite House Burger\"},\"image\":{\"@id\":\"https://test.bitehouseburger.es/#/schema/logo/image/\"},\"sameAs\":[\"https://www.instagram.com/bitehouseburger\"]}]}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "NUTELLA SHAKE - Bite House Burger",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "https://test.bitehouseburger.es/producto/nutella-shake/",
+            "og_locale": "es_ES",
+            "og_type": "article",
+            "og_title": "NUTELLA SHAKE - Bite House Burger",
+            "og_description": "Batido elaborado a base de leche y helado de nata con textura espesa y deliciosa crema Nutella.",
+            "og_url": "https://test.bitehouseburger.es/producto/nutella-shake/",
+            "og_site_name": "Bite House Burger",
+            "article_modified_time": "2024-10-17T18:12:22+00:00",
+            "og_image": [
+                {
+                    "width": 594,
+                    "height": 594,
+                    "url": "https://test.bitehouseburger.es/wp-content/uploads/2023/12/NUTELLA_SHAKE-651fdce99bceb79df14948bd.jpg",
+                    "type": "image/jpeg"
+                }
+            ],
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://test.bitehouseburger.es/producto/nutella-shake/",
+                        "url": "https://test.bitehouseburger.es/producto/nutella-shake/",
+                        "name": "NUTELLA SHAKE - Bite House Burger",
+                        "isPartOf": {
+                            "@id": "https://test.bitehouseburger.es/#website"
+                        },
+                        "primaryImageOfPage": {
+                            "@id": "https://test.bitehouseburger.es/producto/nutella-shake/#primaryimage"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/producto/nutella-shake/#primaryimage"
+                        },
+                        "thumbnailUrl": "https://test.bitehouseburger.es/wp-content/uploads/2023/12/NUTELLA_SHAKE-651fdce99bceb79df14948bd.jpg",
+                        "datePublished": "2023-12-18T19:49:15+00:00",
+                        "dateModified": "2024-10-17T18:12:22+00:00",
+                        "breadcrumb": {
+                            "@id": "https://test.bitehouseburger.es/producto/nutella-shake/#breadcrumb"
+                        },
+                        "inLanguage": "es",
+                        "potentialAction": [
+                            {
+                                "@type": "ReadAction",
+                                "target": [
+                                    "https://test.bitehouseburger.es/producto/nutella-shake/"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "ImageObject",
+                        "inLanguage": "es",
+                        "@id": "https://test.bitehouseburger.es/producto/nutella-shake/#primaryimage",
+                        "url": "https://test.bitehouseburger.es/wp-content/uploads/2023/12/NUTELLA_SHAKE-651fdce99bceb79df14948bd.jpg",
+                        "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2023/12/NUTELLA_SHAKE-651fdce99bceb79df14948bd.jpg",
+                        "width": 594,
+                        "height": 594,
+                        "caption": "NUTELLA SHAKE"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://test.bitehouseburger.es/producto/nutella-shake/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Portada",
+                                "item": "https://test.bitehouseburger.es/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Productos",
+                                "item": "https://test.bitehouseburger.es/tienda__trashed/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "NUTELLA SHAKE"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://test.bitehouseburger.es/#website",
+                        "url": "https://test.bitehouseburger.es/",
+                        "name": "Bite House Burger",
+                        "description": "Bite House Burger",
+                        "publisher": {
+                            "@id": "https://test.bitehouseburger.es/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "https://test.bitehouseburger.es/?s={search_term_string}"
+                                },
+                                "query-input": {
+                                    "@type": "PropertyValueSpecification",
+                                    "valueRequired": true,
+                                    "valueName": "search_term_string"
+                                }
+                            }
+                        ],
+                        "inLanguage": "es"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "https://test.bitehouseburger.es/#organization",
+                        "name": "Bite House Burger",
+                        "url": "https://test.bitehouseburger.es/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "es",
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/",
+                            "url": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "contentUrl": "https://test.bitehouseburger.es/wp-content/uploads/2022/06/cropped-Screenshot-2022-06-06-at-19.29.48.png",
+                            "width": 512,
+                            "height": 512,
+                            "caption": "Bite House Burger"
+                        },
+                        "image": {
+                            "@id": "https://test.bitehouseburger.es/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://www.instagram.com/bitehouseburger"
+                        ]
+                    }
+                ]
+            }
+        },
+        "google_listings_and_ads__channel_visibility": {
+            "is_visible": true,
+            "channel_visibility": "sync-and-show",
+            "sync_status": "synced",
+            "issues": []
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products/20659"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://test.bitehouseburger.es/wp-json/wc/v3/products"
+                }
+            ]
+        }
+    }
+]
