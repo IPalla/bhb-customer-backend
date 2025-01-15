@@ -43,4 +43,5 @@ export interface Product {
      */
     images?: Array<Image>;
     modifiers?: Array<Modifier>;
+    quantity?: number;
 }

@@ -32,6 +32,7 @@ export interface Modifier {
      */
     selection?: Modifier.SelectionEnum;
     options?: Array<Option>;
+    quantity?: number;
 }
 export namespace Modifier {
     export type TypeEnum = 'LIST';

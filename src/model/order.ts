@@ -10,9 +10,7 @@
  * Do not edit the class manually.
  */
 import { Customer } from './customer';
-import { Item } from './item';
-import { Operation } from './operation';
-import { Rider } from './rider';
+import { Product } from './product';
 import { Status } from './status';
 
 /**
@@ -23,10 +21,6 @@ export interface Order {
      * Order id
      */
     id?: string;
-    /**
-     * External Order Id
-     */
-    externalId?: string;
     /**
      * Order creation date
      */
@@ -40,10 +34,6 @@ export interface Order {
      */
     type?: Order.TypeEnum;
     /**
-     * Order channel
-     */
-    channel?: Order.ChannelEnum;
-    /**
      * Order amount in cents without decimals
      */
     amount?: number;
@@ -51,10 +41,8 @@ export interface Order {
      * Order notes
      */
     notes?: string;
-    rider?: Rider;
     customer?: Customer;
-    operation?: Operation;
-    items?: Array<Item>;
+    products?: Array<Product>;
     status?: Status;
     statuses?: Array<Status>;
 }

@@ -4,6 +4,11 @@ import { EventEmitterModule } from "@nestjs/event-emitter";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import config from "./config/config";
 import { ProductsModule } from "./modules/products.module";
+import { OrdersModule } from "./modules/orders.module";
+import { OtpModule } from "./modules/otp.module";
+import { APP_GUARD } from '@nestjs/core';
+import { JwtModule } from '@nestjs/jwt';
+import { JwtGuard } from './guards/jwt.guard';
 
 @Module({
   imports: [
@@ -12,25 +17,24 @@ import { ProductsModule } from "./modules/products.module";
       load: [config],
       isGlobal: true,
     }),
-    /*SequelizeModule.forRootAsync({
+    SequelizeModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (configService: ConfigService) =>
         configService.get('database'),
-    }),*/
+    }),
     ProductsModule,
+    OrdersModule,
+    OtpModule,
+    JwtModule.register({
+      secret: process.env.JWT_KEY || 'DO NOT USE THIS VALUE. INSTEAD, CREATE A COMPLEX SECRET AND KEEP IT SAFE OUTSIDE OF THE SOURCE CODE.',
+      signOptions: { expiresIn: '24h' },
+    }),
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: JwtGuard,
+    },
   ],
 })
 export class AppModule {}
-/*
-
-    SequelizeModule.forRoot({
-      dialect: 'postgres',
-      username: 'myUser',
-      host: 'localhost',
-      database: 'postgres',
-      password: 'myPassword',
-      port: 5455,
-      autoLoadModels: true,
-      sync: {},
-    }),
-*/
