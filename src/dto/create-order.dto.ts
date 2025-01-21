@@ -1,5 +1,5 @@
-import { IsArray, IsNotEmpty, ValidateNested } from 'class-validator';
-import { Type } from 'class-transformer';
+import { IsArray, IsNotEmpty, ValidateNested } from "class-validator";
+import { Type } from "class-transformer";
 
 export class OrderItemDto {
   @IsNotEmpty()
@@ -14,4 +14,4 @@ export class CreateOrderDto {
   @ValidateNested({ each: true })
   @Type(() => OrderItemDto)
   items: OrderItemDto[];
-} 
+}

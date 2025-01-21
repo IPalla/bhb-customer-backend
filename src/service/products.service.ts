@@ -8,9 +8,10 @@ export class ProductsService {
   private readonly logger = new Logger(ProductsService.name);
   private readonly products: Product[] = [];
 
-  constructor(private readonly squareService: SquareService, private readonly squareMapper: SquareMapper) {
-    
-  }
+  constructor(
+    private readonly squareService: SquareService,
+    private readonly squareMapper: SquareMapper,
+  ) {}
 
   async findAll(): Promise<Product[]> {
     this.logger.log("Retrieving all products");

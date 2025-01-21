@@ -1,6 +1,12 @@
-import { Column, Model, Table, CreatedAt, DataType } from 'sequelize-typescript';
+import {
+  Column,
+  Model,
+  Table,
+  CreatedAt,
+  DataType,
+} from "sequelize-typescript";
 
-@Table({ tableName: 'otp' })
+@Table({ tableName: "otp" })
 export class OtpEntity extends Model {
   @Column({
     type: DataType.INTEGER,
@@ -29,4 +35,4 @@ export class OtpEntity extends Model {
 
   @CreatedAt
   createdAt: Date;
-} 
+}

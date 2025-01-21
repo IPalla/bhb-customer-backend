@@ -1,6 +1,6 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { Twilio } from 'twilio';
+import { Injectable, Logger } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { Twilio } from "twilio";
 
 @Injectable()
 export class TwilioService {
@@ -10,16 +10,20 @@ export class TwilioService {
   private readonly isActive: boolean;
 
   constructor(private readonly configService: ConfigService) {
-    const accountSid = this.configService.get<string>('twilio.accountSid');
-    const authToken = this.configService.get<string>('twilio.authToken');
-    this.isActive = this.configService.get<boolean>('twilio.isActive');
-    this.verifyServiceSid = this.configService.get<string>('twilio.verifyServiceSid');
+    const accountSid = this.configService.get<string>("twilio.accountSid");
+    const authToken = this.configService.get<string>("twilio.authToken");
+    this.isActive = this.configService.get<boolean>("twilio.isActive");
+    this.verifyServiceSid = this.configService.get<string>(
+      "twilio.verifyServiceSid",
+    );
     this.twilioClient = new Twilio(accountSid, authToken);
   }
 
   async sendOtp(phoneNumber: string, otpCode: string): Promise<void> {
     if (!this.isActive) {
-      this.logger.log(`Twilio is not active, skipping OTP send for ${phoneNumber}`);
+      this.logger.log(
+        `Twilio is not active, skipping OTP send for ${phoneNumber}`,
+      );
       return;
     }
     this.logger.log(`Attempting to send OTP to ${phoneNumber}`);
@@ -28,11 +32,15 @@ export class TwilioService {
         .services(this.verifyServiceSid)
         .verifications.create({
           to: phoneNumber,
-          channel: 'sms'
+          channel: "sms",
         });
-      this.logger.log(`Verification request sent successfully to ${phoneNumber}`);
+      this.logger.log(
+        `Verification request sent successfully to ${phoneNumber}`,
+      );
     } catch (verifyError) {
-      this.logger.error(`Failed to send verification to ${phoneNumber}: ${verifyError.message}`);
+      this.logger.error(
+        `Failed to send verification to ${phoneNumber}: ${verifyError.message}`,
+      );
       throw verifyError;
     }
   }
