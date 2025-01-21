@@ -50,7 +50,7 @@ export class SquareMapper {
       .reduce((acc, modifier) => {
         const mdfr: Modifier = {
           id: modifier.id,
-          name: modifier?.modifierData?.name,
+          name: modifier?.modifierListData?.name,
           type: Modifier.TypeEnum[modifier?.modifierListData?.modifierType],
           selection:
             Modifier?.SelectionEnum[modifier?.modifierListData?.selectionType],
@@ -60,9 +60,10 @@ export class SquareMapper {
               return {
                 id: option?.id,
                 name: option?.modifierData?.name,
+                defaultOption: option?.modifierData?.ordinal === 1,
                 price: Number(option?.modifierData?.priceMoney?.amount),
               } as Option;
-            }),
+            }).sort((a, b) => a.defaultOption ? -1 : 1),
         };
         acc[modifier?.id] = mdfr;
         return acc;

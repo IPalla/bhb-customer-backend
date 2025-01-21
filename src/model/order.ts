@@ -53,12 +53,4 @@ export namespace Order {
     Pickup: "Pickup" as TypeEnum,
     Dinein: "Dinein" as TypeEnum,
   };
-  export type ChannelEnum = "Web" | "Glovo" | "JustEat" | "Uber" | "Waitry";
-  export const ChannelEnum = {
-    Web: "Web" as ChannelEnum,
-    Glovo: "Glovo" as ChannelEnum,
-    JustEat: "JustEat" as ChannelEnum,
-    Uber: "Uber" as ChannelEnum,
-    Waitry: "Waitry" as ChannelEnum,
-  };
 }

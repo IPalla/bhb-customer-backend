@@ -23,6 +23,6 @@ export interface Category {
    * Category name
    */
   name?: string;
-  image?: Image;
+  image?: string;
   order?: number;
 }
