@@ -13,8 +13,9 @@ export class OrdersService {
     private readonly squareMapper: SquareMapper,
   ) {}
 
-  async createOrder(ordr: Order, customer: Customer): Promise<Order> {
-    this.logger.log("Creating order");
+  async createOrder(ordr: Order, customer: Customer, saveAddressAsDefault?: boolean): Promise<Order> {  
+    this.logger.log("Creating order")
+    console.log(saveAddressAsDefault);
     const customerToCreate: Customer = {
       phoneNumber: customer.phoneNumber,
       id: customer.id,
@@ -31,7 +32,7 @@ export class OrdersService {
     );
     this.logger.log("Order created");
     this.squareService
-      .updateCustomer(customerToCreate)
+      .updateCustomer({...customerToCreate, address: saveAddressAsDefault ? ordr.customer?.address : customer.address})
       .then((customer) => {
         this.logger.log(`Customer updated in square: ${customer}`);
       })

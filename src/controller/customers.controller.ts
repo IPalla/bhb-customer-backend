@@ -1,4 +1,4 @@
-import { Controller, Put, Body, Logger, Req } from "@nestjs/common";
+import { Controller, Put, Body, Logger, Req, Get, NotFoundException } from "@nestjs/common";
 import { CustomersService } from "../service/customers.service";
 import { Customer } from "src/model/customer";
 import { RequestWithUser } from "src/guards/jwt.guard";
@@ -8,6 +8,17 @@ export class CustomersController {
   private readonly logger = new Logger(CustomersController.name);
 
   constructor(private readonly customersService: CustomersService) {}
+  
+  @Get()
+  async getCustomer(@Req() request: RequestWithUser): Promise<Customer> {
+    const customerId = request.user?.customer?.id;
+    this.logger.log(`Fetching customer with ID: ${customerId}`);
+    const customer = await this.customersService.getCustomer(customerId);
+    if (!customer) {
+      throw new NotFoundException("Customer not found");
+    }
+    return customer;
+  }
 
   @Put()
   async updateCustomer(

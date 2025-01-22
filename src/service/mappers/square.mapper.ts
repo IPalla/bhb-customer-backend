@@ -63,7 +63,8 @@ export class SquareMapper {
                 defaultOption: option?.modifierData?.ordinal === 1,
                 price: Number(option?.modifierData?.priceMoney?.amount),
               } as Option;
-            }).sort((a, b) => a.defaultOption ? -1 : 1),
+            })
+            .sort((a, b) => (a.defaultOption ? -1 : 1)),
         };
         acc[modifier?.id] = mdfr;
         return acc;
@@ -116,6 +117,7 @@ export class SquareMapper {
             }
           : undefined,
     };
+    console.log(order.type);
     return {
       order: {
         locationId: "LA6A066DRHSZZ",
@@ -124,10 +126,10 @@ export class SquareMapper {
           catalogObjectId: product.catalogId,
           modifiers: product?.modifiers?.map((modifier) => ({
             catalogObjectId: modifier.id,
-            quantity: modifier.quantity.toString(),
+            quantity: modifier?.quantity?.toString() || "1",
           })),
         })),
-
+        
         fulfillments: [
           {
             type:
@@ -141,6 +143,7 @@ export class SquareMapper {
                     pickupAt: new Date(
                       Date.now() + SquareMapper.TEN_MINUTES_MS,
                     ).toISOString(),
+                    scheduleType: "ASAP",
                     note: order.notes,
                   }
                 : undefined,

@@ -6,6 +6,7 @@ import {
   Req,
   Get,
   Param,
+  Query,
 } from "@nestjs/common";
 import { OrdersService } from "../service/orders.service";
 import { CreatePaymentDto } from "../dto/create-payment.dto";
@@ -27,6 +28,7 @@ export class OrdersController {
   async createOrder(
     @Req() request: RequestWithUser,
     @Body() createOrderDto: Order,
+    @Query('saveAddressAsDefault') saveAddressAsDefault?: boolean,
   ): Promise<Order> {
     const customer: Customer = request.user?.customer;
     this.logger.log(
@@ -35,20 +37,22 @@ export class OrdersController {
     const order = await this.ordersService.createOrder(
       createOrderDto,
       customer,
+      saveAddressAsDefault,
     );
     return order;
   }
 
-  @Post("payment")
+  @Post(":orderId/payment")
   async createPayment(
+    @Param("orderId") orderId: string,
     @Body() createPaymentDto: CreatePaymentDto,
   ): Promise<any> {
     this.logger.log(
-      `Creating payment with sourceId: ${createPaymentDto.sourceId}`,
+      `Creating payment with sourceId: ${createPaymentDto.sourceId} for order ${orderId}`,
     );
     const payment = await this.squareService.createPayment(
       createPaymentDto.sourceId,
-      createPaymentDto.orderId,
+      orderId,
     );
     // For local logging
     this.logger.log(

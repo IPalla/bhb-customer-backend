@@ -76,6 +76,7 @@ export class SquareService {
   async createOrder(order: CreateOrderRequest): Promise<CreateOrderResponse> {
     this.logger.log("Creating order in Square");
     try {
+      console.log(serializeWithBigInt(order))
       const { result } = await this.client.ordersApi.createOrder(order);
       this.logger.log("Order created in Square");
       return result;
@@ -111,6 +112,25 @@ export class SquareService {
         return undefined;
       }
       return result.customers[0];
+    } catch (error) {
+      if (error instanceof ApiError) {
+        this.logger.error("Square API Error:", error.errors);
+        return undefined;
+      } else {
+        this.logger.error("Unexpected error while finding customer:", error);
+        return undefined;
+      }
+    }
+  }
+
+  async getCustomerById(customerId: string): Promise<Customer | undefined> {
+    this.logger.log(`Finding customer with ID: ${customerId}`);
+    try {
+      const { result } = await this.client.customersApi.retrieveCustomer(customerId);
+      this.logger.debug(
+        `Customer found in Square: ${serializeWithBigInt(result)}`,
+      );
+      return result.customer;
     } catch (error) {
       if (error instanceof ApiError) {
         this.logger.error("Square API Error:", error.errors);

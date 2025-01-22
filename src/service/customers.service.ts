@@ -30,6 +30,12 @@ export class CustomersService {
     return internalCustomer;
   }
 
+  async getCustomer(customerId: string): Promise<Customer> {
+    this.logger.log(`Fetching customer with ID: ${customerId}`);
+    const squareCustomer = await this.squareService.getCustomerById(customerId);
+    return this.squareMapper.mapCustomer(squareCustomer);
+  }
+
   async updateCustomer(customer: Customer): Promise<Customer> {
     this.logger.log(`Updating customer with ID: ${customer.id}`);
     const updatedSquareCustomer =
