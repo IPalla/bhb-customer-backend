@@ -110,16 +110,17 @@ export class SquareMapper {
       address:
         order.type == OrderModel.TypeEnum.Delivery
           ? {
-              addressLine1: order.customer?.address.street,
-              locality: "Tres Cantos",
-              postalCode: "28760",
-              country: "ES",
+              addressLine1: order.customer?.address.address_line_1,
+              addressLine2: order.customer?.address.address_line_2,
+              locality: order.customer?.address.locality,
+              postalCode: order.customer?.address.postalCode,
+              country: countryToIsoCode[order.customer?.address.country],
             }
           : undefined,
     };
-    console.log(order.type);
     return {
       order: {
+        customerId: order.customer?.id,
         locationId: "LA6A066DRHSZZ",
         lineItems: order.products.map((product) => ({
           quantity: product?.quantity.toString(),
@@ -172,10 +173,11 @@ export class SquareMapper {
       email: customer.emailAddress,
       phoneNumber: customer.phoneNumber,
       address: {
-        street: customer.address?.addressLine1,
-        postalCode: customer.address?.postalCode,
-        city: customer.address?.locality,
-        country: customer.address?.country,
+        address_line_1: customer.address?.addressLine1,
+        address_line_2: customer.address?.addressLine2,
+        postal_code: customer.address?.postalCode,
+        locality: customer.address?.locality,
+        country: countryToIsoCode[customer.address?.country],
       },
     } as CustomerModel;
   }
@@ -187,21 +189,6 @@ export class SquareMapper {
 
     const fulfillment = squareOrder.fulfillments?.[0];
     const fulfillmentType = fulfillment?.type;
-    console.log(
-      serializeWithBigInt(
-        squareOrder.lineItems?.map((item) => ({
-          catalogId: item.catalogObjectId,
-          quantity: Number(item.quantity),
-          name: item.name,
-          price: Number(item.basePriceMoney?.amount || 0),
-          modifiers: item.modifiers?.map((mod) => ({
-            id: mod.catalogObjectId,
-            name: mod.name,
-            quantity: Number(mod.quantity || 1),
-          })),
-        })),
-      ),
-    );
     return {
       id: squareOrder.id,
       date: squareOrder.createdAt,
@@ -237,6 +224,7 @@ export class SquareMapper {
           id: mod.catalogObjectId,
           name: mod.name,
           quantity: Number(mod.quantity || 1),
+          price: Number(mod.basePriceMoney?.amount || 0),
         })),
       })),
       status: {
@@ -281,3 +269,13 @@ export class SquareMapper {
     }
   }
 }
+
+export const countryToIsoCode = {
+  "ES": "ES",
+  "España": "ES",
+  "Spain": "ES",
+  "Portugal": "PT",
+  "France": "FR",
+  "Italy": "IT",
+  "Germany": "DE",
+};

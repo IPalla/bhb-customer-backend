@@ -33,9 +33,21 @@ export class CustomersController {
       firstName: customerData.firstName || request.user?.customer?.firstName,
       lastName: customerData.lastName || request.user?.customer?.lastName,
       address: {
-        street:
-          customerData.address?.street ||
-          request.user?.customer?.address?.street,
+        address_line_1:
+          customerData.address?.address_line_1 ||
+          request.user?.customer?.address?.address_line_1,
+        address_line_2:
+          customerData.address?.address_line_2 ||
+          request.user?.customer?.address?.address_line_2,
+        locality:
+          customerData.address?.locality ||
+          request.user?.customer?.address?.locality,
+        postalCode:
+          customerData.address?.postalCode ||
+          request.user?.customer?.address?.postalCode,
+        country:
+          customerData.address?.country ||
+          request.user?.customer?.address?.country,
       },
     };
     this.logger.log(`Updating customer with ID: ${toUpdateCustomer.id}`);

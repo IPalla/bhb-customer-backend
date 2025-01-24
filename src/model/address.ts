@@ -15,10 +15,6 @@
  */
 export interface Address {
   /**
-   * Street address
-   */
-  street?: string;
-  /**
    * City
    */
   locality?: string;
@@ -30,4 +26,13 @@ export interface Address {
    * Country
    */
   country?: string;
+
+  /**
+   * First line of street address
+   */
+  address_line_1?: string;
+  /**
+   * Second line of street address
+   */
+  address_line_2?: string;
 }

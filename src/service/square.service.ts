@@ -14,6 +14,7 @@ import {
 import { randomUUID } from "crypto";
 import { serializeWithBigInt } from "src/util/utils";
 import { Customer } from "src/model/customer";
+import { countryToIsoCode } from "./mappers/square.mapper";
 
 @Injectable()
 export class SquareService {
@@ -170,10 +171,11 @@ export class SquareService {
           emailAddress: customer.email,
           phoneNumber: customer.phoneNumber,
           address: {
-            addressLine1: customer.address?.street,
-            locality: "Tres Cantos",
-            postalCode: "28760",
-            country: "ES",
+            addressLine1: customer.address?.address_line_1,
+            addressLine2: customer.address?.address_line_2,
+            locality: customer.address?.locality,
+            postalCode: customer.address?.postalCode,
+            country: countryToIsoCode[customer.address?.country],
           },
         },
       );

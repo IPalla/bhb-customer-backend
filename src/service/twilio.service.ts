@@ -24,15 +24,15 @@ export class TwilioService {
       this.logger.log(
         `Twilio is not active, skipping OTP send for ${phoneNumber}`,
       );
-      return;
     }
     this.logger.log(`Attempting to send OTP to ${phoneNumber}`);
     try {
-      await this.twilioClient.verify.v2
+      const verification = await this.twilioClient.verify.v2
         .services(this.verifyServiceSid)
         .verifications.create({
           to: phoneNumber,
           channel: "sms",
+          //customCode: otpCode
         });
       this.logger.log(
         `Verification request sent successfully to ${phoneNumber}`,
