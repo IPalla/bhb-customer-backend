@@ -20,7 +20,7 @@ export class OtpService {
 
   async generateAndSendOtp(phoneNumber: string): Promise<any> {
     const otp = this.generateOtpCode();
-    const expiryDate = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes from now
+    const expiryDate = new Date(Date.now() + 1 * 60 * 1000); // 1 minutes from now
     await this.otpModel.create({
       phoneNumber,
       code: otp,

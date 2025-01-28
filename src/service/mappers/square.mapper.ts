@@ -94,9 +94,9 @@ export class SquareMapper {
         price: Number(
           item?.itemData.variations[0].itemVariationData.priceMoney.amount,
         ),
-        modifiers: item?.itemData.modifierListInfo?.map(
-          (modifier) => modifiersMap[modifier.modifierListId],
-        ),
+        modifiers: item?.itemData.modifierListInfo
+          ?.filter((mfr) => mfr.enabled)
+          ?.map((modifier) => modifiersMap[modifier.modifierListId]),
       } as Product;
     });
   }
@@ -121,7 +121,7 @@ export class SquareMapper {
     return {
       order: {
         customerId: order.customer?.id,
-        locationId: "LA6A066DRHSZZ",
+        locationId: order.locationId,
         lineItems: order.products.map((product) => ({
           quantity: product?.quantity.toString(),
           catalogObjectId: product.catalogId,
@@ -130,7 +130,7 @@ export class SquareMapper {
             quantity: modifier?.quantity?.toString() || "1",
           })),
         })),
-        
+
         fulfillments: [
           {
             type:
@@ -187,7 +187,7 @@ export class SquareMapper {
       `Mapping Square order to Order model: ${serializeWithBigInt(squareOrder)}`,
     );
 
-    const fulfillment = squareOrder.fulfillments?.[0];
+    const fulfillment = squareOrder?.fulfillments?.[0];
     const fulfillmentType = fulfillment?.type;
     return {
       id: squareOrder.id,
@@ -271,11 +271,11 @@ export class SquareMapper {
 }
 
 export const countryToIsoCode = {
-  "ES": "ES",
-  "España": "ES",
-  "Spain": "ES",
-  "Portugal": "PT",
-  "France": "FR",
-  "Italy": "IT",
-  "Germany": "DE",
+  ES: "ES",
+  España: "ES",
+  Spain: "ES",
+  Portugal: "PT",
+  France: "FR",
+  Italy: "IT",
+  Germany: "DE",
 };

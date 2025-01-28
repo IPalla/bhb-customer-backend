@@ -32,4 +32,10 @@ export class CategoryEntity extends Model {
     defaultValue: true,
   })
   isActive: boolean;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  locationId: string;
 }

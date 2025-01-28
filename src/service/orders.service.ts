@@ -13,8 +13,13 @@ export class OrdersService {
     private readonly squareMapper: SquareMapper,
   ) {}
 
-  async createOrder(ordr: Order, customer: Customer, saveAddressAsDefault?: boolean): Promise<Order> {  
-    this.logger.log("Creating order")
+  async createOrder(
+    ordr: Order,
+    customer: Customer,
+    locationId: string,
+    saveAddressAsDefault?: boolean,
+  ): Promise<Order> {
+    this.logger.log(`Creating order for location: ${locationId}`);
     console.log(saveAddressAsDefault);
     const customerToCreate: Customer = {
       phoneNumber: customer.phoneNumber,
@@ -23,20 +28,32 @@ export class OrdersService {
       firstName: ordr.customer?.firstName || customer.firstName,
       lastName: ordr.customer?.lastName || customer.lastName,
       address: {
-        address_line_1: ordr.customer?.address?.address_line_1 || customer.address?.address_line_1,
-        address_line_2: ordr.customer?.address?.address_line_2 || customer.address?.address_line_2,
-        locality: ordr.customer?.address?.locality || customer.address?.locality,
-        postalCode: ordr.customer?.address?.postalCode || customer.address?.postalCode,
+        address_line_1:
+          ordr.customer?.address?.address_line_1 ||
+          customer.address?.address_line_1,
+        address_line_2:
+          ordr.customer?.address?.address_line_2 ||
+          customer.address?.address_line_2,
+        locality:
+          ordr.customer?.address?.locality || customer.address?.locality,
+        postalCode:
+          ordr.customer?.address?.postalCode || customer.address?.postalCode,
         country: ordr.customer?.address?.country || customer.address?.country,
       },
     };
     ordr.customer = customerToCreate;
+    ordr.locationId = locationId;
     const createdOrder = await this.squareService.createOrder(
       this.squareMapper.orderToCreateOrderRequest(ordr),
     );
     this.logger.log("Order created");
     this.squareService
-      .updateCustomer({...customerToCreate, address: saveAddressAsDefault ? ordr.customer?.address : customer.address})
+      .updateCustomer({
+        ...customerToCreate,
+        address: saveAddressAsDefault
+          ? ordr.customer?.address
+          : customer.address,
+      })
       .then((customer) => {
         this.logger.log(`Customer updated in square: ${customer}`);
       })
@@ -51,7 +68,9 @@ export class OrdersService {
     const squareOrders = await this.squareService.getCustomerOrders(
       customer.id,
     );
-    this.logger.log(`Found ${squareOrders.length} orders for customer: ${customer.id}`);
+    this.logger.log(
+      `Found ${squareOrders.length} orders for customer: ${customer.id}`,
+    );
     return squareOrders.map((order) =>
       this.squareMapper.squareOrderToOrder(order),
     );

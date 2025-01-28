@@ -28,15 +28,17 @@ export class OrdersController {
   async createOrder(
     @Req() request: RequestWithUser,
     @Body() createOrderDto: Order,
-    @Query('saveAddressAsDefault') saveAddressAsDefault?: boolean,
+    @Query("locationId") locationId: string,
+    @Query("saveAddressAsDefault") saveAddressAsDefault?: boolean,
   ): Promise<Order> {
     const customer: Customer = request.user?.customer;
     this.logger.log(
-      `Creating order with items: ${JSON.stringify(createOrderDto)}`,
+      `Creating order with items: ${JSON.stringify(createOrderDto)} for location: ${locationId}`,
     );
     const order = await this.ordersService.createOrder(
       createOrderDto,
       customer,
+      locationId,
       saveAddressAsDefault,
     );
     return order;

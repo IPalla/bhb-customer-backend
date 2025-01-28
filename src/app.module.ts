@@ -11,6 +11,7 @@ import { JwtModule } from "@nestjs/jwt";
 import { JwtGuard } from "./guards/jwt.guard";
 import { CategoriesModule } from "./modules/categories.module";
 import { CustomerModule } from "./modules/customer.module";
+import { LocationsModule } from "./modules/locations.module";
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { CustomerModule } from "./modules/customer.module";
     ProductsModule,
     OrdersModule,
     CustomerModule,
+    LocationsModule,
     OtpModule,
     CategoriesModule,
     JwtModule.register({

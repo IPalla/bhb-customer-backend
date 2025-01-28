@@ -25,4 +25,5 @@ export interface Category {
   name?: string;
   image?: string;
   order?: number;
+  location_id?: string;
 }

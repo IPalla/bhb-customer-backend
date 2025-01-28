@@ -25,6 +25,7 @@ export class TwilioService {
         `Twilio is not active, skipping OTP send for ${phoneNumber}`,
       );
     }
+    return;
     this.logger.log(`Attempting to send OTP to ${phoneNumber}`);
     try {
       const verification = await this.twilioClient.verify.v2

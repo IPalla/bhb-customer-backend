@@ -33,8 +33,10 @@ export class SquareService {
     this.locationIds = this.configService.getOrThrow("square.locationIds");
   }
 
-  async getProducts(): Promise<CatalogObject[]> {
-    this.logger.log("Retrieving products from Square");
+  async getProducts(locationId: string): Promise<CatalogObject[]> {
+    this.logger.log(
+      `Retrieving products from Square for location: ${locationId}`,
+    );
     try {
       const response = await this.client.catalogApi.listCatalog(
         undefined,
@@ -77,7 +79,7 @@ export class SquareService {
   async createOrder(order: CreateOrderRequest): Promise<CreateOrderResponse> {
     this.logger.log("Creating order in Square");
     try {
-      console.log(serializeWithBigInt(order))
+      console.log(serializeWithBigInt(order));
       const { result } = await this.client.ordersApi.createOrder(order);
       this.logger.log("Order created in Square");
       return result;
@@ -127,7 +129,8 @@ export class SquareService {
   async getCustomerById(customerId: string): Promise<Customer | undefined> {
     this.logger.log(`Finding customer with ID: ${customerId}`);
     try {
-      const { result } = await this.client.customersApi.retrieveCustomer(customerId);
+      const { result } =
+        await this.client.customersApi.retrieveCustomer(customerId);
       this.logger.debug(
         `Customer found in Square: ${serializeWithBigInt(result)}`,
       );

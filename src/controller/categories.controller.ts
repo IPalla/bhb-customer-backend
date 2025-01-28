@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Logger, Post } from "@nestjs/common";
+import { Body, Controller, Get, Logger, Post, Query } from "@nestjs/common";
 import { CategoriesService } from "../service/categories.service";
 import { Category } from "../model/category";
 
@@ -9,9 +9,9 @@ export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Get()
-  async findAll(): Promise<Category[]> {
-    this.logger.log("Retrieving all categories");
-    const categories = await this.categoriesService.findAll();
+  async findAll(@Query("locationId") locationId: string): Promise<Category[]> {
+    this.logger.log(`Retrieving all categories for location: ${locationId}`);
+    const categories = await this.categoriesService.findAll(locationId);
     this.logger.log("Categories retrieved successfully");
     return categories;
   }

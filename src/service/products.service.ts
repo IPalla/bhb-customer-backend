@@ -13,9 +13,9 @@ export class ProductsService {
     private readonly squareMapper: SquareMapper,
   ) {}
 
-  async findAll(): Promise<Product[]> {
+  async findAll(locationId: string): Promise<Product[]> {
     this.logger.log("Retrieving all products");
-    const catalog = await this.squareService.getProducts();
+    const catalog = await this.squareService.getProducts(locationId);
     this.logger.log("Mapping products");
     const products = this.squareMapper.productsFromCatalogObject(catalog);
     return products;

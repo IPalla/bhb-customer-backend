@@ -45,6 +45,7 @@ export interface Order {
   products?: Array<Product>;
   status?: Status;
   statuses?: Array<Status>;
+  locationId?: string;
 }
 export namespace Order {
   export type TypeEnum = "Delivery" | "Pickup" | "Dinein";

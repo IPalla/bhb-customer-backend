@@ -12,10 +12,10 @@ export class CategoriesService {
     private readonly categoryModel: typeof CategoryEntity,
   ) {}
 
-  async findAll(): Promise<Category[]> {
-    this.logger.log("Finding all categories");
+  async findAll(locationId: string): Promise<Category[]> {
+    this.logger.log(`Finding all categories for location: ${locationId}`);
     const categories = await this.categoryModel.findAll({
-      where: { isActive: true },
+      where: { isActive: true, locationId: locationId },
       order: [["order", "ASC"]],
     });
     return categories.map(
@@ -35,6 +35,7 @@ export class CategoriesService {
       name: category.name,
       image: category.image,
       order: category.order,
+      locationId: category.location_id,
     });
   }
 }
