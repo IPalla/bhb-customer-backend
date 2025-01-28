@@ -9,7 +9,6 @@ async function bootstrap() {
     logger: LoggerFactory("BHB Customer Backend app"),
   });
   app.useGlobalFilters(new HttpExceptionFilter());
-  app.enableCors();
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -17,6 +16,7 @@ async function bootstrap() {
     }),
   );
   app.useGlobalInterceptors(new BigIntSerializationInterceptor());
-  await app.listen(3000);
+  app.enableCors();
+  await app.listen(process.env.PORT);
 }
 bootstrap();
