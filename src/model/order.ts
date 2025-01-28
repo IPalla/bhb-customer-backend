@@ -9,11 +9,9 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Customer } from './customer';
-import { Item } from './item';
-import { Operation } from './operation';
-import { Rider } from './rider';
-import { Status } from './status';
+import { Customer } from "./customer";
+import { Product } from "./product";
+import { Status } from "./status";
 
 /**
  * Order information
@@ -23,10 +21,6 @@ export interface Order {
    * Order id
    */
   id?: string;
-  /**
-   * External Order Id
-   */
-  externalId?: string;
   /**
    * Order creation date
    */
@@ -40,43 +34,24 @@ export interface Order {
    */
   type?: Order.TypeEnum;
   /**
-   * Order channel
-   */
-  channel?: Order.ChannelEnum;
-  /**
    * Order amount in cents without decimals
    */
-  notes?: string;
   amount?: number;
-  rider?: Rider;
+  /**
+   * Order notes
+   */
+  notes?: string;
   customer?: Customer;
-  operation?: Operation;
-  items?: Array<Item>;
+  products?: Array<Product>;
   status?: Status;
   statuses?: Array<Status>;
+  locationId?: string;
 }
 export namespace Order {
-  export type TypeEnum = 'Delivery' | 'Pickup' | 'Dinein' | 'Unknown';
+  export type TypeEnum = "Delivery" | "Pickup" | "Dinein";
   export const TypeEnum = {
-    Delivery: 'Delivery' as TypeEnum,
-    Pickup: 'Pickup' as TypeEnum,
-    Dinein: 'Dinein' as TypeEnum,
-    Unknown: 'Unknown' as TypeEnum,
-  };
-  export type ChannelEnum =
-    | 'Web'
-    | 'Glovo'
-    | 'JustEat'
-    | 'Uber'
-    | 'Waitry'
-    | 'Unknown';
-  export const ChannelEnum = {
-    Web: 'Web' as ChannelEnum,
-    Glovo: 'Glovo' as ChannelEnum,
-    JustEat: 'JustEat' as ChannelEnum,
-    Uber: 'Uber' as ChannelEnum,
-    Waitry: 'Waitry' as ChannelEnum,
-    Deliverect: 'Deliverect' as ChannelEnum,
-    Unknown: 'Unknown' as ChannelEnum,
+    Delivery: "Delivery" as TypeEnum,
+    Pickup: "Pickup" as TypeEnum,
+    Dinein: "Dinein" as TypeEnum,
   };
 }

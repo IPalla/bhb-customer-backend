@@ -19,7 +19,7 @@ export interface Status {
    */
   createdAt?: string;
   /**
-   * Status creation date
+   * Status creation date timestamp in epoch
    */
   createdAtTs?: number;
   /**
@@ -27,32 +27,32 @@ export interface Status {
    */
   createdBy?: string;
   /**
-   * Status enum
-   */
-  status?: Status.StatusEnum;
-  /**
-   * Status latitude
+   * Status update latitude
    */
   latitude?: string;
   /**
-   * Status longitude
+   * Status update longitude
    */
   longitude?: string;
+  /**
+   * Status enum
+   */
+  status?: Status.StatusEnum;
 }
 export namespace Status {
   export type StatusEnum =
-    | 'PENDING'
-    | 'IN_PROGRESS'
-    | 'PREPARED'
-    | 'READY'
-    | 'IN_DELIVERY'
-    | 'DELIVERED';
+    | "PENDING"
+    | "IN_PROGRESS"
+    | "PREPARED"
+    | "READY"
+    | "IN_DELIVERY"
+    | "DELIVERED";
   export const StatusEnum = {
-    PENDING: 'PENDING' as StatusEnum,
-    IN_PROGRESS: 'IN_PROGRESS' as StatusEnum,
-    PREPARED: 'PREPARED' as StatusEnum,
-    READY: 'READY' as StatusEnum,
-    IN_DELIVERY: 'IN_DELIVERY' as StatusEnum,
-    DELIVERED: 'DELIVERED' as StatusEnum,
+    PENDING: "PENDING" as StatusEnum,
+    INPROGRESS: "IN_PROGRESS" as StatusEnum,
+    PREPARED: "PREPARED" as StatusEnum,
+    READY: "READY" as StatusEnum,
+    INDELIVERY: "IN_DELIVERY" as StatusEnum,
+    DELIVERED: "DELIVERED" as StatusEnum,
   };
 }
