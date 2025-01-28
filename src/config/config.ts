@@ -13,6 +13,7 @@ export default () => ({
     database: process.env.DB_NAME,
     password: process.env.DB_PASS,
     port: parseInt(process.env.DB_PORT, 10),
+    schema: process.env.DB_SCHEMA || 'public',
     autoLoadModels: true,
     logging: false, //console.log,
     sync: { force: process.env.DB_SYNC_FORCE === "true" },
