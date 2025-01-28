@@ -15,25 +15,17 @@
  */
 export interface Operation {
   /**
-   * Operation identifier
-   */
-  id?: string;
-  /**
    * Expected ready timestamp. Usually 15 mins after order is created.
    */
-  createdTs?: number;
+  createdTs?: string;
   /**
    * Expected delivery timestamp. Usually 30 mins after order is created.
    */
-  expectedReadyTs?: number;
-  /**
-   * Expected delivery timestamp. Usually 30 mins after order is created.
-   */
-  expectedDeliveredTs?: number;
+  expectedDeliveredTs?: string;
   /**
    * Expected total order timestamp. Usually 15 mins after order is created, 30 mins for delivery orders.
    */
-  expectedTotalOrderTs?: number;
+  expectedTotalOrderTs?: string;
   /**
    * Total time of the order in the kitchen in miliseconds
    */

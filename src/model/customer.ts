@@ -10,6 +10,8 @@
  * Do not edit the class manually.
  */
 
+import { Address } from "./address";
+
 /**
  * Customer information
  */
@@ -21,7 +23,11 @@ export interface Customer {
   /**
    * Customer name
    */
-  name?: string;
+  firstName?: string;
+  /**
+   * Customer last name
+   */
+  lastName?: string;
   /**
    * Customer email
    */
@@ -29,17 +35,9 @@ export interface Customer {
   /**
    * Customer phone
    */
-  phone_number?: string;
+  phoneNumber?: string;
   /**
    * Customer address
    */
-  address?: string;
-  /**
-   * Customer address latitude
-   */
-  addressLatitude?: string;
-  /**
-   * Customer address longitude
-   */
-  addressLongitude?: string;
+  address?: Address;
 }

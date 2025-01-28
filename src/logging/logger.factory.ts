@@ -1,8 +1,8 @@
-import { transports, format } from 'winston';
+import { transports, format } from "winston";
 import {
   WinstonModule,
   utilities as nestWinstonModuleUtilities,
-} from 'nest-winston';
+} from "nest-winston";
 
 export const LoggerFactory = (appName: string) => {
   let consoleFormat;
@@ -10,7 +10,7 @@ export const LoggerFactory = (appName: string) => {
   const DEBUG = process.env.DEBUG;
   const USE_JSON_LOGGER = process.env.USE_JSON_LOGGER;
 
-  if (USE_JSON_LOGGER === 'true') {
+  if (USE_JSON_LOGGER === "true") {
     consoleFormat = format.combine(
       format.ms(),
       format.timestamp(),
@@ -28,7 +28,7 @@ export const LoggerFactory = (appName: string) => {
   }
 
   return WinstonModule.createLogger({
-    level: DEBUG ? 'debug' : 'info',
+    level: DEBUG ? "debug" : "info",
     transports: [new transports.Console({ format: consoleFormat })],
   });
 };

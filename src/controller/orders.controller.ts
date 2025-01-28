@@ -1,117 +1,83 @@
 import {
   Controller,
-  Get,
-  Delete,
-  Patch,
   Post,
   Body,
-  Param,
-  Headers,
-  Query,
-  Request,
   Logger,
-  UseGuards,
-  Sse,
-  HttpException,
-  HttpStatus,
-} from '@nestjs/common';
-import { OrdersService } from '../service/orders.service';
-import { Order } from '../model/order';
-import { StatusUpdate } from '../model/statusUpdate';
-import { JwtAuthGuard } from '../auth-strategies/jwt.auth.guard';
-import { fromEvent, map, merge, Observable } from 'rxjs';
-import { EventEmitter2 } from '@nestjs/event-emitter';
-import { Status } from '../model/status';
-import { EventType } from 'src/model/events';
+  Req,
+  Get,
+  Param,
+  Query,
+} from "@nestjs/common";
+import { OrdersService } from "../service/orders.service";
+import { CreatePaymentDto } from "../dto/create-payment.dto";
+import { SquareService } from "src/service/square.service";
+import { Order } from "../model/order";
+import { Customer } from "src/model/models";
+import { RequestWithUser } from "src/guards/jwt.guard";
 
-@Controller('bhb-customer-backend/orders')
+@Controller("bhb-customer-backend/orders")
 export class OrdersController {
   private readonly logger = new Logger(OrdersController.name);
-  private notificationsObservable: Observable<MessageEvent<any>>;
+
   constructor(
     private readonly ordersService: OrdersService,
-    private readonly eventEmitter: EventEmitter2,
-  ) {
-    this.notificationsObservable = merge(
-      this.fromEventEmitterToEvent(this.eventEmitter, EventType.ORDER_CREATED),
-      this.fromEventEmitterToEvent(
-        this.eventEmitter,
-        EventType.ORDER_STATUS_UPDATED,
-      ),
+    private readonly squareService: SquareService,
+  ) {}
+
+  @Post()
+  async createOrder(
+    @Req() request: RequestWithUser,
+    @Body() createOrderDto: Order,
+    @Query("locationId") locationId: string,
+    @Query("saveAddressAsDefault") saveAddressAsDefault?: boolean,
+  ): Promise<Order> {
+    const customer: Customer = request.user?.customer;
+    this.logger.log(
+      `Creating order with items: ${JSON.stringify(createOrderDto)} for location: ${locationId}`,
     );
-    this.notificationsObservable.subscribe({
-      next: (data) => this.logger.log(`Sending SSE: ${JSON.stringify(data)}`),
-    });
+    const order = await this.ordersService.createOrder(
+      createOrderDto,
+      customer,
+      locationId,
+      saveAddressAsDefault,
+    );
+    return order;
+  }
+
+  @Post(":orderId/payment")
+  async createPayment(
+    @Param("orderId") orderId: string,
+    @Body() createPaymentDto: CreatePaymentDto,
+  ): Promise<any> {
+    this.logger.log(
+      `Creating payment with sourceId: ${createPaymentDto.sourceId} for order ${orderId}`,
+    );
+    const payment = await this.squareService.createPayment(
+      createPaymentDto.sourceId,
+      orderId,
+    );
+    // For local logging
+    this.logger.log(
+      `Payment created: ${JSON.stringify(payment, (_, value) =>
+        typeof value === "bigint" ? value.toString() : value,
+      )}`,
+    );
+    this.logger.log("Payment created successfully");
+    return payment;
   }
 
   @Get()
-  async getOrders(
-    @Query('order_type') orderType?: string[],
-    @Query('start_date') startDate?: string,
-    @Query('end_date') endDate?: string,
-  ): Promise<Order[]> {
-    this.logger.log(`Retrieving orders}`);
-    return this.ordersService.getOrders(orderType, startDate, endDate);
+  async getCustomerOrders(@Req() request: RequestWithUser): Promise<Order[]> {
+    const customer: Customer = request.user?.customer;
+    this.logger.log(`Fetching orders for customer: ${customer.id}`);
+    return this.ordersService.getCustomerOrders(customer);
   }
-
-  @Get(':id')
-  async getOrderById(@Param('id') id: string): Promise<Order> {
-    this.logger.log(`Retrieving order: ${id}}`);
-    return (await this.ordersService.getOrderById(id)).toOrder();
-  }
-
-  @Delete(':id')
-  async deleteOrderById(@Param('id') id: string): Promise<void> {
-    this.logger.log(`Deleting order: ${id}}`);
-    await this.ordersService.deleteById(id);
-  }
-
-  @Patch(':id')
-  @UseGuards(JwtAuthGuard)
-  async updateOrderStatus(
-    @Request() req,
-    @Param('id') id: string,
-    @Body() updateOrderStatusDto: StatusUpdate,
-    @Headers('x-user-latitude') latitude: string,
-    @Headers('x-user-longitude') longitude: string,
-  ): Promise<void> {
-    this.logger.log(
-      `Updating order: ${id}. Status: ${updateOrderStatusDto.status}. Latitude: ${latitude}. Longitude: ${longitude}`,
-    );
-    if (
-      updateOrderStatusDto.status === undefined ||
-      updateOrderStatusDto.status === null ||
-      !Status.StatusEnum[updateOrderStatusDto.status]
-    ) {
-      this.logger.error(`Invalid status: ${updateOrderStatusDto.status}`);
-      throw new HttpException(
-        `Invalid status: ${updateOrderStatusDto.status}`,
-        HttpStatus.BAD_REQUEST,
-      );
-    }
-    await this.ordersService.updateOrderStatus(
-      id,
-      updateOrderStatusDto.status,
-      req.user.riderId,
-      latitude,
-      longitude,
-    );
-  }
-
-  @Sse('notifications/subscribe')
-  getOrderNotifications(): Observable<MessageEvent> {
-    this.logger.log(`Adding subscription for order events`);
-    return this.notificationsObservable;
-  }
-
-  fromEventEmitterToEvent(eventEmitter: EventEmitter2, eventType: EventType) {
-    return fromEvent(eventEmitter, eventType).pipe(
-      map(
-        (data: any) =>
-          ({
-            data: { events: data[1], order: data[0] },
-          }) as MessageEvent,
-      ),
-    );
+  // add a get order by id
+  @Get(":orderId")
+  async getOrderById(
+    @Param("orderId") orderId: string,
+    @Req() request: RequestWithUser,
+  ): Promise<Order> {
+    return this.ordersService.getOrderById(orderId, request.user?.customer.id);
   }
 }
