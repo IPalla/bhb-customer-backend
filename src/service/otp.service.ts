@@ -5,10 +5,12 @@ import { TwilioService } from "./twilio.service";
 import { JwtService } from "@nestjs/jwt";
 import { Op } from "sequelize";
 import { CustomersService } from "./customers.service";
+import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class OtpService {
   private readonly logger = new Logger(OtpService.name);
+  private readonly guestApiKey: string;
 
   constructor(
     @InjectModel(OtpEntity)
@@ -16,7 +18,10 @@ export class OtpService {
     private readonly twilioService: TwilioService,
     private readonly jwtService: JwtService,
     private readonly customersService: CustomersService,
-  ) {}
+    private readonly configService: ConfigService,
+  ) {
+    this.guestApiKey = this.configService.get('guestApiKey');
+  }
 
   async generateAndSendOtp(phoneNumber: string): Promise<any> {
     const otp = this.generateOtpCode();
@@ -60,5 +65,14 @@ export class OtpService {
       await this.customersService.findOrCreateByPhone(phoneNumber);
     // Generate JWT
     return this.jwtService.sign({ customer });
+  }
+
+  async generateGuestJwt(apiKey: string): Promise<string> {
+    // Generate JWT with 30 minute expiration
+    if (apiKey !== this.guestApiKey) {
+      throw new UnauthorizedException("Invalid API key");
+    }
+    const expiresIn = '30m';
+    return this.jwtService.sign({ customer: null }, { expiresIn });
   }
 }

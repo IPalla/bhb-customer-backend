@@ -1,5 +1,6 @@
 export default () => ({
   port: parseInt(process.env.PORT, 10) || 3000,
+  guestApiKey: process.env.GUEST_API_KEY || '123456',
   square: {
     applicationId: process.env.SQ_APPLICATION_ID,
     accessToken: process.env.SQ_ACCESS_TOKEN,

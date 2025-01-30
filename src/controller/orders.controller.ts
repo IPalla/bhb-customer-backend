@@ -44,6 +44,28 @@ export class OrdersController {
     return order;
   }
 
+  @Post(":orderId/terminal-checkout")
+  async createTerminalCheckout(
+    @Param("orderId") orderId: string,
+    @Query("deviceId") deviceId: string,
+  ): Promise<any> {
+    this.logger.log(
+      `Creating terminal checkout for order ${orderId}`,
+    );
+    const payment = await this.squareService.createTerminalCheckout(
+      orderId,
+      deviceId,
+    );
+    // For local logging
+    this.logger.log(
+      `Terminal checkout created: ${JSON.stringify(payment, (_, value) =>
+        typeof value === "bigint" ? value.toString() : value,
+      )}`,
+    );
+    this.logger.log("Terminal checkout created successfully");
+    return payment;
+  }
+
   @Post(":orderId/payment")
   async createPayment(
     @Param("orderId") orderId: string,

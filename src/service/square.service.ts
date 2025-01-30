@@ -225,4 +225,29 @@ export class SquareService {
       }
     }
   }
+
+  async createTerminalCheckout(orderId: string, deviceId: string): Promise<any> {
+    try {
+      const { result } = await this.client.ordersApi.retrieveOrder(orderId);
+      const checkout = await this.client.terminalApi.createTerminalCheckout({
+        idempotencyKey: randomUUID(),
+        checkout: {
+          amountMoney: result.order.totalMoney,
+          orderId: orderId,
+          deviceOptions: {
+            deviceId,
+          },
+        },
+      });
+      return checkout.result;
+    } catch (error) {
+      if (error instanceof ApiError) {
+        this.logger.error("Square API Error:", error.errors);
+        throw error;
+      } else {
+        this.logger.error("Unexpected error during terminal checkout:", error);
+        throw error;
+      }
+    }
+  }
 }

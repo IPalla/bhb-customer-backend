@@ -1,4 +1,4 @@
-import { Body, Controller, Logger, Post } from "@nestjs/common";
+import { Body, Controller, Headers, Logger, Post } from "@nestjs/common";
 import { OtpService } from "../service/otp.service";
 import { GenerateOtpDto } from "../dto/generate-otp.dto";
 import { JwtToken } from "src/model/jwtToken";
@@ -33,6 +33,13 @@ export class OtpController {
       validateOtpDto.phoneNumber,
       validateOtpDto.code,
     );
+    return { token };
+  }
+
+  @Post("guest")
+  async generateGuestJwt(@Headers('X-Bhb-Api-Key') apiKey: string): Promise<JwtToken> {
+    this.logger.log(`Generating guest JWT`);
+    const token = await this.otpService.generateGuestJwt(apiKey);
     return { token };
   }
 }
