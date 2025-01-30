@@ -1,5 +1,6 @@
 export default () => ({
   port: parseInt(process.env.PORT, 10) || 3000,
+  guestApiKey: process.env.GUEST_API_KEY || "123456",
   square: {
     applicationId: process.env.SQ_APPLICATION_ID,
     accessToken: process.env.SQ_ACCESS_TOKEN,
@@ -13,7 +14,7 @@ export default () => ({
     database: process.env.DB_NAME,
     password: process.env.DB_PASS,
     port: parseInt(process.env.DB_PORT, 10),
-    schema: process.env.DB_SCHEMA || 'public',
+    schema: process.env.DB_SCHEMA || "public",
     autoLoadModels: true,
     logging: false, //console.log,
     sync: { force: process.env.DB_SYNC_FORCE === "true" },
