@@ -20,7 +20,7 @@ export class OtpService {
     private readonly customersService: CustomersService,
     private readonly configService: ConfigService,
   ) {
-    this.guestApiKey = this.configService.get('guestApiKey');
+    this.guestApiKey = this.configService.get("guestApiKey");
   }
 
   async generateAndSendOtp(phoneNumber: string): Promise<any> {
@@ -72,7 +72,7 @@ export class OtpService {
     if (apiKey !== this.guestApiKey) {
       throw new UnauthorizedException("Invalid API key");
     }
-    const expiresIn = '30m';
+    const expiresIn = "30m";
     return this.jwtService.sign({ customer: null }, { expiresIn });
   }
 }

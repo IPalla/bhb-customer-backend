@@ -49,9 +49,7 @@ export class OrdersController {
     @Param("orderId") orderId: string,
     @Query("deviceId") deviceId: string,
   ): Promise<any> {
-    this.logger.log(
-      `Creating terminal checkout for order ${orderId}`,
-    );
+    this.logger.log(`Creating terminal checkout for order ${orderId}`);
     const payment = await this.squareService.createTerminalCheckout(
       orderId,
       deviceId,

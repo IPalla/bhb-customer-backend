@@ -37,7 +37,9 @@ export class OtpController {
   }
 
   @Post("guest")
-  async generateGuestJwt(@Headers('X-Bhb-Api-Key') apiKey: string): Promise<JwtToken> {
+  async generateGuestJwt(
+    @Headers("X-Bhb-Api-Key") apiKey: string,
+  ): Promise<JwtToken> {
     this.logger.log(`Generating guest JWT`);
     const token = await this.otpService.generateGuestJwt(apiKey);
     return { token };

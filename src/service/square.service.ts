@@ -226,7 +226,10 @@ export class SquareService {
     }
   }
 
-  async createTerminalCheckout(orderId: string, deviceId: string): Promise<any> {
+  async createTerminalCheckout(
+    orderId: string,
+    deviceId: string,
+  ): Promise<any> {
     try {
       const { result } = await this.client.ordersApi.retrieveOrder(orderId);
       const checkout = await this.client.terminalApi.createTerminalCheckout({
