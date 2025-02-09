@@ -1,12 +1,12 @@
 import { Module } from "@nestjs/common";
-import { SquareService } from "src/service/square.service";
-import { SquareMapper } from "src/service/mappers/square.mapper";
+import { SquareModule } from "./square.module";
 import { CustomersService } from "src/service/customers.service";
 import { CustomersController } from "src/controller/customers.controller";
 
 @Module({
+  imports: [SquareModule],
   controllers: [CustomersController],
-  providers: [CustomersService, SquareService, SquareMapper],
+  providers: [CustomersService],
   exports: [CustomersService],
 })
 export class CustomerModule {}

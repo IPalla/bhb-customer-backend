@@ -12,6 +12,8 @@ import { JwtGuard } from "./guards/jwt.guard";
 import { CategoriesModule } from "./modules/categories.module";
 import { CustomerModule } from "./modules/customer.module";
 import { LocationsModule } from "./modules/locations.module";
+import { SquareModule } from "./modules/square.module";
+import { OrderPaymentCheckoutModule } from "./modules/order-payment-checkout.module";
 
 @Module({
   imports: [
@@ -25,12 +27,14 @@ import { LocationsModule } from "./modules/locations.module";
       useFactory: (configService: ConfigService) =>
         configService.get("database"),
     }),
+    SquareModule,
     ProductsModule,
     OrdersModule,
     CustomerModule,
     LocationsModule,
     OtpModule,
     CategoriesModule,
+    OrderPaymentCheckoutModule,
     JwtModule.register({
       secret:
         process.env.JWT_KEY ||

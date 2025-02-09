@@ -16,7 +16,10 @@ async function bootstrap() {
     }),
   );
   app.useGlobalInterceptors(new BigIntSerializationInterceptor());
-  app.enableCors();
+  app.enableCors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  });
   await app.listen(process.env.PORT);
 }
 bootstrap();

@@ -21,6 +21,17 @@ export class CustomersController {
   async getCustomer(@Req() request: RequestWithUser): Promise<Customer> {
     const customerId = request.user?.customer?.id;
     this.logger.log(`Fetching customer with ID: ${customerId}`);
+    if (!customerId) {
+      this.logger.log("Customer ID not found, guest.");
+      return {
+        id: null,
+        phoneNumber: null,
+        email: null,
+        firstName: null,
+        lastName: null,
+        address: null,
+      };
+    }
     const customer = await this.customersService.getCustomer(customerId);
     if (!customer) {
       throw new NotFoundException("Customer not found");

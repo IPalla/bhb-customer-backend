@@ -8,7 +8,7 @@ import {
   CreateOrderRequest,
   CreateOrderResponse,
   Customer as SquareCustomer,
-  SearchOrdersResponse,
+  TerminalCheckout,
   Order,
 } from "square";
 import { randomUUID } from "crypto";
@@ -228,27 +228,65 @@ export class SquareService {
 
   async createTerminalCheckout(
     orderId: string,
+    amount: bigint,
+    currency: string,
     deviceId: string,
-  ): Promise<any> {
+  ): Promise<TerminalCheckout> {
     try {
-      const { result } = await this.client.ordersApi.retrieveOrder(orderId);
+      this.logger.log(
+        `Creating terminal checkout in square for order: ${orderId}, with amount: ${amount}, currency: ${currency}, deviceId: ${deviceId} `,
+      );
       const checkout = await this.client.terminalApi.createTerminalCheckout({
         idempotencyKey: randomUUID(),
         checkout: {
-          amountMoney: result.order.totalMoney,
-          orderId: orderId,
+          referenceId: orderId,
+          amountMoney: {
+            amount: amount,
+            currency: currency,
+          },
           deviceOptions: {
             deviceId,
           },
         },
       });
-      return checkout.result;
+      return checkout.result.checkout;
     } catch (error) {
       if (error instanceof ApiError) {
         this.logger.error("Square API Error:", error.errors);
         throw error;
       } else {
         this.logger.error("Unexpected error during terminal checkout:", error);
+        throw error;
+      }
+    }
+  }
+
+  async getOrder(orderId: string): Promise<Order> {
+    try {
+      const { result } = await this.client.ordersApi.retrieveOrder(orderId);
+      return result.order;
+    } catch (error) {
+      if (error instanceof ApiError) {
+        this.logger.error("Square API Error:", error.errors);
+        throw error;
+      } else {
+        this.logger.error("Unexpected error retrieving order:", error);
+        throw error;
+      }
+    }
+  }
+
+  async retrievePayment(paymentId: string): Promise<any> {
+    this.logger.log(`Retrieving payment with ID: ${paymentId}`);
+    try {
+      const { result } = await this.client.paymentsApi.getPayment(paymentId);
+      return result.payment;
+    } catch (error) {
+      if (error instanceof ApiError) {
+        this.logger.error("Square API Error:", error.errors);
+        throw error;
+      } else {
+        this.logger.error("Unexpected error retrieving payment:", error);
         throw error;
       }
     }

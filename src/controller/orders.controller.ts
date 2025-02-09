@@ -7,6 +7,7 @@ import {
   Get,
   Param,
   Query,
+  BadRequestException,
 } from "@nestjs/common";
 import { OrdersService } from "../service/orders.service";
 import { CreatePaymentDto } from "../dto/create-payment.dto";
@@ -14,6 +15,7 @@ import { SquareService } from "src/service/square.service";
 import { Order } from "../model/order";
 import { Customer } from "src/model/models";
 import { RequestWithUser } from "src/guards/jwt.guard";
+import { OrderPaymentCheckout } from "src/model/order-payment-checkout.model";
 
 @Controller("bhb-customer-backend/orders")
 export class OrdersController {
@@ -49,16 +51,13 @@ export class OrdersController {
     @Param("orderId") orderId: string,
     @Query("deviceId") deviceId: string,
   ): Promise<any> {
+    if (!deviceId) {
+      throw new BadRequestException("Device ID is required");
+    }
     this.logger.log(`Creating terminal checkout for order ${orderId}`);
-    const payment = await this.squareService.createTerminalCheckout(
+    const payment = await this.ordersService.createTerminalCheckout(
       orderId,
       deviceId,
-    );
-    // For local logging
-    this.logger.log(
-      `Terminal checkout created: ${JSON.stringify(payment, (_, value) =>
-        typeof value === "bigint" ? value.toString() : value,
-      )}`,
     );
     this.logger.log("Terminal checkout created successfully");
     return payment;
@@ -86,13 +85,22 @@ export class OrdersController {
     return payment;
   }
 
+  @Get(":orderId/payment")
+  async getOrderPaymentStatus(
+    @Param("orderId") orderId: string,
+    @Req() request: RequestWithUser,
+  ): Promise<OrderPaymentCheckout> {
+    this.logger.log(`Getting payment status for order: ${orderId}`);
+    return this.ordersService.getOrderPaymentCheckout(orderId);
+  }
+
   @Get()
   async getCustomerOrders(@Req() request: RequestWithUser): Promise<Order[]> {
     const customer: Customer = request.user?.customer;
     this.logger.log(`Fetching orders for customer: ${customer.id}`);
     return this.ordersService.getCustomerOrders(customer);
   }
-  // add a get order by id
+
   @Get(":orderId")
   async getOrderById(
     @Param("orderId") orderId: string,
