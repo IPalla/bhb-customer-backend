@@ -98,7 +98,7 @@ export class OrdersService {
       status: checkout.status,
     });
     this.logger.log(`Terminal checkout created successfully: ${checkout.id}`);
-    return;
+    return checkout;
   }
 
   async handleWebhookPayment(
@@ -115,7 +115,11 @@ export class OrdersService {
       return;
     }
     this.logger.log(`Order payment checkout found: ${orderPaymentCheckout.id}`);
-    if (status === "COMPLETED") {
+    if (
+      status === "COMPLETED" ||
+      status === "CANCELED" ||
+      status === "CANCEL_REQUESTED"
+    ) {
       await this.orderPaymentCheckoutModel.update(
         { paymentId, status },
         { where: { checkoutId } },
@@ -147,6 +151,9 @@ export class OrdersService {
     orderCustomer: Partial<Customer>,
     existingCustomer: Customer | null,
   ): Customer {
+    this.logger.log(`Merging customer data for order: ${orderCustomer.id}`);
+    this.logger.log(`Existing customer: ${existingCustomer}`);
+    this.logger.log(`Order customer: ${orderCustomer}`);
     return {
       phoneNumber: existingCustomer?.phoneNumber,
       id: existingCustomer?.id,

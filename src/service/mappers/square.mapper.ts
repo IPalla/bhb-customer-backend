@@ -138,7 +138,8 @@ export class SquareMapper {
                 ? "DELIVERY"
                 : "PICKUP",
             pickupDetails:
-              order.type === OrderModel.TypeEnum.Pickup
+              order.type === OrderModel.TypeEnum.Pickup ||
+              order.type === OrderModel.TypeEnum.Dinein
                 ? {
                     recipient,
                     pickupAt: new Date(

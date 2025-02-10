@@ -8,6 +8,7 @@ import {
   Param,
   Query,
   BadRequestException,
+  HttpCode,
 } from "@nestjs/common";
 import { OrdersService } from "../service/orders.service";
 import { CreatePaymentDto } from "../dto/create-payment.dto";
@@ -16,6 +17,7 @@ import { Order } from "../model/order";
 import { Customer } from "src/model/models";
 import { RequestWithUser } from "src/guards/jwt.guard";
 import { OrderPaymentCheckout } from "src/model/order-payment-checkout.model";
+import { serializeWithBigInt } from "src/util/utils";
 
 @Controller("bhb-customer-backend/orders")
 export class OrdersController {
@@ -47,6 +49,7 @@ export class OrdersController {
   }
 
   @Post(":orderId/terminal-checkout")
+  @HttpCode(204)
   async createTerminalCheckout(
     @Param("orderId") orderId: string,
     @Query("deviceId") deviceId: string,
@@ -59,8 +62,11 @@ export class OrdersController {
       orderId,
       deviceId,
     );
-    this.logger.log("Terminal checkout created successfully");
-    return payment;
+    this.logger.log(
+      "Terminal checkout created successfully:",
+      serializeWithBigInt(payment),
+    );
+    return;
   }
 
   @Post(":orderId/payment")
@@ -106,6 +112,6 @@ export class OrdersController {
     @Param("orderId") orderId: string,
     @Req() request: RequestWithUser,
   ): Promise<Order> {
-    return this.ordersService.getOrderById(orderId, request.user?.customer.id);
+    return this.ordersService.getOrderById(orderId, request.user?.customer?.id);
   }
 }
