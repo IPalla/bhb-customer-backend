@@ -96,7 +96,8 @@ export class OrdersService {
       amount: checkout.amountMoney.amount,
       currency: checkout.amountMoney.currency,
       status: checkout.status,
-      customerId
+      customerId,
+      deviceId,
     });
     this.logger.log(`Terminal checkout created successfully: ${checkout.id}`);
     return checkout;
@@ -128,6 +129,11 @@ export class OrdersService {
           orderPaymentCheckout.currency,
           orderPaymentCheckout.customerId,
         );
+        this.squareService.printReceipt(paymentId, orderPaymentCheckout.deviceId).then((result) => {
+          this.logger.log(`Receipt printed: ${result}`);
+        }).catch((error) => {
+          this.logger.error("Error printing receipt", { error });
+        });
       }
       this.logger.log(`Updating payment checkout`);
       await this.orderPaymentCheckoutModel.update(

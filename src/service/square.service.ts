@@ -246,6 +246,7 @@ export class SquareService {
             currency: currency,
           },
           deviceOptions: {
+            skipReceiptScreen: true,
             deviceId,
           },
         },
@@ -272,6 +273,32 @@ export class SquareService {
         throw error;
       } else {
         this.logger.error("Unexpected error retrieving order:", error);
+        throw error;
+      }
+    }
+  }
+
+  async printReceipt(paymentId: string, deviceId: string): Promise<any> {
+    this.logger.log(`Printing receipt for payment: ${paymentId}`);
+    try {
+      const { result } = await this.client.terminalApi.createTerminalAction({
+        idempotencyKey: randomUUID(),
+        action: {
+          type: "RECEIPT",
+          deviceId,
+          receiptOptions: {
+            paymentId,
+          },
+
+        },
+      });
+      return result;
+    } catch (error) {
+      if (error instanceof ApiError) {
+        this.logger.error("Square API Error:", error.errors);
+        throw error;
+      } else {
+        this.logger.error("Unexpected error during receipt printing:", error);
         throw error;
       }
     }

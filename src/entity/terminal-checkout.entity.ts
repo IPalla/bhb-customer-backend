@@ -30,6 +30,12 @@ export class TerminalCheckoutEntity extends Model {
   checkoutId: string;
 
   @Column({
+    field: "device_id",
+    allowNull: true,
+  })
+  deviceId: string;
+
+  @Column({
     field: "payment_id",
     allowNull: true,
   })
