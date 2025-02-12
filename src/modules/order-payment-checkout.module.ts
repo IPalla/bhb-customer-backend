@@ -1,9 +1,9 @@
 import { Module } from "@nestjs/common";
 import { SequelizeModule } from "@nestjs/sequelize";
-import { OrderPaymentCheckout } from "../model/order-payment-checkout.model";
+import { TerminalCheckoutEntity } from "../entity/terminal-checkout.entity";
 
 @Module({
-  imports: [SequelizeModule.forFeature([OrderPaymentCheckout])],
+  imports: [SequelizeModule.forFeature([TerminalCheckoutEntity])],
   exports: [SequelizeModule],
 })
 export class OrderPaymentCheckoutModule {}

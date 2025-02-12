@@ -10,6 +10,7 @@ import {
   Customer as SquareCustomer,
   TerminalCheckout,
   Order,
+  Money,
 } from "square";
 import { randomUUID } from "crypto";
 import { serializeWithBigInt } from "src/util/utils";
@@ -230,7 +231,7 @@ export class SquareService {
     orderId: string,
     amount: bigint,
     currency: string,
-    deviceId: string,
+    deviceId: string
   ): Promise<TerminalCheckout> {
     try {
       this.logger.log(
@@ -271,6 +272,42 @@ export class SquareService {
         throw error;
       } else {
         this.logger.error("Unexpected error retrieving order:", error);
+        throw error;
+      }
+    }
+  }
+
+  async createExternalPayment(orderId: string, amount: bigint, currency: string, customerId?: string): Promise<any> {
+    this.logger.log(`Creating external payment for order: ${orderId}, amount: ${amount}, currency: ${currency}, customerId: ${customerId}`);
+    try {
+      const { result } = await this.client.paymentsApi.createPayment({
+        sourceId: "EXTERNAL",
+        autocomplete: true,
+        customerId: customerId || undefined,
+        referenceId: orderId,
+        orderId: orderId,
+        amountMoney: {
+          amount: amount,
+          currency: currency,
+        },
+        idempotencyKey: randomUUID(),
+        externalDetails: {
+          type: "EXTERNAL",
+          source: "kiosk",
+          sourceFeeMoney: {
+            amount: amount,
+            currency: currency,
+          },
+        },
+      });
+      this.logger.log(`External payment created for order: ${orderId}, amount: ${amount}, currency: ${currency}, customerId: ${customerId}`);
+      return result.payment.id;
+    } catch (error) {
+      if (error instanceof ApiError) {
+        this.logger.error("Square API Error:", error.errors);
+        throw error;
+      } else {
+        this.logger.error("Unexpected error during external payment:", error);
         throw error;
       }
     }

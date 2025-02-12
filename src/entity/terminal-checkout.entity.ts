@@ -1,7 +1,7 @@
 import { Column, Model, Table, DataType } from "sequelize-typescript";
 
 @Table({ tableName: "order_payments_checkout", timestamps: true })
-export class OrderPaymentCheckout extends Model {
+export class TerminalCheckoutEntity extends Model {
   @Column({
     primaryKey: true,
     autoIncrement: true,
@@ -15,7 +15,7 @@ export class OrderPaymentCheckout extends Model {
   orderId: string;
 
   @Column({
-    type: DataType.DECIMAL(10, 2),
+    type: DataType.INTEGER,
     allowNull: false,
   })
   amount: number;
@@ -24,7 +24,7 @@ export class OrderPaymentCheckout extends Model {
   currency: string;
 
   @Column({
-    field: "payment_id",
+    field: "checkout_id",
     allowNull: false,
   })
   checkoutId: string;
@@ -35,6 +35,12 @@ export class OrderPaymentCheckout extends Model {
   })
   paymentId: string;
 
+  @Column({
+    field: "customer_id",
+    allowNull: true,
+  })
+  customerId: string;
+
   @Column
   status: string;
-}
+} 

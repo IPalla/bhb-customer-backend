@@ -16,8 +16,8 @@ import { SquareService } from "src/service/square.service";
 import { Order } from "../model/order";
 import { Customer } from "src/model/models";
 import { RequestWithUser } from "src/guards/jwt.guard";
-import { OrderPaymentCheckout } from "src/model/order-payment-checkout.model";
 import { serializeWithBigInt } from "src/util/utils";
+import { TerminalCheckoutEntity } from "src/entity/terminal-checkout.entity";
 
 @Controller("bhb-customer-backend/orders")
 export class OrdersController {
@@ -53,6 +53,7 @@ export class OrdersController {
   async createTerminalCheckout(
     @Param("orderId") orderId: string,
     @Query("deviceId") deviceId: string,
+    @Req() request: RequestWithUser,
   ): Promise<any> {
     if (!deviceId) {
       throw new BadRequestException("Device ID is required");
@@ -61,6 +62,7 @@ export class OrdersController {
     const payment = await this.ordersService.createTerminalCheckout(
       orderId,
       deviceId,
+      request.user?.customer?.id,
     );
     this.logger.log(
       "Terminal checkout created successfully:",
@@ -91,12 +93,10 @@ export class OrdersController {
     return payment;
   }
 
-  @Get(":orderId/payment")
-  async getOrderPaymentStatus(
+  @Get(":orderId/payment-checkout")
+  async getOrderPaymentCheckout(
     @Param("orderId") orderId: string,
-    @Req() request: RequestWithUser,
-  ): Promise<OrderPaymentCheckout> {
-    this.logger.log(`Getting payment status for order: ${orderId}`);
+  ): Promise<TerminalCheckoutEntity> {
     return this.ordersService.getOrderPaymentCheckout(orderId);
   }
 

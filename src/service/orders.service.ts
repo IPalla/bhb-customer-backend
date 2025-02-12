@@ -4,7 +4,7 @@ import { Order } from "src/model/order";
 import { SquareMapper } from "./mappers/square.mapper";
 import { Customer } from "src/model/customer";
 import { InjectModel } from "@nestjs/sequelize";
-import { OrderPaymentCheckout } from "src/model/order-payment-checkout.model";
+import { TerminalCheckoutEntity } from "src/entity/terminal-checkout.entity";
 
 @Injectable()
 export class OrdersService {
@@ -13,8 +13,8 @@ export class OrdersService {
   constructor(
     private readonly squareService: SquareService,
     private readonly squareMapper: SquareMapper,
-    @InjectModel(OrderPaymentCheckout)
-    private orderPaymentCheckoutModel: typeof OrderPaymentCheckout,
+    @InjectModel(TerminalCheckoutEntity)
+    private orderPaymentCheckoutModel: typeof TerminalCheckoutEntity,
   ) {}
 
   async createOrder(
@@ -79,7 +79,7 @@ export class OrdersService {
     return this.squareMapper.squareOrderToOrder(order);
   }
 
-  async createTerminalCheckout(orderId: string, deviceId: string) {
+  async createTerminalCheckout(orderId: string, deviceId: string, customerId?: string) {
     this.logger.log(`Creating terminal checkout for order: ${orderId}`);
     const order = await this.squareService.getOrder(orderId);
     this.logger.log(`Order found in square`);
@@ -96,6 +96,7 @@ export class OrdersService {
       amount: checkout.amountMoney.amount,
       currency: checkout.amountMoney.currency,
       status: checkout.status,
+      customerId
     });
     this.logger.log(`Terminal checkout created successfully: ${checkout.id}`);
     return checkout;
@@ -103,10 +104,9 @@ export class OrdersService {
 
   async handleWebhookPayment(
     status: string,
-    checkoutId: string,
-    paymentId?: string,
+    checkoutId: string
   ) {
-    this.logger.log(`Handling webhook payment: ${checkoutId}`);
+    this.logger.log(`Handling webhook payment: ${checkoutId}, status: ${status}`);
     const orderPaymentCheckout = await this.orderPaymentCheckoutModel.findOne({
       where: { checkoutId, status: "PENDING" },
     });
@@ -114,24 +114,35 @@ export class OrdersService {
       this.logger.warn(`No payment checkout found for checkout: ${checkoutId}`);
       return;
     }
+    var paymentId = null;
     this.logger.log(`Order payment checkout found: ${orderPaymentCheckout.id}`);
     if (
       status === "COMPLETED" ||
       status === "CANCELED" ||
       status === "CANCEL_REQUESTED"
     ) {
+      if (status === "COMPLETED") {
+        paymentId = await this.squareService.createExternalPayment(
+          orderPaymentCheckout.orderId,
+          BigInt(orderPaymentCheckout.amount),
+          orderPaymentCheckout.currency,
+          orderPaymentCheckout.customerId,
+        );
+      }
+      this.logger.log(`Updating payment checkout`);
       await this.orderPaymentCheckoutModel.update(
         { paymentId, status },
         { where: { checkoutId } },
       );
     }
+    
     this.logger.log(`Payment checkout updated: ${orderPaymentCheckout.id}`);
     return;
   }
 
   async getOrderPaymentCheckout(
     orderId: string,
-  ): Promise<OrderPaymentCheckout> {
+  ): Promise<TerminalCheckoutEntity> {
     this.logger.log(`Getting payment checkout for order: ${orderId}`);
     const orderPaymentCheckout = await this.orderPaymentCheckoutModel.findOne({
       where: {
