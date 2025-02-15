@@ -1,4 +1,4 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { CategoryEntity } from "../entity/category.entity";
 import { Category } from "src/model/category";
@@ -13,29 +13,48 @@ export class CategoriesService {
   ) {}
 
   async findAll(locationId: string): Promise<Category[]> {
-    this.logger.log(`Finding all categories for location: ${locationId}`);
+    this.logger.log(
+      `Finding all active categories for location: ${locationId}`,
+    );
+
     const categories = await this.categoryModel.findAll({
-      where: { isActive: true, locationId: locationId },
+      where: {
+        isActive: true,
+        locationId,
+      },
       order: [["order", "ASC"]],
     });
-    return categories.map(
-      (category) =>
-        ({
-          id: category.id,
-          name: category.name,
-          image: category.image,
-          order: category.order,
-        }) as Category,
-    );
+
+    return categories.map(this.mapToCategory);
   }
 
   async create(category: Category): Promise<void> {
-    await this.categoryModel.create({
-      id: category.id,
-      name: category.name,
-      image: category.image,
-      order: category.order,
-      locationId: category.location_id,
-    });
+    this.logger.log(`Creating new category: ${JSON.stringify(category)}`);
+
+    try {
+      await this.categoryModel.create({
+        id: category.id,
+        name: category.name,
+        image: category.image,
+        order: category.order,
+        locationId: category.location_id,
+        isActive: true,
+      });
+
+      this.logger.log(`Category created successfully: ${category.id}`);
+    } catch (error) {
+      this.logger.error(`Failed to create category:`, error);
+      throw error;
+    }
+  }
+
+  private mapToCategory(entity: CategoryEntity): Category {
+    return {
+      id: entity.id,
+      name: entity.name,
+      image: entity.image,
+      order: entity.order,
+      location_id: entity.locationId,
+    };
   }
 }

@@ -7,9 +7,7 @@ import { SequelizeModule } from "@nestjs/sequelize";
 import { TerminalCheckoutEntity } from "src/entity/terminal-checkout.entity";
 
 @Module({
-  imports: [
-    SequelizeModule.forFeature([TerminalCheckoutEntity]),
-  ],
+  imports: [SequelizeModule.forFeature([TerminalCheckoutEntity])],
   controllers: [SquareWebhookController],
   providers: [SquareService, SquareMapper, OrdersService],
   exports: [SquareService, SquareMapper],

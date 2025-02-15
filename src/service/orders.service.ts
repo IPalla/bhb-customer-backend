@@ -79,7 +79,11 @@ export class OrdersService {
     return this.squareMapper.squareOrderToOrder(order);
   }
 
-  async createTerminalCheckout(orderId: string, deviceId: string, customerId?: string) {
+  async createTerminalCheckout(
+    orderId: string,
+    deviceId: string,
+    customerId?: string,
+  ) {
     this.logger.log(`Creating terminal checkout for order: ${orderId}`);
     const order = await this.squareService.getOrder(orderId);
     this.logger.log(`Order found in square`);
@@ -103,11 +107,10 @@ export class OrdersService {
     return checkout;
   }
 
-  async handleWebhookPayment(
-    status: string,
-    checkoutId: string
-  ) {
-    this.logger.log(`Handling webhook payment: ${checkoutId}, status: ${status}`);
+  async handleWebhookPayment(status: string, checkoutId: string) {
+    this.logger.log(
+      `Handling webhook payment: ${checkoutId}, status: ${status}`,
+    );
     const orderPaymentCheckout = await this.orderPaymentCheckoutModel.findOne({
       where: { checkoutId, status: "PENDING" },
     });
@@ -129,11 +132,14 @@ export class OrdersService {
           orderPaymentCheckout.currency,
           orderPaymentCheckout.customerId,
         );
-        this.squareService.printReceipt(paymentId, orderPaymentCheckout.deviceId).then((result) => {
-          this.logger.log(`Receipt printed: ${result}`);
-        }).catch((error) => {
-          this.logger.error("Error printing receipt", { error });
-        });
+        this.squareService
+          .printReceipt(paymentId, orderPaymentCheckout.deviceId)
+          .then((result) => {
+            this.logger.log(`Receipt printed: ${result}`);
+          })
+          .catch((error) => {
+            this.logger.error("Error printing receipt", { error });
+          });
       }
       this.logger.log(`Updating payment checkout`);
       await this.orderPaymentCheckoutModel.update(
@@ -141,7 +147,7 @@ export class OrdersService {
         { where: { checkoutId } },
       );
     }
-    
+
     this.logger.log(`Payment checkout updated: ${orderPaymentCheckout.id}`);
     return;
   }

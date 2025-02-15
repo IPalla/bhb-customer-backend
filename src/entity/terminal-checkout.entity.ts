@@ -49,4 +49,4 @@ export class TerminalCheckoutEntity extends Model {
 
   @Column
   status: string;
-} 
+}
