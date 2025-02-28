@@ -6,8 +6,7 @@ import { OtpService } from "../service/otp.service";
 import { OtpEntity } from "../entity/otp.entity";
 import { TwilioService } from "../service/twilio.service";
 import { CustomersService } from "src/service/customers.service";
-import { SquareService } from "src/service/square.service";
-import { SquareMapper } from "src/service/mappers/square.mapper";
+import { SquareModule } from "./square.module";
 
 @Module({
   imports: [
@@ -18,14 +17,9 @@ import { SquareMapper } from "src/service/mappers/square.mapper";
         "DO NOT USE THIS VALUE. INSTEAD, CREATE A COMPLEX SECRET AND KEEP IT SAFE OUTSIDE OF THE SOURCE CODE.",
       signOptions: { expiresIn: "24h" },
     }),
+    SquareModule,
   ],
   controllers: [OtpController],
-  providers: [
-    OtpService,
-    TwilioService,
-    CustomersService,
-    SquareService,
-    SquareMapper,
-  ],
+  providers: [OtpService, TwilioService, CustomersService],
 })
 export class OtpModule {}

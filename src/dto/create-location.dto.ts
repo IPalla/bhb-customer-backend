@@ -40,9 +40,6 @@ export class CreateLocationDto {
   @IsString()
   square_location_id: string;
 
-  @IsString()
-  square_terminal_id: string;
-
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => OpeningHoursDto)

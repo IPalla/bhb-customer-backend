@@ -3,10 +3,11 @@
 import { Module } from "@nestjs/common";
 import { ProductsController } from "../controller/products.controller";
 import { ProductsService } from "../service/products.service";
-import { SquareMapper } from "src/service/mappers/square.mapper";
-import { SquareService } from "src/service/square.service";
+import { SquareModule } from "./square.module";
+
 @Module({
+  imports: [SquareModule],
   controllers: [ProductsController],
-  providers: [ProductsService, SquareService, SquareMapper],
+  providers: [ProductsService],
 })
 export class ProductsModule {}

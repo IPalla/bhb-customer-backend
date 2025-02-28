@@ -8,21 +8,30 @@ import {
   CreateOrderRequest,
   CreateOrderResponse,
   Customer as SquareCustomer,
-  SearchOrdersResponse,
+  TerminalCheckout,
   Order,
+  Money,
+  Payment,
 } from "square";
 import { randomUUID } from "crypto";
 import { serializeWithBigInt } from "src/util/utils";
 import { Customer } from "src/model/customer";
 import { countryToIsoCode } from "./mappers/square.mapper";
+import { SquareServiceError } from "../errors/square-service.error";
 
 @Injectable()
 export class SquareService {
   private readonly logger = new Logger(SquareService.name);
-  private client: Client;
-  private locationIds: string[];
+  private readonly client: Client;
+  private readonly locationIds: string[];
+
   constructor(private readonly configService: ConfigService) {
-    this.client = new Client({
+    this.client = this.initializeSquareClient();
+    this.locationIds = this.configService.getOrThrow("square.locationIds");
+  }
+
+  private initializeSquareClient(): Client {
+    return new Client({
       bearerAuthCredentials: {
         accessToken: this.configService.getOrThrow("square.accessToken"),
       },
@@ -30,7 +39,15 @@ export class SquareService {
         ? Environment.Sandbox
         : Environment.Production,
     });
-    this.locationIds = this.configService.getOrThrow("square.locationIds");
+  }
+
+  private handleSquareError(error: unknown, operation: string): never {
+    if (error instanceof ApiError) {
+      this.logger.error(`Square API Error during ${operation}:`, error.errors);
+      throw new SquareServiceError(`Failed to ${operation}`, error.errors);
+    }
+    this.logger.error(`Unexpected error during ${operation}:`, error);
+    throw new SquareServiceError(`Unexpected error during ${operation}`, error);
   }
 
   async getProducts(locationId: string): Promise<CatalogObject[]> {
@@ -44,11 +61,7 @@ export class SquareService {
       );
       return response.result.objects;
     } catch (error) {
-      if (error instanceof ApiError) {
-        console.error("Errors returned by the API: ", error.errors);
-      } else {
-        console.error("Unexpected error: ", error);
-      }
+      this.handleSquareError(error, "retrieving products");
     }
   }
 
@@ -66,13 +79,7 @@ export class SquareService {
       });
       return payment.result;
     } catch (error) {
-      if (error instanceof ApiError) {
-        this.logger.error("Square API Error:", error.errors);
-        throw error;
-      } else {
-        this.logger.error("Unexpected error during payment creation:", error);
-        throw error;
-      }
+      this.handleSquareError(error, "creating payment");
     }
   }
 
@@ -84,87 +91,54 @@ export class SquareService {
       this.logger.log("Order created in Square");
       return result;
     } catch (error) {
-      if (error instanceof ApiError) {
-        this.logger.error("Square API Error:", error.errors);
-        throw error;
-      } else {
-        this.logger.error("Unexpected error during order creation:", error);
-        throw error;
-      }
+      this.handleSquareError(error, "creating order");
     }
   }
 
   async findCustomerByPhone(
     phoneNumber: string,
   ): Promise<Customer | undefined> {
-    this.logger.log(`Finding customer with phone number: ${phoneNumber}`);
     try {
       const { result } = await this.client.customersApi.searchCustomers({
         query: {
           filter: {
-            phoneNumber: {
-              exact: phoneNumber,
-            },
+            phoneNumber: { exact: phoneNumber },
           },
         },
       });
+
       this.logger.debug(
-        `Customer found in Square: ${serializeWithBigInt(result)}`,
+        `Customer search result: ${serializeWithBigInt(result)}`,
       );
-      if (!result.customers?.length) {
-        return undefined;
-      }
-      return result.customers[0];
+      return result.customers?.[0];
     } catch (error) {
-      if (error instanceof ApiError) {
-        this.logger.error("Square API Error:", error.errors);
-        return undefined;
-      } else {
-        this.logger.error("Unexpected error while finding customer:", error);
-        return undefined;
-      }
+      this.handleSquareError(error, "finding customer by phone");
     }
   }
 
   async getCustomerById(customerId: string): Promise<Customer | undefined> {
-    this.logger.log(`Finding customer with ID: ${customerId}`);
     try {
       const { result } =
         await this.client.customersApi.retrieveCustomer(customerId);
-      this.logger.debug(
-        `Customer found in Square: ${serializeWithBigInt(result)}`,
-      );
+      this.logger.debug(`Retrieved customer: ${serializeWithBigInt(result)}`);
       return result.customer;
     } catch (error) {
-      if (error instanceof ApiError) {
-        this.logger.error("Square API Error:", error.errors);
-        return undefined;
-      } else {
-        this.logger.error("Unexpected error while finding customer:", error);
-        return undefined;
-      }
+      this.handleSquareError(error, "retrieving customer by ID");
     }
   }
 
   async createCustomer(phoneNumber: string): Promise<Customer> {
-    this.logger.log(`Creating customer with phone number: ${phoneNumber}`);
     try {
       const { result } = await this.client.customersApi.createCustomer({
         phoneNumber,
       });
       return result.customer;
     } catch (error) {
-      if (error instanceof ApiError) {
-        this.logger.error("Square API Error:", error.errors);
-        throw error;
-      }
-      this.logger.error("Unexpected error creating customer:", error);
-      throw error;
+      this.handleSquareError(error, "creating customer");
     }
   }
 
   async updateCustomer(customer: Customer): Promise<SquareCustomer> {
-    this.logger.log(`Updating customer with ID: ${customer.id}`);
     try {
       const { result } = await this.client.customersApi.updateCustomer(
         customer.id,
@@ -173,23 +147,18 @@ export class SquareService {
           familyName: customer.lastName,
           emailAddress: customer.email,
           phoneNumber: customer.phoneNumber,
-          address: {
-            addressLine1: customer.address?.address_line_1,
-            addressLine2: customer.address?.address_line_2,
-            locality: customer.address?.locality,
-            postalCode: customer.address?.postalCode,
-            country: countryToIsoCode[customer.address?.country],
+          address: customer.address && {
+            addressLine1: customer.address.address_line_1,
+            addressLine2: customer.address.address_line_2,
+            locality: customer.address.locality,
+            postalCode: customer.address.postalCode,
+            country: countryToIsoCode[customer.address.country],
           },
         },
       );
       return result.customer;
     } catch (error) {
-      if (error instanceof ApiError) {
-        this.logger.error("Square API Error:", error.errors);
-        throw error;
-      }
-      this.logger.error("Unexpected error updating customer:", error);
-      throw error;
+      this.handleSquareError(error, "updating customer");
     }
   }
 
@@ -213,44 +182,111 @@ export class SquareService {
 
       return result.orders || [];
     } catch (error) {
-      if (error instanceof ApiError) {
-        this.logger.error("Square API Error:", error.errors);
-        throw error;
-      } else {
-        this.logger.error(
-          "Unexpected error while fetching customer orders:",
-          error,
-        );
-        throw error;
-      }
+      this.handleSquareError(error, "fetching customer orders");
     }
   }
 
   async createTerminalCheckout(
     orderId: string,
+    amount: bigint,
+    currency: string,
     deviceId: string,
-  ): Promise<any> {
+  ): Promise<TerminalCheckout> {
     try {
-      const { result } = await this.client.ordersApi.retrieveOrder(orderId);
+      this.logger.log(
+        `Creating terminal checkout in square for order: ${orderId}, with amount: ${amount}, currency: ${currency}, deviceId: ${deviceId} `,
+      );
       const checkout = await this.client.terminalApi.createTerminalCheckout({
         idempotencyKey: randomUUID(),
         checkout: {
-          amountMoney: result.order.totalMoney,
-          orderId: orderId,
+          referenceId: orderId,
+          amountMoney: {
+            amount: amount,
+            currency: currency,
+          },
           deviceOptions: {
+            skipReceiptScreen: true,
             deviceId,
           },
         },
       });
-      return checkout.result;
+      return checkout.result.checkout;
     } catch (error) {
-      if (error instanceof ApiError) {
-        this.logger.error("Square API Error:", error.errors);
-        throw error;
-      } else {
-        this.logger.error("Unexpected error during terminal checkout:", error);
-        throw error;
-      }
+      this.handleSquareError(error, "creating terminal checkout");
+    }
+  }
+
+  async getOrder(orderId: string): Promise<Order> {
+    try {
+      const { result } = await this.client.ordersApi.retrieveOrder(orderId);
+      return result.order;
+    } catch (error) {
+      this.handleSquareError(error, "retrieving order");
+    }
+  }
+
+  async printReceipt(paymentId: string, deviceId: string): Promise<any> {
+    this.logger.log(`Printing receipt for payment: ${paymentId}`);
+    try {
+      const { result } = await this.client.terminalApi.createTerminalAction({
+        idempotencyKey: randomUUID(),
+        action: {
+          type: "RECEIPT",
+          deviceId,
+          receiptOptions: {
+            paymentId,
+          },
+        },
+      });
+      return result;
+    } catch (error) {
+      this.handleSquareError(error, "printing receipt");
+    }
+  }
+
+  async createExternalPayment(
+    orderId: string,
+    amount: bigint,
+    currency: string,
+    customerId?: string,
+  ): Promise<string> {
+    try {
+      const { result } = await this.client.paymentsApi.createPayment({
+        sourceId: "EXTERNAL",
+        autocomplete: true,
+        customerId: customerId,
+        referenceId: orderId,
+        orderId: orderId,
+        amountMoney: {
+          amount,
+          currency,
+        },
+        idempotencyKey: randomUUID(),
+        externalDetails: {
+          type: "EXTERNAL",
+          source: "kiosk",
+          sourceFeeMoney: {
+            amount,
+            currency,
+          },
+        },
+      });
+
+      this.logger.log(
+        `External payment created successfully for order: ${orderId}`,
+      );
+      return result.payment.id;
+    } catch (error) {
+      this.handleSquareError(error, "creating external payment");
+    }
+  }
+
+  async retrievePayment(paymentId: string): Promise<Payment> {
+    try {
+      const { result } = await this.client.paymentsApi.getPayment(paymentId);
+      return result.payment;
+    } catch (error) {
+      this.handleSquareError(error, "retrieving payment");
     }
   }
 }
