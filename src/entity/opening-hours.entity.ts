@@ -49,7 +49,7 @@ export class OpeningHoursEntity extends Model {
     allowNull: false,
     references: {
       model: LocationEntity,
-      key: 'square_location_id',
+      key: "square_location_id",
     },
   })
   square_location_id: string;

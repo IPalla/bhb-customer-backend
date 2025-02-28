@@ -20,7 +20,9 @@ async function bootstrap() {
     origin: "http://localhost:5173",
     credentials: true,
   });
-  console.log(`Application running in ${process.env.NODE_ENV || 'production'} mode on port ${process.env.PORT}`);
+  console.log(
+    `Application running in ${process.env.NODE_ENV || "production"} mode on port ${process.env.PORT}`,
+  );
   await app.listen(process.env.PORT);
 }
 bootstrap();

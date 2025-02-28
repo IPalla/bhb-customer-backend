@@ -31,7 +31,7 @@ export class LocationEntity extends Model {
     primaryKey: true,
   })
   square_location_id: string;
-  
+
   @HasMany(() => OpeningHoursEntity)
   opening_hours: OpeningHoursEntity[];
 }
