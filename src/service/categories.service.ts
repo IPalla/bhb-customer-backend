@@ -20,7 +20,7 @@ export class CategoriesService {
     const categories = await this.categoryModel.findAll({
       where: {
         isActive: true,
-        locationId,
+        square_location_id: locationId,
       },
       order: [["order", "ASC"]],
     });
@@ -33,15 +33,14 @@ export class CategoriesService {
 
     try {
       await this.categoryModel.create({
-        id: category.id,
         name: category.name,
         image: category.image,
         order: category.order,
-        locationId: category.location_id,
+        square_location_id: category.location_id,
         isActive: true,
       });
 
-      this.logger.log(`Category created successfully: ${category.id}`);
+      this.logger.log(`Category created successfully: ${category.location_id}`);
     } catch (error) {
       this.logger.error(`Failed to create category:`, error);
       throw error;
@@ -54,7 +53,7 @@ export class CategoriesService {
       name: entity.name,
       image: entity.image,
       order: entity.order,
-      location_id: entity.locationId,
+      location_id: entity.square_location_id,
     };
   }
 }

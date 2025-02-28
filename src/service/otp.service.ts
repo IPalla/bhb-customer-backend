@@ -1,4 +1,4 @@
-import { Injectable, Logger, UnauthorizedException } from "@nestjs/common";
+import { ConflictException, Injectable, Logger, UnauthorizedException } from "@nestjs/common";
 import { OtpEntity } from "../entity/otp.entity";
 import { InjectModel } from "@nestjs/sequelize";
 import { TwilioService } from "./twilio.service";
@@ -77,7 +77,7 @@ export class OtpService {
     const otp = await this.findValidOtp(phoneNumber, code);
 
     if (!otp) {
-      throw new UnauthorizedException("Invalid or expired OTP");
+      throw new ConflictException("Invalid or expired OTP");
     }
 
     await otp.destroy();

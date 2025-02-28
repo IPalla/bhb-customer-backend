@@ -16,12 +16,9 @@ import { Image } from "./image";
  */
 export interface Category {
   /**
-   * Category id
-   */
-  id?: string;
-  /**
    * Category name
    */
+  id?: string;
   name?: string;
   image?: string;
   order?: number;
