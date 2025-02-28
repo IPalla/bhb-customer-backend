@@ -17,10 +17,12 @@ async function bootstrap() {
   );
   app.useGlobalInterceptors(new BigIntSerializationInterceptor());
   app.enableCors({
-    origin: "http://localhost:5173",
+    origin: "*",
     credentials: true,
   });
-  console.log(`Application running in ${process.env.NODE_ENV || 'production'} mode on port ${process.env.PORT}`);
+  console.log(
+    `Application running in ${process.env.NODE_ENV || "production"} mode on port ${process.env.PORT}`,
+  );
   await app.listen(process.env.PORT);
 }
 bootstrap();

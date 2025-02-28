@@ -1,4 +1,9 @@
-import { ConflictException, Injectable, Logger, UnauthorizedException } from "@nestjs/common";
+import {
+  ConflictException,
+  Injectable,
+  Logger,
+  UnauthorizedException,
+} from "@nestjs/common";
 import { OtpEntity } from "../entity/otp.entity";
 import { InjectModel } from "@nestjs/sequelize";
 import { TwilioService } from "./twilio.service";
