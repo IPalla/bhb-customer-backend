@@ -18,6 +18,7 @@ import { Customer } from "src/model/models";
 import { RequestWithUser } from "src/guards/jwt.guard";
 import { serializeWithBigInt } from "src/util/utils";
 import { TerminalCheckoutEntity } from "src/entity/terminal-checkout.entity";
+import { EventEmitter2 } from "@nestjs/event-emitter";
 
 @Controller("bhb-customer-backend/orders")
 export class OrdersController {
@@ -26,6 +27,7 @@ export class OrdersController {
   constructor(
     private readonly ordersService: OrdersService,
     private readonly squareService: SquareService,
+    private readonly eventEmitter: EventEmitter2,
   ) {}
 
   @Post()
@@ -89,6 +91,8 @@ export class OrdersController {
         typeof value === "bigint" ? value.toString() : value,
       )}`,
     );
+    this.eventEmitter.emit("order.created", orderId);
+    // Event to create in delivery manager
     this.logger.log("Payment created successfully");
     return payment;
   }

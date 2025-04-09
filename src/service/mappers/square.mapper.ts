@@ -5,6 +5,7 @@ import {
   Customer,
   FulfillmentRecipient,
   Order,
+  OrderLineItemDiscount,
 } from "square";
 import { Product } from "src/model/product";
 import { Image } from "src/model/image";
@@ -15,6 +16,8 @@ import { Category } from "src/model/models";
 import { serializeWithBigInt } from "src/util/utils";
 import { Order as OrderModel } from "src/model/order";
 import { Status } from "src/model/status";
+import { CouponType } from "src/entity/coupon.entity";
+import { CouponDto } from "src/dto/coupon.dto";
 
 @Injectable()
 export class SquareMapper {
@@ -104,7 +107,7 @@ export class SquareMapper {
   orderToCreateOrderRequest(order: OrderModel): CreateOrderRequest {
     const recipient: FulfillmentRecipient = {
       customerId: order.customer?.id,
-      displayName: order.customer?.firstName,
+      displayName: order.customer?.firstName + " " + order.customer?.lastName,
       emailAddress: order.customer?.email,
       phoneNumber: order.customer?.phoneNumber,
       address:
@@ -118,10 +121,53 @@ export class SquareMapper {
             }
           : undefined,
     };
+    const fulfillment = {
+      type: order.type == OrderModel.TypeEnum.Delivery ? "DELIVERY" : "PICKUP",
+      pickupDetails:
+        order.type === OrderModel.TypeEnum.Pickup
+          ? {
+              recipient,
+              pickupAt: new Date(
+                Date.now() + SquareMapper.TEN_MINUTES_MS,
+              ).toISOString(),
+              scheduleType: "ASAP",
+              note: order.notes,
+            }
+          : undefined,
+      deliveryDetails:
+        order.type === OrderModel.TypeEnum.Delivery
+          ? {
+              recipient,
+              note: order.notes,
+              scheduleType: "ASAP",
+              deliverAt: new Date(
+                Date.now() + SquareMapper.TEN_MINUTES_MS,
+              ).toISOString(),
+            }
+          : undefined,
+    };
+    const serviceCharges =
+      order.type === OrderModel.TypeEnum.Delivery
+        ? {
+            name: "Delivery fee",
+            calculationPhase: "TOTAL_PHASE",
+            amountMoney: {
+              amount: BigInt(250),
+              currency: "EUR",
+            },
+          }
+        : undefined;
     return {
       order: {
+        serviceCharges: serviceCharges ? [serviceCharges] : undefined,
+        ticketName:
+          order.customer?.firstName + " " + order.customer?.lastName?.charAt(0),
+        referenceId: "NACHOSREFEREENCE",
         customerId: order.customer?.id,
         locationId: order.locationId,
+        discounts: order.coupon
+          ? this.createDiscountObject(order.coupon)
+          : undefined,
         lineItems: order.products.map((product) => ({
           quantity: product?.quantity.toString(),
           catalogObjectId: product.catalogId,
@@ -131,42 +177,35 @@ export class SquareMapper {
           })),
         })),
 
-        fulfillments: [
-          {
-            type:
-              order.type == OrderModel.TypeEnum.Delivery
-                ? "DELIVERY"
-                : "PICKUP",
-            pickupDetails:
-              order.type === OrderModel.TypeEnum.Pickup ||
-              order.type === OrderModel.TypeEnum.Dinein
-                ? {
-                    recipient,
-                    pickupAt: new Date(
-                      Date.now() + SquareMapper.TEN_MINUTES_MS,
-                    ).toISOString(),
-                    scheduleType: "ASAP",
-                    note: order.notes,
-                  }
-                : undefined,
-            deliveryDetails:
-              order.type === OrderModel.TypeEnum.Delivery
-                ? {
-                    recipient,
-                    note: order.notes,
-                    scheduleType: "ASAP",
-                    deliverAt: new Date(
-                      Date.now() + SquareMapper.TEN_MINUTES_MS,
-                    ).toISOString(),
-                  }
-                : undefined,
-          },
-        ],
+        fulfillments:
+          order.type === OrderModel.TypeEnum.Dinein ? undefined : [fulfillment],
       },
     } as CreateOrderRequest;
   }
+  private createDiscountObject(coupon: CouponDto): OrderLineItemDiscount[] {
+    console.log("Coupon", coupon);
+    return [
+      {
+        name: coupon.code,
+        type: coupon.type,
+        ...(coupon.type === CouponType.FIXED_AMOUNT
+          ? {
+              amountMoney: {
+                amount: BigInt(coupon.amount),
+                currency: "EUR",
+              },
+            }
+          : coupon.type === CouponType.FIXED_PERCENTAGE
+            ? {
+                percentage: coupon.discount.toString(),
+              }
+            : {}),
+      },
+    ];
+  }
 
   mapCustomer(customer: Customer): CustomerModel {
+    this.logger.debug(`Mapping customer: ${serializeWithBigInt(customer)}`);
     return {
       id: customer.id,
       firstName: customer.givenName,
@@ -184,7 +223,7 @@ export class SquareMapper {
   }
 
   squareOrderToOrder(squareOrder: Order): OrderModel {
-    this.logger.debug(
+    this.logger.log(
       `Mapping Square order to Order model: ${serializeWithBigInt(squareOrder)}`,
     );
 
