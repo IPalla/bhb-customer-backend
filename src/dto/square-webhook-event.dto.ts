@@ -7,6 +7,9 @@ export interface SquareWebhookEventDto {
     type?: string;
     id?: string;
     object?: {
+      order_updated?: {
+        state?: string;
+      };
       checkout?: {
         status?: string;
         payment_ids?: string[];
@@ -17,6 +20,26 @@ export interface SquareWebhookEventDto {
             currency?: string;
           };
         };
+      };
+      order?: {
+        id?: string;
+        location_id?: string;
+        customer_id?: string;
+        created_at?: string;
+        state?: string;
+      };
+      order_fulfillment_updated?: {
+        created_at?: string;
+        fulfillment_update?: Array<{
+          fulfillment_uid?: string;
+          new_state?: string;
+          old_state?: string;
+        }>;
+        location_id?: string;
+        order_id?: string;
+        state?: string;
+        updated_at?: string;
+        version?: number;
       };
     };
   };

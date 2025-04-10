@@ -25,4 +25,10 @@ export default () => ({
     verifyServiceSid: process.env.VERIFY_SERVICE_SID,
     isActive: process.env.TWILIO_IS_ACTIVE === "true",
   },
+  deliveryManager: {
+    baseUrl: process.env.DELIVERY_MANAGER_BASE_URL,
+  },
+  close: {
+    apiKey: process.env.CLOSE_API_KEY,
+  },
 });

@@ -18,7 +18,6 @@ async function bootstrap() {
   app.useGlobalInterceptors(new BigIntSerializationInterceptor());
   app.enableCors({
     origin: "*",
-    credentials: true,
   });
   console.log(
     `Application running in ${process.env.NODE_ENV || "production"} mode on port ${process.env.PORT}`,

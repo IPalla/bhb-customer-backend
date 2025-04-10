@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { CouponDto } from "src/dto/coupon.dto";
 import { Customer } from "./customer";
 import { Product } from "./product";
 import { Status } from "./status";
@@ -46,6 +47,7 @@ export interface Order {
   status?: Status;
   statuses?: Array<Status>;
   locationId?: string;
+  coupon?: CouponDto;
 }
 export namespace Order {
   export type TypeEnum = "Delivery" | "Pickup" | "Dinein";

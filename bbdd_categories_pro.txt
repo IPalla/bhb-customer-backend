@@ -1,0 +1,46 @@
+INSERT INTO "test"."categories" (id, name, image, "order", "is_active", "square_location_id", "createdAt", "updatedAt")
+VALUES 
+('JYVPP7PETGFTP4YS2NJ6GDJQ', 'BURGERS', 'https://items-images-sandbox.s3.us-west-2.amazonaws.com/files/c4c6f442165750d2650ef6e18d5b6f5c9f48e19d/original.png', 1, true, 'L5NNX56YBQXZY', '2025-01-28 19:27:40', '2025-01-28 19:27:40'),
+('5ONA7MDFD3ZU7KIN3KZBH627', 'ENTRANTES', 'https://items-images-sandbox.s3.us-west-2.amazonaws.com/files/476ef6682233e7749f54e4c1d7a639863f9c46c3/original.png', 2, true, 'L5NNX56YBQXZY', '2025-01-28 19:31:42', '2025-01-28 19:31:42'),
+('BOE3NIRMMNJTKBXV3S743EEG', 'BEBIDAS', 'https://items-images-sandbox.s3.us-west-2.amazonaws.com/files/02a92ed825c6b3ac528f9090e5849fd1e264eb2d/original.png', 3, true, 'L5NNX56YBQXZY', '2025-01-28 19:32:22', '2025-01-28 19:32:22'),
+('PGWJTDQ54HMOHC5BNNOWWDST', 'SHAKES', 'https://items-images-sandbox.s3.us-west-2.amazonaws.com/files/93b459bf54f3518ae5c85b2f3f5d3418cdb0fcd9/original.png', 4, true, 'L5NNX56YBQXZY', '2025-01-28 19:32:56', '2025-01-28 19:32:56'),
+('WAYC25UWXIJVX5VDRLKUAAPE', 'SAUCES', 'https://items-images-sandbox.s3.us-west-2.amazonaws.com/files/6aab78821159e731c9b96413f446c47c352e1ac8/original.png', 5, true, 'L5NNX56YBQXZY', '2025-01-28 19:33:32', '2025-01-28 19:33:32'),
+('35Q63JJYUCVE54ZPUMMXRKZ6', 'CAKES', 'https://items-images-sandbox.s3.us-west-2.amazonaws.com/files/0963b0083eae7c9e46d61c83f35dd1886100bba6/original.png', 6, true, 'L5NNX56YBQXZY', '2025-01-28 19:34:02', '2025-01-28 19:34:02');
+
+
+INSERT INTO "test"."locations" (name, address, square_location_id, "createdAt", "updatedAt")
+VALUES 
+('Bite House PROD Siempre Abierto', 'Calle Plaza del Toro 1, Tres Cantos', 'L5NNX56YBQXZY', '2025-01-28 19:27:40', '2025-01-28 19:27:40');
+
+INSERT INTO "test"."opening_hours" (day, open, close, break_starts_at, break_ends_at, square_location_id, "createdAt", "updatedAt")
+VALUES 
+(1, '00:00:00', '23:59:00', '23:57:00', '23:58:00', 'L5NNX56YBQXZY', '2025-01-28 19:27:40', '2025-01-28 19:27:40');
+
+INSERT INTO "test"."opening_hours" (day, open, close, break_starts_at, break_ends_at, square_location_id, "createdAt", "updatedAt")
+VALUES 
+(2, '00:00:00', '23:59:00', '23:57:00', '23:58:00', 'L5NNX56YBQXZY', '2025-01-28 19:27:40', '2025-01-28 19:27:40');
+
+INSERT INTO "test"."opening_hours" (day, open, close, break_starts_at, break_ends_at, square_location_id, "createdAt", "updatedAt")
+VALUES 
+(3, '00:00:00', '23:59:00', '23:57:00', '23:58:00', 'L5NNX56YBQXZY', '2025-01-28 19:27:40', '2025-01-28 19:27:40');
+
+
+INSERT INTO "test"."opening_hours" (day, open, close, break_starts_at, break_ends_at, square_location_id, "createdAt", "updatedAt")
+VALUES 
+(4, '00:00:00', '23:59:00', '23:57:00', '23:58:00', 'L5NNX56YBQXZY', '2025-01-28 19:27:40', '2025-01-28 19:27:40');
+
+
+INSERT INTO "test"."opening_hours" (day, open, close, break_starts_at, break_ends_at, square_location_id, "createdAt", "updatedAt")
+VALUES 
+(5, '00:00:00', '23:59:00', '23:57:00', '23:58:00', 'L5NNX56YBQXZY', '2025-01-28 19:27:40', '2025-01-28 19:27:40');
+
+
+INSERT INTO "test"."opening_hours" (day, open, close, break_starts_at, break_ends_at, square_location_id, "createdAt", "updatedAt")
+VALUES 
+(6, '00:00:00', '23:59:00', '23:57:00', '23:58:00', 'L5NNX56YBQXZY', '2025-01-28 19:27:40', '2025-01-28 19:27:40');
+
+
+INSERT INTO "test"."opening_hours" (day, open, close, break_starts_at, break_ends_at, square_location_id, "createdAt", "updatedAt")
+VALUES 
+(7, '00:00:00', '23:59:00', '23:57:00', '23:58:00', 'L5NNX56YBQXZY', '2025-01-28 19:27:40', '2025-01-28 19:27:40');
+

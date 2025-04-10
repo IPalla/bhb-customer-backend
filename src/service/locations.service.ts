@@ -50,4 +50,20 @@ export class LocationsService {
       include: [OpeningHoursEntity],
     });
   }
+
+  async updateStoreStatus(
+    squareLocationId: string,
+    isClosed: boolean,
+  ): Promise<LocationEntity> {
+    const location = await this.locationModel.findOne({
+      where: { square_location_id: squareLocationId },
+    });
+
+    if (!location) {
+      throw new Error("Location not found");
+    }
+
+    await location.update({ high_demand: isClosed });
+    return location;
+  }
 }

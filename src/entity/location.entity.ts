@@ -23,7 +23,7 @@ export class LocationEntity extends Model {
     allowNull: false,
     defaultValue: false,
   })
-  is_closed: boolean;
+  high_demand: boolean;
 
   @Column({
     type: DataType.STRING,

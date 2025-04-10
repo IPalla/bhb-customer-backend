@@ -14,6 +14,8 @@ import { CustomerModule } from "./modules/customer.module";
 import { LocationsModule } from "./modules/locations.module";
 import { SquareModule } from "./modules/square.module";
 import { OrderPaymentCheckoutModule } from "./modules/order-payment-checkout.module";
+import { DeliveryManagerModule } from "./modules/delivery-manager.module";
+import { CouponModule } from "./modules/coupon.module";
 
 @Module({
   imports: [
@@ -35,6 +37,8 @@ import { OrderPaymentCheckoutModule } from "./modules/order-payment-checkout.mod
     OtpModule,
     CategoriesModule,
     OrderPaymentCheckoutModule,
+    DeliveryManagerModule,
+    CouponModule,
     JwtModule.register({
       secret:
         process.env.JWT_KEY ||

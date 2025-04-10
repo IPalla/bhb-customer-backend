@@ -49,7 +49,7 @@ export class TwilioService {
           to: phoneNumber,
           channel: "sms",
           // Note: customCode is commented out as it might not be supported in the current Twilio plan
-          // customCode: otpCode
+          customCode: otpCode,
         });
 
       this.logger.log(
