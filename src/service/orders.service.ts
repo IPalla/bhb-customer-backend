@@ -5,6 +5,9 @@ import { SquareMapper } from "./mappers/square.mapper";
 import { Customer } from "src/model/customer";
 import { InjectModel } from "@nestjs/sequelize";
 import { TerminalCheckoutEntity } from "src/entity/terminal-checkout.entity";
+import { CouponService } from "./coupon.service";
+import { serializeWithBigInt } from "src/util/utils";
+import { EventEmitter2 } from "@nestjs/event-emitter";
 
 @Injectable()
 export class OrdersService {
@@ -13,6 +16,8 @@ export class OrdersService {
   constructor(
     private readonly squareService: SquareService,
     private readonly squareMapper: SquareMapper,
+    private readonly couponsService: CouponService,
+    private readonly eventEmitter: EventEmitter2,
     @InjectModel(TerminalCheckoutEntity)
     private orderPaymentCheckoutModel: typeof TerminalCheckoutEntity,
   ) {}
@@ -26,14 +31,43 @@ export class OrdersService {
     this.logger.log(`Creating order for location: ${locationId}`);
 
     const mergedCustomer = this.mergeCustomerData(order.customer, customer);
+    this.logger.log(`Merged customer: ${JSON.stringify(mergedCustomer)}`);
     order.customer = mergedCustomer;
     order.locationId = locationId;
-
+    if (order.coupon) {
+      const coupon = await this.couponsService.findByCodeAndCustomer(
+        order.coupon.code,
+        mergedCustomer.phoneNumber,
+      );
+      // Validate expiration date
+      if (coupon.expirationDate < new Date()) {
+        this.logger.warn(`Coupon expired: ${order.coupon.code}`);
+        throw new Error("Coupon expired");
+      } else {
+        order.coupon = {
+          code: coupon.code,
+          type: coupon.type,
+          discount: coupon.discount,
+          amount: coupon.amount,
+          expirationDate: coupon.expirationDate.toISOString(),
+        };
+      }
+    }
     const squareOrderRequest =
       this.squareMapper.orderToCreateOrderRequest(order);
+    console.log(
+      "Square order request",
+      serializeWithBigInt(squareOrderRequest),
+    );
     const createdOrder =
       await this.squareService.createOrder(squareOrderRequest);
-    this.logger.log(`Order created successfully: ${createdOrder.order.id}`);
+    this.logger.log(
+      `Order created successfully in Square: ${createdOrder.order.id}`,
+    );
+
+    const mappedOrder = this.squareMapper.squareOrderToOrder(
+      createdOrder.order,
+    );
 
     // Async customer update without blocking order creation
     this.updateCustomerIfNeeded(
@@ -44,7 +78,7 @@ export class OrdersService {
       this.logger.error("Background customer update failed", { error }),
     );
 
-    return this.squareMapper.squareOrderToOrder(createdOrder.order);
+    return mappedOrder;
   }
 
   async getCustomerOrders(customer: Customer): Promise<Order[]> {
@@ -140,6 +174,7 @@ export class OrdersService {
           .catch((error) => {
             this.logger.error("Error printing receipt", { error });
           });
+        this.eventEmitter.emit("order.created", orderPaymentCheckout.orderId);
       }
       this.logger.log(`Updating payment checkout`);
       await this.orderPaymentCheckoutModel.update(
