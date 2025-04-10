@@ -89,7 +89,7 @@ export class OtpService {
 
     const customer =
       await this.customersService.findOrCreateByPhone(phoneNumber);
-    return this.jwtService.sign({ customer });
+    return this.jwtService.sign({ customer }, { expiresIn: "180d" });
   }
 
   private async findValidOtp(
