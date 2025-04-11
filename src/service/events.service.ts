@@ -3,7 +3,7 @@ import { OnEvent } from "@nestjs/event-emitter";
 import { SquareService } from "./square.service";
 import { SquareMapper } from "./mappers/square.mapper";
 import { DeliveryManagerService } from "./delivery-manager.service";
-
+import { CouponService } from "./coupon.service";
 @Injectable()
 export class EventsService {
   private readonly logger = new Logger(EventsService.name);
@@ -12,6 +12,7 @@ export class EventsService {
     private readonly squareService: SquareService,
     private readonly squareMapper: SquareMapper,
     private readonly deliveryManagerService: DeliveryManagerService,
+    private readonly couponService: CouponService,
   ) {}
 
   @OnEvent("order.created")
@@ -37,6 +38,10 @@ export class EventsService {
       );
       if (order.coupon) {
         this.logger.log(`Coupon used: ${order.coupon.code}`);
+        this.couponService.useCoupon(
+          order.coupon.code,
+          order.customer.phoneNumber,
+        );
       }
       // Create order in delivery manager system
       try {

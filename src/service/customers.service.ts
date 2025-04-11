@@ -1,6 +1,5 @@
 import { Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { SquareService } from "./square.service";
-import { serializeWithBigInt } from "src/util/utils";
 import { SquareMapper } from "./mappers/square.mapper";
 import { Customer } from "src/model/customer";
 
@@ -22,9 +21,6 @@ export class CustomersService {
       await this.squareService.findCustomerByPhone(phoneNumber);
 
     if (existingCustomer) {
-      this.logger.debug(
-        `Found existing customer: ${serializeWithBigInt(existingCustomer)}`,
-      );
       return this.squareMapper.mapCustomer(existingCustomer);
     }
 

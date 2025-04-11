@@ -15,25 +15,19 @@ export enum CouponType {
 @Table({ tableName: "coupons" })
 export class CouponEntity extends Model {
   @Column({
-    type: DataType.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  })
-  id: number;
-
-  @Column({
     type: DataType.STRING,
+    primaryKey: true,
     allowNull: false,
-    unique: true,
   })
   code: string;
 
   @Column({
-    type: DataType.BOOLEAN,
+    type: DataType.INTEGER,
     allowNull: false,
-    defaultValue: false,
+    defaultValue: 1,
+    field: "remaining_usages",
   })
-  used: boolean;
+  remainingUsages: number;
 
   @Column({
     type: DataType.ENUM(...Object.values(CouponType)),

@@ -13,7 +13,6 @@ import {
   Payment,
 } from "square";
 import { randomUUID } from "crypto";
-import { serializeWithBigInt } from "src/util/utils";
 import { Customer } from "src/model/customer";
 import { countryToIsoCode } from "./mappers/square.mapper";
 import { SquareServiceError } from "../errors/square-service.error";
@@ -125,10 +124,6 @@ export class SquareService {
           },
         },
       });
-
-      this.logger.debug(
-        `Customer search result: ${serializeWithBigInt(result)}`,
-      );
       return result.customers?.[0];
     } catch (error) {
       this.handleSquareError(error, "finding customer by phone");
@@ -139,7 +134,6 @@ export class SquareService {
     try {
       const { result } =
         await this.client.customersApi.retrieveCustomer(customerId);
-      this.logger.debug(`Retrieved customer: ${serializeWithBigInt(result)}`);
       return result.customer;
     } catch (error) {
       this.handleSquareError(error, "retrieving customer by ID");
