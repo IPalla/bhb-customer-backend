@@ -61,9 +61,6 @@ export class DeliveryManagerService {
    */
   async createOrder(order: Order): Promise<void> {
     this.logger.log(`Creating order in delivery manager: ${order.id}`);
-    this.logger.log(
-      `Order: ${JSON.stringify(this.orderToDeliveryManagerOrder(order))}`,
-    );
     try {
       const response = await firstValueFrom(
         this.httpService.post<{ order: Order }>(

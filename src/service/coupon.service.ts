@@ -132,7 +132,8 @@ export class CouponService {
 
       // Update coupon properties
       if (couponDto.code !== undefined) coupon.code = couponDto.code;
-      if (couponDto.remainingUsages !== undefined) coupon.remainingUsages = couponDto.remainingUsages;
+      if (couponDto.remainingUsages !== undefined)
+        coupon.remainingUsages = couponDto.remainingUsages;
       if (couponDto.type !== undefined) coupon.type = couponDto.type;
       if (couponDto.discount !== undefined)
         coupon.discount = couponDto.discount;
@@ -174,7 +175,7 @@ export class CouponService {
 
       coupon.remainingUsages -= 1;
       await coupon.save();
-      
+
       return {
         success: true,
         message: "Coupon used successfully",

@@ -13,7 +13,6 @@ import { Option } from "src/model/option";
 import { Customer as CustomerModel } from "src/model/customer";
 import { Modifier } from "src/model/modifier";
 import { Category } from "src/model/models";
-import { serializeWithBigInt } from "src/util/utils";
 import { Order as OrderModel } from "src/model/order";
 import { Status } from "src/model/status";
 import { CouponType } from "src/entity/coupon.entity";
@@ -183,7 +182,6 @@ export class SquareMapper {
     } as CreateOrderRequest;
   }
   private createDiscountObject(coupon: CouponDto): OrderLineItemDiscount[] {
-    console.log("Coupon", coupon);
     return [
       {
         name: coupon.code,
@@ -205,7 +203,6 @@ export class SquareMapper {
   }
 
   mapCustomer(customer: Customer): CustomerModel {
-    this.logger.debug(`Mapping customer: ${serializeWithBigInt(customer)}`);
     return {
       id: customer.id,
       firstName: customer.givenName,
@@ -224,7 +221,7 @@ export class SquareMapper {
 
   squareOrderToOrder(squareOrder: Order): OrderModel {
     this.logger.log(
-      `Mapping Square order to Order model: ${serializeWithBigInt(squareOrder)}`,
+      `Mapping Square order to Order model`,
     );
 
     const fulfillment = squareOrder?.fulfillments?.[0];
@@ -279,7 +276,9 @@ export class SquareMapper {
         ? {
             code: squareOrder.discounts?.[0]?.name,
             type: squareOrder.discounts?.[0]?.type as CouponType,
-            amount: Number(squareOrder.discounts?.[0]?.amountMoney?.amount || 0),
+            amount: Number(
+              squareOrder.discounts?.[0]?.amountMoney?.amount || 0,
+            ),
             discount: Number(squareOrder.discounts?.[0]?.percentage || 0),
           }
         : undefined,
