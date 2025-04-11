@@ -275,6 +275,14 @@ export class SquareMapper {
         createdAt: squareOrder.updatedAt,
         createdAtTs: new Date(squareOrder.updatedAt).getTime(),
       },
+      coupon: squareOrder.discounts?.[0]
+        ? {
+            code: squareOrder.discounts?.[0]?.name,
+            type: squareOrder.discounts?.[0]?.type as CouponType,
+            amount: Number(squareOrder.discounts?.[0]?.amountMoney?.amount || 0),
+            discount: Number(squareOrder.discounts?.[0]?.percentage || 0),
+          }
+        : undefined,
     };
   }
 
