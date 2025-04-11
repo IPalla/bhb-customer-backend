@@ -6,6 +6,7 @@ import {
   IsNumber,
   IsISO8601,
   IsPhoneNumber,
+  Min,
 } from "class-validator";
 import { CouponType } from "../entity/coupon.entity";
 
@@ -14,9 +15,10 @@ export class CouponDto {
   @IsOptional()
   code?: string;
 
-  @IsBoolean()
+  @IsNumber()
+  @Min(0)
   @IsOptional()
-  used?: boolean;
+  remainingUsages?: number;
 
   @IsEnum(CouponType)
   @IsOptional()

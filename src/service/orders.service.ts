@@ -6,7 +6,6 @@ import { Customer } from "src/model/customer";
 import { InjectModel } from "@nestjs/sequelize";
 import { TerminalCheckoutEntity } from "src/entity/terminal-checkout.entity";
 import { CouponService } from "./coupon.service";
-import { serializeWithBigInt } from "src/util/utils";
 import { EventEmitter2 } from "@nestjs/event-emitter";
 
 @Injectable()
@@ -31,7 +30,6 @@ export class OrdersService {
     this.logger.log(`Creating order for location: ${locationId}`);
 
     const mergedCustomer = this.mergeCustomerData(order.customer, customer);
-    this.logger.log(`Merged customer: ${JSON.stringify(mergedCustomer)}`);
     order.customer = mergedCustomer;
     order.locationId = locationId;
     if (order.coupon) {
@@ -55,10 +53,6 @@ export class OrdersService {
     }
     const squareOrderRequest =
       this.squareMapper.orderToCreateOrderRequest(order);
-    console.log(
-      "Square order request",
-      serializeWithBigInt(squareOrderRequest),
-    );
     const createdOrder =
       await this.squareService.createOrder(squareOrderRequest);
     this.logger.log(

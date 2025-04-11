@@ -7,7 +7,6 @@ import {
   Delete,
   Put,
   Logger,
-  ParseIntPipe,
   Req,
 } from "@nestjs/common";
 import { CouponService } from "../service/coupon.service";
@@ -36,7 +35,7 @@ export class CouponController {
     this.logger.log(`Creating coupon with code: ${couponDto.code}`);
     return this.couponService.create({
       ...couponDto,
-      used: false,
+      remainingUsages: couponDto.remainingUsages || 1,
       expirationDate: moment().add(6, "month").toDate().toISOString(),
     });
   }
@@ -47,28 +46,38 @@ export class CouponController {
     return this.couponService.findAll();
   }
 
-  @Get(":id")
+  @Get(":code")
   async findOne(
-    @Param("id") code: string,
+    @Param("code") code: string,
     @Req() request: RequestWithUser,
   ): Promise<CouponEntity> {
-    this.logger.log(`Fetching coupon with id: ${code}`);
+    this.logger.log(`Fetching coupon with code: ${code}`);
     const customerPhoneNumber = request.user?.customer?.phoneNumber;
     return this.couponService.findByCodeAndCustomer(code, customerPhoneNumber);
   }
 
-  @Put(":id")
+  @Put(":code")
   async update(
-    @Param("id", ParseIntPipe) id: number,
+    @Param("code") code: string,
     @Body() couponDto: CouponDto,
   ): Promise<CouponResponse> {
-    this.logger.log(`Updating coupon with id: ${id}`);
-    return this.couponService.update(id, couponDto);
+    this.logger.log(`Updating coupon with code: ${code}`);
+    return this.couponService.update(code, couponDto);
   }
 
-  @Delete(":id")
-  async remove(@Param("id", ParseIntPipe) id: number): Promise<CouponResponse> {
-    this.logger.log(`Deleting coupon with id: ${id}`);
-    return this.couponService.remove(id);
+  @Post(":code/use")
+  async useCoupon(
+    @Param("code") code: string,
+    @Req() request: RequestWithUser,
+  ): Promise<CouponResponse> {
+    this.logger.log(`Using coupon with code: ${code}`);
+    const customerPhoneNumber = request.user?.customer?.phoneNumber;
+    return this.couponService.useCoupon(code, customerPhoneNumber);
+  }
+
+  @Delete(":code")
+  async remove(@Param("code") code: string): Promise<CouponResponse> {
+    this.logger.log(`Deleting coupon with code: ${code}`);
+    return this.couponService.remove(code);
   }
 }

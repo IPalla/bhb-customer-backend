@@ -16,7 +16,6 @@ import { SquareService } from "src/service/square.service";
 import { Order } from "../model/order";
 import { Customer } from "src/model/models";
 import { RequestWithUser } from "src/guards/jwt.guard";
-import { serializeWithBigInt } from "src/util/utils";
 import { TerminalCheckoutEntity } from "src/entity/terminal-checkout.entity";
 import { EventEmitter2 } from "@nestjs/event-emitter";
 
@@ -38,9 +37,6 @@ export class OrdersController {
     @Query("saveAddressAsDefault") saveAddressAsDefault?: boolean,
   ): Promise<Order> {
     const customer: Customer = request.user?.customer;
-    this.logger.log(
-      `Creating order with items: ${JSON.stringify(createOrderDto)} for location: ${locationId}`,
-    );
     const order = await this.ordersService.createOrder(
       createOrderDto,
       customer,
@@ -67,8 +63,7 @@ export class OrdersController {
       request.user?.customer?.id,
     );
     this.logger.log(
-      "Terminal checkout created successfully:",
-      serializeWithBigInt(payment),
+      "Terminal checkout created successfully"
     );
     return;
   }
@@ -87,9 +82,7 @@ export class OrdersController {
     );
     // For local logging
     this.logger.log(
-      `Payment created: ${JSON.stringify(payment, (_, value) =>
-        typeof value === "bigint" ? value.toString() : value,
-      )}`,
+      `Payment created`,
     );
     this.eventEmitter.emit("order.created", orderId);
     // Event to create in delivery manager
