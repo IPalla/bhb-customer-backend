@@ -34,8 +34,6 @@ export class WebhookService {
         return;
       }
 
-      this.logger.log(`Square order: ${JSON.stringify(squareOrder)}`);
-
       // Map Square order to our Order model
       const order = this.squareMapper.squareOrderToOrder(squareOrder);
 

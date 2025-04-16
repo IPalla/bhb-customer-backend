@@ -220,9 +220,7 @@ export class SquareMapper {
   }
 
   squareOrderToOrder(squareOrder: Order): OrderModel {
-    this.logger.log(
-      `Mapping Square order to Order model`,
-    );
+    this.logger.log(`Mapping Square order to Order model`);
 
     const fulfillment = squareOrder?.fulfillments?.[0];
     const fulfillmentType = fulfillment?.type;
