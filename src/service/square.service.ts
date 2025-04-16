@@ -16,6 +16,7 @@ import { randomUUID } from "crypto";
 import { Customer } from "src/model/customer";
 import { countryToIsoCode } from "./mappers/square.mapper";
 import { SquareServiceError } from "../errors/square-service.error";
+import { removeUndefinedProperties } from "src/util/utils";
 
 @Injectable()
 export class SquareService {
@@ -152,22 +153,24 @@ export class SquareService {
   }
 
   async updateCustomer(customer: Customer): Promise<SquareCustomer> {
+    const customerToUpdate = {
+      givenName: customer.firstName,
+      familyName: customer.lastName,
+      emailAddress: customer.email,
+      phoneNumber: customer.phoneNumber,
+      address: customer.address && {
+        addressLine1: customer.address.address_line_1,
+        addressLine2: customer.address.address_line_2,
+        locality: customer.address.locality,
+        postalCode: customer.address.postalCode,
+        country: countryToIsoCode[customer.address.country],
+      },
+    };
+    removeUndefinedProperties(customerToUpdate);
     try {
       const { result } = await this.client.customersApi.updateCustomer(
         customer.id,
-        {
-          givenName: customer.firstName,
-          familyName: customer.lastName,
-          emailAddress: customer.email,
-          phoneNumber: customer.phoneNumber,
-          address: customer.address && {
-            addressLine1: customer.address.address_line_1,
-            addressLine2: customer.address.address_line_2,
-            locality: customer.address.locality,
-            postalCode: customer.address.postalCode,
-            country: countryToIsoCode[customer.address.country],
-          },
-        },
+        customerToUpdate,
       );
       return result.customer;
     } catch (error) {

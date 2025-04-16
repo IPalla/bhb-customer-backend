@@ -137,9 +137,12 @@ export class DeliveryManagerService {
       customer: {
         name: order.customer.firstName,
         address:
-          order.customer.address.address_line_1 +
-          " " +
-          order.customer.address.address_line_2,
+          order.customer.address?.address_line_1 &&
+          order.customer.address?.address_line_2
+            ? `${order.customer.address.address_line_1} ${order.customer.address.address_line_2}`
+            : order.customer.address?.address_line_1 ||
+              order.customer.address?.address_line_2 ||
+              "",
         phone_number: order.customer.phoneNumber,
       },
       statuses: statuses,
