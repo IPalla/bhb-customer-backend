@@ -62,10 +62,16 @@ export class OrdersController {
       deviceId,
       request.user?.customer?.id,
     );
-    this.logger.log(
-      "Terminal checkout created successfully"
-    );
+    this.logger.log("Terminal checkout created successfully");
     return;
+  }
+
+  @Post(":orderId/event")
+  async createEvent(@Param("orderId") orderId: string): Promise<any> {
+    this.logger.log(`Creating event for order ${orderId}`);
+    this.eventEmitter.emit("order.created", orderId);
+    this.logger.log("Event created successfully");
+    return event;
   }
 
   @Post(":orderId/payment")
@@ -81,9 +87,7 @@ export class OrdersController {
       orderId,
     );
     // For local logging
-    this.logger.log(
-      `Payment created`,
-    );
+    this.logger.log(`Payment created`);
     this.eventEmitter.emit("order.created", orderId);
     // Event to create in delivery manager
     this.logger.log("Payment created successfully");

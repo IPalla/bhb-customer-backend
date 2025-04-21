@@ -50,7 +50,7 @@ export class SquareWebhookController {
     ) {
       this.logger.log(`Received order updated event.`);
       // Delegate to the webhook service
-      // await this.webhookService.handleOrderUpdatedWebhook(event);
+      this.webhookService.handleOrderPreparedWebhook(event);
     } else if (
       event.type === "order.updated" &&
       event?.data?.object?.order_updated?.state === "OPEN"

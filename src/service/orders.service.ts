@@ -7,6 +7,7 @@ import { InjectModel } from "@nestjs/sequelize";
 import { TerminalCheckoutEntity } from "src/entity/terminal-checkout.entity";
 import { CouponService } from "./coupon.service";
 import { EventEmitter2 } from "@nestjs/event-emitter";
+import { removeUndefinedProperties } from "src/util/utils";
 
 @Injectable()
 export class OrdersService {
@@ -204,8 +205,6 @@ export class OrdersService {
     existingCustomer: Customer | null,
   ): Customer {
     this.logger.log(`Merging customer data for order: ${orderCustomer.id}`);
-    this.logger.log(`Existing customer: ${existingCustomer}`);
-    this.logger.log(`Order customer: ${orderCustomer}`);
     return {
       phoneNumber: existingCustomer?.phoneNumber,
       id: existingCustomer?.id,
@@ -242,12 +241,16 @@ export class OrdersService {
 
     try {
       const customerToUpdate = {
-        ...customer,
+        id: customer.id,
+        firstName: orderCustomer?.firstName || customer?.firstName,
+        lastName: orderCustomer?.lastName || customer?.lastName,
+        email: orderCustomer?.email || customer?.email,
+        phoneNumber: orderCustomer?.phoneNumber || customer?.phoneNumber,
         address: saveAddressAsDefault
           ? orderCustomer.address
           : customer.address,
       };
-
+      removeUndefinedProperties(customerToUpdate);
       const updatedCustomer =
         await this.squareService.updateCustomer(customerToUpdate);
       this.logger.log(`Customer updated successfully: ${updatedCustomer.id}`);

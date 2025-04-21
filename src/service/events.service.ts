@@ -27,10 +27,8 @@ export class EventsService {
         this.logger.warn(`Order not found in Square: ${orderId}`);
         return;
       }
-
       // Map Square order to our Order model
       const order = this.squareMapper.squareOrderToOrder(squareOrder);
-
       // Log order details
       this.logger.log(`Order created - ID: ${order.id}`);
       this.logger.log(
