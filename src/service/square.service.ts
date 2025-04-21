@@ -95,7 +95,7 @@ export class SquareService {
         this.logger.log(
           `Delivery order detected. Updating fulfillment status for order: ${result.order.id}`,
         );
-        await this.updateDeliveryFulfillmentStatus(result.order.id);
+        //await this.updateDeliveryFulfillmentStatus(result.order.id);
       }
       return payment.result;
     } catch (error) {

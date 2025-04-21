@@ -66,6 +66,14 @@ export class OrdersController {
     return;
   }
 
+  @Post(":orderId/event")
+  async createEvent(@Param("orderId") orderId: string): Promise<any> {
+    this.logger.log(`Creating event for order ${orderId}`);
+    this.eventEmitter.emit("order.created", orderId);
+    this.logger.log("Event created successfully");
+    return event;
+  }
+
   @Post(":orderId/payment")
   async createPayment(
     @Param("orderId") orderId: string,
