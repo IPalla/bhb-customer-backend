@@ -29,7 +29,6 @@ export class EventsService {
       }
       // Map Square order to our Order model
       const order = this.squareMapper.squareOrderToOrder(squareOrder);
-      console.log(JSON.stringify(order));
       // Log order details
       this.logger.log(`Order created - ID: ${order.id}`);
       this.logger.log(

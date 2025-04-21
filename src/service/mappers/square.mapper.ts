@@ -28,9 +28,6 @@ export class SquareMapper {
 
   productsFromCatalogObject(catalogObject: CatalogObject[]): Product[] {
     const items = catalogObject.filter((item) => item.type === "ITEM");
-    items.forEach((item) => {
-      console.log(serializeWithBigInt(item));
-    });
     const categoriesMap: Map<string, Category> = catalogObject
       .filter((item) => item.type === "CATEGORY")
       .reduce((acc, category) => {
