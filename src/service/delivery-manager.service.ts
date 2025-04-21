@@ -89,15 +89,15 @@ export class DeliveryManagerService {
    * @param status The new status to set
    * @returns The updated order
    */
-  async updateOrder(orderId: string, status: Status): Promise<Order> {
+  async updateOrder(orderId: string, status: Status.StatusEnum): Promise<Order> {
     this.logger.log(
-      `Updating order in delivery manager: ${orderId}, status: ${status.status}`,
+      `Updating order in delivery manager: ${orderId}, status: ${status}`,
     );
 
     try {
       const response = await firstValueFrom(
         this.httpService.patch<{ order: Order }>(
-          `${this.baseUrl}/orders/${orderId}`,
+          `${this.baseUrl}/orders/${orderId}/internal`,
           { status },
         ),
       );
@@ -112,7 +112,7 @@ export class DeliveryManagerService {
         {
           error,
           orderId,
-          status: status.status,
+          status: status,
         },
       );
       throw error;
@@ -136,13 +136,11 @@ export class DeliveryManagerService {
       notes: order.notes,
       customer: {
         name: order.customer.firstName,
-        address:
-          order.customer.address?.address_line_1 &&
-          order.customer.address?.address_line_2
-            ? `${order.customer.address.address_line_1} ${order.customer.address.address_line_2}`
-            : order.customer.address?.address_line_1 ||
-              order.customer.address?.address_line_2 ||
-              "",
+        address: !order.customer.address || Object.keys(order.customer.address).length === 0 
+          ? '' 
+          : order.customer.address?.address_line_1 && order.customer.address?.address_line_2
+              ? `${order.customer.address.address_line_1} ${order.customer.address.address_line_2}`
+              : order.customer.address?.address_line_1 || order.customer.address?.address_line_2 || '',
         phone_number: order.customer.phoneNumber,
       },
       statuses: statuses,
