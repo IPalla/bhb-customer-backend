@@ -119,6 +119,8 @@ export class SquareMapper {
         country: countryToIsoCode[order.customer?.address?.country],
       } : undefined,
     };
+    const deliveryInstructions = order.type === OrderModel.TypeEnum.Delivery ? ` ${recipient.phoneNumber} ${recipient.address.addressLine1} ${recipient.address.addressLine2}` : undefined;
+    const notes = `[${order.type}]${deliveryInstructions} ${order.notes}`;
     const fulfillment = {
       type: "PICKUP",
       pickupDetails:
@@ -128,8 +130,8 @@ export class SquareMapper {
                 Date.now() + SquareMapper.TEN_MINUTES_MS,
               ).toISOString(),
               scheduleType: "ASAP",
-              note: `[${order.type}] ${order.notes}`,
-            },
+              note: notes,
+        },
     };
     const serviceCharges =
       order.type === OrderModel.TypeEnum.Delivery
@@ -137,7 +139,7 @@ export class SquareMapper {
             name: "Delivery fee",
             calculationPhase: "TOTAL_PHASE",
             amountMoney: {
-              amount: BigInt(250),
+              amount: BigInt(199),
               currency: "EUR",
             },
           }
