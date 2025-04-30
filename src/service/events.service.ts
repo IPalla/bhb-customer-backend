@@ -4,6 +4,8 @@ import { SquareService } from "./square.service";
 import { SquareMapper } from "./mappers/square.mapper";
 import { DeliveryManagerService } from "./delivery-manager.service";
 import { CouponService } from "./coupon.service";
+import { Order } from "src/model/order";
+
 @Injectable()
 export class EventsService {
   private readonly logger = new Logger(EventsService.name);
@@ -29,6 +31,9 @@ export class EventsService {
       }
       // Map Square order to our Order model
       const order = this.squareMapper.squareOrderToOrder(squareOrder);
+      if (order.type !== Order.TypeEnum.Delivery) {
+        order.customer.address = null;
+      }
       // Log order details
       this.logger.log(`Order created - ID: ${order.id}`);
       this.logger.log(
