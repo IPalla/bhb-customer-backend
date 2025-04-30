@@ -9,6 +9,8 @@ import {
   Query,
   BadRequestException,
   HttpCode,
+  HttpException,
+  HttpStatus,
 } from "@nestjs/common";
 import { OrdersService } from "../service/orders.service";
 import { CreatePaymentDto } from "../dto/create-payment.dto";
@@ -18,6 +20,7 @@ import { Customer } from "src/model/models";
 import { RequestWithUser } from "src/guards/jwt.guard";
 import { TerminalCheckoutEntity } from "src/entity/terminal-checkout.entity";
 import { EventEmitter2 } from "@nestjs/event-emitter";
+import { SquareServiceError } from "src/errors/square-service.error";
 
 @Controller("bhb-customer-backend/orders")
 export class OrdersController {
@@ -82,16 +85,24 @@ export class OrdersController {
     this.logger.log(
       `Creating payment with sourceId: ${createPaymentDto.sourceId} for order ${orderId}`,
     );
-    const payment = await this.squareService.createPayment(
-      createPaymentDto.sourceId,
-      orderId,
-    );
-    // For local logging
-    this.logger.log(`Payment created`);
-    this.eventEmitter.emit("order.created", orderId);
-    // Event to create in delivery manager
-    this.logger.log("Payment created successfully");
-    return payment;
+    try {
+      const payment = await this.squareService.createPayment(
+        createPaymentDto.sourceId,
+        orderId,
+      );
+      // For local logging
+      this.logger.log(`Payment created`);
+      this.eventEmitter.emit("order.created", orderId);
+      // Event to create in delivery manager
+      this.logger.log("Payment created successfully");
+      return payment;
+    } catch (error) {
+      if (error instanceof SquareServiceError) {
+        // Just rethrow the SquareServiceError - our filter will handle it
+        throw error;
+      }
+      throw error;
+    }
   }
 
   @Get(":orderId/payment-checkout")

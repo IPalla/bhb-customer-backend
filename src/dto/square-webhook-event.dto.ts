@@ -41,6 +41,25 @@ export interface SquareWebhookEventDto {
         updated_at?: string;
         version?: number;
       };
+      payment?: {
+        id?: string;
+        order_id?: string;
+        status?: string;
+        amount_money?: {
+          amount?: number;
+          currency?: string;
+        };
+        total_money?: {
+          amount?: number;
+          currency?: string;
+        };
+        created_at?: string;
+        updated_at?: string;
+        location_id?: string;
+        receipt_number?: string;
+        source_type?: string;
+        version?: number;
+      };
     };
   };
 }
