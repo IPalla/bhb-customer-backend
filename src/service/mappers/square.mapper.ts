@@ -233,7 +233,7 @@ export class SquareMapper {
                 fulfillment.pickupDetails?.recipient?.phoneNumber,
               address: fulfillment.pickupDetails?.recipient?.address,
             })
-          : undefined,
+          : {},
       products: squareOrder.lineItems?.map((item) => ({
         catalogId: item.catalogObjectId,
         quantity: Number(item.quantity),
@@ -273,6 +273,8 @@ export class SquareMapper {
   ): OrderModel.TypeEnum {
     this.logger.log(`Mapping fulfillment type to order type: ${fulfillmentType}, notes: ${order.fulfillments?.[0]?.deliveryDetails?.note}`);
     switch (fulfillmentType) {
+      case undefined:
+        return OrderModel.TypeEnum.Dinein;
       case "DELIVERY":
         return OrderModel.TypeEnum.Delivery;
       case "PICKUP":
