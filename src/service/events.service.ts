@@ -6,6 +6,8 @@ import { DeliveryManagerService } from "./delivery-manager.service";
 import { CouponService } from "./coupon.service";
 import { Order } from "src/model/order";
 
+const UNSUPPORTED_PLATFORMS = ['just eat', 'glovo', 'uber eats'];
+
 @Injectable()
 export class EventsService {
   private readonly logger = new Logger(EventsService.name);
@@ -24,11 +26,17 @@ export class EventsService {
     try {
       // Get order details from Square
       const squareOrder = await this.squareService.getOrder(orderId);
-
       if (!squareOrder) {
         this.logger.warn(`Order not found in Square: ${orderId}`);
         return;
       }
+      
+      const sourceName = squareOrder.source.name?.toLowerCase() || '';
+      if (UNSUPPORTED_PLATFORMS.includes(sourceName)) {
+        this.logger.warn(`Order is from unsupported platform (${squareOrder.source.name}): ${orderId}`);
+        return;
+      }
+      
       // Map Square order to our Order model
       const order = this.squareMapper.squareOrderToOrder(squareOrder);
 
@@ -82,3 +90,4 @@ export class EventsService {
     }
   }
 }
+
