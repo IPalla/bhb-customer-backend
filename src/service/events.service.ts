@@ -31,11 +31,16 @@ export class EventsService {
       }
       // Map Square order to our Order model
       const order = this.squareMapper.squareOrderToOrder(squareOrder);
-      if (order.type !== Order.TypeEnum.Delivery) {
-        order.customer.address = null;
+
+      // Ensure customer object exists and details are not undefined
+      if (!order.customer) {
+        order.customer = {};
       }
-      // Log order details
-      this.logger.log(`Order created - ID: ${order.id}`);
+      order.customer.firstName = order.customer.firstName || "Invitado";
+      order.customer.lastName = order.customer.lastName || "";
+      order.customer.email = order.customer.email || "";
+      order.customer.phoneNumber = order.customer.phoneNumber || "";
+      
       this.logger.log(
         `Order details - Type: ${order.type}, Amount: ${order.amount}, Scheduled: ${order.scheduled}`,
       );
@@ -73,6 +78,7 @@ export class EventsService {
           orderId,
         },
       );
+      throw error;
     }
   }
 }
