@@ -110,28 +110,31 @@ export class SquareMapper {
       displayName: order.customer?.firstName + " " + order.customer?.lastName,
       emailAddress: order.customer?.email,
       phoneNumber: order.customer?.phoneNumber,
-      address: 
-        order.customer?.address ? {
-        addressLine1: order.customer?.address?.address_line_1,
-        addressLine2: order.customer?.address?.address_line_2,
-        locality: order.customer?.address?.locality,
-        postalCode: order.customer?.address?.postalCode,
-        country: countryToIsoCode[order.customer?.address?.country],
-      } : undefined,
+      address: order.customer?.address
+        ? {
+            addressLine1: order.customer?.address?.address_line_1,
+            addressLine2: order.customer?.address?.address_line_2,
+            locality: order.customer?.address?.locality,
+            postalCode: order.customer?.address?.postalCode,
+            country: countryToIsoCode[order.customer?.address?.country],
+          }
+        : undefined,
     };
-    const deliveryInstructions = order.type === OrderModel.TypeEnum.Delivery ? ` ${recipient.phoneNumber} ${recipient.address.addressLine1} ${recipient.address.addressLine2}` : undefined;
+    const deliveryInstructions =
+      order.type === OrderModel.TypeEnum.Delivery
+        ? ` ${recipient.phoneNumber} ${recipient.address.addressLine1} ${recipient.address.addressLine2}`
+        : undefined;
     const notes = `[${order.type}]${deliveryInstructions} ${order.notes}`;
     const fulfillment = {
       type: "PICKUP",
-      pickupDetails:
-        {
-              recipient,
-              pickupAt: new Date(
-                Date.now() + SquareMapper.TEN_MINUTES_MS,
-              ).toISOString(),
-              scheduleType: "ASAP",
-              note: notes,
-        },
+      pickupDetails: {
+        recipient,
+        pickupAt: new Date(
+          Date.now() + SquareMapper.TEN_MINUTES_MS,
+        ).toISOString(),
+        scheduleType: "ASAP",
+        note: notes,
+      },
     };
     const serviceCharges =
       order.type === OrderModel.TypeEnum.Delivery
@@ -172,10 +175,14 @@ export class SquareMapper {
       {
         name: coupon.code,
         type: coupon.type,
-        ...(coupon.type === CouponType.FIXED_AMOUNT || coupon.type === CouponType.FREE_SHIPPING
+        ...(coupon.type === CouponType.FIXED_AMOUNT ||
+        coupon.type === CouponType.FREE_SHIPPING
           ? {
               amountMoney: {
-                amount: coupon.type === CouponType.FREE_SHIPPING ? BigInt(1.99) : BigInt(coupon.amount),
+                amount:
+                  coupon.type === CouponType.FREE_SHIPPING
+                    ? BigInt(1.99)
+                    : BigInt(coupon.amount),
                 currency: "EUR",
               },
             }
@@ -273,7 +280,9 @@ export class SquareMapper {
     fulfillmentType: string,
     order: Order,
   ): OrderModel.TypeEnum {
-    this.logger.log(`Mapping fulfillment type to order type: ${fulfillmentType}, notes: ${order.fulfillments?.[0]?.deliveryDetails?.note}`);
+    this.logger.log(
+      `Mapping fulfillment type to order type: ${fulfillmentType}, notes: ${order.fulfillments?.[0]?.deliveryDetails?.note}`,
+    );
     switch (fulfillmentType) {
       case undefined:
         return OrderModel.TypeEnum.Dinein;
@@ -283,9 +292,10 @@ export class SquareMapper {
         const isDineIn = order.fulfillments?.[0]?.pickupDetails?.note?.includes(
           OrderModel.TypeEnum.Dinein,
         );
-        const isDelivery = order.fulfillments?.[0]?.pickupDetails?.note?.includes(
-          OrderModel.TypeEnum.Delivery,
-        );
+        const isDelivery =
+          order.fulfillments?.[0]?.pickupDetails?.note?.includes(
+            OrderModel.TypeEnum.Delivery,
+          );
         return isDineIn
           ? OrderModel.TypeEnum.Dinein
           : isDelivery

@@ -13,9 +13,11 @@ export class WebhookService {
     private readonly squareService: SquareService,
     private readonly squareMapper: SquareMapper,
     private readonly deliveryManagerService: DeliveryManagerService,
-  ) { }
+  ) {}
 
-  async handleOrderPreparedWebhook(event: SquareWebhookEventDto): Promise<void> {
+  async handleOrderPreparedWebhook(
+    event: SquareWebhookEventDto,
+  ): Promise<void> {
     const orderId = event.data?.object?.order?.id || event.data?.id;
     if (!orderId) {
       this.logger.warn("Order ID not found in webhook event");
@@ -38,10 +40,13 @@ export class WebhookService {
       // Log order details
       this.logger.log(`Order updated - ID: ${orderId}`);
 
-        await this.deliveryManagerService.updateOrder(orderId, Status.StatusEnum.READY);
-        this.logger.log(
-          `Order status updated successfully in delivery manager from webhook: ${orderId}`,
-        );
+      await this.deliveryManagerService.updateOrder(
+        orderId,
+        Status.StatusEnum.READY,
+      );
+      this.logger.log(
+        `Order status updated successfully in delivery manager from webhook: ${orderId}`,
+      );
     } catch (error) {
       this.logger.error(
         `Failed to update order status in delivery manager from webhook: ${error.message}`,
