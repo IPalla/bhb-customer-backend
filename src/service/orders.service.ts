@@ -39,7 +39,10 @@ export class OrdersService {
         mergedCustomer.phoneNumber,
       );
       // Validate expiration date
-      if (coupon.expirationDate < new Date()) {
+      if (
+        coupon.expirationDate < new Date() ||
+        coupon.remainingUsages <= 0
+      ) {
         this.logger.warn(`Coupon expired: ${order.coupon.code}`);
         throw new Error("Coupon expired");
       } else {

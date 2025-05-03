@@ -99,10 +99,15 @@ export class CouponService {
   ): Promise<CouponEntity> {
     try {
       const coupon = await this.couponModel.findOne({
-        where: { code, customerPhoneNumber },
+        where: { code },
       });
 
-      if (!coupon) {
+      if (
+        !coupon ||
+        (coupon.customerPhoneNumber &&
+          coupon.customerPhoneNumber !== customerPhoneNumber) ||
+        coupon.remainingUsages <= 0
+      ) {
         throw new NotFoundException(
           `Coupon with code ${code} and customer phone number ${customerPhoneNumber} not found`,
         );

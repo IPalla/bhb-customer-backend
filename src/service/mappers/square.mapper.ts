@@ -172,10 +172,10 @@ export class SquareMapper {
       {
         name: coupon.code,
         type: coupon.type,
-        ...(coupon.type === CouponType.FIXED_AMOUNT
+        ...(coupon.type === CouponType.FIXED_AMOUNT || coupon.type === CouponType.FREE_SHIPPING
           ? {
               amountMoney: {
-                amount: BigInt(coupon.amount),
+                amount: coupon.type === CouponType.FREE_SHIPPING ? BigInt(1.99) : BigInt(coupon.amount),
                 currency: "EUR",
               },
             }
