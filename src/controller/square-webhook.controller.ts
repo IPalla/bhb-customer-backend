@@ -59,8 +59,13 @@ export class SquareWebhookController {
     ) {
       this.logger.log(`Received order created event.`);
       // Delegate to the webhook service
-    } else if (event.type === "payment.created" && event?.data?.object?.payment?.status === "APPROVED") {
-      this.logger.log(`Received payment created event with ID: ${event.event_id}`);
+    } else if (
+      event.type === "payment.created" &&
+      event?.data?.object?.payment?.status === "APPROVED"
+    ) {
+      this.logger.log(
+        `Received payment created event with ID: ${event.event_id}`,
+      );
       try {
         const orderId = event?.data?.object?.payment?.order_id;
         if (orderId) {

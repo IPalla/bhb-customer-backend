@@ -12,7 +12,7 @@ async function bootstrap() {
   });
   app.useGlobalFilters(
     new HttpExceptionFilter(),
-    new SquareServiceErrorFilter()
+    new SquareServiceErrorFilter(),
   );
   app.useGlobalPipes(
     new ValidationPipe({

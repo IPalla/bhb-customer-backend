@@ -9,25 +9,32 @@ export class SquareServiceError extends Error {
   }
 
   getErrorInfo() {
-    console.log('Square API Error Details:', JSON.stringify(this.details, null, 2));
-    
-    if (this.details && Array.isArray(this.details) && this.details.length > 0) {
+    console.log(
+      "Square API Error Details:",
+      JSON.stringify(this.details, null, 2),
+    );
+
+    if (
+      this.details &&
+      Array.isArray(this.details) &&
+      this.details.length > 0
+    ) {
       const firstError = this.details[0];
-      console.log('First Error:', JSON.stringify(firstError, null, 2));
-      
+      console.log("First Error:", JSON.stringify(firstError, null, 2));
+
       if (firstError) {
         return {
-          code: firstError.code || 'UNKNOWN_ERROR',
-          detail: firstError.detail || 'Unknown error occurred',
-          category: firstError.category || 'UNKNOWN_CATEGORY'
+          code: firstError.code || "UNKNOWN_ERROR",
+          detail: firstError.detail || "Unknown error occurred",
+          category: firstError.category || "UNKNOWN_CATEGORY",
         };
       }
     }
-    
+
     return {
-      code: 'UNKNOWN_ERROR',
+      code: "UNKNOWN_ERROR",
       detail: this.message,
-      category: 'UNKNOWN_CATEGORY'
+      category: "UNKNOWN_CATEGORY",
     };
   }
 }
