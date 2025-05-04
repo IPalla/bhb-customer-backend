@@ -10,6 +10,7 @@ import {
 export enum CouponType {
   FIXED_PERCENTAGE = "FIXED_PERCENTAGE",
   FIXED_AMOUNT = "FIXED_AMOUNT",
+  FREE_SHIPPING = "FREE_SHIPPING",
 }
 
 @Table({ tableName: "coupons" })
