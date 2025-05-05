@@ -1,8 +1,10 @@
 import { Controller, Get, Logger } from "@nestjs/common";
 import { SquareService } from "../service/square.service";
 import { Device } from "../model/device";
+import { Public } from "src/decorators/public.decorator";
 
 @Controller("bhb-customer-backend/devices")
+@Public()
 export class DevicesController {
   private readonly logger = new Logger(DevicesController.name);
   constructor(private readonly squareService: SquareService) {}
