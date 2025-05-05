@@ -2,3 +2,7 @@
 
 - Created API file
 - Created Microservice Scaffolding
+
+### 1.0.1
+
+- Created devices endpoint
