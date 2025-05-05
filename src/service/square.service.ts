@@ -11,6 +11,7 @@ import {
   TerminalCheckout,
   Order,
   Payment,
+  Device,
 } from "square";
 import { randomUUID } from "crypto";
 import { Customer } from "src/model/customer";
@@ -238,6 +239,16 @@ export class SquareService {
       return result.order;
     } catch (error) {
       this.handleSquareError(error, "retrieving order");
+    }
+  }
+
+  async getDevices(): Promise<Device[]> {
+    this.logger.log("Retrieving devices from Square");
+    try {
+      const { result } = await this.client.devicesApi.listDevices();
+      return result.devices;
+    } catch (error) {
+      this.handleSquareError(error, "retrieving devices");
     }
   }
 
