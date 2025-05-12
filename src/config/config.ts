@@ -31,4 +31,8 @@ export default () => ({
   close: {
     apiKey: process.env.CLOSE_API_KEY,
   },
+  whatsapp: {
+    token: process.env.WHATSAPP_TOKEN,
+    origin: process.env.WHATSAPP_ORIGIN,
+  },
 });
