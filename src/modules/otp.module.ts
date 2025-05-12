@@ -7,6 +7,8 @@ import { OtpEntity } from "../entity/otp.entity";
 import { TwilioService } from "../service/twilio.service";
 import { CustomersService } from "src/service/customers.service";
 import { SquareModule } from "./square.module";
+import { WhatsAppService } from "src/service/whatsapp.service";
+import { HttpModule } from "@nestjs/axios";
 
 @Module({
   imports: [
@@ -18,8 +20,9 @@ import { SquareModule } from "./square.module";
       signOptions: { expiresIn: "24h" },
     }),
     SquareModule,
+    HttpModule,
   ],
   controllers: [OtpController],
-  providers: [OtpService, TwilioService, CustomersService],
+  providers: [OtpService, TwilioService, CustomersService, WhatsAppService],
 })
 export class OtpModule {}

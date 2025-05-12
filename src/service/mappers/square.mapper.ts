@@ -174,7 +174,10 @@ export class SquareMapper {
     return [
       {
         name: coupon.code,
-        type: coupon.type === CouponType.FREE_SHIPPING ? CouponType.FIXED_AMOUNT : coupon.type,
+        type:
+          coupon.type === CouponType.FREE_SHIPPING
+            ? CouponType.FIXED_AMOUNT
+            : coupon.type,
         ...(coupon.type === CouponType.FIXED_AMOUNT ||
         coupon.type === CouponType.FREE_SHIPPING
           ? {

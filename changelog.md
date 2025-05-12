@@ -6,3 +6,8 @@
 ### 1.0.1
 
 - Created devices endpoint
+
+### 1.0.2
+
+- Added whatsapp for OTP
+
