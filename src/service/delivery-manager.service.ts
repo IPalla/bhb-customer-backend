@@ -129,7 +129,6 @@ export class DeliveryManagerService {
       createdAtTs: Date.now(),
     };
     const statuses = [status];
-    console.log(order.customer);
     return {
       id: order.id,
       externalId: order.id,
