@@ -14,3 +14,7 @@
 ### 1.0.3
 
 - Fix removed undefined in notes
+
+### 1.0.4
+
+- Fix POS orders

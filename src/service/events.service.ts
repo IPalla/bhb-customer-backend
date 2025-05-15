@@ -22,34 +22,44 @@ export class EventsService {
   @OnEvent("order.created")
   async handleOrderCreatedWebhook(orderId: string): Promise<void> {
     this.logger.log(`Handling order created event for Order ID: ${orderId}`);
-
+    // We should wait one second to ensure the order is created in Square
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     try {
       // Get order details from Square
       const squareOrder = await this.squareService.getOrder(orderId);
+
+      const sourceName = squareOrder.source.name?.toLowerCase() || "";
       if (!squareOrder) {
         this.logger.warn(`Order not found in Square: ${orderId}`);
         return;
       }
+      if (sourceName !== "") {
+        this.logger.warn(`Order is not from POS, rejecting order`);
+        return;
+      }
 
-      const sourceName = squareOrder.source.name?.toLowerCase() || "";
       if (UNSUPPORTED_PLATFORMS.includes(sourceName)) {
         this.logger.warn(
-          `Order is from unsupported platform (${squareOrder.source.name}): ${orderId}`,
+          `Order is not from POS (${squareOrder.source.name}): ${orderId}`,
         );
         return;
       }
 
       // Map Square order to our Order model
       const order = this.squareMapper.squareOrderToOrder(squareOrder);
-
-      // Ensure customer object exists and details are not undefined
-      if (!order.customer) {
-        order.customer = {};
+      const customerId = squareOrder.customerId;
+      if (!customerId) {
+        order.customer = {
+          firstName: "Invitado",
+          lastName: "",
+          email: "",
+          phoneNumber: "",
+        };
+      } else {
+        const squareCustomer =
+          await this.squareService.getCustomerById(customerId);
+        order.customer = squareCustomer;
       }
-      order.customer.firstName = order.customer.firstName || "Invitado";
-      order.customer.lastName = order.customer.lastName || "";
-      order.customer.email = order.customer.email || "";
-      order.customer.phoneNumber = order.customer.phoneNumber || "";
 
       this.logger.log(
         `Order details - Type: ${order.type}, Amount: ${order.amount}, Scheduled: ${order.scheduled}`,
