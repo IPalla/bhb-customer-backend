@@ -4,7 +4,6 @@ import { SquareService } from "./square.service";
 import { SquareMapper } from "./mappers/square.mapper";
 import { DeliveryManagerService } from "./delivery-manager.service";
 import { CouponService } from "./coupon.service";
-import { Order } from "src/model/order";
 
 const UNSUPPORTED_PLATFORMS = ["just eat", "glovo", "uber eats"];
 
@@ -22,8 +21,8 @@ export class EventsService {
   @OnEvent("order.created")
   async handleOrderCreatedWebhook(orderId: string): Promise<void> {
     this.logger.log(`Handling order created event for Order ID: ${orderId}`);
-    // We should wait one second to ensure the order is created in Square
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // We should wait five seconds to ensure the order is created in Square
+    await new Promise((resolve) => setTimeout(resolve, 5000));
     try {
       // Get order details from Square
       const squareOrder = await this.squareService.getOrder(orderId);
@@ -46,7 +45,7 @@ export class EventsService {
       }
 
       // Map Square order to our Order model
-      const order = this.squareMapper.squareOrderToOrder(squareOrder);
+      var order = this.squareMapper.squareOrderToOrder(squareOrder);
       const customerId = squareOrder.customerId;
       if (!customerId) {
         order.customer = {
@@ -56,11 +55,16 @@ export class EventsService {
           phoneNumber: "",
         };
       } else {
+        this.logger.log(`Getting customer details for ${customerId}`);
         const squareCustomer =
           await this.squareService.getCustomerById(customerId);
-        order.customer = squareCustomer;
+        order.customer = {
+          firstName: `${squareCustomer?.givenName || ""} ${squareCustomer?.familyName || ""}`,
+          email: squareCustomer?.emailAddress,
+          phoneNumber: squareCustomer?.phoneNumber,
+          address: squareCustomer?.address,
+        };
       }
-
       this.logger.log(
         `Order details - Type: ${order.type}, Amount: ${order.amount}, Scheduled: ${order.scheduled}`,
       );

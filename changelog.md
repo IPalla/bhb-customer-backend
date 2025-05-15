@@ -18,3 +18,8 @@
 ### 1.0.4
 
 - Fix POS orders
+
+
+### 1.0.5
+
+- Fix POS orders now receive whatsapps and set customer name
