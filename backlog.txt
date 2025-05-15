@@ -1,0 +1,46 @@
+Cosas que faltan:
+
+- Integración square y KDS con nuestros sistemas (in progress)
+- Añadir soporte para cupones de descuento
+- Añadir opción de poder cerrar página web (no lo estaba haciendo pensando en nuevo local)
+- Capacidad para poder diferenciar bien dine in y pick up (nuevo local)
+- Modificar pantalla de pedidos para diferenciar por nombre
+- Revisar guardado automático de nombre, dirección y teléfono en el sistema
+- Modificar ID de los pedidos para poder diferenciarlos en el sistema de Square
+- Comprobar las direcciones de los pedidos para solo tres cantos
+- Arreglar direcciones 
+- Incluir delivery price en el pedido
+Pain points:
+- Problema de duplicar los pedidos en el sistema de Square
+- Problema de como diferenciar los pedidos de pick up y dine in en el sistema de Square (In progress)
+- Impresora de tickets: no muestra ID del pedido, 
+
+
+- Poner solo nombre  en el checkout del kiosko
+- Mirar API de llamadas
+
+
+
+Loyalty:
+
+- Pedidos en el kiosko que no den puntos, así el meter el móvil no influye (?)
+- Pedidos dine in o pick up dan más puntos
+- 
+
+Tiers, benefits:
+- Tiers dan acceso a: acceso previo a ciertas colecciones, por ejemplo, una semana antes. Preventa de los eventos.
+- Tener una sección de merch donde sólo aparezcan productos para ciertos tiers. Estos productos también se pueden redeem.
+
+
+Redeem options:
+- Merchan
+- Hamburguesa gratis
+- Entrada a un evento si hay un evento activo
+- Envío gratis
+- Shake gratis
+- Salsas gratis
+
+
+Meter opciones para ganar puntos:
+- Seguir en youtube
+- Seguir en instagram

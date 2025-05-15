@@ -23,19 +23,14 @@ export class LocationEntity extends Model {
     allowNull: false,
     defaultValue: false,
   })
-  is_closed: boolean;
+  high_demand: boolean;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
+    primaryKey: true,
   })
   square_location_id: string;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  square_terminal_id: string;
 
   @HasMany(() => OpeningHoursEntity)
   opening_hours: OpeningHoursEntity[];

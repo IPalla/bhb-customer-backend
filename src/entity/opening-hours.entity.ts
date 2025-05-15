@@ -45,10 +45,14 @@ export class OpeningHoursEntity extends Model {
 
   @ForeignKey(() => LocationEntity)
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.STRING,
     allowNull: false,
+    references: {
+      model: LocationEntity,
+      key: "square_location_id",
+    },
   })
-  locationId: number;
+  square_location_id: string;
 
   @BelongsTo(() => LocationEntity)
   location: LocationEntity;

@@ -17,5 +17,19 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "out",
+      "**/*.spec.ts",
+      "**/*.test.ts",
+      "some/huge/folder",
+    "some/legacy/files/**/*.ts"
+  ],
+  "include": [
+    "src/**/*"
+  ]
 }
+

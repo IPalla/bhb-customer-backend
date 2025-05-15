@@ -18,6 +18,7 @@ export class OtpEntity extends Model {
   @Column({
     type: DataType.STRING,
     allowNull: false,
+    field: "phone_number",
   })
   phoneNumber: string;
 
@@ -30,6 +31,7 @@ export class OtpEntity extends Model {
   @Column({
     type: DataType.DATE,
     allowNull: false,
+    field: "expiry_date",
   })
   expiryDate: Date;
 

@@ -1,4 +1,9 @@
-import { Injectable, Logger, UnauthorizedException } from "@nestjs/common";
+import {
+  ConflictException,
+  Injectable,
+  Logger,
+  UnauthorizedException,
+} from "@nestjs/common";
 import { OtpEntity } from "../entity/otp.entity";
 import { InjectModel } from "@nestjs/sequelize";
 import { TwilioService } from "./twilio.service";
@@ -6,11 +11,19 @@ import { JwtService } from "@nestjs/jwt";
 import { Op } from "sequelize";
 import { CustomersService } from "./customers.service";
 import { ConfigService } from "@nestjs/config";
+import { WhatsAppService } from "./whatsapp.service";
+
+interface OtpResponse {
+  success: boolean;
+  message?: string;
+}
 
 @Injectable()
 export class OtpService {
   private readonly logger = new Logger(OtpService.name);
   private readonly guestApiKey: string;
+  private readonly OTP_EXPIRY_MINUTES = 1;
+  private readonly OTP_LENGTH = 6;
 
   constructor(
     @InjectModel(OtpEntity)
@@ -19,34 +32,73 @@ export class OtpService {
     private readonly jwtService: JwtService,
     private readonly customersService: CustomersService,
     private readonly configService: ConfigService,
+    private readonly whatsappService: WhatsAppService,
   ) {
-    this.guestApiKey = this.configService.get('guestApiKey');
+    this.guestApiKey = this.configService.get("guestApiKey");
   }
 
-  async generateAndSendOtp(phoneNumber: string): Promise<any> {
-    const otp = this.generateOtpCode();
-    const expiryDate = new Date(Date.now() + 1 * 60 * 1000); // 1 minutes from now
-    await this.otpModel.create({
-      phoneNumber,
-      code: otp,
-      expiryDate,
-    });
-    this.logger.log(`Would send SMS to ${phoneNumber} with code: ${otp}`);
-    this.twilioService.sendOtp(phoneNumber, otp);
-    this.logger.log(`OTP generated for ${phoneNumber}: ${otp}`);
-    return { otp };
+  async generateAndSendOtp(phoneNumber: string): Promise<OtpResponse> {
+    try {
+      const otp = this.generateOtpCode();
+      const expiryDate = this.calculateExpiryDate();
+
+      await this.otpModel.create({
+        phoneNumber,
+        code: otp,
+        expiryDate,
+      });
+
+      //await this.twilioService.sendOtp(phoneNumber, otp);
+      await this.whatsappService.sendOtp(otp, phoneNumber);
+      this.logger.log(`OTP generated and sent for ${phoneNumber} - ${otp}`);
+      return {
+        success: true,
+        message: "OTP sent successfully",
+      };
+    } catch (error) {
+      this.logger.error(
+        `Failed to generate/send OTP for ${phoneNumber}:`,
+        error,
+      );
+      return {
+        success: false,
+        message: "Failed to send OTP",
+      };
+    }
   }
 
   private generateOtpCode(): string {
-    return "123456";
-    //return Math.floor(100000 + Math.random() * 900000).toString();
+    if (process.env.NODE_ENV === "development") {
+      return "123456";
+    }
+    return Math.floor(100000 + Math.random() * 900000).toString();
+  }
+
+  private calculateExpiryDate(): Date {
+    return new Date(Date.now() + this.OTP_EXPIRY_MINUTES * 60 * 1000);
   }
 
   async validateOtp(phoneNumber: string, code: string): Promise<string> {
-    this.logger.log(
-      `Validating OTP for phone number: ${phoneNumber} with code: ${code}`,
-    );
-    const otp = await this.otpModel.findOne({
+    this.logger.log(`Validating OTP for phone number: ${phoneNumber}`);
+
+    const otp = await this.findValidOtp(phoneNumber, code);
+
+    if (!otp) {
+      throw new ConflictException("Invalid or expired OTP");
+    }
+
+    await otp.destroy();
+
+    const customer =
+      await this.customersService.findOrCreateByPhone(phoneNumber);
+    return this.jwtService.sign({ customer }, { expiresIn: "180d" });
+  }
+
+  private async findValidOtp(
+    phoneNumber: string,
+    code: string,
+  ): Promise<OtpEntity | null> {
+    return this.otpModel.findOne({
       where: {
         phoneNumber,
         code,
@@ -55,16 +107,6 @@ export class OtpService {
         },
       },
     });
-
-    if (!otp) {
-      throw new UnauthorizedException("Invalid or expired OTP");
-    }
-    // Delete the used OTP
-    await otp.destroy();
-    const customer =
-      await this.customersService.findOrCreateByPhone(phoneNumber);
-    // Generate JWT
-    return this.jwtService.sign({ customer });
   }
 
   async generateGuestJwt(apiKey: string): Promise<string> {
@@ -72,7 +114,7 @@ export class OtpService {
     if (apiKey !== this.guestApiKey) {
       throw new UnauthorizedException("Invalid API key");
     }
-    const expiresIn = '30m';
+    const expiresIn = "30m";
     return this.jwtService.sign({ customer: null }, { expiresIn });
   }
 }

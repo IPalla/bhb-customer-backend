@@ -30,6 +30,7 @@ export class CategoryEntity extends Model {
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: true,
+    field: "is_active",
   })
   isActive: boolean;
 
@@ -37,5 +38,5 @@ export class CategoryEntity extends Model {
     type: DataType.STRING,
     allowNull: false,
   })
-  locationId: string;
+  square_location_id: string;
 }
