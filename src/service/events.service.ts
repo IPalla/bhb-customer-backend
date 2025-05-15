@@ -59,7 +59,10 @@ export class EventsService {
         const squareCustomer =
           await this.squareService.getCustomerById(customerId);
         order.customer = {
-          firstName: `${squareCustomer?.givenName || ""} ${squareCustomer?.familyName || ""}`,
+          firstName:
+            squareCustomer?.givenName || squareCustomer?.familyName
+              ? `${squareCustomer?.givenName || ""} ${squareCustomer?.familyName || ""}`.trim()
+              : squareOrder?.ticketName,
           email: squareCustomer?.emailAddress,
           phoneNumber: squareCustomer?.phoneNumber,
           address: squareCustomer?.address,
