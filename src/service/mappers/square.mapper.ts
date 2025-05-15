@@ -123,7 +123,7 @@ export class SquareMapper {
     const deliveryInstructions =
       order.type === OrderModel.TypeEnum.Delivery
         ? ` ${recipient.phoneNumber} ${recipient.address.addressLine1} ${recipient.address.addressLine2}`
-        : undefined;
+        : "";
     const notes = `[${order.type}]${deliveryInstructions} ${order.notes}`;
     const fulfillment = {
       type: "PICKUP",

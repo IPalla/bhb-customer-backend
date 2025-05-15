@@ -11,3 +11,6 @@
 
 - Added whatsapp for OTP
 
+### 1.0.3
+
+- Fix removed undefined in notes
