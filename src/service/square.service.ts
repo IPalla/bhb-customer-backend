@@ -132,7 +132,9 @@ export class SquareService {
     }
   }
 
-  async getCustomerById(customerId: string): Promise<Customer | undefined> {
+  async getCustomerById(
+    customerId: string,
+  ): Promise<SquareCustomer | undefined> {
     try {
       const { result } =
         await this.client.customersApi.retrieveCustomer(customerId);

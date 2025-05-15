@@ -4,7 +4,8 @@ import { SquareService } from "./square.service";
 import { SquareMapper } from "./mappers/square.mapper";
 import { DeliveryManagerService } from "./delivery-manager.service";
 import { CouponService } from "./coupon.service";
-import { Order } from "src/model/order";
+import { Customer } from "src/model/customer";
+import { Order } from "square";
 
 const UNSUPPORTED_PLATFORMS = ["just eat", "glovo", "uber eats"];
 
@@ -22,8 +23,8 @@ export class EventsService {
   @OnEvent("order.created")
   async handleOrderCreatedWebhook(orderId: string): Promise<void> {
     this.logger.log(`Handling order created event for Order ID: ${orderId}`);
-    // We should wait one second to ensure the order is created in Square
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // We should wait two seconds to ensure the order is created in Square
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     try {
       // Get order details from Square
       const squareOrder = await this.squareService.getOrder(orderId);
@@ -33,10 +34,6 @@ export class EventsService {
         this.logger.warn(`Order not found in Square: ${orderId}`);
         return;
       }
-      if (sourceName !== "") {
-        this.logger.warn(`Order is not from POS, rejecting order`);
-        return;
-      }
 
       if (UNSUPPORTED_PLATFORMS.includes(sourceName)) {
         this.logger.warn(
@@ -44,23 +41,12 @@ export class EventsService {
         );
         return;
       }
-
       // Map Square order to our Order model
-      const order = this.squareMapper.squareOrderToOrder(squareOrder);
-      const customerId = squareOrder.customerId;
-      if (!customerId) {
-        order.customer = {
-          firstName: "Invitado",
-          lastName: "",
-          email: "",
-          phoneNumber: "",
-        };
-      } else {
-        const squareCustomer =
-          await this.squareService.getCustomerById(customerId);
-        order.customer = squareCustomer;
+      var order = this.squareMapper.squareOrderToOrder(squareOrder);
+      if (!order.customer || Object.keys(order.customer).length === 0) {
+        const customerId = squareOrder?.customerId;
+        order.customer = await this.fillCustomer(customerId, squareOrder);
       }
-
       this.logger.log(
         `Order details - Type: ${order.type}, Amount: ${order.amount}, Scheduled: ${order.scheduled}`,
       );
@@ -99,6 +85,33 @@ export class EventsService {
         },
       );
       throw error;
+    }
+  }
+
+  private async fillCustomer(
+    customerId: string,
+    squareOrder: Order,
+  ): Promise<Customer> {
+    if (!customerId) {
+      return {
+        firstName: "Invitado",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+      };
+    } else {
+      this.logger.log(`Getting customer details from Square ${customerId}`);
+      const squareCustomer =
+        await this.squareService.getCustomerById(customerId);
+      return {
+        firstName:
+          squareCustomer?.givenName || squareCustomer?.familyName
+            ? `${squareCustomer?.givenName || ""} ${squareCustomer?.familyName || ""}`.trim()
+            : squareOrder?.ticketName,
+        email: squareCustomer?.emailAddress,
+        phoneNumber: squareCustomer?.phoneNumber,
+        address: squareCustomer?.address,
+      };
     }
   }
 }
