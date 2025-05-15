@@ -101,12 +101,11 @@ export class CouponService {
       const coupon = await this.couponModel.findOne({
         where: { code },
       });
-
       if (
         !coupon ||
-        (coupon.customerPhoneNumber &&
-          coupon.customerPhoneNumber !== customerPhoneNumber) ||
-        coupon.remainingUsages <= 0
+        (coupon?.customerPhoneNumber != null &&
+          coupon?.customerPhoneNumber !== customerPhoneNumber) ||
+        coupon?.remainingUsages <= 0
       ) {
         throw new NotFoundException(
           `Coupon with code ${code} and customer phone number ${customerPhoneNumber} not found`,
