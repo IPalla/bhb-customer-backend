@@ -3,6 +3,7 @@ import {
   Logger,
   NotFoundException,
   ConflictException,
+  BadRequestException,
 } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { CouponEntity, CouponType } from "../entity/coupon.entity";
@@ -38,9 +39,7 @@ export class CouponService {
       }
 
       // Check if coupon code already exists
-      const existingCoupon = await this.couponModel.findOne({
-        where: { code: couponDto.code },
-      });
+      const existingCoupon = await this.couponModel.findByPk(couponDto.code);
 
       if (existingCoupon) {
         throw new ConflictException(
@@ -50,7 +49,7 @@ export class CouponService {
 
       const coupon = await this.couponModel.create({
         code: couponDto.code.toUpperCase(),
-        used: couponDto.used || false,
+        remainingUsages: couponDto.remainingUsages || 1,
         type: couponDto.type,
         discount: couponDto.discount,
         amount: couponDto.amount,
@@ -79,12 +78,12 @@ export class CouponService {
     }
   }
 
-  async findOne(id: number): Promise<CouponEntity> {
+  async findOne(code: string): Promise<CouponEntity> {
     try {
-      const coupon = await this.couponModel.findByPk(id);
+      const coupon = await this.couponModel.findByPk(code);
 
       if (!coupon) {
-        throw new NotFoundException(`Coupon with ID ${id} not found`);
+        throw new NotFoundException(`Coupon with code ${code} not found`);
       }
 
       return coupon;
@@ -100,10 +99,15 @@ export class CouponService {
   ): Promise<CouponEntity> {
     try {
       const coupon = await this.couponModel.findOne({
-        where: { code, customerPhoneNumber },
+        where: { code },
       });
 
-      if (!coupon) {
+      if (
+        !coupon ||
+        (coupon.customerPhoneNumber &&
+          coupon.customerPhoneNumber !== customerPhoneNumber) ||
+        coupon.remainingUsages <= 0
+      ) {
         throw new NotFoundException(
           `Coupon with code ${code} and customer phone number ${customerPhoneNumber} not found`,
         );
@@ -116,15 +120,13 @@ export class CouponService {
     }
   }
 
-  async update(id: number, couponDto: CouponDto): Promise<CouponResponse> {
+  async update(code: string, couponDto: CouponDto): Promise<CouponResponse> {
     try {
-      const coupon = await this.findOne(id);
+      const coupon = await this.findOne(code);
 
       if (couponDto.code && couponDto.code !== coupon.code) {
         // Check if new code exists
-        const existingCoupon = await this.couponModel.findOne({
-          where: { code: couponDto.code },
-        });
+        const existingCoupon = await this.couponModel.findByPk(couponDto.code);
 
         if (existingCoupon) {
           throw new ConflictException(
@@ -135,7 +137,8 @@ export class CouponService {
 
       // Update coupon properties
       if (couponDto.code !== undefined) coupon.code = couponDto.code;
-      if (couponDto.used !== undefined) coupon.used = couponDto.used;
+      if (couponDto.remainingUsages !== undefined)
+        coupon.remainingUsages = couponDto.remainingUsages;
       if (couponDto.type !== undefined) coupon.type = couponDto.type;
       if (couponDto.discount !== undefined)
         coupon.discount = couponDto.discount;
@@ -149,7 +152,7 @@ export class CouponService {
 
       await coupon.save();
 
-      this.logger.log(`Coupon updated with ID: ${id}`);
+      this.logger.log(`Coupon updated with code: ${code}`);
       return {
         success: true,
         message: "Coupon updated successfully",
@@ -161,7 +164,7 @@ export class CouponService {
     }
   }
 
-  async updateAsUsed(
+  async useCoupon(
     code: string,
     customerPhoneNumber: string,
   ): Promise<CouponResponse> {
@@ -170,24 +173,31 @@ export class CouponService {
         code,
         customerPhoneNumber,
       );
-      coupon.used = true;
+
+      if (coupon.remainingUsages <= 0) {
+        throw new BadRequestException("Coupon has no remaining usages");
+      }
+
+      coupon.remainingUsages -= 1;
       await coupon.save();
+
       return {
         success: true,
-        message: "Coupon updated as used successfully",
+        message: "Coupon used successfully",
+        data: { remainingUsages: coupon.remainingUsages },
       };
     } catch (error) {
-      this.logger.error(`Failed to update coupon as used:`, error);
+      this.logger.error(`Failed to use coupon:`, error);
       throw error;
     }
   }
 
-  async remove(id: number): Promise<CouponResponse> {
+  async remove(code: string): Promise<CouponResponse> {
     try {
-      const coupon = await this.findOne(id);
+      const coupon = await this.findOne(code);
       await coupon.destroy();
 
-      this.logger.log(`Coupon deleted with ID: ${id}`);
+      this.logger.log(`Coupon deleted with code: ${code}`);
       return {
         success: true,
         message: "Coupon deleted successfully",

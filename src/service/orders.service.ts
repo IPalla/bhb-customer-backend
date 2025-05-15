@@ -6,8 +6,8 @@ import { Customer } from "src/model/customer";
 import { InjectModel } from "@nestjs/sequelize";
 import { TerminalCheckoutEntity } from "src/entity/terminal-checkout.entity";
 import { CouponService } from "./coupon.service";
-import { serializeWithBigInt } from "src/util/utils";
 import { EventEmitter2 } from "@nestjs/event-emitter";
+import { removeUndefinedProperties } from "src/util/utils";
 
 @Injectable()
 export class OrdersService {
@@ -31,7 +31,6 @@ export class OrdersService {
     this.logger.log(`Creating order for location: ${locationId}`);
 
     const mergedCustomer = this.mergeCustomerData(order.customer, customer);
-    this.logger.log(`Merged customer: ${JSON.stringify(mergedCustomer)}`);
     order.customer = mergedCustomer;
     order.locationId = locationId;
     if (order.coupon) {
@@ -40,7 +39,7 @@ export class OrdersService {
         mergedCustomer.phoneNumber,
       );
       // Validate expiration date
-      if (coupon.expirationDate < new Date()) {
+      if (coupon.expirationDate < new Date() || coupon.remainingUsages <= 0) {
         this.logger.warn(`Coupon expired: ${order.coupon.code}`);
         throw new Error("Coupon expired");
       } else {
@@ -55,10 +54,6 @@ export class OrdersService {
     }
     const squareOrderRequest =
       this.squareMapper.orderToCreateOrderRequest(order);
-    console.log(
-      "Square order request",
-      serializeWithBigInt(squareOrderRequest),
-    );
     const createdOrder =
       await this.squareService.createOrder(squareOrderRequest);
     this.logger.log(
@@ -210,8 +205,6 @@ export class OrdersService {
     existingCustomer: Customer | null,
   ): Customer {
     this.logger.log(`Merging customer data for order: ${orderCustomer.id}`);
-    this.logger.log(`Existing customer: ${existingCustomer}`);
-    this.logger.log(`Order customer: ${orderCustomer}`);
     return {
       phoneNumber: existingCustomer?.phoneNumber,
       id: existingCustomer?.id,
@@ -248,12 +241,16 @@ export class OrdersService {
 
     try {
       const customerToUpdate = {
-        ...customer,
+        id: customer.id,
+        firstName: orderCustomer?.firstName || customer?.firstName,
+        lastName: orderCustomer?.lastName || customer?.lastName,
+        email: orderCustomer?.email || customer?.email,
+        phoneNumber: orderCustomer?.phoneNumber || customer?.phoneNumber,
         address: saveAddressAsDefault
           ? orderCustomer.address
           : customer.address,
       };
-
+      removeUndefinedProperties(customerToUpdate);
       const updatedCustomer =
         await this.squareService.updateCustomer(customerToUpdate);
       this.logger.log(`Customer updated successfully: ${updatedCustomer.id}`);

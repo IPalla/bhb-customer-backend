@@ -11,6 +11,7 @@ import { JwtService } from "@nestjs/jwt";
 import { Op } from "sequelize";
 import { CustomersService } from "./customers.service";
 import { ConfigService } from "@nestjs/config";
+import { WhatsAppService } from "./whatsapp.service";
 
 interface OtpResponse {
   success: boolean;
@@ -31,6 +32,7 @@ export class OtpService {
     private readonly jwtService: JwtService,
     private readonly customersService: CustomersService,
     private readonly configService: ConfigService,
+    private readonly whatsappService: WhatsAppService,
   ) {
     this.guestApiKey = this.configService.get("guestApiKey");
   }
@@ -46,8 +48,8 @@ export class OtpService {
         expiryDate,
       });
 
-      await this.twilioService.sendOtp(phoneNumber, otp);
-
+      //await this.twilioService.sendOtp(phoneNumber, otp);
+      await this.whatsappService.sendOtp(otp, phoneNumber);
       this.logger.log(`OTP generated and sent for ${phoneNumber} - ${otp}`);
       return {
         success: true,
@@ -89,7 +91,7 @@ export class OtpService {
 
     const customer =
       await this.customersService.findOrCreateByPhone(phoneNumber);
-    return this.jwtService.sign({ customer });
+    return this.jwtService.sign({ customer }, { expiresIn: "180d" });
   }
 
   private async findValidOtp(

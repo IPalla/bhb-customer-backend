@@ -1,0 +1,24 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+[remote "origin"]
+	url = git@github.com:IPalla/bhb-customer-backend.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "test"]
+	remote = origin
+	merge = refs/heads/test
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[branch "development"]
+	remote = origin
+	merge = refs/heads/development
+	vscode-merge-base = origin/master
+[branch "t2"]
+	vscode-merge-base = origin/development
+	remote = origin
+	merge = refs/heads/t2

@@ -8,14 +8,14 @@ import { TerminalCheckoutEntity } from "src/entity/terminal-checkout.entity";
 import { WebhookService } from "src/service/webhook.service";
 import { DeliveryManagerModule } from "./delivery-manager.module";
 import { CouponModule } from "./coupon.module";
-
+import { DevicesController } from "src/controller/devices.controller";
 @Module({
   imports: [
     SequelizeModule.forFeature([TerminalCheckoutEntity]),
     DeliveryManagerModule,
     CouponModule,
   ],
-  controllers: [SquareWebhookController],
+  controllers: [SquareWebhookController, DevicesController],
   providers: [SquareService, SquareMapper, OrdersService, WebhookService],
   exports: [SquareService, SquareMapper],
 })

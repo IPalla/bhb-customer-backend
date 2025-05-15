@@ -3,6 +3,7 @@ import { SquareWebhookEventDto } from "src/dto/square-webhook-event.dto";
 import { SquareService } from "./square.service";
 import { SquareMapper } from "./mappers/square.mapper";
 import { DeliveryManagerService } from "./delivery-manager.service";
+import { Status } from "src/model/status";
 
 @Injectable()
 export class WebhookService {
@@ -14,7 +15,9 @@ export class WebhookService {
     private readonly deliveryManagerService: DeliveryManagerService,
   ) {}
 
-  async handleOrderUpdatedWebhook(event: SquareWebhookEventDto): Promise<void> {
+  async handleOrderPreparedWebhook(
+    event: SquareWebhookEventDto,
+  ): Promise<void> {
     const orderId = event.data?.object?.order?.id || event.data?.id;
     if (!orderId) {
       this.logger.warn("Order ID not found in webhook event");
@@ -34,59 +37,22 @@ export class WebhookService {
         return;
       }
 
-      this.logger.log(`Square order: ${JSON.stringify(squareOrder)}`);
-
-      // Map Square order to our Order model
-      const order = this.squareMapper.squareOrderToOrder(squareOrder);
-
       // Log order details
-      this.logger.log(`Order updated - ID: ${order.id}`);
-      this.logger.log(
-        `Order details - Type: ${order.type}, Amount: ${order.amount}, Scheduled: ${order.scheduled}`,
+      this.logger.log(`Order updated - ID: ${orderId}`);
+
+      await this.deliveryManagerService.updateOrder(
+        orderId,
+        Status.StatusEnum.READY,
       );
-
-      if (order.status) {
-        this.logger.log(
-          `Order status - Status: ${order.status.status}, Created At: ${order.status.createdAt}`,
-        );
-
-        // Update order status in delivery manager system
-        try {
-          await this.deliveryManagerService.updateOrder(order.id, order.status);
-          this.logger.log(
-            `Order status updated successfully in delivery manager from webhook: ${order.id}`,
-          );
-        } catch (error) {
-          this.logger.error(
-            `Failed to update order status in delivery manager from webhook: ${error.message}`,
-            {
-              orderId: order.id,
-              status: order.status.status,
-              error,
-            },
-          );
-        }
-      }
-
-      if (order.statuses && order.statuses.length > 0) {
-        this.logger.log(`Order status history:`);
-        order.statuses.forEach((status, index) => {
-          this.logger.log(
-            `Status ${index + 1} - Status: ${status.status}, Created At: ${status.createdAt}`,
-          );
-        });
-      }
-
       this.logger.log(
-        `Order updated webhook processed successfully: ${orderId}`,
+        `Order status updated successfully in delivery manager from webhook: ${orderId}`,
       );
     } catch (error) {
       this.logger.error(
-        `Error processing order updated webhook: ${error.message}`,
+        `Failed to update order status in delivery manager from webhook: ${error.message}`,
         {
+          orderId: orderId,
           error,
-          orderId,
-          eventId: event.event_id,
         },
       );
     }

@@ -11,12 +11,13 @@ import {
   TerminalCheckout,
   Order,
   Payment,
+  Device,
 } from "square";
 import { randomUUID } from "crypto";
-import { serializeWithBigInt } from "src/util/utils";
 import { Customer } from "src/model/customer";
 import { countryToIsoCode } from "./mappers/square.mapper";
 import { SquareServiceError } from "../errors/square-service.error";
+import { removeUndefinedProperties } from "src/util/utils";
 
 @Injectable()
 export class SquareService {
@@ -95,7 +96,7 @@ export class SquareService {
         this.logger.log(
           `Delivery order detected. Updating fulfillment status for order: ${result.order.id}`,
         );
-        await this.updateDeliveryFulfillmentStatus(result.order.id);
+        //await this.updateDeliveryFulfillmentStatus(result.order.id);
       }
       return payment.result;
     } catch (error) {
@@ -125,10 +126,6 @@ export class SquareService {
           },
         },
       });
-
-      this.logger.debug(
-        `Customer search result: ${serializeWithBigInt(result)}`,
-      );
       return result.customers?.[0];
     } catch (error) {
       this.handleSquareError(error, "finding customer by phone");
@@ -139,7 +136,6 @@ export class SquareService {
     try {
       const { result } =
         await this.client.customersApi.retrieveCustomer(customerId);
-      this.logger.debug(`Retrieved customer: ${serializeWithBigInt(result)}`);
       return result.customer;
     } catch (error) {
       this.handleSquareError(error, "retrieving customer by ID");
@@ -158,22 +154,24 @@ export class SquareService {
   }
 
   async updateCustomer(customer: Customer): Promise<SquareCustomer> {
+    const customerToUpdate = {
+      givenName: customer.firstName,
+      familyName: customer.lastName,
+      emailAddress: customer.email,
+      phoneNumber: customer.phoneNumber,
+      address: customer.address && {
+        addressLine1: customer.address.address_line_1,
+        addressLine2: customer.address.address_line_2,
+        locality: customer.address.locality,
+        postalCode: customer.address.postalCode,
+        country: countryToIsoCode[customer.address.country],
+      },
+    };
+    removeUndefinedProperties(customerToUpdate);
     try {
       const { result } = await this.client.customersApi.updateCustomer(
         customer.id,
-        {
-          givenName: customer.firstName,
-          familyName: customer.lastName,
-          emailAddress: customer.email,
-          phoneNumber: customer.phoneNumber,
-          address: customer.address && {
-            addressLine1: customer.address.address_line_1,
-            addressLine2: customer.address.address_line_2,
-            locality: customer.address.locality,
-            postalCode: customer.address.postalCode,
-            country: countryToIsoCode[customer.address.country],
-          },
-        },
+        customerToUpdate,
       );
       return result.customer;
     } catch (error) {
@@ -241,6 +239,16 @@ export class SquareService {
       return result.order;
     } catch (error) {
       this.handleSquareError(error, "retrieving order");
+    }
+  }
+
+  async getDevices(): Promise<Device[]> {
+    this.logger.log("Retrieving devices from Square");
+    try {
+      const { result } = await this.client.devicesApi.listDevices();
+      return result.devices;
+    } catch (error) {
+      this.handleSquareError(error, "retrieving devices");
     }
   }
 
