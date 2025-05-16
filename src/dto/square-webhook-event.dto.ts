@@ -59,6 +59,10 @@ export interface SquareWebhookEventDto {
         receipt_number?: string;
         source_type?: string;
         version?: number;
+        application_details?: {
+          square_product?: string;
+          application_id?: string;
+        };
       };
     };
   };

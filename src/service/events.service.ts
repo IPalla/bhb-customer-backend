@@ -33,6 +33,7 @@ export class EventsService {
       const isFromPos =
         squareOrder.source.name?.toLowerCase() === "" ||
         squareOrder.source?.name === undefined;
+
       if (!squareOrder) {
         this.logger.warn(`Order not found in Square: ${orderId}`);
         return;
