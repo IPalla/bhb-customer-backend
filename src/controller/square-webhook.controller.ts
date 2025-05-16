@@ -67,6 +67,13 @@ export class SquareWebhookController {
         `Received payment created event with ID: ${event.event_id}`,
       );
       try {
+        const isDuplicatedPaymentForKiosk =
+          event.data?.object?.payment?.application_details?.square_product !==
+          "ECOMMERCE_API";
+        if (isDuplicatedPaymentForKiosk) {
+          this.logger.log(`Duplicated payment for kiosk. Skipping...`);
+          return;
+        }
         const orderId = event?.data?.object?.payment?.order_id;
         if (orderId) {
           this.eventEmitter.emit("order.created", orderId);
