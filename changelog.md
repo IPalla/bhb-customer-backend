@@ -24,3 +24,4 @@
 
 - Fix POS orders now receive whatsapps and set customer name
 - FIX Webhook for online orders
+- FIX POS orders status was already ready

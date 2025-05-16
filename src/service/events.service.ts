@@ -30,6 +30,7 @@ export class EventsService {
       const squareOrder = await this.squareService.getOrder(orderId);
 
       const sourceName = squareOrder.source.name?.toLowerCase() || "";
+      const isFromPos = squareOrder.source.name?.toLowerCase() === "";
       if (!squareOrder) {
         this.logger.warn(`Order not found in Square: ${orderId}`);
         return;
@@ -42,7 +43,7 @@ export class EventsService {
         return;
       }
       // Map Square order to our Order model
-      var order = this.squareMapper.squareOrderToOrder(squareOrder);
+      var order = this.squareMapper.squareOrderToOrder(squareOrder, isFromPos);
       if (!order.customer || Object.keys(order.customer).length === 0) {
         const customerId = squareOrder?.customerId;
         order.customer = await this.fillCustomer(customerId, squareOrder);

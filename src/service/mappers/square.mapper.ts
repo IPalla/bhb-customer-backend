@@ -215,7 +215,7 @@ export class SquareMapper {
     } as CustomerModel;
   }
 
-  squareOrderToOrder(squareOrder: Order): OrderModel {
+  squareOrderToOrder(squareOrder: Order, isFromPos?: boolean): OrderModel {
     this.logger.log(`Mapping Square order to Order model`);
 
     const fulfillment = squareOrder?.fulfillments?.[0];
@@ -262,6 +262,7 @@ export class SquareMapper {
         status: this.mapSquareStateToStatusEnum(
           squareOrder.state,
           this.mapFulfillmentTypeToOrderType(fulfillmentType, squareOrder),
+          isFromPos || false,
         ),
         createdAt: squareOrder.updatedAt,
         createdAtTs: new Date(squareOrder.updatedAt).getTime(),
@@ -312,7 +313,11 @@ export class SquareMapper {
   private mapSquareStateToStatusEnum(
     state: string,
     orderType: OrderModel.TypeEnum,
+    isFromPos: boolean,
   ): Status.StatusEnum {
+    if (isFromPos) {
+      return Status.StatusEnum.PENDING;
+    }
     switch (state?.toUpperCase()) {
       case "OPEN":
         return Status.StatusEnum.PENDING;
