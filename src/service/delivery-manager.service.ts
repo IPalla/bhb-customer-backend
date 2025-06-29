@@ -143,12 +143,13 @@ export class DeliveryManagerService {
           !order.customer.address ||
           Object.keys(order.customer.address).length === 0
             ? ""
-            : order.customer.address?.address_line_1 &&
-                order.customer.address?.address_line_2
-              ? `${order.customer.address.address_line_1} ${order.customer.address.address_line_2}`
-              : order.customer.address?.address_line_1 ||
-                order.customer.address?.address_line_2 ||
-                "",
+            : [
+                order.customer.address?.address_line_1,
+                order.customer.address?.address_line_2,
+                order.customer.address?.locality
+              ]
+                .filter(Boolean)
+                .join(" "),
         phone_number: order.customer.phoneNumber,
       },
       statuses: statuses,
