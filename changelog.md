@@ -25,3 +25,8 @@
 - Fix POS orders now receive whatsapps and set customer name
 - FIX Webhook for online orders
 - FIX POS orders status was already ready
+
+### 1.0.6
+
+- Fix send locality for orders address
+- Fix duplicated orders
