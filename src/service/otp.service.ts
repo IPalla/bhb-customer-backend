@@ -48,8 +48,8 @@ export class OtpService {
         expiryDate,
       });
 
-      await this.twilioService.sendOtp(phoneNumber, otp);
-      //await this.whatsappService.sendOtp(otp, phoneNumber);
+      //await this.twilioService.sendOtp(phoneNumber, otp);
+      await this.whatsappService.sendOtp(otp, phoneNumber);
       this.logger.log(`OTP generated and sent for ${phoneNumber} - ${otp}`);
       return {
         success: true,
