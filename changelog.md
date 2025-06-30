@@ -30,3 +30,6 @@
 
 - Fix send locality for orders address
 - Fix duplicated orders
+
+### 1.0.7
+- Back to whatsapp otp
