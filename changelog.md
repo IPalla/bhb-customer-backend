@@ -33,3 +33,6 @@
 
 ### 1.0.7
 - Back to whatsapp otp
+
+### 1.0.8
+- Fix duplicated payments in KIOSK

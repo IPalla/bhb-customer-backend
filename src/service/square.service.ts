@@ -223,8 +223,9 @@ export class SquareService {
             amount: amount,
             currency: currency,
           },
+          orderId: orderId,
           deviceOptions: {
-            skipReceiptScreen: true,
+            skipReceiptScreen: false,
             deviceId,
           },
         },

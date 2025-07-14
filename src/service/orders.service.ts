@@ -155,20 +155,6 @@ export class OrdersService {
       status === "CANCEL_REQUESTED"
     ) {
       if (status === "COMPLETED") {
-        paymentId = await this.squareService.createExternalPayment(
-          orderPaymentCheckout.orderId,
-          BigInt(orderPaymentCheckout.amount),
-          orderPaymentCheckout.currency,
-          orderPaymentCheckout.customerId,
-        );
-        this.squareService
-          .printReceipt(paymentId, orderPaymentCheckout.deviceId)
-          .then((result) => {
-            this.logger.log(`Receipt printed: ${result}`);
-          })
-          .catch((error) => {
-            this.logger.error("Error printing receipt", { error });
-          });
         this.eventEmitter.emit("order.created", orderPaymentCheckout.orderId);
       }
       this.logger.log(`Updating payment checkout`);
