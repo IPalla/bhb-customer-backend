@@ -6,12 +6,15 @@ import { OrderPaymentCheckoutModule } from "./order-payment-checkout.module";
 import { DeliveryManagerModule } from "./delivery-manager.module";
 import { CouponModule } from "./coupon.module";
 import { EventsService } from "src/service/events.service";
+import { RewardsModule } from "./rewards.module";
+
 @Module({
   imports: [
     SquareModule,
     OrderPaymentCheckoutModule,
     DeliveryManagerModule,
     CouponModule,
+    RewardsModule,
   ],
   controllers: [OrdersController],
   providers: [OrdersService, EventsService],

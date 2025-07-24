@@ -9,11 +9,13 @@ import { WebhookService } from "src/service/webhook.service";
 import { DeliveryManagerModule } from "./delivery-manager.module";
 import { CouponModule } from "./coupon.module";
 import { DevicesController } from "src/controller/devices.controller";
+import { RewardsModule } from "./rewards.module";
 @Module({
   imports: [
     SequelizeModule.forFeature([TerminalCheckoutEntity]),
     DeliveryManagerModule,
     CouponModule,
+    RewardsModule,
   ],
   controllers: [SquareWebhookController, DevicesController],
   providers: [SquareService, SquareMapper, OrdersService, WebhookService],

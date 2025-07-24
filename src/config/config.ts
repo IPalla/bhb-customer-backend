@@ -35,4 +35,8 @@ export default () => ({
     token: process.env.WHATSAPP_TOKEN,
     origin: process.env.WHATSAPP_ORIGIN,
   },
+  rewards: {
+    baseUrl: process.env.REWARDS_BASE_URL,
+    apiKey: process.env.REWARDS_API_KEY,
+  },
 });

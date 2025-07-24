@@ -5,6 +5,7 @@ import {
   Customer,
   FulfillmentRecipient,
   Order,
+  OrderLineItem,
   OrderLineItemDiscount,
 } from "square";
 import { Product } from "src/model/product";
@@ -17,7 +18,8 @@ import { Order as OrderModel } from "src/model/order";
 import { Status } from "src/model/status";
 import { CouponType } from "src/entity/coupon.entity";
 import { CouponDto } from "src/dto/coupon.dto";
-import { serializeWithBigInt } from "src/util/utils";
+import { ClaimRewardDto } from "src/dto/claim-reward.dto";
+import { v4 as uuidv4 } from "uuid";
 
 @Injectable()
 export class SquareMapper {
@@ -147,6 +149,16 @@ export class SquareMapper {
             },
           }
         : undefined;
+    const couponDiscount = order.coupon
+      ? this.createDiscountObject(order.coupon)
+      : [];
+    const rewardDiscount = order.reward
+      ? this.createDiscountObjectForReward(order.reward)
+      : [];
+    const discounts = [...couponDiscount, ...rewardDiscount];
+    const rewardLineItems = order.reward
+      ? this.createRewardLineItems(order.reward, rewardDiscount[0].uid)
+      : undefined;
     return {
       order: {
         serviceCharges: serviceCharges ? [serviceCharges] : undefined,
@@ -154,21 +166,38 @@ export class SquareMapper {
           order.customer?.firstName + " " + order.customer?.lastName?.charAt(0),
         customerId: order.customer?.id,
         locationId: order.locationId,
-        discounts: order.coupon
-          ? this.createDiscountObject(order.coupon)
-          : undefined,
-        lineItems: order.products.map((product) => ({
-          quantity: product?.quantity.toString(),
-          catalogObjectId: product.catalogId,
-          modifiers: product?.modifiers?.map((modifier) => ({
-            catalogObjectId: modifier.id,
-            quantity: modifier?.quantity?.toString() || "1",
+        discounts: discounts.length > 0 ? discounts : undefined,
+        lineItems: [
+          ...order.products.map((product) => ({
+            quantity: product?.quantity.toString(),
+            catalogObjectId: product.catalogId,
+            modifiers: product?.modifiers?.map((modifier) => ({
+              catalogObjectId: modifier.id,
+              quantity: modifier?.quantity?.toString() || "1",
+            })),
           })),
-        })),
-
+          ...(rewardLineItems ?? []),
+        ],
         fulfillments: [fulfillment],
       },
     } as CreateOrderRequest;
+  }
+  createRewardLineItems(reward: ClaimRewardDto, uid: string): OrderLineItem[] {
+    return reward?.products?.map((product) => {
+      return {
+        quantity: product.quantity.toString(),
+        catalogObjectId: product.catalog_id,
+        modifiers: product.modifiers?.map((modifier) => ({
+          catalogObjectId: modifier.modifier_catalog_id,
+          quantity: modifier.quantity.toString() || "1",
+        })),
+        appliedDiscounts: [
+          {
+            discountUid: uid,
+          },
+        ],
+      } as OrderLineItem;
+    });
   }
   private createDiscountObject(coupon: CouponDto): OrderLineItemDiscount[] {
     return [
@@ -194,6 +223,20 @@ export class SquareMapper {
                 percentage: coupon.discount.toString(),
               }
             : {}),
+      },
+    ];
+  }
+
+  private createDiscountObjectForReward(
+    reward: ClaimRewardDto,
+  ): OrderLineItemDiscount[] {
+    return [
+      {
+        uid: uuidv4(),
+        name: reward.reward_name,
+        type: "FIXED_PERCENTAGE",
+        percentage: "100",
+        scope: "LINE_ITEM",
       },
     ];
   }

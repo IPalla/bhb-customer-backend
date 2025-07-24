@@ -7,7 +7,13 @@ import { CouponService } from "./coupon.service";
 import { Customer } from "src/model/customer";
 import { Order } from "square";
 
-const UNSUPPORTED_PLATFORMS = ["just eat", "justeat", "glovo", "uber", "uber eats"];
+const UNSUPPORTED_PLATFORMS = [
+  "just eat",
+  "justeat",
+  "glovo",
+  "uber",
+  "uber eats",
+];
 
 @Injectable()
 export class EventsService {

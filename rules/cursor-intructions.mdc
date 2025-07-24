@@ -1,0 +1,39 @@
+---
+alwaysApply: true
+---
+# Project Instructions for NestJS Microservice (MVC Pattern)
+
+## Project Overview
+This project is a NestJS-based microservice following the Model-View-Controller (MVC) architectural pattern. It is designed for modularity, scalability, and maintainability.
+
+## Coding Standards
+- Use **TypeScript** for all code.
+- Follow the official https://docs.nestjs.com/v5/
+- Use dependency injection for all services and repositories.
+- Use DTOs (Data Transfer Objects) for all request/response payloads.
+- Use async/await for all asynchronous operations.
+- Use TypeORM for the database.
+- Use class-validator and class-transformer to transform from Entities to DTOs.
+- For dates and time always work with epoch milliseconds timestamps.
+
+## Directory Structure
+- `/src`
+  - `/modules` — Feature modules (each with its own controller, service, and model)
+  - `/common` — Shared utilities, guards, interceptors, filters, and decorators
+  - `/controller` — HTTP Controllers. Controllers should always return DTOs
+  - `/service` — Services with all business logic. Services receive DTOs and return DTOs and convert the objects to entities.
+  - `/entity` - Entity models
+  - `/dto` - DTO Objects
+  - `/config` — Configuration files and environment management
+  - `/main.ts` — Application entry point
+- `/migrations` - SQL scripts for database migrations
+
+## Special Instructions for Cursor
+- **Do not modify files in `/node_modules`, `/dist`, or `/test` unless explicitly requested.**
+- Instance loggers in all classes: private readonly logger = new Logger(Class.name);
+- Log info at the beginning and end of every method.
+- Always update or create DTOs for new endpoints.
+- Register new modules in the main application module (`app.module.ts`).
+- When in doubt, refer to the official NestJS documentation. 
+- If a new field is added to an entity requiring database changes, create a modification script in /migrations folder. The scripts should have vx_name.sql convention, being X the version.
+- Always removed order and clean imports

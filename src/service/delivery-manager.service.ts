@@ -146,7 +146,7 @@ export class DeliveryManagerService {
             : [
                 order.customer.address?.address_line_1,
                 order.customer.address?.address_line_2,
-                order.customer.address?.locality
+                order.customer.address?.locality,
               ]
                 .filter(Boolean)
                 .join(" "),
