@@ -8,7 +8,6 @@ import {
 } from "@nestjs/common";
 import { SquareWebhookEventDto } from "../dto/square-webhook-event.dto";
 import { Public } from "src/decorators/public.decorator";
-import { WebhooksHelper } from "square";
 import { OrdersService } from "src/service/orders.service";
 import { WebhookService } from "src/service/webhook.service";
 import { EventEmitter2 } from "@nestjs/event-emitter";
@@ -37,32 +36,61 @@ export class SquareWebhookController {
       `Received Square webhook event: ${event.type} with ID: ${event.event_id}`,
     );
 
-    if (event.type === "terminal.checkout.updated") {
-      this.logger.log(
-        `Received terminal checkout updated event. Checkout ID: ${event.data?.id}`,
-      );
-      this.ordersService.handleWebhookPayment(
-        event.data.object.checkout.status,
-        event.data.id,
-      );
-    } else if (
-      event.type === "order.fulfillment.updated" &&
+    switch (event.type) {
+      case "terminal.checkout.updated":
+        this.handleTerminalCheckoutUpdated(event);
+        break;
+      case "order.fulfillment.updated":
+        this.handleOrderFulfillmentUpdated(event);
+        break;
+      case "order.updated":
+        this.handleOrderUpdated(event);
+        break;
+      case "payment.created":
+        await this.handlePaymentCreated(event);
+        break;
+      default:
+        break;
+    }
+
+    /*WebhooksHelper.isWebhookEeventSignature(
+      event,
+      signature,
+      SIGNATURE_KEY,
+      NOTIFICATION_URL
+    )*/
+    return;
+  }
+
+  private handleTerminalCheckoutUpdated(event: SquareWebhookEventDto): void {
+    this.logger.log(
+      `Received terminal checkout updated event. Checkout ID: ${event.data?.id}`,
+    );
+    this.ordersService.handleWebhookPayment(
+      event.data.object.checkout.status,
+      event.data.id,
+    );
+  }
+
+  private handleOrderFulfillmentUpdated(event: SquareWebhookEventDto): void {
+    if (
       event.data.object.order_fulfillment_updated.fulfillment_update[0]
         .new_state === "PREPARED"
     ) {
       this.logger.log(`Received order updated event.`);
-      // Delegate to the webhook service
       this.webhookService.handleOrderPreparedWebhook(event);
-    } else if (
-      event.type === "order.updated" &&
-      event?.data?.object?.order_updated?.state === "OPEN"
-    ) {
+    }
+  }
+
+  private handleOrderUpdated(event: SquareWebhookEventDto): void {
+    if (event?.data?.object?.order_updated?.state === "OPEN") {
       this.logger.log(`Received order created event.`);
-      // Delegate to the webhook service
-    } else if (
-      event.type === "payment.created" &&
-      event?.data?.object?.payment?.status === "APPROVED"
-    ) {
+      // Delegate to the webhook service (no-op)
+    }
+  }
+
+  private async handlePaymentCreated(event: SquareWebhookEventDto): Promise<void> {
+    if (event?.data?.object?.payment?.status === "APPROVED") {
       this.logger.log(
         `Received payment created event with ID: ${event.event_id}`,
       );
@@ -82,14 +110,5 @@ export class SquareWebhookController {
         this.logger.error(`Error processing payment webhook: ${error}`);
       }
     }
-
-    /*WebhooksHelper.isWebhookEeventSignature(
-    /*WebhooksHelper.isWebhookEeventSignature(
-      event,
-      signature,
-      SIGNATURE_KEY,
-      NOTIFICATION_URL
-    )*/
-    return;
   }
 }
