@@ -232,7 +232,8 @@ export class SquareMapper {
   ): OrderLineItemDiscount[] {
     return [
       {
-        uid: uuidv4(),
+        //uid: uuidv4(),
+        uid: reward.reward_id,
         name: reward.reward_name,
         type: "FIXED_PERCENTAGE",
         percentage: "100",
@@ -310,16 +311,43 @@ export class SquareMapper {
         createdAt: squareOrder.updatedAt,
         createdAtTs: new Date(squareOrder.updatedAt).getTime(),
       },
-      coupon: squareOrder.discounts?.[0]
-        ? {
-            code: squareOrder.discounts?.[0]?.name,
-            type: squareOrder.discounts?.[0]?.type as CouponType,
-            amount: Number(
-              squareOrder.discounts?.[0]?.amountMoney?.amount || 0,
-            ),
-            discount: Number(squareOrder.discounts?.[0]?.percentage || 0),
-          }
-        : undefined,
+      coupon: this.mapSquareDiscountToCoupon(squareOrder),
+    };
+  }
+
+  private mapSquareDiscountToCoupon(squareOrder: Order): CouponDto | undefined {
+    const discount = squareOrder.discounts?.find(
+      (discount) => discount.scope !== "LINE_ITEM",
+    );
+    if (!discount) return undefined;
+    return {
+      code: discount?.name,
+      type: discount?.type as CouponType,
+      amount: Number(discount?.amountMoney?.amount || 0),
+      discount: Number(discount?.percentage || 0),
+    };
+  }
+
+  squareOrderToReward(squareOrder: Order): ClaimRewardDto | undefined {
+    const rewardDiscount = squareOrder.discounts?.find(
+      (discount) => discount.scope === "LINE_ITEM",
+    );
+    const productsReward = squareOrder.lineItems?.filter((item) =>
+      item.appliedDiscounts?.some(
+        (discount) => discount.discountUid === rewardDiscount?.uid,
+      ),
+    );
+    const products = productsReward?.map((product) => ({
+      catalog_id: product.catalogObjectId,
+      quantity: Number(product.quantity),
+      modifiers: product.modifiers?.map((modifier) => ({
+        modifier_catalog_id: modifier.catalogObjectId,
+        quantity: Number(modifier.quantity || 1),
+      })),
+    }));
+    return {
+      reward_id: rewardDiscount?.uid,
+      products: products,
     };
   }
 

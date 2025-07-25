@@ -6,6 +6,7 @@ import { DeliveryManagerService } from "./delivery-manager.service";
 import { CouponService } from "./coupon.service";
 import { Customer } from "src/model/customer";
 import { Order } from "square";
+import { RewardsService } from "./rewards.service";
 
 const UNSUPPORTED_PLATFORMS = [
   "just eat",
@@ -24,6 +25,7 @@ export class EventsService {
     private readonly squareMapper: SquareMapper,
     private readonly deliveryManagerService: DeliveryManagerService,
     private readonly couponService: CouponService,
+    private readonly rewardsService: RewardsService,
   ) {}
 
   @OnEvent("order.created")
@@ -53,6 +55,25 @@ export class EventsService {
       }
       // Map Square order to our Order model
       var order = this.squareMapper.squareOrderToOrder(squareOrder, isFromPos);
+      const reward = this.squareMapper.squareOrderToReward(squareOrder);
+      if (reward) {
+        this.logger.log(`Claiming reward: ${reward.reward_id}`);
+        this.rewardsService
+          .claimReward({
+            claimRewardDto: reward,
+            customerPhone: order.customer.phoneNumber,
+            orderType: order.type,
+            orderId: orderId,
+          })
+          .then(() => {
+            this.logger.log(`Reward claimed successfully: ${reward.reward_id}`);
+          })
+          .catch((error) => {
+            this.logger.error(`Failed to claim reward: ${error.message}`, {
+              error,
+            });
+          });
+      }
       if (!order.customer || Object.keys(order.customer).length === 0) {
         const customerId = squareOrder?.customerId;
         order.customer = await this.fillCustomer(customerId, squareOrder);
@@ -62,10 +83,16 @@ export class EventsService {
       );
       if (order.coupon) {
         this.logger.log(`Coupon used: ${order.coupon.code}`);
-        this.couponService.useCoupon(
-          order.coupon.code,
-          order.customer.phoneNumber,
-        );
+        this.couponService
+          .useCoupon(order.coupon.code, order.customer.phoneNumber)
+          .then(() => {
+            this.logger.log(`Coupon used successfully: ${order.coupon.code}`);
+          })
+          .catch((error) => {
+            this.logger.error(`Failed to use coupon: ${error.message}`, {
+              error,
+            });
+          });
       }
       // Create order in delivery manager system
       try {
