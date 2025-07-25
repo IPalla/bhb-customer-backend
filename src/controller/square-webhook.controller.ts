@@ -89,7 +89,9 @@ export class SquareWebhookController {
     }
   }
 
-  private async handlePaymentCreated(event: SquareWebhookEventDto): Promise<void> {
+  private async handlePaymentCreated(
+    event: SquareWebhookEventDto,
+  ): Promise<void> {
     if (event?.data?.object?.payment?.status === "APPROVED") {
       this.logger.log(
         `Received payment created event with ID: ${event.event_id}`,

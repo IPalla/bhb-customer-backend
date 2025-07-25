@@ -173,7 +173,9 @@ export class SquareMapper {
         catalogId: item.catalogObjectId,
         quantity: Number(item.quantity),
         name: item.name,
-        price: Number(item.basePriceMoney?.amount || 0),
+        price:
+          Number(item.basePriceMoney?.amount || 0) -
+          Number(item.totalDiscountMoney?.amount || 0),
         modifiers: item.modifiers?.map((mod) => ({
           id: mod.catalogObjectId,
           name: mod.name,
@@ -219,55 +221,77 @@ export class SquareMapper {
 
   // --- PRIVATE METHODS ---
 
-  private buildCategoriesMap(catalogObject: CatalogObject[]): Record<string, Category> {
+  private buildCategoriesMap(
+    catalogObject: CatalogObject[],
+  ): Record<string, Category> {
     return catalogObject
       .filter(({ type }) => type === "CATEGORY")
-      .reduce((acc, category) => {
-        acc[category.id] = {
-          id: category?.id,
-          name: category?.categoryData.name,
-        };
-        return acc;
-      }, {} as Record<string, Category>);
+      .reduce(
+        (acc, category) => {
+          acc[category.id] = {
+            id: category?.id,
+            name: category?.categoryData.name,
+          };
+          return acc;
+        },
+        {} as Record<string, Category>,
+      );
   }
 
-  private buildImagesMap(catalogObject: CatalogObject[]): Record<string, Image> {
+  private buildImagesMap(
+    catalogObject: CatalogObject[],
+  ): Record<string, Image> {
     return catalogObject
       .filter(({ type }) => type === "IMAGE")
-      .reduce((acc, image) => {
-        acc[image.id] = {
-          url: image.imageData?.url,
-          name: image.imageData?.name,
-        };
-        return acc;
-      }, {} as Record<string, Image>);
+      .reduce(
+        (acc, image) => {
+          acc[image.id] = {
+            url: image.imageData?.url,
+            name: image.imageData?.name,
+          };
+          return acc;
+        },
+        {} as Record<string, Image>,
+      );
   }
 
-  private buildModifiersMap(catalogObject: CatalogObject[]): Record<string, Modifier> {
+  private buildModifiersMap(
+    catalogObject: CatalogObject[],
+  ): Record<string, Modifier> {
     return catalogObject
       .filter(({ type }) => type === "MODIFIER_LIST")
-      .reduce((acc, modifier) => {
-        acc[modifier?.id] = {
-          id: modifier.id,
-          name: modifier?.modifierListData?.name,
-          type: Modifier.TypeEnum[modifier?.modifierListData?.modifierType],
-          selection:
-            Modifier?.SelectionEnum[modifier?.modifierListData?.selectionType],
-          options: modifier?.modifierListData?.modifiers
-            .filter((mfr) => mfr.type === "MODIFIER")
-            .map((option) => ({
-              id: option?.id,
-              name: option?.modifierData?.name,
-              defaultOption: option?.modifierData?.ordinal === 1,
-              price: Number(option?.modifierData?.priceMoney?.amount),
-            }) as Option)
-            .sort((a, b) => (a.defaultOption ? -1 : 1)),
-        };
-        return acc;
-      }, {} as Record<string, Modifier>);
+      .reduce(
+        (acc, modifier) => {
+          acc[modifier?.id] = {
+            id: modifier.id,
+            name: modifier?.modifierListData?.name,
+            type: Modifier.TypeEnum[modifier?.modifierListData?.modifierType],
+            selection:
+              Modifier?.SelectionEnum[
+                modifier?.modifierListData?.selectionType
+              ],
+            options: modifier?.modifierListData?.modifiers
+              .filter((mfr) => mfr.type === "MODIFIER")
+              .map(
+                (option) =>
+                  ({
+                    id: option?.id,
+                    name: option?.modifierData?.name,
+                    defaultOption: option?.modifierData?.ordinal === 1,
+                    price: Number(option?.modifierData?.priceMoney?.amount),
+                  }) as Option,
+              )
+              .sort((a, b) => (a.defaultOption ? -1 : 1)),
+          };
+          return acc;
+        },
+        {} as Record<string, Modifier>,
+      );
   }
 
-  private buildRecipient(customer: OrderModel["customer"]): FulfillmentRecipient {
+  private buildRecipient(
+    customer: OrderModel["customer"],
+  ): FulfillmentRecipient {
     return {
       customerId: customer?.id,
       displayName: customer?.firstName + " " + customer?.lastName,
@@ -290,7 +314,9 @@ export class SquareMapper {
       type: "PICKUP",
       pickupDetails: {
         recipient,
-        pickupAt: new Date(Date.now() + SquareMapper.TEN_MINUTES_MS).toISOString(),
+        pickupAt: new Date(
+          Date.now() + SquareMapper.TEN_MINUTES_MS,
+        ).toISOString(),
         scheduleType: "ASAP",
         note: notes,
       },
