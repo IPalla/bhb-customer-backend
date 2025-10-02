@@ -97,9 +97,10 @@ export class SquareMapper {
         price: Number(
           item?.itemData.variations[0].itemVariationData.priceMoney.amount,
         ),
-        modifiers: item?.itemData.modifierListInfo
-          ?.filter((mfr) => mfr.enabled)
-          ?.map((modifier) => modifiersMap[modifier.modifierListId]),
+         modifiers: item?.itemData.modifierListInfo
+           ?.filter((mfr) => mfr.enabled)
+           ?.map((modifier) => modifiersMap[modifier.modifierListId])
+           ?.filter((modifier) => modifier !== null && modifier !== undefined),
       } as Product;
     });
   }
