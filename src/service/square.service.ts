@@ -59,7 +59,34 @@ export class SquareService {
         undefined,
         "ITEM,IMAGE,MODIFIER_LIST,CATEGORY",
       );
-      return response.result.objects;
+      
+      // Collect all objects from all pages
+      const allObjects: CatalogObject[] = [];
+      
+      // Add objects from first page
+      if (response.result.objects) {
+        allObjects.push(...response.result.objects);
+      }
+      
+      // Check if there are more pages and fetch them
+      let currentCursor = response.result.cursor;
+      while (currentCursor) {
+        this.logger.debug(`Fetching next page with cursor: ${currentCursor}`);
+        const nextResponse = await this.client.catalogApi.listCatalog(
+          currentCursor,
+          "ITEM,IMAGE,MODIFIER_LIST,CATEGORY",
+        );
+        
+        if (nextResponse.result.objects) {
+          allObjects.push(...nextResponse.result.objects);
+        }
+        
+        // Update cursor for next iteration
+        currentCursor = nextResponse.result.cursor;
+      }
+      
+      this.logger.log(`Retrieved ${allObjects.length} total catalog objects across multiple pages`);
+      return allObjects;
     } catch (error) {
       this.handleSquareError(error, "retrieving products");
     }
