@@ -50,16 +50,34 @@ export class SquareService {
     throw new SquareServiceError(`Unexpected error during ${operation}`, error);
   }
 
+
+
   async getProducts(locationId: string): Promise<CatalogObject[]> {
     this.logger.log(
       `Retrieving products from Square for location: ${locationId}`,
     );
     try {
-      const response = await this.client.catalogApi.listCatalog(
-        undefined,
-        "ITEM,IMAGE,MODIFIER_LIST,CATEGORY",
-      );
-      return response.result.objects;
+      const allObjects: CatalogObject[] = [];
+      let cursor: string | undefined = undefined;
+      
+      do {
+        const response = await this.client.catalogApi.listCatalog(
+          cursor,
+          "ITEM,IMAGE,MODIFIER_LIST,CATEGORY",
+        );
+        
+        if (response.result.objects) {
+          allObjects.push(...response.result.objects);
+        }
+        
+        cursor = response.result.cursor;
+        if (cursor) {
+          this.logger.debug(`Fetching next page with cursor: ${cursor}`);
+        }
+      } while (cursor);
+      
+      this.logger.log(`Retrieved ${allObjects.length} total catalog objects across multiple pages`);
+      return allObjects;
     } catch (error) {
       this.handleSquareError(error, "retrieving products");
     }
