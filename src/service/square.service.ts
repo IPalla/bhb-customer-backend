@@ -50,40 +50,31 @@ export class SquareService {
     throw new SquareServiceError(`Unexpected error during ${operation}`, error);
   }
 
+
+
   async getProducts(locationId: string): Promise<CatalogObject[]> {
     this.logger.log(
       `Retrieving products from Square for location: ${locationId}`,
     );
     try {
-      const response = await this.client.catalogApi.listCatalog(
-        undefined,
-        "ITEM,IMAGE,MODIFIER_LIST,CATEGORY",
-      );
-      
-      // Collect all objects from all pages
       const allObjects: CatalogObject[] = [];
+      let cursor: string | undefined = undefined;
       
-      // Add objects from first page
-      if (response.result.objects) {
-        allObjects.push(...response.result.objects);
-      }
-      
-      // Check if there are more pages and fetch them
-      let currentCursor = response.result.cursor;
-      while (currentCursor) {
-        this.logger.debug(`Fetching next page with cursor: ${currentCursor}`);
-        const nextResponse = await this.client.catalogApi.listCatalog(
-          currentCursor,
+      do {
+        const response = await this.client.catalogApi.listCatalog(
+          cursor,
           "ITEM,IMAGE,MODIFIER_LIST,CATEGORY",
         );
         
-        if (nextResponse.result.objects) {
-          allObjects.push(...nextResponse.result.objects);
+        if (response.result.objects) {
+          allObjects.push(...response.result.objects);
         }
         
-        // Update cursor for next iteration
-        currentCursor = nextResponse.result.cursor;
-      }
+        cursor = response.result.cursor;
+        if (cursor) {
+          this.logger.debug(`Fetching next page with cursor: ${cursor}`);
+        }
+      } while (cursor);
       
       this.logger.log(`Retrieved ${allObjects.length} total catalog objects across multiple pages`);
       return allObjects;
