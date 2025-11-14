@@ -67,10 +67,12 @@ export class SquareWebhookController {
         `Received payment created event with ID: ${event.event_id}`,
       );
       try {
+        console.log(`product: ${event.data?.object?.payment?.application_details?.square_product}`);
         const isDuplicatedPaymentForKiosk =
           event.data?.object?.payment?.application_details?.square_product !==
           "ECOMMERCE_API";
-        if (isDuplicatedPaymentForKiosk) {
+        const isFromPos = event.data?.object?.payment?.application_details?.square_product == "SQUARE_POS";
+        if (isDuplicatedPaymentForKiosk && !isFromPos) {
           this.logger.log(`Duplicated payment for kiosk. Skipping...`);
           return;
         }
