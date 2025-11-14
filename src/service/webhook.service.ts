@@ -44,7 +44,7 @@ export class WebhookService {
         deliveryManagerId = squareOrder.referenceId;
       }
       await this.deliveryManagerService.updateOrder(
-        orderId,
+        deliveryManagerId,
         Status.StatusEnum.READY,
       );
       this.logger.log(
