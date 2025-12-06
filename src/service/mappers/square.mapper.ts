@@ -26,8 +26,22 @@ export class SquareMapper {
 
   constructor() {}
 
-  productsFromCatalogObject(catalogObject: CatalogObject[]): Product[] {
-    const items = catalogObject.filter((item) => item.type === "ITEM");
+  productsFromCatalogObject(catalogObject: CatalogObject[], locationId: string): Product[] {
+    const items = catalogObject
+      .filter((item) => item.type === "ITEM")
+      .filter((item) => {
+        const variation = item.itemData?.variations?.[0];
+        if (!variation) return true;
+        const locationOverrides = (variation.itemVariationData as any)
+          ?.locationOverrides;
+        if (locationOverrides) {
+          const soldOut = locationOverrides.find((override: any) => override.soldOut === true);
+          if (soldOut) {
+            return false;
+          }
+        }
+        return true;
+      });
     const categoriesMap: Map<string, Category> = catalogObject
       .filter((item) => item.type === "CATEGORY")
       .reduce((acc, category) => {
