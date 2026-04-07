@@ -35,6 +35,36 @@ export class CategoryEntity extends Model {
   isActive: boolean;
 
   @Column({
+    type: DataType.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+    field: "is_only_kiosk",
+  })
+  isOnlyKiosk: boolean;
+
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+    field: "only_web",
+  })
+  onlyWeb: boolean;
+
+  @Column({
+    type: DataType.TIME,
+    allowNull: true,
+    field: "start_at",
+  })
+  startAt: string | null;
+
+  @Column({
+    type: DataType.TIME,
+    allowNull: true,
+    field: "end_at",
+  })
+  endAt: string | null;
+
+  @Column({
     type: DataType.STRING,
     allowNull: false,
   })

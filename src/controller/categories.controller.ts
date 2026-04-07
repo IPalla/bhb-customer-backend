@@ -9,9 +9,15 @@ export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Get()
-  async findAll(@Query("locationId") locationId: string): Promise<Category[]> {
-    this.logger.log(`Retrieving all categories for location: ${locationId}`);
-    const categories = await this.categoriesService.findAll(locationId);
+  async findAll(
+    @Query("locationId") locationId: string,
+    @Query("is_kiosk") isKiosk: string,
+  ): Promise<Category[]> {
+    const kioskMode = isKiosk === "true";
+    this.logger.log(
+      `Retrieving categories for location: ${locationId}, is_kiosk: ${kioskMode}`,
+    );
+    const categories = await this.categoriesService.findAll(locationId, kioskMode);
     this.logger.log("Categories retrieved successfully");
     return categories;
   }
