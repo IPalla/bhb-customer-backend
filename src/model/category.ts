@@ -23,4 +23,8 @@ export interface Category {
   image?: string;
   order?: number;
   location_id?: string;
+  is_only_kiosk?: boolean;
+  only_web?: boolean;
+  start_at?: string | null;
+  end_at?: string | null;
 }
