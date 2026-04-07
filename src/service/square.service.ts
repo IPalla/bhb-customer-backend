@@ -244,6 +244,7 @@ export class SquareService {
           orderId: orderId,
           deviceOptions: {
             skipReceiptScreen: true,
+            collectSignature: false,
             deviceId,
           },
         },
