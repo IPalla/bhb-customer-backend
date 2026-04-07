@@ -243,7 +243,7 @@ export class SquareService {
           },
           orderId: orderId,
           deviceOptions: {
-            skipReceiptScreen: false,
+            skipReceiptScreen: true,
             deviceId,
           },
         },
