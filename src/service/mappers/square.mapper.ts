@@ -1,5 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
 import {
+  CatalogItemModifierListInfo,
+  CatalogModifier,
   CatalogObject,
   CreateOrderRequest,
   Customer,
@@ -62,30 +64,38 @@ export class SquareMapper {
         acc[image.id] = img;
         return acc;
       }, new Map());
-    const modifiersMap: Map<string, Modifier> = catalogObject
+    const modifierTemplates = catalogObject
       .filter((item) => item.type === "MODIFIER_LIST")
-      .reduce((acc, modifier) => {
-        const mdfr: Modifier = {
-          id: modifier.id,
-          name: modifier?.modifierListData?.name,
-          type: Modifier.TypeEnum[modifier?.modifierListData?.modifierType],
-          selection:
-            Modifier?.SelectionEnum[modifier?.modifierListData?.selectionType],
-          options: modifier?.modifierListData?.modifiers
-            .filter((mfr) => mfr.type === "MODIFIER")
-            .map((option) => {
-              return {
-                id: option?.id,
-                name: option?.modifierData?.name,
-                defaultOption: option?.modifierData?.ordinal === 1,
-                price: Number(option?.modifierData?.priceMoney?.amount),
-              } as Option;
-            })
-            .sort((a, b) => (a.defaultOption ? -1 : 1)),
-        };
-        acc[modifier?.id] = mdfr;
-        return acc;
-      }, new Map());
+      .reduce(
+        (acc, modifier) => {
+          const selectionType = modifier?.modifierListData?.selectionType;
+          const selection =
+            selectionType === "MULTIPLE"
+              ? Modifier.SelectionEnum.MULTIPLE
+              : Modifier.SelectionEnum.SINGLE;
+          const mdfr: Modifier = {
+            id: modifier.id,
+            name: modifier?.modifierListData?.name,
+            type: Modifier.TypeEnum[modifier?.modifierListData?.modifierType],
+            selection,
+            options: modifier?.modifierListData?.modifiers
+              ?.filter((mfr) => mfr.type === "MODIFIER")
+              ?.map((option) => {
+                const data = option.modifierData;
+                const amount = data?.priceMoney?.amount;
+                return {
+                  id: option?.id,
+                  name: data?.name ?? undefined,
+                  defaultOption: this.catalogModifierOnByDefault(data),
+                  price: amount != null ? Number(amount) : 0,
+                } as Option;
+              }),
+          };
+          acc[modifier?.id] = mdfr;
+          return acc;
+        },
+        {} as Record<string, Modifier>,
+      );
     return items.map((item) => {
       // Log the item being processed for debugging
       this.logger.debug(`Processing catalog item: ${item?.itemData?.name}`);
@@ -111,12 +121,87 @@ export class SquareMapper {
         price: Number(
           item?.itemData.variations[0].itemVariationData.priceMoney.amount,
         ),
-         modifiers: item?.itemData.modifierListInfo
-           ?.filter((mfr) => mfr.enabled)
-           ?.map((modifier) => modifiersMap[modifier.modifierListId])
-           ?.filter((modifier) => modifier !== null && modifier !== undefined),
+        modifiers: item?.itemData.modifierListInfo
+          ?.filter((mfr) => mfr.enabled !== false)
+          ?.map((listInfo) =>
+            this.applyItemModifierRules(
+              modifierTemplates[listInfo.modifierListId],
+              listInfo,
+            ),
+          )
+          ?.filter((m): m is Modifier => m != null),
       } as Product;
     });
+  }
+
+  private catalogModifierOnByDefault(
+    data: CatalogModifier | undefined,
+  ): boolean {
+    const extended = data as
+      | (CatalogModifier & { onByDefault?: boolean | null })
+      | undefined;
+    return extended?.onByDefault === true;
+  }
+
+  private applyItemModifierRules(
+    template: Modifier | undefined,
+    listInfo: CatalogItemModifierListInfo,
+  ): Modifier | undefined {
+    if (!template?.id) {
+      return undefined;
+    }
+    const options = template.options?.map((opt) => {
+      const ov = listInfo.modifierOverrides?.find((o) => o.modifierId === opt.id);
+      if (ov == null || ov.onByDefault == null) {
+        return opt;
+      }
+      return { ...opt, defaultOption: ov.onByDefault === true };
+    });
+    const optionCount = options?.length ?? 0;
+    const { min, max } = this.squareModifierSelectionBounds(
+      template.selection,
+      listInfo.minSelectedModifiers,
+      listInfo.maxSelectedModifiers,
+      optionCount,
+    );
+    return {
+      ...template,
+      options,
+      minSelections: min,
+      maxSelections: max,
+    };
+  }
+
+  /**
+   * Maps Square CatalogItemModifierListInfo limits to inclusive bounds.
+   * See https://developer.squareup.com/reference/square/objects/CatalogItemModifierListInfo
+   */
+  private squareModifierSelectionBounds(
+    selection: Modifier.SelectionEnum | undefined,
+    minSq: number | null | undefined,
+    maxSq: number | null | undefined,
+    optionCount: number,
+  ): { min: number; max: number } {
+    const minRaw = minSq ?? -1;
+    const maxRaw = maxSq ?? -1;
+    const isMultiple = selection === Modifier.SelectionEnum.MULTIPLE;
+    const n = Math.max(0, optionCount);
+
+    if (isMultiple) {
+      const min = minRaw >= 0 ? Math.min(minRaw, n) : 0;
+      const maxUncapped = maxRaw >= 0 ? maxRaw : n;
+      const max = Math.min(Math.max(min, maxUncapped), n);
+      return { min, max };
+    }
+
+    if (minRaw === -1 && maxRaw === -1) {
+      return n === 0 ? { min: 0, max: 0 } : { min: 1, max: 1 };
+    }
+
+    const min = minRaw >= 0 ? Math.min(minRaw, n) : n === 0 ? 0 : 1;
+    const maxUncapped = maxRaw >= 0 ? maxRaw : 1;
+    const max = Math.min(Math.max(min, maxUncapped), n);
+    return { min, max };
   }
 
   orderToCreateOrderRequest(order: OrderModel): CreateOrderRequest {

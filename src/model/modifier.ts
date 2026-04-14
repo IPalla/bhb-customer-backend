@@ -31,6 +31,14 @@ export interface Modifier {
    * Modifier selection
    */
   selection?: Modifier.SelectionEnum;
+  /**
+   * Minimum number of options the customer must select for this modifier group on this item (from Square item rules).
+   */
+  minSelections?: number;
+  /**
+   * Maximum number of options the customer may select for this modifier group on this item (from Square item rules).
+   */
+  maxSelections?: number;
   options?: Array<Option>;
   quantity?: number;
 }
