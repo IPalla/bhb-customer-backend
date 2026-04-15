@@ -5,7 +5,7 @@ import { SquareMapper } from "./mappers/square.mapper";
 import { DeliveryManagerService } from "./delivery-manager.service";
 import { CouponService } from "./coupon.service";
 import { Customer } from "src/model/customer";
-import { Order } from "square";
+import { Order } from "square-legacy";
 
 const UNSUPPORTED_PLATFORMS = ["just eat", "justeat", "glovo", "uber", "uber eats"];
 
