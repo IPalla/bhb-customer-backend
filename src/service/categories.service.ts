@@ -62,6 +62,7 @@ export class CategoriesService {
         onlyWeb: category.only_web ?? false,
         startAt: category.start_at ?? null,
         endAt: category.end_at ?? null,
+        order_types: category.order_types ?? null,
       });
 
       this.logger.log(`Category created successfully: ${category.location_id}`);
@@ -82,6 +83,7 @@ export class CategoriesService {
       only_web: entity.onlyWeb,
       start_at: entity.startAt,
       end_at: entity.endAt,
+      order_types: entity.order_types ?? undefined,
     };
   }
 

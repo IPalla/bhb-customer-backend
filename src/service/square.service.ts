@@ -1,10 +1,15 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import {
+  SquareClient,
+  SquareEnvironment,
+  SquareError,
+  type CatalogObject,
+} from "square";
+import {
   Client,
   Environment,
   ApiError,
-  CatalogObject,
   CreateOrderRequest,
   CreateOrderResponse,
   Customer as SquareCustomer,
@@ -12,7 +17,7 @@ import {
   Order,
   Payment,
   Device,
-} from "square";
+} from "square-legacy";
 import { randomUUID } from "crypto";
 import { Customer } from "src/model/customer";
 import { countryToIsoCode } from "./mappers/square.mapper";
@@ -23,11 +28,22 @@ import { removeUndefinedProperties } from "src/util/utils";
 export class SquareService {
   private readonly logger = new Logger(SquareService.name);
   private readonly client: Client;
+  private readonly catalogClient: SquareClient;
   private readonly locationIds: string[];
 
   constructor(private readonly configService: ConfigService) {
     this.client = this.initializeSquareClient();
+    this.catalogClient = this.initializeCatalogClient();
     this.locationIds = this.configService.getOrThrow("square.locationIds");
+  }
+
+  private initializeCatalogClient(): SquareClient {
+    return new SquareClient({
+      token: this.configService.getOrThrow("square.accessToken"),
+      environment: this.configService.getOrThrow("square.isSandbox")
+        ? SquareEnvironment.Sandbox
+        : SquareEnvironment.Production,
+    });
   }
 
   private initializeSquareClient(): Client {
@@ -46,6 +62,10 @@ export class SquareService {
       this.logger.error(`Square API Error during ${operation}:`, error.errors);
       throw new SquareServiceError(`Failed to ${operation}`, error.errors);
     }
+    if (error instanceof SquareError) {
+      this.logger.error(`Square API Error during ${operation}:`, error.errors);
+      throw new SquareServiceError(`Failed to ${operation}`, error.errors);
+    }
     this.logger.error(`Unexpected error during ${operation}:`, error);
     throw new SquareServiceError(`Unexpected error during ${operation}`, error);
   }
@@ -58,25 +78,15 @@ export class SquareService {
     );
     try {
       const allObjects: CatalogObject[] = [];
-      let cursor: string | undefined = undefined;
-      
-      do {
-        const response = await this.client.catalogApi.listCatalog(
-          cursor,
-          "ITEM,IMAGE,MODIFIER_LIST,CATEGORY",
-        );
-        
-        if (response.result.objects) {
-          allObjects.push(...response.result.objects);
-        }
-        
-        cursor = response.result.cursor;
-        if (cursor) {
-          this.logger.debug(`Fetching next page with cursor: ${cursor}`);
-        }
-      } while (cursor);
-      
-      this.logger.log(`Retrieved ${allObjects.length} total catalog objects across multiple pages`);
+      const page = await this.catalogClient.catalog.list({
+        types: "ITEM,IMAGE,MODIFIER_LIST,CATEGORY",
+      });
+      for await (const obj of page) {
+        allObjects.push(obj);
+      }
+      this.logger.log(
+        `Retrieved ${allObjects.length} total catalog objects across multiple pages`,
+      );
       return allObjects;
     } catch (error) {
       this.handleSquareError(error, "retrieving products");
@@ -135,7 +145,7 @@ export class SquareService {
 
   async findCustomerByPhone(
     phoneNumber: string,
-  ): Promise<Customer | undefined> {
+  ): Promise<SquareCustomer | undefined> {
     try {
       const { result } = await this.client.customersApi.searchCustomers({
         query: {
@@ -162,7 +172,7 @@ export class SquareService {
     }
   }
 
-  async createCustomer(phoneNumber: string): Promise<Customer> {
+  async createCustomer(phoneNumber: string): Promise<SquareCustomer> {
     try {
       const { result } = await this.client.customersApi.createCustomer({
         phoneNumber,

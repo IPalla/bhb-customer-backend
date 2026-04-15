@@ -69,4 +69,10 @@ export class CategoryEntity extends Model {
     allowNull: false,
   })
   square_location_id: string;
+
+  @Column({
+    type: DataType.TEXT,
+    allowNull: true,
+  })
+  order_types: string | null;
 }
