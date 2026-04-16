@@ -203,6 +203,7 @@ export class OrdersService {
       where: {
         orderId: orderId,
       },
+      order: [["createdAt", "DESC"]],
     });
 
     if (!orderPaymentCheckout) {
