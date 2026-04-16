@@ -93,16 +93,29 @@ export class SquareService {
     }
   }
 
+  /**
+   * Square Terminal checkout cannot charge 0€. For fully discounted / paid
+   * orders, complete the order via Orders API (same as card payment flow).
+   */
+  async payZeroAmountOrder(orderId: string): Promise<any> {
+    this.logger.log(`Completing zero-amount order in Square: ${orderId}`);
+    try {
+      const payOrderResult = await this.client.ordersApi.payOrder(orderId, {
+        idempotencyKey: randomUUID(),
+        paymentIds: [],
+      });
+      return payOrderResult.result;
+    } catch (error) {
+      this.handleSquareError(error, "completing zero-amount order");
+    }
+  }
+
   async createPayment(sourceId: string, orderId: any): Promise<any> {
     try {
       const { result } = await this.client.ordersApi.retrieveOrder(orderId);
       if (result.order.netAmountDueMoney.amount === BigInt(0)) {
         this.logger.log(`Processing zero amount order: ${orderId}`);
-        const payOrderResult = await this.client.ordersApi.payOrder(orderId, {
-          idempotencyKey: randomUUID(),
-          paymentIds: [], // Empty array for zero amount orders
-        });
-        return payOrderResult.result;
+        return this.payZeroAmountOrder(orderId);
       }
       const payment = await this.client.paymentsApi.createPayment({
         sourceId: sourceId,

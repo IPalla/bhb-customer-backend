@@ -8,6 +8,7 @@ import { TerminalCheckoutEntity } from "src/entity/terminal-checkout.entity";
 import { CouponService } from "./coupon.service";
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import { removeUndefinedProperties } from "src/util/utils";
+import { randomUUID } from "crypto";
 
 @Injectable()
 export class OrdersService {
@@ -112,10 +113,37 @@ export class OrdersService {
     orderId: string,
     deviceId: string,
     customerId?: string,
-  ) {
+  ): Promise<void> {
     this.logger.log(`Creating terminal checkout for order: ${orderId}`);
     const order = await this.squareService.getOrder(orderId);
     this.logger.log(`Order found in square`);
+
+    const dueAmount =
+      order.netAmountDueMoney?.amount ?? order.totalMoney?.amount;
+    if (BigInt(dueAmount ?? 0) === 0n) {
+      this.logger.log(
+        `Order ${orderId} has 0€ due (e.g. full coupon); completing without Terminal checkout`,
+      );
+      await this.squareService.payZeroAmountOrder(orderId);
+      await this.orderPaymentCheckoutModel.create({
+        orderId,
+        checkoutId: `ZERO_AMOUNT_${randomUUID()}`,
+        amount: 0,
+        currency:
+          order.netAmountDueMoney?.currency ??
+          order.totalMoney?.currency ??
+          "EUR",
+        status: "COMPLETED",
+        customerId,
+        deviceId,
+      });
+      this.eventEmitter.emit("order.created", orderId);
+      this.logger.log(
+        `Zero-amount order completed for kiosk; no Square Terminal session`,
+      );
+      return;
+    }
+
     const checkout = await this.squareService.createTerminalCheckout(
       orderId,
       order.totalMoney.amount,
@@ -133,7 +161,6 @@ export class OrdersService {
       deviceId,
     });
     this.logger.log(`Terminal checkout created successfully: ${checkout.id}`);
-    return checkout;
   }
 
   async handleWebhookPayment(status: string, checkoutId: string) {
