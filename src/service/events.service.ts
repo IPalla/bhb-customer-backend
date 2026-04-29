@@ -5,7 +5,7 @@ import { SquareMapper } from "./mappers/square.mapper";
 import { DeliveryManagerService } from "./delivery-manager.service";
 import { CouponService } from "./coupon.service";
 import { Customer } from "src/model/customer";
-import { Order } from "square";
+import { Order } from "square-legacy";
 import { RewardsService } from "./rewards.service";
 
 const UNSUPPORTED_PLATFORMS = [

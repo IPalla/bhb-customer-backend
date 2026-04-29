@@ -17,7 +17,7 @@ export class ProductsService {
     this.logger.log("Retrieving all products");
     const catalog = await this.squareService.getProducts(locationId);
     this.logger.log("Mapping products");
-    const products = this.squareMapper.productsFromCatalogObject(catalog);
+    const products = this.squareMapper.productsFromCatalogObject(catalog, locationId);
     return products;
   }
 }

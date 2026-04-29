@@ -60,7 +60,7 @@ export class OrdersController {
       throw new BadRequestException("Device ID is required");
     }
     this.logger.log(`Creating terminal checkout for order ${orderId}`);
-    const payment = await this.ordersService.createTerminalCheckout(
+    await this.ordersService.createTerminalCheckout(
       orderId,
       deviceId,
       request.user?.customer?.id,

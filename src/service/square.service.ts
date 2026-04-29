@@ -1,10 +1,15 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import {
+  SquareClient,
+  SquareEnvironment,
+  SquareError,
+  type CatalogObject,
+} from "square";
+import {
   Client,
   Environment,
   ApiError,
-  CatalogObject,
   CreateOrderRequest,
   CreateOrderResponse,
   Customer as SquareCustomer,
@@ -12,7 +17,7 @@ import {
   Order,
   Payment,
   Device,
-} from "square";
+} from "square-legacy";
 import { randomUUID } from "crypto";
 import { Customer } from "src/model/customer";
 import { countryToIsoCode } from "./mappers/square.mapper";
@@ -23,11 +28,22 @@ import { removeUndefinedProperties } from "src/util/utils";
 export class SquareService {
   private readonly logger = new Logger(SquareService.name);
   private readonly client: Client;
+  private readonly catalogClient: SquareClient;
   private readonly locationIds: string[];
 
   constructor(private readonly configService: ConfigService) {
     this.client = this.initializeSquareClient();
+    this.catalogClient = this.initializeCatalogClient();
     this.locationIds = this.configService.getOrThrow("square.locationIds");
+  }
+
+  private initializeCatalogClient(): SquareClient {
+    return new SquareClient({
+      token: this.configService.getOrThrow("square.accessToken"),
+      environment: this.configService.getOrThrow("square.isSandbox")
+        ? SquareEnvironment.Sandbox
+        : SquareEnvironment.Production,
+    });
   }
 
   private initializeSquareClient(): Client {
@@ -46,22 +62,51 @@ export class SquareService {
       this.logger.error(`Square API Error during ${operation}:`, error.errors);
       throw new SquareServiceError(`Failed to ${operation}`, error.errors);
     }
+    if (error instanceof SquareError) {
+      this.logger.error(`Square API Error during ${operation}:`, error.errors);
+      throw new SquareServiceError(`Failed to ${operation}`, error.errors);
+    }
     this.logger.error(`Unexpected error during ${operation}:`, error);
     throw new SquareServiceError(`Unexpected error during ${operation}`, error);
   }
+
+
 
   async getProducts(locationId: string): Promise<CatalogObject[]> {
     this.logger.log(
       `Retrieving products from Square for location: ${locationId}`,
     );
     try {
-      const response = await this.client.catalogApi.listCatalog(
-        undefined,
-        "ITEM,IMAGE,MODIFIER_LIST,CATEGORY",
+      const allObjects: CatalogObject[] = [];
+      const page = await this.catalogClient.catalog.list({
+        types: "ITEM,IMAGE,MODIFIER_LIST,CATEGORY",
+      });
+      for await (const obj of page) {
+        allObjects.push(obj);
+      }
+      this.logger.log(
+        `Retrieved ${allObjects.length} total catalog objects across multiple pages`,
       );
-      return response.result.objects;
+      return allObjects;
     } catch (error) {
       this.handleSquareError(error, "retrieving products");
+    }
+  }
+
+  /**
+   * Square Terminal checkout cannot charge 0€. For fully discounted / paid
+   * orders, complete the order via Orders API (same as card payment flow).
+   */
+  async payZeroAmountOrder(orderId: string): Promise<any> {
+    this.logger.log(`Completing zero-amount order in Square: ${orderId}`);
+    try {
+      const payOrderResult = await this.client.ordersApi.payOrder(orderId, {
+        idempotencyKey: randomUUID(),
+        paymentIds: [],
+      });
+      return payOrderResult.result;
+    } catch (error) {
+      this.handleSquareError(error, "completing zero-amount order");
     }
   }
 
@@ -70,11 +115,7 @@ export class SquareService {
       const { result } = await this.client.ordersApi.retrieveOrder(orderId);
       if (result.order.netAmountDueMoney.amount === BigInt(0)) {
         this.logger.log(`Processing zero amount order: ${orderId}`);
-        const payOrderResult = await this.client.ordersApi.payOrder(orderId, {
-          idempotencyKey: randomUUID(),
-          paymentIds: [], // Empty array for zero amount orders
-        });
-        return payOrderResult.result;
+        return this.payZeroAmountOrder(orderId);
       }
       const payment = await this.client.paymentsApi.createPayment({
         sourceId: sourceId,
@@ -117,7 +158,7 @@ export class SquareService {
 
   async findCustomerByPhone(
     phoneNumber: string,
-  ): Promise<Customer | undefined> {
+  ): Promise<SquareCustomer | undefined> {
     try {
       const { result } = await this.client.customersApi.searchCustomers({
         query: {
@@ -144,7 +185,7 @@ export class SquareService {
     }
   }
 
-  async createCustomer(phoneNumber: string): Promise<Customer> {
+  async createCustomer(phoneNumber: string): Promise<SquareCustomer> {
     try {
       const { result } = await this.client.customersApi.createCustomer({
         phoneNumber,
@@ -226,6 +267,7 @@ export class SquareService {
           orderId: orderId,
           deviceOptions: {
             skipReceiptScreen: false,
+            collectSignature: false,
             deviceId,
           },
         },

@@ -39,9 +39,13 @@ export class WebhookService {
 
       // Log order details
       this.logger.log(`Order updated - ID: ${orderId}`);
-
+      var deliveryManagerId = orderId;
+      if (squareOrder.source.name === 'Just Eat') {
+        deliveryManagerId = squareOrder.referenceId;
+        this.logger.log(`Order from JustEat, using JE order id ${deliveryManagerId}`);
+      }
       await this.deliveryManagerService.updateOrder(
-        orderId,
+        deliveryManagerId,
         Status.StatusEnum.READY,
       );
       this.logger.log(

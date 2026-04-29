@@ -1,13 +1,17 @@
 import { Injectable, Logger } from "@nestjs/common";
 import {
-  CatalogObject,
+  type CatalogItemModifierListInfo,
+  type CatalogModifier,
+  type CatalogObject,
+} from "square";
+import {
   CreateOrderRequest,
   Customer,
   FulfillmentRecipient,
   Order,
   OrderLineItem,
   OrderLineItemDiscount,
-} from "square";
+} from "square-legacy";
 import { Product } from "src/model/product";
 import { Image } from "src/model/image";
 import { Option } from "src/model/option";
@@ -19,7 +23,7 @@ import { Status } from "src/model/status";
 import { CouponType } from "src/entity/coupon.entity";
 import { CouponDto } from "src/dto/coupon.dto";
 import { ClaimRewardDto } from "src/dto/claim-reward.dto";
-import { v4 as uuidv4 } from "uuid";
+
 
 @Injectable()
 export class SquareMapper {
@@ -28,12 +32,79 @@ export class SquareMapper {
 
   // --- PUBLIC METHODS ---
 
-  productsFromCatalogObject(catalogObject: CatalogObject[]): Product[] {
-    const items = catalogObject.filter(({ type }) => type === "ITEM");
-    const categoriesMap = this.buildCategoriesMap(catalogObject);
-    const imagesMap = this.buildImagesMap(catalogObject);
-    const modifiersMap = this.buildModifiersMap(catalogObject);
-
+  productsFromCatalogObject(catalogObject: CatalogObject[], locationId: string): Product[] {
+    const items = catalogObject
+      .filter((item): item is CatalogObject.Item => item.type === "ITEM")
+      .filter((item) => {
+        const variation = item.itemData?.variations?.[0];
+        if (!variation || variation.type !== "ITEM_VARIATION") {
+          return true;
+        }
+        const locationOverrides = variation.itemVariationData?.locationOverrides;
+        if (locationOverrides?.length) {
+          const soldOut = locationOverrides.some((override) => override.soldOut === true);
+          if (soldOut) {
+            return false;
+          }
+        }
+        return true;
+      });
+    const categoriesMap: Map<string, Category> = catalogObject
+      .filter((item): item is CatalogObject.Category => item.type === "CATEGORY")
+      .reduce((acc, category) => {
+        const ctgry: Category = {
+          id: category?.id,
+          name: category?.categoryData?.name,
+        };
+        acc[category.id] = ctgry;
+        return acc;
+      }, new Map());
+    const imagesMap: Map<string, Image> = catalogObject
+      .filter((item): item is CatalogObject.Image => item.type === "IMAGE")
+      .reduce((acc, image) => {
+        const img: Image = {
+          url: image.imageData?.url,
+          name: image.imageData?.name,
+        };
+        acc[image.id] = img;
+        return acc;
+      }, new Map());
+    const modifierTemplates = catalogObject
+      .filter(
+        (item): item is CatalogObject.ModifierList => item.type === "MODIFIER_LIST",
+      )
+      .reduce(
+        (acc, modifier) => {
+          const selectionType = modifier?.modifierListData?.selectionType;
+          const selection =
+            selectionType === "MULTIPLE"
+              ? Modifier.SelectionEnum.MULTIPLE
+              : Modifier.SelectionEnum.SINGLE;
+          const modifierType = modifier?.modifierListData?.modifierType;
+          const mdfr: Modifier = {
+            id: modifier.id,
+            name: modifier?.modifierListData?.name,
+            type:
+              modifierType === "LIST" ? Modifier.TypeEnum.LIST : undefined,
+            selection,
+            options: modifier?.modifierListData?.modifiers
+              ?.filter((mfr): mfr is CatalogObject.Modifier => mfr.type === "MODIFIER")
+              ?.map((option) => {
+                const data = option.modifierData;
+                const amount = data?.priceMoney?.amount;
+                return {
+                  id: option?.id,
+                  name: data?.name ?? undefined,
+                  defaultOption: this.catalogModifierOnByDefault(data),
+                  price: amount != null ? Number(amount) : 0,
+                } as Option;
+              }),
+          };
+          acc[modifier?.id] = mdfr;
+          return acc;
+        },
+        {} as Record<string, Modifier>,
+      );
     return items.map((item) => {
       this.logger.debug(`Processing catalog item: ${item?.itemData?.name}`);
       if (!item?.id || !item?.itemData?.variations?.[0]?.id) {
@@ -46,21 +117,95 @@ export class SquareMapper {
           `Item has multiple variations, only using first one: ${item?.itemData?.name}`,
         );
       }
+      const firstVariation = item.itemData?.variations?.[0];
+      const variationPrice =
+        firstVariation?.type === "ITEM_VARIATION"
+          ? firstVariation.itemVariationData?.priceMoney?.amount
+          : undefined;
       return {
         id: item?.id,
-        catalogId: item?.itemData.variations[0].id,
+        catalogId: firstVariation?.id,
         name: item?.itemData.name,
         description: item?.itemData.description,
         category: categoriesMap[item?.itemData.reportingCategory?.id],
         images: item?.itemData?.imageIds?.map((imageId) => imagesMap[imageId]),
-        price: Number(
-          item?.itemData.variations[0].itemVariationData.priceMoney.amount,
-        ),
+        price: variationPrice != null ? Number(variationPrice) : 0,
         modifiers: item?.itemData.modifierListInfo
-          ?.filter((mfr) => mfr.enabled)
-          ?.map((modifier) => modifiersMap[modifier.modifierListId]),
+          ?.filter((mfr) => mfr.enabled !== false)
+          ?.map((listInfo) =>
+            this.applyItemModifierRules(
+              modifierTemplates[listInfo.modifierListId],
+              listInfo,
+            ),
+          )
+          ?.filter((m): m is Modifier => m != null),
       } as Product;
     });
+  }
+
+  private catalogModifierOnByDefault(data: CatalogModifier | undefined): boolean {
+    return data?.onByDefault === true;
+  }
+
+  private applyItemModifierRules(
+    template: Modifier | undefined,
+    listInfo: CatalogItemModifierListInfo,
+  ): Modifier | undefined {
+    if (!template?.id) {
+      return undefined;
+    }
+    const options = template.options?.map((opt) => {
+      const ov = listInfo.modifierOverrides?.find((o) => o.modifierId === opt.id);
+      if (ov == null || ov.onByDefault == null) {
+        return opt;
+      }
+      return { ...opt, defaultOption: ov.onByDefault === true };
+    });
+    const optionCount = options?.length ?? 0;
+    const { min, max } = this.squareModifierSelectionBounds(
+      template.selection,
+      listInfo.minSelectedModifiers,
+      listInfo.maxSelectedModifiers,
+      optionCount,
+    );
+    return {
+      ...template,
+      options,
+      minSelections: min,
+      maxSelections: max,
+    };
+  }
+
+  /**
+   * Maps Square CatalogItemModifierListInfo limits to inclusive bounds.
+   * See https://developer.squareup.com/reference/square/objects/CatalogItemModifierListInfo
+   */
+  private squareModifierSelectionBounds(
+    selection: Modifier.SelectionEnum | undefined,
+    minSq: number | null | undefined,
+    maxSq: number | null | undefined,
+    optionCount: number,
+  ): { min: number; max: number } {
+    const minRaw = minSq ?? -1;
+    const maxRaw = maxSq ?? -1;
+    const isMultiple = selection === Modifier.SelectionEnum.MULTIPLE;
+    const n = Math.max(0, optionCount);
+
+    if (isMultiple) {
+      const min = minRaw >= 0 ? Math.min(minRaw, n) : 0;
+      const maxUncapped = maxRaw >= 0 ? maxRaw : n;
+      const max = Math.min(Math.max(min, maxUncapped), n);
+      return { min, max };
+    }
+
+    if (minRaw === -1 && maxRaw === -1) {
+      return n === 0 ? { min: 0, max: 0 } : { min: 1, max: 1 };
+    }
+
+    const min = minRaw >= 0 ? Math.min(minRaw, n) : n === 0 ? 0 : 1;
+    const maxUncapped = maxRaw >= 0 ? maxRaw : 1;
+    const max = Math.min(Math.max(min, maxUncapped), n);
+    return { min, max };
   }
 
   orderToCreateOrderRequest(order: OrderModel): CreateOrderRequest {

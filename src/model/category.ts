@@ -23,4 +23,12 @@ export interface Category {
   image?: string;
   order?: number;
   location_id?: string;
+  is_only_kiosk?: boolean;
+  only_web?: boolean;
+  start_at?: string | null;
+  end_at?: string | null;
+  /**
+   * Optional hint for which order types apply to this category (e.g. comma-separated values).
+   */
+  order_types?: string;
 }
