@@ -13,6 +13,7 @@ import { CouponDto } from "src/dto/coupon.dto";
 import { Customer } from "./customer";
 import { Product } from "./product";
 import { Status } from "./status";
+import { ClaimRewardDto } from "src/dto/claim-reward.dto";
 
 /**
  * Order information
@@ -48,7 +49,9 @@ export interface Order {
   statuses?: Array<Status>;
   locationId?: string;
   coupon?: CouponDto;
+  reward?: ClaimRewardDto;
 }
+
 export namespace Order {
   export type TypeEnum = "Delivery" | "Pickup" | "Dinein";
   export const TypeEnum = {

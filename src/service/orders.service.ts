@@ -1,4 +1,4 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { BadRequestException, Injectable, Logger } from "@nestjs/common";
 import { SquareService } from "./square.service";
 import { Order } from "src/model/order";
 import { SquareMapper } from "./mappers/square.mapper";
@@ -9,6 +9,7 @@ import { CouponService } from "./coupon.service";
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import { removeUndefinedProperties } from "src/util/utils";
 import { randomUUID } from "crypto";
+import { RewardsService } from "./rewards.service";
 
 @Injectable()
 export class OrdersService {
@@ -18,6 +19,7 @@ export class OrdersService {
     private readonly squareService: SquareService,
     private readonly squareMapper: SquareMapper,
     private readonly couponsService: CouponService,
+    private readonly rewardsService: RewardsService,
     private readonly eventEmitter: EventEmitter2,
     @InjectModel(TerminalCheckoutEntity)
     private orderPaymentCheckoutModel: typeof TerminalCheckoutEntity,
@@ -52,6 +54,9 @@ export class OrdersService {
           expirationDate: coupon.expirationDate.toISOString(),
         };
       }
+    }
+    if (order.reward) {
+      await this.handleRewardForOrder(order, mergedCustomer);
     }
     const squareOrderRequest =
       this.squareMapper.orderToCreateOrderRequest(order);
@@ -274,5 +279,21 @@ export class OrdersService {
         error: error.message,
       });
     }
+  }
+
+  private async handleRewardForOrder(
+    order: Order,
+    mergedCustomer: Customer,
+  ): Promise<void> {
+    const reward = await this.rewardsService.validateReward({
+      claimRewardDto: order.reward,
+      customerPhone: mergedCustomer.phoneNumber,
+      orderType: order.type,
+    });
+    if (!reward.claimable) {
+      this.logger.warn(`Reward not eligible: ${order.reward.reward_id}`);
+      throw new BadRequestException("Reward not eligible");
+    }
+    order.reward.reward_name = reward.reward_name;
   }
 }

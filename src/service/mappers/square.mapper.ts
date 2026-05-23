@@ -9,6 +9,7 @@ import {
   Customer,
   FulfillmentRecipient,
   Order,
+  OrderLineItem,
   OrderLineItemDiscount,
 } from "square-legacy";
 import { Product } from "src/model/product";
@@ -21,12 +22,15 @@ import { Order as OrderModel } from "src/model/order";
 import { Status } from "src/model/status";
 import { CouponType } from "src/entity/coupon.entity";
 import { CouponDto } from "src/dto/coupon.dto";
+import { ClaimRewardDto } from "src/dto/claim-reward.dto";
+
+
 @Injectable()
 export class SquareMapper {
   private readonly logger = new Logger(SquareMapper.name);
   private static readonly TEN_MINUTES_MS = 10 * 60 * 1000; // 10 minutes in milliseconds
 
-  constructor() {}
+  // --- PUBLIC METHODS ---
 
   productsFromCatalogObject(catalogObject: CatalogObject[], locationId: string): Product[] {
     const items = catalogObject
@@ -102,15 +106,12 @@ export class SquareMapper {
         {} as Record<string, Modifier>,
       );
     return items.map((item) => {
-      // Log the item being processed for debugging
       this.logger.debug(`Processing catalog item: ${item?.itemData?.name}`);
-      // Validate required fields
       if (!item?.id || !item?.itemData?.variations?.[0]?.id) {
         this.logger.warn(
           `Skipping item due to missing required fields: ${item?.itemData?.name}`,
         );
       }
-      // Check for multiple variations which is not currently supported
       if (item?.itemData?.variations?.length > 1) {
         this.logger.warn(
           `Item has multiple variations, only using first one: ${item?.itemData?.name}`,
@@ -208,48 +209,24 @@ export class SquareMapper {
   }
 
   orderToCreateOrderRequest(order: OrderModel): CreateOrderRequest {
-    const recipient: FulfillmentRecipient = {
-      customerId: order.customer?.id,
-      displayName: order.customer?.firstName + " " + order.customer?.lastName,
-      emailAddress: order.customer?.email,
-      phoneNumber: order.customer?.phoneNumber,
-      address: order.customer?.address
-        ? {
-            addressLine1: order.customer?.address?.address_line_1,
-            addressLine2: order.customer?.address?.address_line_2,
-            locality: order.customer?.address?.locality,
-            postalCode: order.customer?.address?.postalCode,
-            country: countryToIsoCode[order.customer?.address?.country],
-          }
-        : undefined,
-    };
+    const recipient = this.buildRecipient(order.customer);
     const deliveryInstructions =
       order.type === OrderModel.TypeEnum.Delivery
         ? ` ${recipient.phoneNumber} ${recipient.address.addressLine1} ${recipient.address.addressLine2}`
         : "";
     const notes = `[${order.type}]${deliveryInstructions} ${order.notes}`;
-    const fulfillment = {
-      type: "PICKUP",
-      pickupDetails: {
-        recipient,
-        pickupAt: new Date(
-          Date.now() + SquareMapper.TEN_MINUTES_MS,
-        ).toISOString(),
-        scheduleType: "ASAP",
-        note: notes,
-      },
-    };
-    const serviceCharges =
-      order.type === OrderModel.TypeEnum.Delivery
-        ? {
-            name: "Delivery fee",
-            calculationPhase: "TOTAL_PHASE",
-            amountMoney: {
-              amount: BigInt(199),
-              currency: "EUR",
-            },
-          }
-        : undefined;
+    const fulfillment = this.buildFulfillment(recipient, notes);
+    const serviceCharges = this.buildServiceCharges(order.type);
+    const couponDiscount = order.coupon
+      ? this.createDiscountObject(order.coupon)
+      : [];
+    const rewardDiscount = order.reward
+      ? this.createDiscountObjectForReward(order.reward)
+      : [];
+    const discounts = [...couponDiscount, ...rewardDiscount];
+    const rewardLineItems = order.reward
+      ? this.createRewardLineItems(order.reward, rewardDiscount[0].uid)
+      : undefined;
     return {
       order: {
         serviceCharges: serviceCharges ? [serviceCharges] : undefined,
@@ -257,48 +234,37 @@ export class SquareMapper {
           order.customer?.firstName + " " + order.customer?.lastName?.charAt(0),
         customerId: order.customer?.id,
         locationId: order.locationId,
-        discounts: order.coupon
-          ? this.createDiscountObject(order.coupon)
-          : undefined,
-        lineItems: order.products.map((product) => ({
-          quantity: product?.quantity.toString(),
-          catalogObjectId: product.catalogId,
-          modifiers: product?.modifiers?.map((modifier) => ({
-            catalogObjectId: modifier.id,
-            quantity: modifier?.quantity?.toString() || "1",
+        discounts: discounts.length > 0 ? discounts : undefined,
+        lineItems: [
+          ...order.products.map((product) => ({
+            quantity: product?.quantity.toString(),
+            catalogObjectId: product.catalogId,
+            modifiers: product?.modifiers?.map((modifier) => ({
+              catalogObjectId: modifier.id,
+              quantity: modifier?.quantity?.toString() || "1",
+            })),
           })),
-        })),
-
+          ...(rewardLineItems ?? []),
+        ],
         fulfillments: [fulfillment],
       },
     } as CreateOrderRequest;
   }
-  private createDiscountObject(coupon: CouponDto): OrderLineItemDiscount[] {
-    return [
-      {
-        name: coupon.code,
-        type:
-          coupon.type === CouponType.FREE_SHIPPING
-            ? CouponType.FIXED_AMOUNT
-            : coupon.type,
-        ...(coupon.type === CouponType.FIXED_AMOUNT ||
-        coupon.type === CouponType.FREE_SHIPPING
-          ? {
-              amountMoney: {
-                amount:
-                  coupon.type === CouponType.FREE_SHIPPING
-                    ? BigInt(199)
-                    : BigInt(coupon.amount),
-                currency: "EUR",
-              },
-            }
-          : coupon.type === CouponType.FIXED_PERCENTAGE
-            ? {
-                percentage: coupon.discount.toString(),
-              }
-            : {}),
-      },
-    ];
+
+  createRewardLineItems(reward: ClaimRewardDto, uid: string): OrderLineItem[] {
+    return reward?.products?.map((product) => ({
+      quantity: product.quantity.toString(),
+      catalogObjectId: product.catalog_id,
+      modifiers: product.modifiers?.map((modifier) => ({
+        catalogObjectId: modifier.modifier_catalog_id,
+        quantity: modifier.quantity.toString() || "1",
+      })),
+      appliedDiscounts: [
+        {
+          discountUid: uid,
+        },
+      ],
+    })) as OrderLineItem[];
   }
 
   mapCustomer(customer: Customer): CustomerModel {
@@ -320,7 +286,6 @@ export class SquareMapper {
 
   squareOrderToOrder(squareOrder: Order, isFromPos?: boolean): OrderModel {
     this.logger.log(`Mapping Square order to Order model`);
-
     const fulfillment = squareOrder?.fulfillments?.[0];
     const fulfillmentType = fulfillment?.type;
     return {
@@ -353,7 +318,9 @@ export class SquareMapper {
         catalogId: item.catalogObjectId,
         quantity: Number(item.quantity),
         name: item.name,
-        price: Number(item.basePriceMoney?.amount || 0),
+        price:
+          Number(item.basePriceMoney?.amount || 0) -
+          Number(item.totalDiscountMoney?.amount || 0),
         modifiers: item.modifiers?.map((mod) => ({
           id: mod.catalogObjectId,
           name: mod.name,
@@ -370,16 +337,202 @@ export class SquareMapper {
         createdAt: squareOrder.updatedAt,
         createdAtTs: new Date(squareOrder.updatedAt).getTime(),
       },
-      coupon: squareOrder.discounts?.[0]
+      coupon: this.mapSquareDiscountToCoupon(squareOrder),
+    };
+  }
+
+  squareOrderToReward(squareOrder: Order): ClaimRewardDto | undefined {
+    const rewardDiscount = squareOrder.discounts?.find(
+      (discount) => discount.scope === "LINE_ITEM",
+    );
+    const productsReward = squareOrder.lineItems?.filter((item) =>
+      item.appliedDiscounts?.some(
+        (discount) => discount.discountUid === rewardDiscount?.uid,
+      ),
+    );
+    const products = productsReward?.map((product) => ({
+      catalog_id: product.catalogObjectId,
+      quantity: Number(product.quantity),
+      modifiers: product.modifiers?.map((modifier) => ({
+        modifier_catalog_id: modifier.catalogObjectId,
+        quantity: Number(modifier.quantity || 1),
+      })),
+    }));
+    return {
+      reward_id: rewardDiscount?.uid,
+      products: products,
+    };
+  }
+
+  // --- PRIVATE METHODS ---
+
+  private buildCategoriesMap(
+    catalogObject: CatalogObject[],
+  ): Record<string, Category> {
+    return catalogObject
+      .filter(({ type }) => type === "CATEGORY")
+      .reduce(
+        (acc, category) => {
+          acc[category.id] = {
+            id: category?.id,
+            name: (category as any)?.categoryData?.name,
+          };
+          return acc;
+        },
+        {} as Record<string, Category>,
+      );
+  }
+
+  private buildImagesMap(
+    catalogObject: CatalogObject[],
+  ): Record<string, Image> {
+    return catalogObject
+      .filter(({ type }) => type === "IMAGE")
+      .reduce(
+        (acc, image) => {
+          acc[image.id] = {
+            url: (image as any).imageData?.url,
+            name: (image as any).imageData?.name,
+          };
+          return acc;
+        },
+        {} as Record<string, Image>,
+      );
+  }
+
+  private buildModifiersMap(
+    catalogObject: CatalogObject[],
+  ): Record<string, Modifier> {
+    return catalogObject
+      .filter(({ type }) => type === "MODIFIER_LIST")
+      .reduce(
+        (acc, modifier) => {
+          acc[modifier?.id] = {
+            id: modifier.id,
+            name: (modifier as any)?.modifierListData?.name,
+            type: Modifier.TypeEnum[(modifier as any)?.modifierListData?.modifierType],
+            selection:
+              Modifier?.SelectionEnum[
+                (modifier as any)?.modifierListData?.selectionType
+              ],
+            options: (modifier as any)?.modifierListData?.modifiers
+              .filter((mfr) => mfr.type === "MODIFIER")
+              .map(
+                (option) =>
+                  ({
+                    id: option?.id,
+                    name: option?.modifierData?.name,
+                    defaultOption: option?.modifierData?.ordinal === 1,
+                    price: Number(option?.modifierData?.priceMoney?.amount),
+                  }) as Option,
+              )
+              .sort((a, b) => (a.defaultOption ? -1 : 1)),
+          };
+          return acc;
+        },
+        {} as Record<string, Modifier>,
+      );
+  }
+
+  private buildRecipient(
+    customer: OrderModel["customer"],
+  ): FulfillmentRecipient {
+    return {
+      customerId: customer?.id,
+      displayName: customer?.firstName + " " + customer?.lastName,
+      emailAddress: customer?.email,
+      phoneNumber: customer?.phoneNumber,
+      address: customer?.address
         ? {
-            code: squareOrder.discounts?.[0]?.name,
-            type: squareOrder.discounts?.[0]?.type as CouponType,
-            amount: Number(
-              squareOrder.discounts?.[0]?.amountMoney?.amount || 0,
-            ),
-            discount: Number(squareOrder.discounts?.[0]?.percentage || 0),
+            addressLine1: customer?.address?.address_line_1,
+            addressLine2: customer?.address?.address_line_2,
+            locality: customer?.address?.locality,
+            postalCode: customer?.address?.postalCode,
+            country: countryToIsoCode[customer?.address?.country],
           }
         : undefined,
+    };
+  }
+
+  private buildFulfillment(recipient: FulfillmentRecipient, notes: string) {
+    return {
+      type: "PICKUP",
+      pickupDetails: {
+        recipient,
+        pickupAt: new Date(
+          Date.now() + SquareMapper.TEN_MINUTES_MS,
+        ).toISOString(),
+        scheduleType: "ASAP",
+        note: notes,
+      },
+    };
+  }
+
+  private buildServiceCharges(orderType: OrderModel["type"]) {
+    return orderType === OrderModel.TypeEnum.Delivery
+      ? {
+          name: "Delivery fee",
+          calculationPhase: "TOTAL_PHASE",
+          amountMoney: {
+            amount: BigInt(199),
+            currency: "EUR",
+          },
+        }
+      : undefined;
+  }
+
+  private createDiscountObject(coupon: CouponDto): OrderLineItemDiscount[] {
+    return [
+      {
+        name: coupon.code,
+        type:
+          coupon.type === CouponType.FREE_SHIPPING
+            ? CouponType.FIXED_AMOUNT
+            : coupon.type,
+        ...(coupon.type === CouponType.FIXED_AMOUNT ||
+        coupon.type === CouponType.FREE_SHIPPING
+          ? {
+              amountMoney: {
+                amount:
+                  coupon.type === CouponType.FREE_SHIPPING
+                    ? BigInt(199)
+                    : BigInt(coupon.amount),
+                currency: "EUR",
+              },
+            }
+          : coupon.type === CouponType.FIXED_PERCENTAGE
+            ? {
+                percentage: coupon.discount.toString(),
+              }
+            : {}),
+      },
+    ];
+  }
+
+  private createDiscountObjectForReward(
+    reward: ClaimRewardDto,
+  ): OrderLineItemDiscount[] {
+    return [
+      {
+        uid: reward.reward_id,
+        name: reward.reward_name,
+        type: "FIXED_PERCENTAGE",
+        percentage: "100",
+        scope: "LINE_ITEM",
+      },
+    ];
+  }
+
+  private mapSquareDiscountToCoupon(squareOrder: Order): CouponDto | undefined {
+    const discount = squareOrder.discounts?.find(
+      (discount) => discount.scope !== "LINE_ITEM",
+    );
+    if (!discount) return undefined;
+    return {
+      code: discount?.name,
+      type: discount?.type as CouponType,
+      amount: Number(discount?.amountMoney?.amount || 0),
+      discount: Number(discount?.percentage || 0),
     };
   }
 
@@ -395,7 +548,7 @@ export class SquareMapper {
         return OrderModel.TypeEnum.Dinein;
       case "DELIVERY":
         return OrderModel.TypeEnum.Delivery;
-      case "PICKUP":
+      case "PICKUP": {
         const isDineIn = order.fulfillments?.[0]?.pickupDetails?.note?.includes(
           OrderModel.TypeEnum.Dinein,
         );
@@ -408,6 +561,7 @@ export class SquareMapper {
           : isDelivery
             ? OrderModel.TypeEnum.Delivery
             : OrderModel.TypeEnum.Pickup;
+      }
       default:
         return OrderModel.TypeEnum.Dinein;
     }

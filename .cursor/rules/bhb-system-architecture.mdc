@@ -1,0 +1,95 @@
+---
+description: Arquitectura completa del sistema BHB - este backend y sus dependencias
+alwaysApply: true
+---
+
+# bhb-customer-backend — Contexto del Sistema
+
+Este repositorio es el **backend principal** de BHB (Bite House Burgers). Opera junto a otros dos repos:
+
+| Repo | Rol | Puerto |
+|------|-----|--------|
+| **`bhb-customer-backend`** (este) | API principal + Square + PostgreSQL | 3001 (Docker) / 3000 (local dev) |
+| `bhb-customer-rewards` | Microservicio de fidelización | 3010 |
+| `bhb-customer-frontend` | SPA React (Vite) | 5173 |
+
+---
+
+## Este servicio
+
+**Stack:** NestJS 10, Sequelize + PostgreSQL, JWT, Square SDK (v44 + v39 legacy).
+
+### Módulos y responsabilidades
+
+| Módulo | Responsabilidad |
+|--------|-----------------|
+| `SquareModule` | Catálogo (v44), pedidos/terminal/pagos (v39 legacy) |
+| `OtpModule` | Login OTP vía WhatsApp (Meta) + Twilio fallback |
+| `OrdersModule` | CRUD pedidos + pago + SSE de estado en tiempo real |
+| `CouponsModule` | Creación, validación y uso de cupones |
+| `CustomersModule` | Perfil de cliente autenticado |
+| `LocationsModule` | Tiendas + estado abierto/cerrado (Close CRM) |
+| `DevicesModule` | Dispositivos Square (kioscos) |
+| `SquareWebhookModule` | Recepción de eventos Square |
+| `RewardsModule` | Cliente HTTP hacia `bhb-customer-rewards` |
+
+### Rutas (prefijo: `/bhb-customer-backend/`)
+
+| Controlador | Notas de auth |
+|-------------|---------------|
+| `products`, `categories` | JWT |
+| `orders` | JWT |
+| `customers` | JWT |
+| `otp` | **`@Public()`** — sin JWT |
+| `locations` | **`@Public()`** — sin JWT |
+| `devices` | **`@Public()`** — sin JWT |
+| `square-webhook` | Handler POST sin JWT |
+| `coupons` | JWT |
+
+### Autenticación
+
+- `JwtGuard` como `APP_GUARD` global
+- `@Public()` para rutas abiertas
+- Token invitado: `POST /otp/guest` + header `X-Bhb-Api-Key` = `GUEST_API_KEY`
+- Close CRM: query param `api-key` = `CLOSE_API_KEY`
+
+### Integraciones salientes
+
+| Destino | Variable de entorno | Uso |
+|---------|---------------------|-----|
+| Square | `SQ_ACCESS_TOKEN`, `SQ_APPLICATION_ID`, `SQ_LOCATION_IDS` | Catálogo, pedidos, terminal, pagos |
+| WhatsApp/Meta | `WHATSAPP_TOKEN`, `WHATSAPP_ORIGIN` | OTP |
+| Twilio | `TWILIO_*` | OTP SMS (activar con `TWILIO_IS_ACTIVE=true`) |
+| Rewards | `REWARDS_BASE_URL`, `REWARDS_API_KEY` | Puntos/rewards al crear pedidos |
+| Delivery Manager | `DELIVERY_MANAGER_BASE_URL` | Envío de pedidos de delivery |
+| Close CRM | `CLOSE_API_KEY` | Estado abierto/cerrado de tiendas |
+
+### Esquemas de base de datos
+
+| Entorno | `DB_SCHEMA` |
+|---------|-------------|
+| Producción | `prod` |
+| Desarrollo | `test` |
+
+> **`DB_SYNC_FORCE` NUNCA debe ser `true`** en ningún entorno. Destruye y recrea todas las tablas.
+
+### Variables de entorno obligatorias
+
+`PORT`, `JWT_KEY`, `GUEST_API_KEY`, `DB_*` (6 vars), `SQ_APPLICATION_ID`, `SQ_ACCESS_TOKEN`, `SQ_SANDBOX`, `SQ_LOCATION_IDS` (**obligatorio, lanza error si falta**), `WHATSAPP_TOKEN`, `WHATSAPP_ORIGIN`, `REWARDS_BASE_URL`, `REWARDS_API_KEY`, `DELIVERY_MANAGER_BASE_URL`, `CLOSE_API_KEY`
+
+### Arranque en local
+
+```bash
+# 1. Crear .env.local con las variables anteriores
+# 2. PostgreSQL con Docker:
+docker run -d --name bhb-postgres -p 5455:5432 \
+  -e POSTGRES_USER=<user> -e POSTGRES_PASSWORD=<pass> \
+  -e POSTGRES_DB=<db> postgres
+
+# 3. Arrancar en watch mode:
+npm run start:dev
+```
+
+---
+
+*Actualizar esta regla cuando se añadan módulos, rutas, integraciones o variables de entorno.*
