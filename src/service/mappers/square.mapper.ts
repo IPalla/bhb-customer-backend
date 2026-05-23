@@ -375,7 +375,7 @@ export class SquareMapper {
         (acc, category) => {
           acc[category.id] = {
             id: category?.id,
-            name: category?.categoryData.name,
+            name: (category as any)?.categoryData?.name,
           };
           return acc;
         },
@@ -391,8 +391,8 @@ export class SquareMapper {
       .reduce(
         (acc, image) => {
           acc[image.id] = {
-            url: image.imageData?.url,
-            name: image.imageData?.name,
+            url: (image as any).imageData?.url,
+            name: (image as any).imageData?.name,
           };
           return acc;
         },
@@ -409,13 +409,13 @@ export class SquareMapper {
         (acc, modifier) => {
           acc[modifier?.id] = {
             id: modifier.id,
-            name: modifier?.modifierListData?.name,
-            type: Modifier.TypeEnum[modifier?.modifierListData?.modifierType],
+            name: (modifier as any)?.modifierListData?.name,
+            type: Modifier.TypeEnum[(modifier as any)?.modifierListData?.modifierType],
             selection:
               Modifier?.SelectionEnum[
-                modifier?.modifierListData?.selectionType
+                (modifier as any)?.modifierListData?.selectionType
               ],
-            options: modifier?.modifierListData?.modifiers
+            options: (modifier as any)?.modifierListData?.modifiers
               .filter((mfr) => mfr.type === "MODIFIER")
               .map(
                 (option) =>
