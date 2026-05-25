@@ -9,10 +9,10 @@ import {
 import { LocationEntity } from "./location.entity";
 
 @Table({
-  tableName: "opening_hours",
+  tableName: "delivery_opening_hours",
   timestamps: true,
 })
-export class OpeningHoursEntity extends Model {
+export class DeliveryOpeningHoursEntity extends Model {
   /** 0 = Sunday, 1 = Monday, … 6 = Saturday (Date.getDay()). */
   @Column({
     type: DataType.INTEGER,

@@ -1,5 +1,6 @@
 import { Column, Model, Table, DataType, HasMany } from "sequelize-typescript";
 import { OpeningHoursEntity } from "./opening-hours.entity";
+import { DeliveryOpeningHoursEntity } from "./delivery-opening-hours.entity";
 
 @Table({
   tableName: "locations",
@@ -32,6 +33,15 @@ export class LocationEntity extends Model {
   })
   square_location_id: string;
 
-  @HasMany(() => OpeningHoursEntity)
+  @HasMany(() => OpeningHoursEntity, {
+    foreignKey: "square_location_id",
+    sourceKey: "square_location_id",
+  })
   opening_hours: OpeningHoursEntity[];
+
+  @HasMany(() => DeliveryOpeningHoursEntity, {
+    foreignKey: "square_location_id",
+    sourceKey: "square_location_id",
+  })
+  delivery_opening_hours: DeliveryOpeningHoursEntity[];
 }
