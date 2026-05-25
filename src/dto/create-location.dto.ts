@@ -3,29 +3,12 @@ import {
   IsBoolean,
   IsArray,
   ValidateNested,
-  IsNumber,
   IsOptional,
 } from "class-validator";
 import { Type } from "class-transformer";
+import { OpeningHoursDto } from "./opening-hours.dto";
 
-export class OpeningHoursDto {
-  @IsNumber()
-  day: number;
-
-  @IsString()
-  open: string;
-
-  @IsString()
-  close: string;
-
-  @IsString()
-  @IsOptional()
-  break_starts_at?: string;
-
-  @IsString()
-  @IsOptional()
-  break_ends_at?: string;
-}
+export { OpeningHoursDto };
 
 export class CreateLocationDto {
   @IsString()
@@ -44,4 +27,10 @@ export class CreateLocationDto {
   @ValidateNested({ each: true })
   @Type(() => OpeningHoursDto)
   opening_hours: OpeningHoursDto[];
+
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => OpeningHoursDto)
+  @IsOptional()
+  delivery_opening_hours?: OpeningHoursDto[];
 }

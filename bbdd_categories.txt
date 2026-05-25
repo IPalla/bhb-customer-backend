@@ -40,7 +40,8 @@ VALUES
 (6, '00:00:00', '23:59:00', '23:57:00', '23:58:00', 'LA6A066DRHSZZ', '2025-01-28 19:27:40', '2025-01-28 19:27:40');
 
 
+-- day: 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
 INSERT INTO "test"."opening_hours" (day, open, close, break_starts_at, break_ends_at, square_location_id, "createdAt", "updatedAt")
 VALUES 
-(7, '00:00:00', '23:59:00', '23:57:00', '23:58:00', 'LA6A066DRHSZZ', '2025-01-28 19:27:40', '2025-01-28 19:27:40');
+(0, '00:00:00', '23:59:00', '23:57:00', '23:58:00', 'LA6A066DRHSZZ', '2025-01-28 19:27:40', '2025-01-28 19:27:40');
 
