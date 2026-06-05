@@ -1,4 +1,8 @@
-import { Injectable, Logger } from "@nestjs/common";
+import {
+  Injectable,
+  Logger,
+  NotFoundException,
+} from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { LocationEntity } from "../entity/location.entity";
 import { OpeningHoursEntity } from "../entity/opening-hours.entity";
@@ -91,6 +95,64 @@ export class LocationsService {
     await location.update({ high_demand: isClosed });
     this.logger.log("updateStoreStatus end");
     return location;
+  }
+
+  async replaceOpeningHours(
+    squareLocationId: string,
+    hours: OpeningHoursDto[],
+  ): Promise<LocationEntity> {
+    this.logger.log(
+      `replaceOpeningHours start squareLocationId=${squareLocationId}`,
+    );
+    return this.replaceHoursForModel(
+      this.openingHoursModel,
+      squareLocationId,
+      hours,
+    );
+  }
+
+  async replaceDeliveryOpeningHours(
+    squareLocationId: string,
+    hours: OpeningHoursDto[],
+  ): Promise<LocationEntity> {
+    this.logger.log(
+      `replaceDeliveryOpeningHours start squareLocationId=${squareLocationId}`,
+    );
+    return this.replaceHoursForModel(
+      this.deliveryOpeningHoursModel,
+      squareLocationId,
+      hours,
+    );
+  }
+
+  private async replaceHoursForModel(
+    model: typeof OpeningHoursEntity | typeof DeliveryOpeningHoursEntity,
+    squareLocationId: string,
+    hours: OpeningHoursDto[],
+  ): Promise<LocationEntity> {
+    const location = await this.locationModel.findOne({
+      where: { square_location_id: squareLocationId },
+    });
+    if (!location) {
+      throw new NotFoundException(`Location not found: ${squareLocationId}`);
+    }
+
+    await this.sequelize.transaction(async (t) => {
+      await model.destroy({
+        where: { square_location_id: squareLocationId },
+        transaction: t,
+      });
+      await this.createHoursRecords(model, hours, squareLocationId, t);
+    });
+
+    const updated = await this.locationModel.findOne({
+      where: { square_location_id: squareLocationId },
+      include: [OpeningHoursEntity, DeliveryOpeningHoursEntity],
+    });
+    this.logger.log(
+      `replaceHoursForModel end squareLocationId=${squareLocationId}`,
+    );
+    return updated;
   }
 
   private async createHoursRecords(

@@ -16,5 +16,6 @@ import { LocationsService } from "src/service/locations.service";
   ],
   controllers: [LocationsController],
   providers: [LocationsService],
+  exports: [LocationsService],
 })
 export class LocationsModule {}
