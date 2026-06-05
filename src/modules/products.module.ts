@@ -9,5 +9,6 @@ import { SquareModule } from "./square.module";
   imports: [SquareModule],
   controllers: [ProductsController],
   providers: [ProductsService],
+  exports: [ProductsService],
 })
 export class ProductsModule {}

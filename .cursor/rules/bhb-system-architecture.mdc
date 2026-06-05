@@ -32,6 +32,7 @@ Este repositorio es el **backend principal** de BHB (Bite House Burgers). Opera 
 | `DevicesModule` | Dispositivos Square (kioscos) |
 | `SquareWebhookModule` | Recepción de eventos Square |
 | `RewardsModule` | Cliente HTTP hacia `bhb-customer-rewards` |
+| `AdminModule` | Portal admin: categorías, horarios, estado tienda |
 
 ### Rutas (prefijo: `/bhb-customer-backend/`)
 
@@ -41,17 +42,19 @@ Este repositorio es el **backend principal** de BHB (Bite House Burgers). Opera 
 | `orders` | JWT |
 | `customers` | JWT |
 | `otp` | **`@Public()`** — sin JWT |
-| `locations` | **`@Public()`** — sin JWT |
+| `locations` | **`@Public()`** — sin JWT (lectura); mutaciones vía `admin` |
 | `devices` | **`@Public()`** — sin JWT |
 | `square-webhook` | Handler POST sin JWT |
 | `coupons` | JWT |
+| `admin` | **`@Admin()`** — header `x-api-key` = `CLOSE_API_KEY`; `POST /admin/auth` es `@Public()`; CRUD rewards (proxy → rewards MS); CRUD cupones (`GET/POST/DELETE /admin/coupons`) |
 
 ### Autenticación
 
 - `JwtGuard` como `APP_GUARD` global
 - `@Public()` para rutas abiertas
+- `@Admin()` para portal admin: header `x-api-key` = `CLOSE_API_KEY` (misma clave que Close CRM)
 - Token invitado: `POST /otp/guest` + header `X-Bhb-Api-Key` = `GUEST_API_KEY`
-- Close CRM: query param `api-key` = `CLOSE_API_KEY`
+- Close CRM (legacy): `GET /locations/:id/open|close?api-key=` = `CLOSE_API_KEY`
 
 ### Integraciones salientes
 

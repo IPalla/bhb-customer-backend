@@ -9,6 +9,13 @@ import {
   Min,
 } from "class-validator";
 import { CouponType } from "../entity/coupon.entity";
+import { CouponEntity } from "../entity/coupon.entity";
+
+export interface CouponResponse {
+  success: boolean;
+  message?: string;
+  data?: CouponEntity | Record<string, unknown>;
+}
 
 export class CouponDto {
   @IsString()
