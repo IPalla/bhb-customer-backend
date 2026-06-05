@@ -10,16 +10,10 @@ import {
   Req,
 } from "@nestjs/common";
 import { CouponService } from "../service/coupon.service";
-import { CouponDto } from "../dto/coupon.dto";
+import { CouponDto, CouponResponse } from "../dto/coupon.dto";
 import { CouponEntity } from "../entity/coupon.entity";
 import { RequestWithUser } from "src/guards/jwt.guard";
 import * as moment from "moment";
-
-interface CouponResponse {
-  success: boolean;
-  message?: string;
-  data?: any;
-}
 
 @Controller("bhb-customer-backend/coupons")
 export class CouponController {

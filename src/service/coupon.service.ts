@@ -7,13 +7,7 @@ import {
 } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { CouponEntity, CouponType } from "../entity/coupon.entity";
-import { CouponDto } from "../dto/coupon.dto";
-
-interface CouponResponse {
-  success: boolean;
-  message?: string;
-  data?: any;
-}
+import { CouponDto, CouponResponse } from "../dto/coupon.dto";
 
 @Injectable()
 export class CouponService {

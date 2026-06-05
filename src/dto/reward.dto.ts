@@ -57,6 +57,26 @@ export class RewardProductModifierDto {
   @IsString()
   modifier_catalog_id: string;
 
+  @IsOptional()
+  @IsString()
+  modifier_name?: string;
+
+  @IsOptional()
+  @IsString()
+  modifier_list_catalog_id?: string;
+
+  @IsOptional()
+  @IsString()
+  modifier_list_selection?: string;
+
+  @IsOptional()
+  @IsInt()
+  modifier_list_min_selections?: number;
+
+  @IsOptional()
+  @IsInt()
+  modifier_list_max_selections?: number;
+
   @IsInt()
   quantity: number;
 }

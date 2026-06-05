@@ -16,6 +16,7 @@ import { SquareModule } from "./modules/square.module";
 import { OrderPaymentCheckoutModule } from "./modules/order-payment-checkout.module";
 import { DeliveryManagerModule } from "./modules/delivery-manager.module";
 import { CouponModule } from "./modules/coupon.module";
+import { AdminModule } from "./modules/admin.module";
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { CouponModule } from "./modules/coupon.module";
     OrderPaymentCheckoutModule,
     DeliveryManagerModule,
     CouponModule,
+    AdminModule,
     JwtModule.register({
       secret:
         process.env.JWT_KEY ||
