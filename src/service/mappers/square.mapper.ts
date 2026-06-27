@@ -210,13 +210,16 @@ export class SquareMapper {
 
   orderToCreateOrderRequest(order: OrderModel): CreateOrderRequest {
     const recipient = this.buildRecipient(order.customer);
+    const orderNotes = order.notes?.trim() ?? "";
     const deliveryInstructions =
       order.type === OrderModel.TypeEnum.Delivery
         ? ` ${recipient.phoneNumber} ${recipient.address.addressLine1} ${recipient.address.addressLine2}`
         : "";
-    const notes = `[${order.type}]${deliveryInstructions} ${order.notes}`;
+    const notes = `[${order.type}]${deliveryInstructions}${
+      orderNotes ? ` ${orderNotes}` : ""
+    }`;
     const fulfillment = this.buildFulfillment(recipient, notes);
-    const serviceCharges = this.buildServiceCharges(order.type);
+    const serviceCharges = this.buildServiceCharges(order.type, orderNotes);
     const couponDiscount = order.coupon
       ? this.createDiscountObject(order.coupon)
       : [];
@@ -468,8 +471,12 @@ export class SquareMapper {
     };
   }
 
-  private buildServiceCharges(orderType: OrderModel["type"]) {
-    return orderType === OrderModel.TypeEnum.Delivery
+  private buildServiceCharges(orderType: OrderModel["type"], notes?: string) {
+    // AFC orders are sent as Delivery but use a fixed event address with free
+    // shipping. They are flagged with the `[AFC]` marker in notes.
+    const isAfcOrder = notes?.includes("[AFC]");
+
+    return orderType === OrderModel.TypeEnum.Delivery && !isAfcOrder
       ? {
           name: "Delivery fee",
           calculationPhase: "TOTAL_PHASE",
