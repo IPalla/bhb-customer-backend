@@ -106,4 +106,15 @@ export class RewardsAdminService {
       this.handleError(error, "list tiers");
     }
   }
+
+  async listHousemates<T>(): Promise<T[]> {
+    try {
+      const response = await axios.get<T[]>(`${this.baseUrl}/users/manage`, {
+        headers: this.headers,
+      });
+      return response.data;
+    } catch (error) {
+      this.handleError(error, "list housemates");
+    }
+  }
 }
