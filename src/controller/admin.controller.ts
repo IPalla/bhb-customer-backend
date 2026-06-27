@@ -150,6 +150,13 @@ export class AdminController {
   }
 
   @Admin()
+  @Get("housemates")
+  listHousemates() {
+    this.logger.log("listHousemates start");
+    return this.rewardsAdminService.listHousemates();
+  }
+
+  @Admin()
   @Get("rewards")
   listRewards() {
     this.logger.log("listRewards start");
